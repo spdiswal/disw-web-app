@@ -1,0 +1,133 @@
+# This file, .gitattributes, ensures that Git reads line endings consistently
+# among all contributors, regardless of their 'core.autocrlf' setting.
+#
+# File settings:
+#   binary              Leave these files untouched.
+#                       (equivalent to 'text -diff')
+#   export-ignore       Omit these files when generating a downloadable archive
+#                       of the repository contents.
+#   text                Convert the line endings in these files on checkout to
+#                       match the native line endings in the operating system.
+#   text eol=lf         Always convert line endings to LF (Unix-style).
+#   text eol=crlf       Always convert line endings to CRLF (Windows-style).
+#   text -diff          Skip diffing these files when merging.
+#
+# Read more:
+# https://docs.github.com/en/get-started/getting-started-with-git/configuring-git-to-handle-line-endings
+
+# Git should figure out how to handle files that have not been declared below.
+*                       text=auto
+
+# Source code.
+*.css                   text
+*.dart                  text
+*.html                  text
+*.gradle                text
+*.java                  text
+*.js                    text
+*.jsx                   text
+*.kt                    text
+*.kts                   text
+*.map                   text -diff
+*.py                    text
+*.svelte                text
+*.ts                    text
+*.tsx                   text
+*.vue                   text
+
+# Data interchange.
+*.conf                  text
+*.http                  text
+*.json                  text
+*.properties            text
+*.xml                   text
+*.yaml                  text
+*.yml                   text
+
+# Unix-based scripts.
+*.bash                  text eol=lf
+*.sh                    text eol=lf
+*.zsh                   text eol=lf
+
+# Windows-based scripts.
+*.bat                   text eol=crlf
+*.cmd                   text eol=crlf
+*.ps1                   text eol=crlf
+
+# Fonts.
+*.eot                   binary
+*.otf                   binary
+*.ttf                   binary
+*.woff                  binary
+*.woff2                 binary
+
+# Graphics.
+*.avif                  binary
+*.gif                   binary
+*.heic                  binary
+*.heif                  binary
+*.ico                   binary
+*.jpg                   binary
+*.jpeg                  binary
+*.png                   binary
+*.tif                   binary
+*.tiff                  binary
+*.svg                   text
+*.webp                  binary
+
+# Audio.
+*.mp3                   binary
+*.ogg                   binary
+*.opus                  binary
+*.wav                   binary
+
+# Video.
+*.mkv                   binary
+*.mov                   binary
+*.mp4                   binary
+*.webm                  binary
+
+# Documents.
+*.csv                   text
+*.docx                  binary
+*.pdf                   binary
+
+# Archives.
+*.7z                    binary
+*.gz                    binary
+*.tar                   binary
+*.tgz                   binary
+*.zip                   binary
+
+# Build artifacts.
+*.class                 binary
+*.dll                   binary
+*.ear                   binary
+*.jar                   binary
+*.war                   binary
+
+# Documentation.
+*.adoc                  text
+*.md                    text
+*.txt                   text
+CHANGELOG               text
+CONTRIBUTING            text
+COPYRIGHT               text
+LICENSE                 text
+
+# Docker.
+.dockerignore           text
+Dockerfile              text
+
+# Node.
+.editorconfig           text
+.env                    text
+.npmignore              text
+browserslist            text
+package.json            text eol=lf
+package-lock.json       text -diff
+yarn.lock               text -diff
+
+# Git.
+.gitattributes          text
+.gitignore              text

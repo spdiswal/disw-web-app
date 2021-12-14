@@ -1,0 +1,45 @@
+# This file, .gitignore, marks certain files and folders as excluded from
+# version control.
+#
+# Read more:
+# https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
+
+# Editors and IDEs.
+.idea/
+.vscode/
+
+# AsciiDoctor in IntelliJ IDEA.
+.asciidoctor/
+.asciidoctorconfig
+
+# Gradle.
+.gradle/
+!gradle-wrapper.jar
+
+# Node.
+node_modules/
+*.local
+*.local.*
+
+# Yarn.
+.yarn/*
+!.yarn/cache/
+!.yarn/patches/
+!.yarn/plugins/
+!.yarn/releases/
+!.yarn/sdks/
+!.yarn/versions/
+
+# TypeScript.
+*.tsbuildinfo
+
+# Build artifacts.
+build/
+out/
+dist/
+*.log
+
+# Operating system artifacts.
+*~
+.DS_Store
+Thumbs.db

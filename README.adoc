@@ -1,0 +1,13 @@
+= DISW Web App
+
+This repository contains the app for web browsers.
+
+== Getting Started
+
+=== Prerequisites
+* https://nodejs.org/en/[Node.js], version 16 or newer.
+* https://yarnpkg.com/getting-started/install[Yarn], which you can install with npm:
++
+----
+npm install -g yarn
+----

@@ -11,3 +11,204 @@ This repository contains the app for web browsers.
 ----
 npm install -g yarn
 ----
+
+Recommended plugins for IntelliJ IDEA users:
+
+* https://plugins.jetbrains.com/plugin/7391-asciidoc[AsciiDoc]
+* https://plugins.jetbrains.com/plugin/15321-tailwind-css[Tailwind CSS]
+
+Recommended browser extensions:
+
+* https://preactjs.github.io/preact-devtools/[Preact Devtools]
+
+=== Cloning the Repository
+For IntelliJ IDEA users:
+
+. Clone the Git repository onto your local computer: menu:Welcome[Get from VCS] or menu:Git[Clone].
+. Open the project folder into which you cloned the repository:
+menu:File[Open].
+
+=== Installing Third-Party Dependencies
+This project uses the https://yarnpkg.com/features/zero-installs[zero-install feature] of the Yarn package manager.
+Upon cloning the Git repository, the `.yarn/cache` folder contains a cache of most third-party dependencies already, effectively replacing the usual `node_modules` folder.
+
+However, a few dependencies (usually executable binaries) remain _unplugged_.
+They must be installed explicitly by executing this command from the project root folder:
+
+----
+yarn install
+----
+
+== Common Work Tasks
+This section describes the scripts to execute for carrying out certain daily work tasks.
+You should execute these scripts from the project root folder.
+They have been defined in the `scripts` field in `package.json`.
+
+=== Starting a Development Server
+To start a development server that hosts the web app under construction at http://localhost:5000:
+
+----
+yarn run develop
+----
+
+Equipped with hot module replacement (HMR), it reflects any changes you make immediately in the web browser.
+
+[#_validating_the_software_quality]
+=== Validating the Software Quality
+To validate the quality of the software:
+
+----
+yarn run validate
+----
+
+It runs the following means of validation:
+
+* Type checking via TypeScript.
+* Static program analysis (linting) via ESLint.
+* Automated unit testing via Jest.
+
+You can apply an automated fix of certain issues reported by ESLint:
+
+----
+yarn run validate:lint:fix
+----
+
+=== Building for Production
+To make a production-grade distribution of the web app:
+
+----
+yarn run build
+----
+
+It saves the output in the `build/www` folder.
+
+<<_validating_the_software_quality>> must pass before it attempts to build the distribution.
+
+After building the distribution, you can start a web server that hosts a preview at http://localhost:80:
+
+----
+yarn run build:preview
+----
+
+== Tools
+
+=== Third-Party Dependencies
+Following the Node.js convention, this project distinguishes between _runtime_ dependencies and _development_ dependencies.
+The `dependencies` and `devDependencies` fields in `package.json` declare these two sets of dependencies, respectively.
+
+TIP: A runtime dependency leaves direct marks in the distribution of the web app, without which the web app would cease to function correctly.
+
+Use the custom `dependenciesComments` and `devDependenciesComments` fields to associate each dependency to a maintenance comment or a description that justifies its use in this project.
+
+[IMPORTANT]
+====
+For security reasons, *always specify the exact version* of a dependency in `package.json`.
+
+Avoid using the `^` and `~` modifiers, which would otherwise allow the package manager to install a newer minor or patch version of the dependency than the one specified.
+====
+
+=== Preact
+https://preactjs.com/[Preact] is a reactive web UI framework with an API similar to that of React.
+It lets you define components as JavaScript functions using https://reactjs.org/docs/introducing-jsx.html[JSX],.
+
+[CAUTION]
+====
+The JSX dialect of Preact is slightly different from React.
+
+For historical reasons, most tools support JSX transformations for React, compiling JSX to function calls of `React.createElement` by default.
+
+However, in Preact, the factory function is `h` (also known as https://github.com/hyperhype/hyperscript[hyperscript]).
+====
+
+For IntelliJ IDEA users:
+
+. Open the inspection settings: *File* &rsaquo; *Settings* &rsaquo; *Editor* &rsaquo; *Inspections*.
+. Disable the warning from this inspection: *JavaScript and TypeScript* &rsaquo; *Imports and dependencies* &rsaquo; _Missing 'React' namespace import in JSX code_.
+
+=== Tailwind CSS
+https://tailwindcss.com/[Tailwind CSS] is a utility-first CSS framework.
+It encourages the developer to reuse styles by extracting components (e.g. via Preact) rather than defining CSS rules and abstractions as practised in traditional CSS development.
+
+`tailwind.config.cjs` defines the https://tailwindcss.com/docs/configuration[configuration] of the Tailwind CSS environment, including custom extensions of the default theme.
+
+NOTE: The `.cjs` file extension indicates that the JavaScript file follows the CommonJS module standard of Node.js instead of the modern ECMAScript module standard (ESM).
+The latter is usually indicated by the `.mjs` file extension.
+
+=== PostCSS
+https://postcss.org/[PostCSS] is a processing tool for CSS.
+Among other things, it permits the use of CSS syntax extensions such as the `@tailwind` and `@apply` directives from Tailwind CSS.
+
+`postcss.config.cjs` defines the configuration of PostCSS as https://tailwindcss.com/docs/configuration#generating-a-post-css-configuration-file[recommended] by the Tailwind CSS documentation.
+
+=== TypeScript
+https://www.typescriptlang.org/[TypeScript] is a programming language that extends JavaScript with syntax for static typing.
+
+`tsconfig.json` defines the https://www.typescriptlang.org/tsconfig[configuration] of the TypeScript environment, except for the set of globally visible types which `global.d.ts` defines.
+
+The `target` is `ES2017`, which is supported by a wide range of modern web browsers.
+The `jsx` setting is `react-jsx`, in which the JSX syntax is transformed to `_jsx` function calls and imported automatically according to the `jsxImportSource` setting.
+Preact 10 supports this kind of JSX transformation.
+
+=== Vite
+https://vitejs.dev/[Vite] is a frontend build tool.
+It hosts the development server and generates the distribution of the web app for production, using `index.html` as the entry point of the web app.
+
+It has native support for PostCSS and TypeScript (minus the type checking).
+It relies on PostCSS to support Tailwind CSS and on a https://github.com/preactjs/preset-vite[plugin] to support JSX transformations for Preact.
+
+`vite.config.ts` defines the https://vitejs.dev/config/[configuration] of Vite.
+It picks up the PostCSS configuration in `postcss.config.cjs` automatically.
+
+[CAUTION]
+====
+You can define the configurations of PostCSS and Tailwind CSS directly in the Vite configuration file.
+
+However, doing so would prevent Vite from instantly applying configuration changes, particularly in Tailwind CSS themes, without requiring a restart of the development server.
+====
+
+=== Jest
+https://jestjs.io/[Jest] is a unit testing framework for JavaScript.
+It is independent of Vite and does not inherit any of its capabilities.
+
+`jest.config.cjs` defines the https://jestjs.io/docs/configuration[configuration] of Jest, including the location of the unit test suites to run and the use of the `@happy-dom/jest-environment` test environment.
+It relies on the `ts-jest` transformer to support TypeScript and Preact-compatible JSX transformations via `tsconfig.json`.
+
+=== ESLint
+https://eslint.org/[ESLint] is a static program analysis tool that flags code issues in JavaScript sources.
+It also covers TypeScript, JSX, React hooks, and unit test suites in Jest through a wide range of plugins.
+
+`.eslintrc.cjs` defines the https://eslint.org/docs/user-guide/configuring/[configuration] of ESLint, including the set of rules to be enforced.
+Every rule must be set to either `error` or `off`.
+We do not use the `warning` level, which would only pollute the linting report while allowing rules to be violated without interrupting the build step.
+
+It uses https://typescript-eslint.io/[TypeScript ESLint] to read TypeScript source code and perform type-aware analysis according to `tsconfig.json`.
+
+When enforcing the rules for JSX and React hooks, it uses the API of React 17, which matches the API provided by Preact 10.
+
+=== AsciiDoc
+https://docs.asciidoctor.org/asciidoc/latest/[AsciiDoc] is a markup language for writing documentation.
+https://docs.asciidoctor.org/asciidoctor/latest/[AsciiDoctor] is a processing tool that converts AsciiDoc files to various output formats such as HTML and PDF.
+
+No configuration is needed for accessing the AsciiDoc documentation files in plain text.
+
+IntelliJ IDEA users with the AsciiDoc plugin may https://intellij-asciidoc-plugin.ahus1.de/docs/users-guide/features/advanced/stylesheets.html[customise the HTML preview] by providing a stylesheet:
+
+. In the project root folder, create a new folder named `.asciidoctor`.
+Git will ignore this folder.
+. Copy your stylesheet (e.g. `<my-preview-stylesheet>.css`) into the `.asciidoctor` folder.
+. In the project root folder, create a new file named `.asciidoctorconfig`.
+Git will ignore this file.
+Insert this content into the file:
++
+----
+:experimental:
+:stylesdir: {asciidoctorconfigdir}/.asciidoctor/
+:stylesheet: <my-preview-stylesheet>.css
+----
+
+[CAUTION]
+====
+The configuration file and the stylesheet *should not* be checked into the Git repository.
+
+By refraining from doing so, developers may provide their own stylesheet to suit their preference, for example to match a light or a dark theme in IntelliJ IDEA.
+====

@@ -1,0 +1,26 @@
+# This file, .eslintignore, marks certain files and folders as excluded from
+# linting in ESLint.
+#
+# Read more:
+# https://eslint.org/docs/user-guide/configuring/ignoring-code#the-eslintignore-file
+
+# Editors and IDEs.
+.idea/
+.vscode/
+
+# AsciiDoctor in IntelliJ IDEA.
+.asciidoctor/
+
+# Gradle.
+.gradle/
+
+# Node.
+node_modules/
+
+# Yarn.
+.yarn/
+
+# Build artifacts.
+build/
+out/
+dist/

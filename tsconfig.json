@@ -6,6 +6,10 @@
 {
     "compilerOptions": {
         "baseUrl": ".",
+        "paths": {
+            "+profile": [ "main/profile/index" ],
+            "+types": [ "main/types/index" ]
+        },
         "target": "ES2017",
         "module": "ES2020",
         "moduleResolution": "Node",

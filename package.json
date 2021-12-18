@@ -11,11 +11,13 @@
         "validate:unit-test": "jest"
     },
     "dependencies": {
+        "date-fns": "2.27.0",
         "preact": "10.6.4",
         "tailwindcss": "3.0.6",
         "tslib": "2.3.1"
     },
     "dependenciesComments": {
+        "date-fns": "A runtime library for date and time manipulation.",
         "preact": "Preact; a virtual DOM-based UI library with JSX support inspired by React. It is a runtime dependency, as it provides the API for mounting the web app onto the DOM.",
         "tailwindcss": "Tailwind CSS; a utility-first CSS framework. It is a runtime dependency, as it provides a CSS reset and helper rules in the CSS distribution.",
         "tslib": "A runtime library that optimises TypeScript applications."
@@ -48,6 +50,7 @@
         "html-minifier-terser": "6.1.0",
         "jest": "27.4.5",
         "postcss": "8.4.5",
+        "ts-essentials": "9.0.0",
         "ts-jest": "27.1.2",
         "typescript": "4.5.4",
         "vite": "2.6.14"
@@ -62,7 +65,7 @@
         "@testing-library/preact": "Preact Testing Library; a library that unit tests Preact applications through their user accessibility.",
         "@types/html-minifier-terser": "A set of type definitions for HTMLMinifier.",
         "@types/jest": "A set of type definitions for test suites in Jest.",
-        "@types/node": "A set of type definitions for Node modules to be used in configuration files.",
+        "@types/node": "A set of type definitions for Node modules to be used in configuration files and test stubs.",
         "@types/tailwindcss": "A set of type definitions for the Tailwind CSS configuration.",
         "@types/testing-library__jest-dom": "A set of type definitions for the assertion matchers provided by Testing Library.",
         "@typescript-eslint/eslint-plugin": "An ESLint plugin that uncovers issues in TypeScript code. It must match the version of '@typescript-eslint/parser'.",
@@ -80,6 +83,7 @@
         "html-minifier-terser": "HTMLMinifier; a minification tool that lets Vite reduce the output size of 'index.html'.",
         "jest": "Jest; a unit testing framework.",
         "postcss": "PostCSS; a processing tool for CSS. It is a peer dependency of 'tailwindcss'.",
+        "ts-essentials": "A set of common type definitions for writing type-safe code.",
         "ts-jest": "A Jest transformer that supports Preact-compatible JSX and TypeScript, including source maps and debugging in IntelliJ IDEA.",
         "typescript": "TypeScript; a statically typed programming language that extends the JavaScript syntax.",
         "vite": "Vite; a frontend build tool with native support for JSX, TypeScript, and PostCSS. '@preact/preset-vite' is not compatible with version 2.7.0 and newer."

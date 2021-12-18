@@ -12,11 +12,15 @@ module.exports = {
     testRegex: ["^.+\\.test\\.(ts|tsx)$"],
     moduleFileExtensions: ["ts", "tsx", "js"],
     moduleNameMapper: {
+        "^\\+profile$": "<rootDir>/main/profile/index",
+        "^\\+types$": "<rootDir>/main/types/index",
+        //
         "^.+\\.css$": "<rootDir>/test/jest/generic-asset-file-stub.cjs",
     },
     transform: {
         "^.+\\.ts$": "ts-jest",
         "^.+\\.tsx$": "ts-jest",
+        "^.+\\.webp$": "<rootDir>/test/jest/image-asset-file-stub.cjs",
     },
     setupFilesAfterEnv: [
         "@testing-library/jest-dom/extend-expect",

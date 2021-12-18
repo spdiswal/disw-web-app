@@ -10,6 +10,15 @@ import { defineConfig, type Plugin } from "vite"
 //
 export default defineConfig({
     root: path("main"),
+    resolve: {
+        // The declaration order of aliases matter, as Vite resolves aliases
+        // in this order. Thus, the longer and more specific aliases should
+        // be declared first.
+        alias: {
+            "+profile": path("main/profile/"),
+            "+types": path("main/types/"),
+        },
+    },
     publicDir: false,
     plugins: [
         MinifyIndexHtmlPlugin(),

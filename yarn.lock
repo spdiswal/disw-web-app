@@ -2130,6 +2130,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"date-fns@npm:2.27.0":
+  version: 2.27.0
+  resolution: "date-fns@npm:2.27.0"
+  checksum: db62036b3816eb0322c9532b353beac7f660a91e1a55dbd21c14893c621ebb8509f21c66ba287844dabd34dee0207edd54a9537bce6bb7cab9383dedc6b8bc90
+  languageName: node
+  linkType: hard
+
 "debug@npm:4, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1, debug@npm:^4.3.2":
   version: 4.3.3
   resolution: "debug@npm:4.3.3"
@@ -5659,6 +5666,7 @@ __metadata:
     "@typescript-eslint/parser": 5.7.0
     autoprefixer: 10.4.0
     babel-plugin-transform-hook-names: 1.0.2
+    date-fns: 2.27.0
     eslint: 8.4.1
     eslint-plugin-compat: 4.0.0
     eslint-plugin-jest: 25.3.0
@@ -5672,6 +5680,7 @@ __metadata:
     postcss: 8.4.5
     preact: 10.6.4
     tailwindcss: 3.0.6
+    ts-essentials: 9.0.0
     ts-jest: 27.1.2
     tslib: 2.3.1
     typescript: 4.5.4
@@ -6249,6 +6258,15 @@ __metadata:
   version: 0.0.3
   resolution: "tr46@npm:0.0.3"
   checksum: 726321c5eaf41b5002e17ffbd1fb7245999a073e8979085dacd47c4b4e8068ff5777142fc6726d6ca1fd2ff16921b48788b87225cbc57c72636f6efa8efbffe3
+  languageName: node
+  linkType: hard
+
+"ts-essentials@npm:9.0.0":
+  version: 9.0.0
+  resolution: "ts-essentials@npm:9.0.0"
+  peerDependencies:
+    typescript: ">=4.1.0"
+  checksum: 7122715b96dd5a93ca9e234e764ead870d11be8171b4ce1c97dad72d93f3213dac92c7e32ff198d16f44f4c27d4d9a35671f3f57ec3c18e8a215675c604326ad
   languageName: node
   linkType: hard
 

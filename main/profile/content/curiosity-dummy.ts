@@ -8,53 +8,113 @@ import pictureAssetUrl from "./curiosity-dummy.webp"
 export const content = defineProfileContent({
     picture: {
         assetUrl: pictureAssetUrl,
-        caption: "My self-portrait. Courtesy NASA/JPL-Caltech.",
+        caption: {
+            da: "Mit selvportræt. Courtesy NASA/JPL-Caltech.",
+            en: "My self-portrait. Courtesy NASA/JPL-Caltech.",
+        },
     },
     name: "Curiosity",
-    ambition: "And the climate on Mars thrills me!",
+    ambition: {
+        da: "Og jeg er vild med klimaet på Mars!",
+        en: "And the climate on Mars thrills me!",
+    },
     career: [
         {
-            title: "Geologist",
+            title: {
+                da: "Geolog",
+                en: "Geologist",
+            },
+            organisation: "NASA",
             period: {
                 since: "2012-08-15",
                 until: null,
             },
-            organisation: "NASA",
             activities: [
-                "Deployed at the Gale Crater on Planet Mars.",
-                "Investigating the chemical composition of the material on the Martian surface.",
-                "Collecting and analysing rock and soil samples.",
-                "Studying the water cycles on Mars.",
-                "Measuring the surface radiation on Mars, uncovering its great health risks for humans on Mars.",
+                {
+                    da: "Udstationeret i Gale-krateret på planeten Mars.",
+                    en: "Deployed at the Gale Crater on Planet Mars.",
+                },
+                {
+                    da: "Undersøger den kemiske sammensætning af materialet på Mars' overflade.",
+                    en: "Investigating the chemical composition of the material on the Martian surface.",
+                },
+                {
+                    da: "Indsamler og analyserer klippestykker og jordprøver.",
+                    en: "Collecting and analysing rock and soil samples.",
+                },
+                {
+                    da: "Nærstudere vandets cyklus på Mars.",
+                    en: "Studying the water cycles on Mars.",
+                },
+                {
+                    da: "Måler den radioaktive stråling på Mars' overflade, hvilket har afsløret dens sundhedsrisiko for mennesker på Mars.",
+                    en: "Measuring the surface radiation on Mars, uncovering its great health risks for humans on Mars.",
+                },
             ],
         },
         {
-            title: "Interplanetary Cruiser",
+            title: {
+                da: "Interplanetarisk turist",
+                en: "Interplanetary Cruiser",
+            },
+            organisation: {
+                da: "Verdensrumsagenturet",
+                en: "The Interplanetary Space Agency",
+            },
             period: {
                 since: "2011-11-26",
                 until: "2012-08-06",
             },
-            organisation: "The Interplanetary Space Agency",
             activities: [
-                "Launched from the terrestrial site of Cape Canaveral aboard an Atlas V rocket.",
-                "Measured the cosmic radiation in interplanetary space.",
-                "Completed an eight-month journey through space.",
-                "Had a wonderful teamwork with the Mars Reconnaissance Orbiter.",
-                "Soft landed onto the Martian surface using a sky crane touchdown manoeuvre with the spacecraft.",
+                {
+                    da: "Sendt til vejrs fra den jordiske opsendelsesbase Cape Canaveral om bord på en Atlas V-raket.",
+                    en: "Launched from the terrestrial site of Cape Canaveral aboard an Atlas V rocket.",
+                },
+                {
+                    da: "Målte den kosmiske stråling i det interplanetariske rum.",
+                    en: "Measured the cosmic radiation in interplanetary space.",
+                },
+                {
+                    da: "Gennemførte otte måneders rumrejse.",
+                    en: "Completed an eight-month journey through space.",
+                },
+                {
+                    da: "Havde et fantastisk samarbejde med Mars Reconnaissance Orbiter.",
+                    en: "Had a wonderful teamwork with the Mars Reconnaissance Orbiter.",
+                },
+                {
+                    da: "Gennemførte en blød landing på Mars' overflade ved hjælp af en sky crane touchdown-manøvre med rumfartøjet.",
+                    en: "Soft landed onto the Martian surface using a sky crane touchdown manoeuvre with the spacecraft.",
+                },
             ],
         },
         {
-            title: "Hatcher",
+            title: {
+                da: "Udruger",
+                en: "Hatcher",
+            },
+            organisation: "NASA",
             period: {
                 since: "2004-04-14",
                 until: "2011-11-26",
             },
-            organisation: "NASA",
             activities: [
-                "Brought a plutonium-238-based radioisotope thermoelectric power generator to charge two lithium-ion batteries, allowing for operation at night and during dust storms.",
-                "Chose rocker-bogie mobility gear to climb steep sand dunes and withstand tilts without overturning.",
-                "Acquired a heat rejection system to maintain optimal operation temperatures.",
-                "Implemented two twin rovers to be used for debugging on Planet Earth.",
+                {
+                    da: "Medbragte en plutonium-238-baseret termoelektrisk radioisotopgenerator til at oplade to litium-ion-batterier, der muliggør arbejde om natten og under sandstorme.",
+                    en: "Brought a plutonium-238-based radioisotope thermoelectric power generator to charge two lithium-ion batteries, allowing for operation at night and during dust storms.",
+                },
+                {
+                    da: "Valgte en vippeboogie-opstilling til at bestige stejle klitter og modstå hældninger uden at vælte.",
+                    en: "Chose rocker-bogie mobility gear to climb steep sand dunes and withstand tilts without overturning.",
+                },
+                {
+                    da: "Anskaffede et varmeafvisende system til at opretholde en optimal arbejdstemperatur.",
+                    en: "Acquired a heat rejection system to maintain optimal operation temperatures.",
+                },
+                {
+                    da: "Implementerede to tvillingerovere til fejlsøgning på planeten Jorden.",
+                    en: "Implemented two twin rovers to be used for debugging on Planet Earth.",
+                },
             ],
         },
     ],

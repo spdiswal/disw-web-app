@@ -366,7 +366,6 @@ module.exports = {
                 "testing-library/prefer-wait-for": "error",
                 "jest/require-hook": "error",
                 "jest/require-to-throw-message": "error",
-                "jest/require-top-level-describe": "error",
             },
         },
     ],

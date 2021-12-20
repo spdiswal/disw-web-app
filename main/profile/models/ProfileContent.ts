@@ -1,3 +1,5 @@
+import type { Multilingual, MultilingualDefinition } from "+i18n"
+import { multilingual } from "+i18n"
 import type { JsonValue } from "+types"
 import { parseISO } from "date-fns"
 import type { DeepReadonly } from "ts-essentials"
@@ -5,39 +7,39 @@ import type { DeepReadonly } from "ts-essentials"
 type ProfileContentTemplate = DeepReadonly<{
     picture: {
         assetUrl: string
-        caption: string
+        caption: MultilingualDefinition<string>
     }
     name: string
-    ambition: string
+    ambition: MultilingualDefinition<string>
     career: Array<{
-        title: string
-        organisation: string
+        title: MultilingualDefinition<string>
+        organisation: MultilingualDefinition<string>
         period: {
             since: string
             until: string | null
         }
-        activities: Array<string>
+        activities: Array<MultilingualDefinition<string>>
     }>
 }>
 
 export type ProfileContent = DeepReadonly<{
     picture: {
         assetUrl: string
-        caption: string
+        caption: Multilingual<string>
     }
     name: string
-    ambition: string
+    ambition: Multilingual<string>
     career: Array<{
         key: string
-        title: string
-        organisation: string
+        title: Multilingual<string>
+        organisation: Multilingual<string>
         period: {
             since: Date
             until: Date | null
         }
         activities: Array<{
             key: string
-            description: string
+            description: Multilingual<string>
         }>
     }>
 }>
@@ -48,14 +50,14 @@ export function defineProfileContent(
     return {
         picture: {
             assetUrl: template.picture.assetUrl,
-            caption: template.picture.caption,
+            caption: multilingual(template.picture.caption),
         },
         name: template.name,
-        ambition: template.ambition,
+        ambition: multilingual(template.ambition),
         career: template.career.map((occupation) => ({
             key: hashString(occupation),
-            title: occupation.title,
-            organisation: occupation.organisation,
+            title: multilingual(occupation.title),
+            organisation: multilingual(occupation.organisation),
             period: {
                 since: parseISO(occupation.period.since),
                 until: occupation.period.until !== null
@@ -64,7 +66,7 @@ export function defineProfileContent(
             },
             activities: occupation.activities.map((activity) => ({
                 key: hashString(activity),
-                description: activity,
+                description: multilingual(activity),
             })),
         })),
     }

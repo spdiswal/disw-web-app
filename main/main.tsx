@@ -7,6 +7,6 @@ render(<App/>, document.body)
 
 function App() {
     return (
-        <ProfilePage content={predefinedContent}/>
+        <ProfilePage content={predefinedContent} activeLanguage="en"/>
     )
 }

@@ -10,6 +10,7 @@
             // The alias below lets the type checker rely on a dummy profile.
             "+profile/content/predefined": [ "main/profile/content/perseverance-dummy" ],
             //
+            "+i18n": [ "main/i18n/index" ],
             "+profile": [ "main/profile/index" ],
             "+types": [ "main/types/index" ]
         },

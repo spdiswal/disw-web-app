@@ -5,13 +5,18 @@ import { EvenFlexBasis } from "./EvenFlexBasis"
 type OccupationProps = Props<{
     title: string
     organisation: string
-    since: Date
-    until: Date | null
-    activities: Array<string>
+    period: {
+        since: Date
+        until: Date | null
+    }
+    activities: Array<{
+        key: string
+        description: string
+    }>
 }>
 
 export function Occupation(
-    { title, organisation, since, until, activities }: OccupationProps,
+    { title, organisation, period, activities }: OccupationProps,
 ) {
     return (
         <article class="flex flex-col gap-y-2 items-center">
@@ -24,10 +29,10 @@ export function Occupation(
                  */}
                 <EvenFlexBasis>
                     <div class="font-normal italic pb-2 text-center / md:font-semibold md:not-italic md:pb-0 md:text-right">
-                        <DateTime dateTime={since}/>
+                        <DateTime dateTime={period.since}/>
                         &ndash;
-                        {until !== null
-                            ? <DateTime dateTime={until}/>
+                        {period.until !== null
+                            ? <DateTime dateTime={period.until}/>
                             : "present"}
                     </div>
                 </EvenFlexBasis>
@@ -43,8 +48,8 @@ export function Occupation(
                 </EvenFlexBasis>
             </header>
             {activities.map((activity) => (
-                <p key={activity} class="text-center text-white / md:text-lg md:w-144 / lg:w-192">
-                    {activity}
+                <p key={activity.key} class="text-center text-white / md:text-lg md:w-144 / lg:w-192">
+                    {activity.description}
                 </p>
             ))}
         </article>

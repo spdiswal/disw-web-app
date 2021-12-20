@@ -7,6 +7,9 @@
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
+            // The alias below lets the type checker rely on a dummy profile.
+            "+profile/content/predefined": [ "main/profile/content/perseverance-dummy" ],
+            //
             "+profile": [ "main/profile/index" ],
             "+types": [ "main/types/index" ]
         },

@@ -8,6 +8,7 @@ This repository contains the app for web browsers.
 * https://nodejs.org/en/[Node.js], version 16 or newer.
 * https://yarnpkg.com/getting-started/install[Yarn], which you can install with npm:
 +
+[source,shell script]
 ----
 npm install -g yarn
 ----
@@ -35,9 +36,54 @@ Upon cloning the Git repository, the `.yarn/cache` folder contains a cache of mo
 However, a few dependencies (usually executable binaries) remain _unplugged_.
 They must be installed explicitly by executing this command from the project root folder:
 
+[source,shell script]
 ----
 yarn install
 ----
+
+=== Defining a Profile
+A profile describes the content to display in the web app.
+
+The `VITE_PROFILE_NAME` environment variable specifies the profile to use.
+As declared in `.env.development`, it uses the `perseverance-dummy` profile during development.
+
+The `VITE_TITLE_NAME` environment variable specifies the name to display in the `<title>` element of the web page.
+
+You can create a new profile (e.g. named `my-profile`):
+
+. In the `main/profile/content` folder, save the profile picture as a https://developers.google.com/speed/webp/docs/using[WebP] image file named `my-profile.webp`.
+. In the same folder, create a TypeScript file named `my-profile.ts` and import the profile picture:
++
+[source,typescript]
+----
+import pictureAssetUrl from "./my-profile.webp"
+----
+. Call the `defineProfileContent` function to describe the profile content and set the profile picture.
+. Export the result in a constant named `content`.
+. In the project root folder, create a new file named `.env.development.local` (or `.env.production.local` when building for production).
+Git will ignore this file.
+Insert this content into the file to override the `VITE_PROFILE_NAME` and `VITE_TITLE_NAME` environment variables:
++
+[source,properties]
+----
+VITE_PROFILE_NAME=my-profile
+VITE_TITLE_NAME=My Profile
+----
+
+[IMPORTANT]
+====
+Git will ignore filenames that contain the substring `.local`.
+Use this to prevent personal information from leaking into the repository.
+
+For example: `my-profile.local.ts` and `my-profile.local.webp`.
+
+You must override the `VITE_PROFILE_NAME` environment variable accordingly:
+
+[source,properties]
+----
+VITE_PROFILE_NAME=my-profile.local
+----
+====
 
 == Common Work Tasks
 This section describes the scripts to execute for carrying out certain daily work tasks.
@@ -47,6 +93,7 @@ They have been defined in the `scripts` field in `package.json`.
 === Starting a Development Server
 To start a development server that hosts the web app under construction at http://localhost:5000:
 
+[source,shell script]
 ----
 yarn run develop
 ----
@@ -57,6 +104,7 @@ Equipped with hot module replacement (HMR), it reflects any changes you make imm
 === Validating the Software Quality
 To validate the quality of the software:
 
+[source,shell script]
 ----
 yarn run validate
 ----
@@ -69,6 +117,7 @@ It runs the following means of validation:
 
 You can apply an automated fix of certain issues reported by ESLint:
 
+[source,shell script]
 ----
 yarn run validate:lint:fix
 ----
@@ -76,6 +125,7 @@ yarn run validate:lint:fix
 === Building for Production
 To make a production-grade distribution of the web app:
 
+[source,shell script]
 ----
 yarn run build
 ----
@@ -86,6 +136,7 @@ It saves the output in the `build/www` folder.
 
 After building the distribution, you can start a web server that hosts a preview at http://localhost:80:
 
+[source,shell script]
 ----
 yarn run build:preview
 ----
@@ -109,7 +160,7 @@ Avoid using the `^` and `~` modifiers, which would otherwise allow the package m
 
 === Preact
 https://preactjs.com/[Preact] is a reactive web UI framework with an API similar to that of React.
-It lets you define components as JavaScript functions using https://reactjs.org/docs/introducing-jsx.html[JSX],.
+It lets you define components as JavaScript functions using https://reactjs.org/docs/introducing-jsx.html[JSX].
 
 [CAUTION]
 ====
@@ -159,6 +210,12 @@ It relies on PostCSS to support Tailwind CSS and on a https://github.com/preactj
 `vite.config.ts` defines the https://vitejs.dev/config/[configuration] of Vite.
 It picks up the PostCSS configuration in `postcss.config.cjs` automatically.
 
+`+profile/content/predefined` is an alias for the TypeScript module designated by `VITE_PROFILE_NAME`.
+
+`DisplayProfileNameInTitlePlugin` makes Vite replace the `<title>` element of `index.html` entirely with the value of `VITE_TITLE_NAME`.
+
+`removeLocalSubstringFromEmittedAssetFilenames` overrides a https://vitejs.dev/config/#build-rollupoptions[Rollup] option to strip asset filenames of the `.local` substring when building a production distribution.
+
 [CAUTION]
 ====
 You can define the configurations of PostCSS and Tailwind CSS directly in the Vite configuration file.
@@ -195,15 +252,16 @@ IntelliJ IDEA users with the AsciiDoc plugin may https://intellij-asciidoc-plugi
 
 . In the project root folder, create a new folder named `.asciidoctor`.
 Git will ignore this folder.
-. Copy your stylesheet (e.g. `<my-preview-stylesheet>.css`) into the `.asciidoctor` folder.
+. Copy your stylesheet (e.g. `my-preview-stylesheet.css`) into the `.asciidoctor` folder.
 . In the project root folder, create a new file named `.asciidoctorconfig`.
 Git will ignore this file.
 Insert this content into the file:
 +
+[source,asciidoc]
 ----
 :experimental:
 :stylesdir: {asciidoctorconfigdir}/.asciidoctor/
-:stylesheet: <my-preview-stylesheet>.css
+:stylesheet: my-preview-stylesheet.css
 ----
 
 [CAUTION]

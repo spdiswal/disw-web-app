@@ -12,6 +12,9 @@ module.exports = {
     testRegex: ["^.+\\.test\\.(ts|tsx)$"],
     moduleFileExtensions: ["ts", "tsx", "js"],
     moduleNameMapper: {
+        // The alias below lets Jest rely on a dummy profile.
+        "^\\+profile/content/predefined$": "<rootDir>/main/profile/content/perseverance-dummy",
+        //
         "^\\+profile$": "<rootDir>/main/profile/index",
         "^\\+types$": "<rootDir>/main/types/index",
         //

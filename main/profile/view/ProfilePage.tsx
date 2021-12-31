@@ -21,7 +21,7 @@ export function ProfilePage({
     activeLanguage,
 }: ProfilePageProps) {
     return (
-        <main class="flex flex-col gap-y-16 min-w-min mx-auto px-8 py-12 / md:gap-y-20 md:py-20 / lg:gap-y-24 lg:py-32">
+        <main class="flex flex-col gap-y-16 / md:gap-y-20/ lg:gap-y-24">
             <img
                 class="aspect-square h-auto mx-auto rounded-16 w-48 / md:rounded-24 md:w-72 / lg:rounded-32 lg:w-96"
                 src={picture.assetUrl}

@@ -23,6 +23,8 @@ export default defineConfig(({ mode }) => {
                 // module replacement during development.
                 "+profile/content/predefined": path(`main/profile/content/${env.VITE_PROFILE_NAME}`),
                 //
+                "+elements/icons": path("main/elements/icons/"),
+                "+elements/listbox": path("main/elements/listbox/"),
                 "+i18n": path("main/i18n/"),
                 "+profile": path("main/profile/"),
                 "+types": path("main/types/"),

@@ -8,4 +8,5 @@ export type DefaultProps = Readonly<Partial<{
     id: string
     class: string
     children: ComponentChildren
+    onClick: () => void
 }>>

@@ -227,7 +227,8 @@ module.exports = {
         "radix": "error",
         "@typescript-eslint/require-array-sort-compare": "error",
         "require-atomic-updates": "error",
-        "require-await": "error",
+        "require-await": "off",
+        "@typescript-eslint/require-await": "error",
         "require-unicode-regexp": "error",
         "rest-spread-spacing": ["error", "never"],
         "semi": "off",
@@ -285,7 +286,7 @@ module.exports = {
                 "react/jsx-curly-spacing": ["error", "never"],
                 "react/jsx-equals-spacing": ["error", "never"],
                 "react/jsx-first-prop-new-line": ["error", "multiline"],
-                "react/jsx-fragments": ["error", "syntax"],
+                "react/jsx-fragments": ["error", "element"],
                 "react/jsx-indent": ["error", 4, {
                     checkAttributes: true,
                     indentLogicalExpressions: true,
@@ -294,7 +295,11 @@ module.exports = {
                 "react/jsx-newline": ["error", {
                     prevent: true,
                 }],
-                "react/jsx-no-bind": "error",
+                "react/jsx-no-bind": ["error", {
+                    ignoreRefs: true,
+                    allowFunctions: true,
+                    allowArrowFunctions: true,
+                }],
                 "react/jsx-no-script-url": "error",
                 "react/jsx-no-useless-fragment": ["error", {
                     allowExpressions: true,
@@ -321,7 +326,13 @@ module.exports = {
                 "react/no-array-index-key": "error",
                 "react/no-danger": "error",
                 "react/no-unknown-property": ["error", {
-                    ignore: ["class", "for"],
+                    ignore: [
+                        "class",
+                        "for",
+                        "stroke-width",
+                        "stroke-linecap",
+                        "stroke-linejoin",
+                    ],
                 }],
                 "react/no-unstable-nested-components": "error",
                 "react/prefer-stateless-function": "error",

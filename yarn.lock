@@ -469,17 +469,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@happy-dom/jest-environment@npm:2.25.0":
-  version: 2.25.0
-  resolution: "@happy-dom/jest-environment@npm:2.25.0"
+"@happy-dom/jest-environment@npm:2.25.1":
+  version: 2.25.1
+  resolution: "@happy-dom/jest-environment@npm:2.25.1"
   dependencies:
     "@jest/environment": ^27.0.3
     "@jest/fake-timers": ^27.0.3
     "@jest/types": ^27.0.2
-    happy-dom: ^2.25.0
+    happy-dom: ^2.25.1
     jest-mock: ^27.0.3
     jest-util: ^27.0.2
-  checksum: 817f54d7866d8f1ba02f384d3248e5556b04691dcbc0e7c8c9ed7c795c5a1f631d7290a2f60eb4554ccaf68bb1443356145587dc4d711aff44a8c0aad8b9cffc
+  checksum: e8aa6000902a77ed2bb44e8f35e6f386ea7d72facdd14a39aaf81a2deebe7258e4690a4baf041cc8d87c979f775e97390d8d78d0488b31ae135201121f7e2d70
   languageName: node
   linkType: hard
 
@@ -873,6 +873,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@testing-library/dom@npm:8.11.1":
+  version: 8.11.1
+  resolution: "@testing-library/dom@npm:8.11.1"
+  dependencies:
+    "@babel/code-frame": ^7.10.4
+    "@babel/runtime": ^7.12.5
+    "@types/aria-query": ^4.2.0
+    aria-query: ^5.0.0
+    chalk: ^4.1.0
+    dom-accessibility-api: ^0.5.9
+    lz-string: ^1.4.4
+    pretty-format: ^27.0.2
+  checksum: 082104b104def94db071fe35f967124c52d387d995a61327cd60ed39c310126f4cde2fa51054c37977cd3a2082311795417413506ad1a14df1010bd1cbb02bc5
+  languageName: node
+  linkType: hard
+
 "@testing-library/dom@npm:^7.16.2, @testing-library/dom@npm:^7.28.1":
   version: 7.31.2
   resolution: "@testing-library/dom@npm:7.31.2"
@@ -906,6 +922,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@testing-library/preact-hooks@npm:1.1.0":
+  version: 1.1.0
+  resolution: "@testing-library/preact-hooks@npm:1.1.0"
+  peerDependencies:
+    "@testing-library/preact": ^2.0.0
+    preact: ^10.4.8
+  checksum: ed04a44aa7cdfc3e51ede05bf62b513ee1ef23cba1a03648b19b81c42bdce977b2282a29874617250e34d38eee74ce7a8eee46891e2a81efe10d93ecb6faff11
+  languageName: node
+  linkType: hard
+
 "@testing-library/preact@npm:2.0.1":
   version: 2.0.1
   resolution: "@testing-library/preact@npm:2.0.1"
@@ -914,6 +940,17 @@ __metadata:
   peerDependencies:
     preact: ">=10 || ^10.0.0-alpha.0 || ^10.0.0-beta.0"
   checksum: 36fae3730d43d0a9ba132d4fe7eb0b2b3006f7857e559d91c5710ac687931768c53efbd17b840b722ff1533944ec159e1a31975b967a49e4ffea47ffe1574c75
+  languageName: node
+  linkType: hard
+
+"@testing-library/user-event@npm:13.5.0":
+  version: 13.5.0
+  resolution: "@testing-library/user-event@npm:13.5.0"
+  dependencies:
+    "@babel/runtime": ^7.12.5
+  peerDependencies:
+    "@testing-library/dom": ">=7.21.4"
+  checksum: 16319de685fbb7008f1ba667928f458b2d08196918002daca56996de80ef35e6d9de26e9e1ece7d00a004692b95a597cf9142fff0dc53f2f51606a776584f549
   languageName: node
   linkType: hard
 
@@ -1911,6 +1948,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"clsx@npm:1.1.1":
+  version: 1.1.1
+  resolution: "clsx@npm:1.1.1"
+  checksum: ff052650329773b9b245177305fc4c4dc3129f7b2be84af4f58dc5defa99538c61d4207be7419405a5f8f3d92007c954f4daba5a7b74e563d5de71c28c830063
+  languageName: node
+  linkType: hard
+
 "co@npm:^4.6.0":
   version: 4.6.0
   resolution: "co@npm:4.6.0"
@@ -2289,7 +2333,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dom-accessibility-api@npm:^0.5.6":
+"dom-accessibility-api@npm:^0.5.6, dom-accessibility-api@npm:^0.5.9":
   version: 0.5.10
   resolution: "dom-accessibility-api@npm:0.5.10"
   checksum: c05949889b02f5313d100778e9f736f9bddfb1da47387d351833f0b5d60d6230d4fcb849e124a8a1591706b6200337fa40f0f4f3817dce1459309e075f48371c
@@ -3270,9 +3314,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"happy-dom@npm:^2.25.0":
-  version: 2.25.0
-  resolution: "happy-dom@npm:2.25.0"
+"happy-dom@npm:^2.25.1":
+  version: 2.25.1
+  resolution: "happy-dom@npm:2.25.1"
   dependencies:
     he: ^1.1.1
     node-fetch: ^2.6.1
@@ -3280,7 +3324,7 @@ __metadata:
     webidl-conversions: ^7.0.0
     whatwg-encoding: ^1.0.5
     whatwg-mimetype: ^2.3.0
-  checksum: d41d616ce3039f5047789b06945fae43533d114ab79907a90c6feca312ca6e8f6988934cefb8e415f995d41f987a6223d31498bfd8dcd89d73e0c0e914437acd
+  checksum: 1b04855310fc74f915554e1a52d551717a73a3272d10ed7862f459936083568f36cab560471b44567f98ac0cc527b53776f2df71d156a75e869c0afb96d38453
   languageName: node
   linkType: hard
 
@@ -5323,7 +5367,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pretty-format@npm:^27.0.0, pretty-format@npm:^27.4.2":
+"pretty-format@npm:^27.0.0, pretty-format@npm:^27.0.2, pretty-format@npm:^27.4.2":
   version: 27.4.2
   resolution: "pretty-format@npm:27.4.2"
   dependencies:
@@ -5652,11 +5696,14 @@ __metadata:
   dependencies:
     "@babel/core": 7.16.5
     "@babel/plugin-transform-react-jsx": 7.16.5
-    "@happy-dom/jest-environment": 2.25.0
+    "@happy-dom/jest-environment": 2.25.1
     "@jest/types": 27.4.2
     "@preact/preset-vite": 2.1.5
+    "@testing-library/dom": 8.11.1
     "@testing-library/jest-dom": 5.16.1
     "@testing-library/preact": 2.0.1
+    "@testing-library/preact-hooks": 1.1.0
+    "@testing-library/user-event": 13.5.0
     "@types/html-minifier-terser": 6.1.0
     "@types/jest": 27.0.3
     "@types/node": 16.11.14
@@ -5666,6 +5713,7 @@ __metadata:
     "@typescript-eslint/parser": 5.7.0
     autoprefixer: 10.4.0
     babel-plugin-transform-hook-names: 1.0.2
+    clsx: 1.1.1
     date-fns: 2.27.0
     eslint: 8.4.1
     eslint-plugin-compat: 4.0.0

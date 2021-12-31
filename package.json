@@ -11,12 +11,14 @@
         "validate:unit-test": "jest"
     },
     "dependencies": {
+        "clsx": "1.1.1",
         "date-fns": "2.27.0",
         "preact": "10.6.4",
         "tailwindcss": "3.0.6",
         "tslib": "2.3.1"
     },
     "dependenciesComments": {
+        "clsx": "A runtime library for constructing conditional class attribute strings from JavaScript objects and arrays.",
         "date-fns": "A runtime library for date and time manipulation.",
         "preact": "Preact; a virtual DOM-based UI library with JSX support inspired by React. It is a runtime dependency, as it provides the API for mounting the web app onto the DOM.",
         "tailwindcss": "Tailwind CSS; a utility-first CSS framework. It is a runtime dependency, as it provides a CSS reset and helper rules in the CSS distribution.",
@@ -25,11 +27,14 @@
     "devDependencies": {
         "@babel/core": "7.16.5",
         "@babel/plugin-transform-react-jsx": "7.16.5",
-        "@happy-dom/jest-environment": "2.25.0",
+        "@happy-dom/jest-environment": "2.25.1",
         "@jest/types": "27.4.2",
         "@preact/preset-vite": "2.1.5",
+        "@testing-library/dom": "8.11.1",
         "@testing-library/jest-dom": "5.16.1",
         "@testing-library/preact": "2.0.1",
+        "@testing-library/preact-hooks": "1.1.0",
+        "@testing-library/user-event": "13.5.0",
         "@types/html-minifier-terser": "6.1.0",
         "@types/jest": "27.0.3",
         "@types/node": "16.11.14",
@@ -61,8 +66,11 @@
         "@happy-dom/jest-environment": "Happy DOM; a library that provides a DOM-like API. It is faster than the built-in JSDOM-based test environment for Jest.",
         "@jest/types": "A set of type definitions for the Jest configuration.",
         "@preact/preset-vite": "A Vite plugin for Preact applications that supports hot module replacement (HMR) and Preact Devtools.",
+        "@testing-library/dom": "DOM Testing Library; a library that unit tests web applications through their user accessibility via the DOM. It is a peer dependency of '@testing-library/user-event'.",
         "@testing-library/jest-dom": "A Testing Library add-on that provides DOM assertion matchers in Jest.",
         "@testing-library/preact": "Preact Testing Library; a library that unit tests Preact applications through their user accessibility.",
+        "@testing-library/preact-hooks": "A Testing Library add-on that renders custom hooks in Preact applications.",
+        "@testing-library/user-event": "A Testing Library add-on that provides more advanced simulations of user events than the built-in 'fireEvent' function.",
         "@types/html-minifier-terser": "A set of type definitions for HTMLMinifier.",
         "@types/jest": "A set of type definitions for test suites in Jest.",
         "@types/node": "A set of type definitions for Node modules to be used in configuration files and test stubs.",

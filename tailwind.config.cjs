@@ -13,8 +13,10 @@ module.exports = {
     content: ["./main/**/*.{ts,tsx}"],
     theme: {
         colors: {
-            "primary": colors.amber,
+            "accent": colors.blue,
+            "black": colors.black,
             "neutral": colors.gray,
+            "primary": colors.amber,
             "white": colors.white,
         },
         extend: {

@@ -1415,10 +1415,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/tailwindcss@npm:2.2.4":
-  version: 2.2.4
-  resolution: "@types/tailwindcss@npm:2.2.4"
-  checksum: 024fb3cfc63164390db9a1d10f4bd65c06a280f115394106dc5085db5fef9a0679c3cc45ec1196c79aaa3b45cedab101ac49767b409eb49b0ee9e16dd6aed3e7
+"@types/tailwindcss@npm:3.0.0":
+  version: 3.0.0
+  resolution: "@types/tailwindcss@npm:3.0.0"
+  checksum: b41c86137b6fa1d0a129748586c13e8a33e26c6e2d975770a19c26397203a72da53a604773153f7fa2b8c2da8f6dbf2f532ce41fb82787433965f7e3944ef934
   languageName: node
   linkType: hard
 
@@ -1915,21 +1915,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"autoprefixer@npm:10.4.0":
-  version: 10.4.0
-  resolution: "autoprefixer@npm:10.4.0"
+"autoprefixer@npm:10.4.1":
+  version: 10.4.1
+  resolution: "autoprefixer@npm:10.4.1"
   dependencies:
-    browserslist: ^4.17.5
-    caniuse-lite: ^1.0.30001272
-    fraction.js: ^4.1.1
+    browserslist: ^4.19.1
+    caniuse-lite: ^1.0.30001294
+    fraction.js: ^4.1.2
     normalize-range: ^0.1.2
     picocolors: ^1.0.0
-    postcss-value-parser: ^4.1.0
+    postcss-value-parser: ^4.2.0
   peerDependencies:
     postcss: ^8.1.0
   bin:
     autoprefixer: bin/autoprefixer
-  checksum: 7d511c64daeaa13c7888b40b0394cd891fab1852a1f60165330c9e49ab70ac29ad1e3386665d86361661cf2bbe90cea42b78ea73cb77b373ffe30a8f4973a955
+  checksum: 96527cd62b88e44ad3949fd2dedcc771ece8818d0bfffffdffd9aa87e409e4c5c00cf0cda1ebe1dc75910a62052d33a7628adf3c13a1763ba7677c027250f88c
   languageName: node
   linkType: hard
 
@@ -2074,6 +2074,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"browserslist@npm:^4.19.1":
+  version: 4.19.1
+  resolution: "browserslist@npm:4.19.1"
+  dependencies:
+    caniuse-lite: ^1.0.30001286
+    electron-to-chromium: ^1.4.17
+    escalade: ^3.1.1
+    node-releases: ^2.0.1
+    picocolors: ^1.0.0
+  bin:
+    browserslist: cli.js
+  checksum: c0777fd483691638fd6801e16c9d809e1d65f6d2b06db2e806654be51045cbab1452a89841a2c5caea2cbe19d621b4f1d391cffbb24512aa33280039ab345875
+  languageName: node
+  linkType: hard
+
 "bs-logger@npm:0.x":
   version: 0.2.6
   resolution: "bs-logger@npm:0.2.6"
@@ -2173,10 +2188,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"caniuse-lite@npm:^1.0.30001267, caniuse-lite@npm:^1.0.30001272, caniuse-lite@npm:^1.0.30001286":
+"caniuse-lite@npm:^1.0.30001267, caniuse-lite@npm:^1.0.30001286":
   version: 1.0.30001286
   resolution: "caniuse-lite@npm:1.0.30001286"
   checksum: 04de4742552d4aeb713677b40693d9ac1fbd259573e0ff739565278bcecb6f398f3227546a4e930f4d5cf95b61458f4a53c9c1f90f5b0c4f6063b32e4c54b89e
+  languageName: node
+  linkType: hard
+
+"caniuse-lite@npm:^1.0.30001294":
+  version: 1.0.30001295
+  resolution: "caniuse-lite@npm:1.0.30001295"
+  checksum: 42f77ce2b2e5ce3797ebf9137da491d4be883879be81164740f2d5d403ed85532e4be66f11822bef73922449242de4b70a06153a3c7ed4f6fd7765faebad7b4f
   languageName: node
   linkType: hard
 
@@ -3471,7 +3493,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fraction.js@npm:^4.1.1":
+"fraction.js@npm:^4.1.2":
   version: 4.1.2
   resolution: "fraction.js@npm:4.1.2"
   checksum: a67eff2b599cb6546b77ce9c913bd0cccd646e1a525c793ba4e0bf5a399fc403f379227fca83423a6ea79d01e35c2f2b0f141ffa1d09e41377041268a53fb150
@@ -5671,7 +5693,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-value-parser@npm:^4.1.0, postcss-value-parser@npm:^4.2.0":
+"postcss-value-parser@npm:^4.2.0":
   version: 4.2.0
   resolution: "postcss-value-parser@npm:4.2.0"
   checksum: 819ffab0c9d51cf0acbabf8996dffbfafbafa57afc0e4c98db88b67f2094cb44488758f06e5da95d7036f19556a4a732525e84289a425f4f6fd8e412a9d7442f
@@ -6062,11 +6084,11 @@ __metadata:
     "@types/html-minifier-terser": 6.1.0
     "@types/jest": 27.0.3
     "@types/node": 16.11.14
-    "@types/tailwindcss": 2.2.4
+    "@types/tailwindcss": 3.0.0
     "@types/testing-library__jest-dom": 5.14.2
     "@typescript-eslint/eslint-plugin": 5.8.1
     "@typescript-eslint/parser": 5.8.1
-    autoprefixer: 10.4.0
+    autoprefixer: 10.4.1
     babel-plugin-transform-hook-names: 1.0.2
     clsx: 1.1.1
     date-fns: 2.27.0
@@ -6082,7 +6104,7 @@ __metadata:
     jest: 27.4.5
     postcss: 8.4.5
     preact: 10.6.4
-    tailwindcss: 3.0.6
+    tailwindcss: 3.0.8
     ts-essentials: 9.0.0
     ts-jest: 27.1.2
     tslib: 2.3.1
@@ -6484,9 +6506,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:3.0.6":
-  version: 3.0.6
-  resolution: "tailwindcss@npm:3.0.6"
+"tailwindcss@npm:3.0.8":
+  version: 3.0.8
+  resolution: "tailwindcss@npm:3.0.8"
   dependencies:
     arg: ^5.0.1
     chalk: ^4.1.2
@@ -6515,7 +6537,7 @@ __metadata:
   bin:
     tailwind: lib/cli.js
     tailwindcss: lib/cli.js
-  checksum: 9b381caadb1d058fbfede02d87a3f3ce2d64de08fd1b13528b2bdc8aebb31d66af254355dbe96195cb5fb7769631803396494a452cb3b373b0e4f79a8fe1169a
+  checksum: 7a3215e2d9e121d5cf465cede3204c02740792659200e87b0c0344fea3092415581eedf0ccf70e79bc9270396a8aac9e049566e372f10ce646e15e196273e35e
   languageName: node
   linkType: hard
 

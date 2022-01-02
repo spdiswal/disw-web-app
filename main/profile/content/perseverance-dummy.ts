@@ -58,11 +58,11 @@ export const content = defineProfileContent({
         },
         {
             title: {
-                da: "Interplanetarisk cinematografiagent",
+                da: "Interplanetarisk cinematografi\u00ADagent",
                 en: "Interplanetary Cinematography Agent",
             },
             organisation: {
-                da: "Verdensrumsagenturet",
+                da: "Verdensrums\u00ADagenturet",
                 en: "The Interplanetary Space Agency",
             },
             period: {

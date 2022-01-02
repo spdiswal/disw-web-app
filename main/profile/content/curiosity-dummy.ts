@@ -58,7 +58,7 @@ export const content = defineProfileContent({
                 en: "Interplanetary Cruiser",
             },
             organisation: {
-                da: "Verdensrumsagenturet",
+                da: "Verdensrums\u00ADagenturet",
                 en: "The Interplanetary Space Agency",
             },
             period: {

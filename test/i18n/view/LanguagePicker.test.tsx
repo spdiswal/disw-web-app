@@ -1,20 +1,14 @@
-/**
- * This test suite requires JSDOM instead of Happy DOM, which fails to interact
- * properly with the web app.
- *
- * @jest-environment jsdom
- */
-
 import type { Language } from "+i18n"
 import { LanguagePicker } from "+i18n"
+import type { ClassList } from "+types"
 import type { ByRoleOptions } from "@testing-library/preact"
 import { render, screen } from "@testing-library/preact"
 import userEvent from "@testing-library/user-event"
 
-test("The language picker propagates the class string.", async () => {
+test("The language picker propagates the class list.", async () => {
     // GIVEN a language picker.
-    // AND the class string is 'noun verb adjective'.
-    await givenALanguagePicker({ class: "noun verb adjective" })
+    // AND the class list is 'noun verb adjective'.
+    givenALanguagePicker({ class: "noun verb adjective" })
     
     // THEN the language picker has classes 'noun', 'verb', and 'adjective'.
     await expect(theLanguagePicker()).resolves
@@ -23,7 +17,7 @@ test("The language picker propagates the class string.", async () => {
 
 test("The language picker popup has two options.", async () => {
     // GIVEN a language picker.
-    await givenALanguagePicker()
+    givenALanguagePicker()
     
     // GIVEN a visible the language picker popup.
     await givenAVisibleLanguagePickerPopup()
@@ -34,7 +28,7 @@ test("The language picker popup has two options.", async () => {
 
 test("The language picker popup has a Danish option.", async () => {
     // GIVEN a language picker.
-    await givenALanguagePicker()
+    givenALanguagePicker()
     
     // GIVEN a visible the language picker popup.
     await givenAVisibleLanguagePickerPopup()
@@ -46,7 +40,7 @@ test("The language picker popup has a Danish option.", async () => {
 
 test("The language picker popup has an English option.", async () => {
     // GIVEN a language picker.
-    await givenALanguagePicker()
+    givenALanguagePicker()
     
     // GIVEN a visible the language picker popup.
     await givenAVisibleLanguagePickerPopup()
@@ -62,7 +56,7 @@ test("The change handler is invoked when left-clicking on the Danish option in t
     
     // GIVEN a language picker.
     // AND English is the selected option.
-    await givenALanguagePicker({ selection: "en", handleChange })
+    givenALanguagePicker({ selection: "en", handleChange })
     
     // GIVEN a visible the language picker popup.
     await givenAVisibleLanguagePickerPopup()
@@ -83,7 +77,7 @@ test("The change handler is invoked when left-clicking on the English option in 
     
     // GIVEN a language picker.
     // AND Danish is the selected option.
-    await givenALanguagePicker({ selection: "da", handleChange })
+    givenALanguagePicker({ selection: "da", handleChange })
     
     // GIVEN a visible the language picker popup.
     await givenAVisibleLanguagePickerPopup()
@@ -98,10 +92,10 @@ test("The change handler is invoked when left-clicking on the English option in 
     expect(handleChange).toHaveBeenCalledWith("en")
 })
 
-async function givenALanguagePicker(options?: {
+function givenALanguagePicker(options?: {
     selection?: Language,
     handleChange?: (selection: Language) => void,
-    class?: string
+    class?: ClassList
 }) {
     render((
         <LanguagePicker
@@ -110,15 +104,10 @@ async function givenALanguagePicker(options?: {
             onLanguageSelected={options?.handleChange}
         />
     ))
-    
-    await expect(theLanguagePickerButton()).resolves.toBeInTheDocument()
-    await expect(theLanguagePickerPopup()).resolves.toBeInTheDocument()
 }
 
 async function givenAVisibleLanguagePickerPopup() {
     await whenLeftClickingOnTheLanguagePickerButton()
-    await expect(theLanguagePickerPopup()).resolves
-        .not.toHaveClass("hidden")
 }
 
 async function whenLeftClickingOnTheLanguagePickerButton() {
@@ -148,12 +137,6 @@ async function theLanguagePickerButton(
     queryOptions?: ByRoleOptions,
 ): Promise<HTMLElement> {
     return screen.findByRole("button", queryOptions)
-}
-
-async function theLanguagePickerPopup(
-    queryOptions?: ByRoleOptions,
-): Promise<HTMLElement> {
-    return screen.findByRole("listbox", queryOptions)
 }
 
 async function theLanguagePickerOption(

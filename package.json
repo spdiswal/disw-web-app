@@ -27,7 +27,6 @@
     "devDependencies": {
         "@babel/core": "7.16.7",
         "@babel/plugin-transform-react-jsx": "7.16.7",
-        "@happy-dom/jest-environment": "2.25.1",
         "@jest/types": "27.4.2",
         "@preact/preset-vite": "2.1.7",
         "@testing-library/dom": "8.11.1",
@@ -55,7 +54,6 @@
         "html-minifier-terser": "6.1.0",
         "jest": "27.4.5",
         "postcss": "8.4.5",
-        "ts-essentials": "9.0.0",
         "ts-jest": "27.1.2",
         "typescript": "4.5.4",
         "vite": "2.7.10"
@@ -63,7 +61,6 @@
     "devDependenciesComments": {
         "@babel/core": "Babel; a JavaScript compiler. It is a peer dependency of '@preact/preset-vite'.",
         "@babel/plugin-transform-react-jsx": "A Babel plugin that supports Preact-compatible JSX transformations. It is a peer dependency of '@preact/preset-vite'.",
-        "@happy-dom/jest-environment": "Happy DOM; a library that provides a DOM-like API. It is faster than the built-in JSDOM-based test environment for Jest.",
         "@jest/types": "A set of type definitions for the Jest configuration.",
         "@preact/preset-vite": "A Vite plugin for Preact applications that supports hot module replacement (HMR) and Preact Devtools.",
         "@testing-library/dom": "DOM Testing Library; a library that unit tests web applications through their user accessibility via the DOM. It is a peer dependency of '@testing-library/user-event'.",
@@ -91,7 +88,6 @@
         "html-minifier-terser": "HTMLMinifier; a minification tool that lets Vite reduce the output size of 'index.html'.",
         "jest": "Jest; a unit testing framework.",
         "postcss": "PostCSS; a processing tool for CSS. It is a peer dependency of 'tailwindcss'.",
-        "ts-essentials": "A set of common type definitions for writing type-safe code.",
         "ts-jest": "A Jest transformer that supports Preact-compatible JSX and TypeScript, including source maps and debugging in IntelliJ IDEA.",
         "typescript": "TypeScript; a statically typed programming language that extends the JavaScript syntax.",
         "vite": "Vite; a frontend build tool with native support for JSX, TypeScript, and PostCSS. '@preact/preset-vite' is not compatible with version 2.7.0 and newer."

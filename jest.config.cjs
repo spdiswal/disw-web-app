@@ -7,7 +7,7 @@
  * @type {import("@jest/types").Config.InitialOptions}
  */
 module.exports = {
-    testEnvironment: "@happy-dom/jest-environment",
+    testEnvironment: "jsdom",
     roots: ["<rootDir>/test"],
     testRegex: ["^.+\\.test\\.(ts|tsx)$"],
     moduleFileExtensions: ["ts", "tsx", "js"],

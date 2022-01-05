@@ -1,1 +1,3 @@
-export * from "./ProfileContent"
+export * from "./Content"
+export * from "./Occupation"
+export * from "./Portrait"

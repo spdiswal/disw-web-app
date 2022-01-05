@@ -1,6 +1,8 @@
-type HeroIconCheckProps = Readonly<{
-    class?: string
-}>
+import type { ClassList } from "+types"
+
+type HeroIconCheckProps = {
+    readonly class?: ClassList
+}
 
 /**
  * Heroicons: `check`.

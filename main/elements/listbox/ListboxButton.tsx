@@ -1,11 +1,11 @@
 import { HeroIconSelector } from "+elements/icons"
 import type { ComponentChildren } from "preact"
 
-type ListboxButtonProps = Readonly<{
-    isOpen: boolean
-    onClick: () => void
-    children: ComponentChildren
-}>
+type ListboxButtonProps = {
+    readonly isOpen: boolean
+    readonly onClick: () => void
+    readonly children: ComponentChildren
+}
 
 export function ListboxButton({
     isOpen,

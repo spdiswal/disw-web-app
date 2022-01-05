@@ -1,6 +1,8 @@
-type HeroIconSelectorProps = Readonly<{
-    class?: string
-}>
+import type { ClassList } from "+types"
+
+type HeroIconSelectorProps = {
+    readonly class?: ClassList
+}
 
 /**
  * Heroicons: `selector`.

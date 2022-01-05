@@ -206,10 +206,7 @@ module.exports = {
         "@typescript-eslint/prefer-optional-chain": "error",
         "prefer-promise-reject-errors": "error",
         "@typescript-eslint/prefer-readonly": "error",
-        "@typescript-eslint/prefer-readonly-parameter-types": ["error", {
-            ignoreInferredTypes: true,
-            treatMethodsAsReadonly: true,
-        }],
+        "@typescript-eslint/prefer-readonly-parameter-types": "off",
         "@typescript-eslint/prefer-reduce-type-parameter": "error",
         "prefer-regex-literals": "error",
         "prefer-rest-params": "error",

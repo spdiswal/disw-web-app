@@ -2,11 +2,11 @@ import { HeroIconCheck } from "+elements/icons"
 import clsx from "clsx"
 import type { ComponentChildren } from "preact"
 
-type ListboxOptionProps = Readonly<{
-    isSelected: boolean
-    onClick: () => void
-    children: ComponentChildren
-}>
+type ListboxOptionProps = {
+    readonly isSelected: boolean
+    readonly onClick: () => void
+    readonly children: ComponentChildren
+}
 
 export function ListboxOption({
     isSelected,

@@ -1,3 +1,4 @@
+import type { ClassList } from "+types"
 import type { ComponentChildren } from "preact"
 import { useRef, useState } from "preact/hooks"
 import { ListboxButton } from "./ListboxButton"
@@ -6,16 +7,16 @@ import { ListboxPopup } from "./ListboxPopup"
 import { useMouseDownOutsideElementEvent } from "./useMouseDownOutsideElementEvent"
 import { useWindowEvent } from "./useWindowEvent"
 
-type ListboxProps<Option> = Readonly<{
-    options: ReadonlyArray<Option>
-    selection: Option
-    onChange?: (selection: Option) => void
-    children: (optionToRender: Option) => {
-        element: ComponentChildren
-        key: string
+type ListboxProps<Option> = {
+    readonly options: ReadonlyArray<Option>
+    readonly selection: Option
+    readonly onChange?: (selection: Option) => void
+    readonly children: (optionToRender: Option) => {
+        readonly element: ComponentChildren
+        readonly key: string
     }
-    class?: string
-}>
+    readonly class?: ClassList
+}
 
 export function Listbox<Option>({
     options,

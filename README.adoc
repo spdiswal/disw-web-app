@@ -51,15 +51,14 @@ The `VITE_TITLE_NAME` environment variable specifies the name to display in the 
 
 You can create a new profile (e.g. named `my-profile`):
 
-. In the `main/profile/content` folder, save the profile picture as a https://developers.google.com/speed/webp/docs/using[WebP] image file named `my-profile.webp`.
-. In the same folder, create a TypeScript file named `my-profile.ts` and import the profile picture:
+. In the `main/profile/content` folder, save the portrait as a https://developers.google.com/speed/webp/docs/using[WebP] image file named `my-profile.webp`.
+. In the same folder, create a TypeScript file named `my-profile.ts` and import the portrait:
 +
 [source,typescript]
 ----
-import pictureAssetUrl from "./my-profile.webp"
+import portraitAssetUrl from "./my-profile.webp"
 ----
-. Call the `defineProfileContent` function to describe the profile content and set the profile picture.
-. Export the result in a constant named `content`.
+. Export a constant named `content` of the `Content` type, in which you describe the content and set the portrait.
 . In the project root folder, create a new file named `.env.development.local` (or `.env.production.local` when building for production).
 Git will ignore this file.
 Insert this content into the file to override the `VITE_PROFILE_NAME` and `VITE_TITLE_NAME` environment variables:
@@ -227,7 +226,7 @@ However, doing so would prevent Vite from instantly applying configuration chang
 https://jestjs.io/[Jest] is a unit testing framework for JavaScript.
 It is independent of Vite and does not inherit any of its capabilities.
 
-`jest.config.cjs` defines the https://jestjs.io/docs/configuration[configuration] of Jest, including the location of the unit test suites to run and the use of the `@happy-dom/jest-environment` test environment.
+`jest.config.cjs` defines the https://jestjs.io/docs/configuration[configuration] of Jest, including the location of the unit test suites to run and the use of the built-in `jsdom` test environment.
 It relies on the `ts-jest` transformer to support TypeScript and Preact-compatible JSX transformations via `tsconfig.json`.
 
 === ESLint

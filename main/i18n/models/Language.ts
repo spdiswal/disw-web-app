@@ -1,6 +1,8 @@
-export const languages = [
+export type Language =
+    | "da"
+    | "en"
+
+export const languages: ReadonlyArray<Language> = [
     "da",
     "en",
-] as const
-
-export type Language = (typeof languages)[number]
+]

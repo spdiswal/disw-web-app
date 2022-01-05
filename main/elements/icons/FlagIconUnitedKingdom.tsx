@@ -1,6 +1,8 @@
-type FlagIconUnitedKingdomProps = Readonly<{
-    class?: string
-}>
+import type { ClassList } from "+types"
+
+type FlagIconUnitedKingdomProps = {
+    readonly class?: ClassList
+}
 
 /**
  * Pantone PMS 280 C: #012169 (dark blue).

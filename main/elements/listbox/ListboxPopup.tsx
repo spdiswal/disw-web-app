@@ -1,10 +1,10 @@
 import clsx from "clsx"
 import type { ComponentChildren } from "preact"
 
-type ListboxPopupProps = Readonly<{
-    isOpen: boolean
-    children: ComponentChildren
-}>
+type ListboxPopupProps = {
+    readonly isOpen: boolean
+    readonly children: ComponentChildren
+}
 
 export function ListboxPopup({ isOpen, children }: ListboxPopupProps) {
     return (

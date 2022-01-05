@@ -1,24 +1,26 @@
 import { FlagIconDenmark, FlagIconUnitedKingdom } from "+elements/icons"
 import { Listbox } from "+elements/listbox"
-import type { Language } from "+i18n"
-import { languages, multilingual } from "+i18n"
+import type { Language, Multilingual } from "+i18n"
+import { languages } from "+i18n"
+import type { ClassList } from "+types"
+import type { JSX } from "preact"
 import { Fragment } from "preact"
 
-const caption = multilingual({
+const caption: Multilingual<string> = {
     da: "Dansk",
     en: "English",
-})
+}
 
-const flagIcon = multilingual({
+const flagIcon: Multilingual<JSX.Element> = {
     da: <FlagIconDenmark class="flex-shrink-0 h-5 rounded-full"/>,
     en: <FlagIconUnitedKingdom class="flex-shrink-0 h-5 rounded-full"/>,
-})
+}
 
-type LanguagePickerProps = Readonly<{
-    selection: Language
-    onLanguageSelected?: (language: Language) => void
-    class?: string
-}>
+type LanguagePickerProps = {
+    readonly selection: Language
+    readonly onLanguageSelected?: (language: Language) => void
+    readonly class?: ClassList
+}
 
 export function LanguagePicker({
     class: _class,
@@ -36,9 +38,9 @@ export function LanguagePicker({
                 key: language,
                 element: (
                     <Fragment>
-                        {flagIcon.resolveFor(language)}
+                        {flagIcon[language]}
                         <span class="ml-3 block truncate">
-                            {caption.resolveFor(language)}
+                            {caption[language]}
                         </span>
                     </Fragment>
                 ),

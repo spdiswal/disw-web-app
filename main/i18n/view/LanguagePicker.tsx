@@ -1,7 +1,7 @@
 import { FlagIconDenmark, FlagIconUnitedKingdom } from "+elements/icons"
 import { Listbox } from "+elements/listbox"
 import type { Language, Multilingual } from "+i18n"
-import { languages } from "+i18n"
+import { supportedLanguages } from "+i18n"
 import type { ClassList } from "+types"
 import type { JSX } from "preact"
 import { Fragment } from "preact"
@@ -30,7 +30,7 @@ export function LanguagePicker({
     return (
         <Listbox
             class={_class}
-            options={languages}
+            options={supportedLanguages}
             selection={selection}
             onChange={onLanguageSelected}
         >

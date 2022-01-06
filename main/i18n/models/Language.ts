@@ -2,7 +2,7 @@ export type Language =
     | "da"
     | "en"
 
-export const languages: ReadonlyArray<Language> = [
+export const supportedLanguages: ReadonlyArray<Language> = [
     "da",
     "en",
 ]

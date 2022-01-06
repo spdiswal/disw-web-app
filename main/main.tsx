@@ -1,4 +1,4 @@
-import { LanguagePicker, useActiveLanguage } from "+i18n"
+import { LanguagePicker, useActiveLanguage, usePreferredLanguage } from "+i18n"
 import { ProfilePage } from "+profile"
 import { content as predefinedContent } from "+profile/content/predefined"
 import { render } from "preact"
@@ -7,7 +7,13 @@ import "./main.css"
 render(<App/>, document.body)
 
 function App() {
-    const { activeLanguage, setActiveLanguage } = useActiveLanguage("en")
+    const { preferredLanguage } = usePreferredLanguage({
+        fallbackLanguage: "en",
+    })
+    
+    const { activeLanguage, setActiveLanguage } = useActiveLanguage({
+        initialLanguage: preferredLanguage,
+    })
     
     return (
         <div class="flex flex-col min-w-min px-8 py-12 / md:py-20 / lg:py-32">

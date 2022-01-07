@@ -2,17 +2,16 @@ import type { Language } from "+i18n"
 import { LanguagePicker } from "+i18n"
 import type { ClassList } from "+types"
 import type { ByRoleOptions } from "@testing-library/preact"
-import { render, screen } from "@testing-library/preact"
+import { render, screen, waitFor } from "@testing-library/preact"
 import userEvent from "@testing-library/user-event"
 
-test("The language picker propagates the class list.", async () => {
+test("The language picker propagates the class list.", () => {
     // GIVEN a language picker.
     // AND the class list is 'noun verb adjective'.
     givenALanguagePicker({ class: "noun verb adjective" })
     
     // THEN the language picker has classes 'noun', 'verb', and 'adjective'.
-    await expect(theLanguagePicker()).resolves
-        .toHaveClass("noun", "verb", "adjective")
+    expect(theLanguagePicker()).toHaveClass("noun", "verb", "adjective")
 })
 
 test("The language picker popup has two options.", async () => {
@@ -23,7 +22,7 @@ test("The language picker popup has two options.", async () => {
     await givenAVisibleLanguagePickerPopup()
     
     // THEN the language picker popup has two options.
-    await expect(theLanguagePickerOptions()).resolves.toHaveLength(2)
+    expect(theLanguagePickerOptions()).toHaveLength(2)
 })
 
 test("The language picker popup has a Danish option.", async () => {
@@ -34,8 +33,7 @@ test("The language picker popup has a Danish option.", async () => {
     await givenAVisibleLanguagePickerPopup()
     
     // THEN the language picker popup has a Danish option.
-    await expect(theLanguagePickerOption({ name: "Dansk" })).resolves
-        .toBeInTheDocument()
+    expect(theLanguagePickerOption({ name: "Dansk" })).toBeInTheDocument()
 })
 
 test("The language picker popup has an English option.", async () => {
@@ -46,8 +44,7 @@ test("The language picker popup has an English option.", async () => {
     await givenAVisibleLanguagePickerPopup()
     
     // THEN the language picker popup has an English option.
-    await expect(theLanguagePickerOption({ name: "English" })).resolves
-        .toBeInTheDocument()
+    expect(theLanguagePickerOption({ name: "English" })).toBeInTheDocument()
 })
 
 test("The change handler is invoked when left-clicking on the Danish option in the language picker popup.", async () => {
@@ -62,7 +59,7 @@ test("The change handler is invoked when left-clicking on the Danish option in t
     await givenAVisibleLanguagePickerPopup()
     
     // WHEN left-clicking on the Danish option in the language picker popup.
-    await whenLeftClickingOnAnOptionInTheLanguagePickerPopup("Dansk")
+    whenLeftClickingOnAnOptionInTheLanguagePickerPopup("Dansk")
     
     // THEN the change handler is invoked once.
     expect(handleChange).toHaveBeenCalledTimes(1)
@@ -83,7 +80,7 @@ test("The change handler is invoked when left-clicking on the English option in 
     await givenAVisibleLanguagePickerPopup()
     
     // WHEN left-clicking on the English option in the language picker popup.
-    await whenLeftClickingOnAnOptionInTheLanguagePickerPopup("English")
+    whenLeftClickingOnAnOptionInTheLanguagePickerPopup("English")
     
     // THEN the change handler is invoked once.
     expect(handleChange).toHaveBeenCalledTimes(1)
@@ -107,24 +104,25 @@ function givenALanguagePicker(options?: {
 }
 
 async function givenAVisibleLanguagePickerPopup() {
-    await whenLeftClickingOnTheLanguagePickerButton()
+    whenLeftClickingOnTheLanguagePickerButton()
+    
+    await waitFor(() => {
+        expect(theLanguagePickerPopup()).not.toHaveClass("hidden")
+    })
 }
 
-async function whenLeftClickingOnTheLanguagePickerButton() {
-    userEvent.click(await theLanguagePickerButton())
+function whenLeftClickingOnTheLanguagePickerButton() {
+    userEvent.click(theLanguagePickerButton())
 }
 
-async function whenLeftClickingOnAnOptionInTheLanguagePickerPopup(
+function whenLeftClickingOnAnOptionInTheLanguagePickerPopup(
     accessibleNameOfOption: string,
 ) {
-    userEvent.click(await theLanguagePickerOption({
-        name: accessibleNameOfOption,
-    }))
+    userEvent.click(theLanguagePickerOption({ name: accessibleNameOfOption }))
 }
 
-async function theLanguagePicker(): Promise<HTMLElement> {
-    const languagePickerElement =
-        (await theLanguagePickerButton()).parentElement // eslint-disable-line testing-library/no-node-access
+function theLanguagePicker(): HTMLElement {
+    const languagePickerElement = theLanguagePickerButton().parentElement // eslint-disable-line testing-library/no-node-access
     
     // When the assumption of the language picker being a <div> element fails,
     // it may open the door to an easier way of retrieving the language picker element.
@@ -133,20 +131,20 @@ async function theLanguagePicker(): Promise<HTMLElement> {
     return languagePickerElement! // eslint-disable-line @typescript-eslint/no-non-null-assertion
 }
 
-async function theLanguagePickerButton(
-    queryOptions?: ByRoleOptions,
-): Promise<HTMLElement> {
-    return screen.findByRole("button", queryOptions)
+function theLanguagePickerButton(queryOptions?: ByRoleOptions): HTMLElement {
+    return screen.getByRole("button", queryOptions)
 }
 
-async function theLanguagePickerOption(
-    queryOptions?: ByRoleOptions,
-): Promise<HTMLElement> {
-    return screen.findByRole("option", queryOptions)
+function theLanguagePickerPopup(queryOptions?: ByRoleOptions): HTMLElement {
+    return screen.getByRole("listbox", queryOptions)
 }
 
-async function theLanguagePickerOptions(
+function theLanguagePickerOption(queryOptions?: ByRoleOptions): HTMLElement {
+    return screen.getByRole("option", queryOptions)
+}
+
+function theLanguagePickerOptions(
     queryOptions?: ByRoleOptions,
-): Promise<ReadonlyArray<HTMLElement>> {
-    return screen.findAllByRole("option", queryOptions)
+): ReadonlyArray<HTMLElement> {
+    return screen.getAllByRole("option", queryOptions)
 }

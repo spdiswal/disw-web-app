@@ -1,41 +1,38 @@
-import type { Language } from "+i18n"
 import type { Content } from "+profile"
 import { ProfilePage } from "+profile"
 import type { ByRoleOptions } from "@testing-library/preact"
 import { render, screen } from "@testing-library/preact"
 
-export function givenAProfilePage(options: {
+export function givenAProfilePageInDanish({ content }: {
     readonly content: Content,
-    readonly activeLanguage?: Language,
 }) {
-    render((
-        <ProfilePage
-            content={options.content}
-            activeLanguage={options.activeLanguage ?? "en"}
-        />
-    ))
+    const { rerender } = render(
+        <ProfilePage content={content} activeLanguage="da"/>,
+    )
+    
+    return {
+        whenRenderingTheProfilePageInEnglish: () => {
+            rerender(
+                <ProfilePage content={content} activeLanguage="en"/>,
+            )
+        },
+    }
 }
 
-export async function theProfilePage(
-    queryOptions?: ByRoleOptions,
-): Promise<HTMLElement> {
-    return screen.findByRole("main", queryOptions)
+export function theProfilePage(queryOptions?: ByRoleOptions): HTMLElement {
+    return screen.getByRole("main", queryOptions)
 }
 
-export async function thePortrait(
-    queryOptions?: ByRoleOptions,
-): Promise<HTMLElement> {
-    return screen.findByRole("img", queryOptions)
+export function thePortrait(queryOptions?: ByRoleOptions): HTMLElement {
+    return screen.getByRole("img", queryOptions)
 }
 
-export async function theOccupation(
-    queryOptions?: ByRoleOptions,
-): Promise<HTMLElement> {
-    return screen.findByRole("article", queryOptions)
+export function theOccupation(queryOptions?: ByRoleOptions): HTMLElement {
+    return screen.getByRole("article", queryOptions)
 }
 
-export async function theOccupations(
+export function theOccupations(
     queryOptions?: ByRoleOptions,
-): Promise<ReadonlyArray<HTMLElement>> {
-    return screen.findAllByRole("article", queryOptions)
+): ReadonlyArray<HTMLElement> {
+    return screen.getAllByRole("article", queryOptions)
 }

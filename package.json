@@ -5,8 +5,8 @@
         "build:preview": "vite preview --port 80",
         "develop": "vite serve",
         "validate": "yarn run validate:type-check && yarn run validate:lint && yarn run validate:unit-test",
-        "validate:lint": "eslint --ext ts,tsx ./main ./test",
-        "validate:lint:fix": "eslint --fix --ext ts,tsx ./main ./test",
+        "validate:lint": "eslint **/*.{ts,tsx}",
+        "validate:lint:fix": "eslint --fix **/*.{ts,tsx}",
         "validate:type-check": "tsc",
         "validate:unit-test": "jest"
     },

@@ -1,4 +1,4 @@
-import PreactPlugin from "@preact/preset-vite"
+import preactPlugin from "@preact/preset-vite"
 import { minify as minifyHtml } from "html-minifier-terser"
 import { basename, extname, resolve as resolvePath } from "path"
 import { defineConfig, loadEnv, type Plugin } from "vite"
@@ -32,11 +32,11 @@ export default defineConfig(({ mode }) => {
         },
         publicDir: false,
         plugins: [
-            DisplayProfileNameInTitlePlugin({
+            displayProfileNameInTitlePlugin({
                 titleName: env.VITE_TITLE_NAME,
             }),
-            MinifyIndexHtmlPlugin(),
-            PreactPlugin(),
+            minifyIndexHtmlPlugin(),
+            preactPlugin(),
         ],
         server: {
             port: 5000,
@@ -50,7 +50,7 @@ export default defineConfig(({ mode }) => {
                     // Read more:
                     // https://rollupjs.org/guide/en/#outputassetfilenames
                     //
-                    assetFileNames: removeLocalSubstringFromEmittedAssetFilenames,
+                    assetFileNames: removeLocalSubstringFromEmittedAssetNames,
                 },
             },
         },
@@ -61,19 +61,19 @@ function path(relativeToProjectRoot: string): string {
     return resolvePath(__dirname, relativeToProjectRoot)
 }
 
-function DisplayProfileNameInTitlePlugin(
+function displayProfileNameInTitlePlugin(
     options: { titleName: string },
 ): Plugin {
     return {
         name: "display-profile-name-in-title",
-        transformIndexHtml: async (html: string) => html.replace(
-            "<title>(replaced by VITE_TITLE_NAME)</title>",
+        transformIndexHtml: (html: string) => html.replace(
+            /<title>(.*?)<\/title>/u,
             `<title>${options.titleName}</title>`,
         ),
     }
 }
 
-function MinifyIndexHtmlPlugin(): Plugin {
+function minifyIndexHtmlPlugin(): Plugin {
     return {
         name: "minify-index-html",
         transformIndexHtml: async (html: string) => minifyHtml(html, {
@@ -82,7 +82,7 @@ function MinifyIndexHtmlPlugin(): Plugin {
     }
 }
 
-function removeLocalSubstringFromEmittedAssetFilenames(
+function removeLocalSubstringFromEmittedAssetNames(
     assetInfo: { name?: string },
 ): string {
     const assetsFolder = "assets"

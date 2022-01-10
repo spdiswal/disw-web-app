@@ -2,6 +2,7 @@ import type { Language } from "+i18n"
 import { supportedLanguages } from "+i18n"
 
 export type UsePreferredLanguageOptions = {
+    readonly languagesOrderedByPreference: ReadonlyArray<string>
     readonly fallbackLanguage: Language
 }
 
@@ -10,15 +11,21 @@ export type UsePreferredLanguageHook = {
 }
 
 /**
- * @return the language preferred by the web browser, or `fallbackLanguage` if
- * the preferred language is unsupported or undefined
+ * @return the most preferred language among the given
+ * `languagesOrderedByPreference`, or `fallbackLanguage` if none of them are
+ * supported by the app
+ * @see Language
  */
 export function usePreferredLanguage({
+    languagesOrderedByPreference,
     fallbackLanguage,
 }: UsePreferredLanguageOptions): UsePreferredLanguageHook {
+    const mostPreferredSupportedLanguage = languagesOrderedByPreference
+        .map(toPrefix)
+        .find(isSupported)
+    
     return {
-        preferredLanguage: navigator.languages.map(toPrefix).find(isSupported)
-            ?? fallbackLanguage,
+        preferredLanguage: mostPreferredSupportedLanguage ?? fallbackLanguage,
     }
 }
 

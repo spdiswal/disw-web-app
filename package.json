@@ -2,7 +2,7 @@
     "scripts": {
         "build": "yarn run validate && yarn run build:generate",
         "build:generate": "vite build",
-        "build:preview": "vite preview --port 80",
+        "build:preview": "vite preview",
         "develop": "vite serve",
         "validate": "yarn run validate:type-check && yarn run validate:lint && yarn run validate:unit-test",
         "validate:lint": "eslint **/*.{ts,tsx}",

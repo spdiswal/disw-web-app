@@ -42,6 +42,10 @@ export default defineConfig(({ mode }) => {
             port: 5000,
             strictPort: true,
         },
+        preview: {
+            port: 80,
+            strictPort: true,
+        },
         build: {
             emptyOutDir: true,
             outDir: path("build/www"),

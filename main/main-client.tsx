@@ -1,10 +1,10 @@
-import { render } from "preact"
+import { hydrate } from "preact"
 import type { AppDependencies } from "./App"
 import { App } from "./App"
-import "./main.css"
+import "./index.css"
 
 const dependencies: AppDependencies = {
     languagesOrderedByPreference: navigator.languages,
 }
 
-render(<App dependencies={dependencies}/>, document.body)
+hydrate(<App dependencies={dependencies}/>, document.body)

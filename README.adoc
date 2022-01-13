@@ -47,8 +47,6 @@ A profile describes the content to display in the web app.
 The `VITE_PROFILE_NAME` environment variable specifies the profile to use.
 As declared in `.env.development`, it uses the `perseverance-dummy` profile during development.
 
-The `VITE_TITLE_NAME` environment variable specifies the name to display in the `<title>` element of the web page.
-
 You can create a new profile (e.g. named `my-profile`):
 
 . In the `main/profile/content` folder, save the portrait as a https://developers.google.com/speed/webp/docs/using[WebP] image file named `my-profile.webp`.
@@ -61,12 +59,11 @@ import portraitAssetUrl from "./my-profile.webp"
 . Export a constant named `content` of the `Content` type, in which you describe the content and set the portrait.
 . In the project root folder, create a new file named `.env.development.local` (or `.env.production.local` when building for production).
 Git will ignore this file.
-Insert this content into the file to override the `VITE_PROFILE_NAME` and `VITE_TITLE_NAME` environment variables:
+Insert this content into the file to override the `VITE_PROFILE_NAME` environment variable:
 +
 [source,properties]
 ----
 VITE_PROFILE_NAME=my-profile
-VITE_TITLE_NAME=My Profile
 ----
 
 [IMPORTANT]
@@ -201,7 +198,7 @@ Preact 10 supports this kind of JSX transformation.
 
 === Vite
 https://vitejs.dev/[Vite] is a frontend build tool.
-It hosts the development server and generates the distribution of the web app for production, using `index.html` as the entry point of the web app.
+It hosts the development server and generates the distribution of the web app for production.
 
 It has native support for PostCSS and TypeScript (minus the type checking).
 It relies on PostCSS to support Tailwind CSS and on a https://github.com/preactjs/preset-vite[plugin] to support JSX transformations for Preact.
@@ -209,17 +206,33 @@ It relies on PostCSS to support Tailwind CSS and on a https://github.com/preactj
 `vite.config.ts` defines the https://vitejs.dev/config/[configuration] of Vite.
 It picks up the PostCSS configuration in `postcss.config.cjs` automatically.
 
-`+profile/content/predefined` is an alias for the TypeScript module designated by `VITE_PROFILE_NAME`.
-
-`DisplayProfileNameInTitlePlugin` makes Vite replace the `<title>` element of `index.html` entirely with the value of `VITE_TITLE_NAME`.
-
-`removeLocalSubstringFromEmittedAssetFilenames` overrides a https://vitejs.dev/config/#build-rollupoptions[Rollup] option to strip asset filenames of the `.local` substring when building a production distribution.
-
 [CAUTION]
 ====
 You can define the configurations of PostCSS and Tailwind CSS directly in the Vite configuration file.
 
 However, doing so would prevent Vite from instantly applying configuration changes, particularly in Tailwind CSS themes, without requiring a restart of the development server.
+====
+
+To load the correct profile into the web app, the Vite configuration defines `+profile/content/predefined` to be an alias for the TypeScript module designated by `VITE_PROFILE_NAME`.
+
+Generating a production-grade distribution of the web app consists of two phases:
+
+. A *server-oriented build* which produces a CommonJS module that generates a static HTML tree from the initial state of the web app.
+The entry point is `main-server.tsx`.
+Vite operates in `ssr` mode during this phase.
+
+. A *client-oriented build* which pre-renders the HTML page and produces a browser script that makes the web app interactive by hydrating the HTML page.
+The entry point is `index.html`, which in turn imports `main-client.tsx`.
+Vite operates in its normal mode during this phase.
+Additionally, the Vite configuration imports the CommonJS module produced by the server-oriented build to complete pre-rendering the HTML page at build-time.
+
+[NOTE]
+====
+_Pre-Rendering_, also known as _Static Site Generation_ (SSG), is a technique in which a static HTML page is generated at build-time.
+_Server-Side Rendering_ (SSR) is a slightly different technique in which the HTML page is generated dynamically by the web server at request-time.
+Both techniques allow search engines to discover the contents of the web app without having to execute any browser scripts.
+
+_Hydration_ is a process carried out by the web framework (e.g. Preact) that attaches event listeners to the pre- or server-side-rendered HTML document and constructs a reactive component tree equivalent to it.
 ====
 
 === Jest

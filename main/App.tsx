@@ -1,6 +1,7 @@
 import { LanguagePicker, useActiveLanguage, usePreferredLanguage } from "+i18n"
 import { ProfilePage } from "+profile"
-import { content as predefinedContent } from "+profile/content/predefined"
+import { content } from "+profile/content/predefined"
+import { useEffect } from "preact/hooks"
 
 type AppProps = {
     readonly dependencies: AppDependencies
@@ -15,6 +16,10 @@ export function App({
         languagesOrderedByPreference,
     },
 }: AppProps) {
+    useEffect(() => {
+        document.title = content.name
+    }, [])
+    
     const { preferredLanguage } = usePreferredLanguage({
         languagesOrderedByPreference,
         fallbackLanguage: "da",
@@ -32,7 +37,7 @@ export function App({
                 onLanguageSelected={setActiveLanguage}
             />
             <ProfilePage
-                content={predefinedContent}
+                content={content}
                 activeLanguage={activeLanguage}
             />
         </div>

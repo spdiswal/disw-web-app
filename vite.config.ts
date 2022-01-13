@@ -1,7 +1,12 @@
 import preactPlugin from "@preact/preset-vite"
+import { unlinkSync } from "fs"
 import { minify as minifyHtml } from "html-minifier-terser"
 import { basename, extname, resolve as resolvePath } from "path"
-import { defineConfig, loadEnv, type Plugin } from "vite"
+import type { ConfigEnv, Plugin, UserConfig } from "vite"
+import { defineConfig, loadEnv } from "vite"
+
+const relativeOutputFolder = "./build/www"
+const relativeServerOrientedBuildArtifactFile = `${relativeOutputFolder}/main-server.js`
 
 // Read more:
 // https://vitejs.dev/config/
@@ -32,11 +37,10 @@ export default defineConfig(({ mode }) => {
         },
         publicDir: false,
         plugins: [
-            displayProfileNameInTitlePlugin({
-                titleName: env.VITE_TITLE_NAME,
-            }),
-            minifyIndexHtmlPlugin(),
             preactPlugin(),
+            preRenderIndexHtmlPlugin(),
+            minifyIndexHtmlPlugin(),
+            deleteServerOrientedBuildArtifactPlugin(),
         ],
         server: {
             port: 5000,
@@ -47,46 +51,102 @@ export default defineConfig(({ mode }) => {
             strictPort: true,
         },
         build: {
-            emptyOutDir: true,
-            outDir: path("build/www"),
+            emptyOutDir: false, // Overridden by `--emptyOutDir` when making a server-oriented build.
+            outDir: path(relativeOutputFolder),
             rollupOptions: {
                 output: {
                     // Read more:
                     // https://rollupjs.org/guide/en/#outputassetfilenames
                     //
-                    assetFileNames: removeLocalSubstringFromEmittedAssetNames,
+                    assetFileNames: stripEmittedAssetFilenamesOfLocalSubstring,
                 },
             },
+        },
+        ssr: {
+            noExternal: true,
         },
     }
 })
 
-function path(relativeToProjectRoot: string): string {
-    return resolvePath(__dirname, relativeToProjectRoot)
-}
-
-function displayProfileNameInTitlePlugin(
-    options: { titleName: string },
-): Plugin {
+/**
+ * Substitutes the placeholders in `index.html` with the HTML fragments
+ * exported by `main-server.tsx`.
+ */
+function preRenderIndexHtmlPlugin(): Plugin {
     return {
-        name: "display-profile-name-in-title",
-        transformIndexHtml: (html: string) => html.replace(
-            /<title>(.*?)<\/title>/u,
-            `<title>${options.titleName}</title>`,
-        ),
+        name: "pre-render-index-html",
+        apply: isClientOrientedProductionBuild,
+        transformIndexHtml: async (html: string) => {
+            const staticHtml = await importStaticHtmlFromServerOrientedBuild()
+            const { title, body } = staticHtml
+            
+            return html
+                .replace("<title>[main-server.tsx title]</title>", title)
+                .replace("<!-- [main-server.tsx body] -->", body)
+        },
     }
 }
 
+async function importStaticHtmlFromServerOrientedBuild(): Promise<StaticHtml> {
+    // The module to be imported does not exist until Vite has completed the
+    // server-oriented build.
+    // Using a separate variable, `relativeServerOrientedBuildArtifactFile`,
+    // instead of a string literal as argument to the `import()` directive
+    // halts TypeScript from statically checking if the module exists.
+    return await import(relativeServerOrientedBuildArtifactFile) as StaticHtml
+}
+
+/**
+ * `title` and `body` are exported by `main-server.tsx`.
+ */
+type StaticHtml = {
+    readonly title: string
+    readonly body: string
+}
+
+/**
+ * Minifies `index.html` via `html-minifier-terser`.
+ */
 function minifyIndexHtmlPlugin(): Plugin {
     return {
         name: "minify-index-html",
+        apply: isClientOrientedProductionBuild,
         transformIndexHtml: async (html: string) => minifyHtml(html, {
             collapseWhitespace: true,
         }),
     }
 }
 
-function removeLocalSubstringFromEmittedAssetNames(
+/**
+ * Deletes the `main-server.js` build artifact from the file system,
+ * as it is not a part of the final distribution of the web app.
+ */
+function deleteServerOrientedBuildArtifactPlugin(): Plugin {
+    return {
+        name: "delete-server-oriented-build-artifact",
+        apply: isClientOrientedProductionBuild,
+        closeBundle: () => {
+            unlinkSync(path(relativeServerOrientedBuildArtifactFile))
+        },
+    }
+}
+
+function isClientOrientedProductionBuild(
+    config: UserConfig,
+    { command }: ConfigEnv,
+): boolean {
+    const isClientOriented = !config.build?.ssr
+    return isClientOriented && command === "build"
+}
+
+function path(relativeToProjectRoot: string): string {
+    return resolvePath(__dirname, relativeToProjectRoot)
+}
+
+/**
+ * Removes the `.local` substring from the emitted asset filenames.
+ */
+function stripEmittedAssetFilenamesOfLocalSubstring(
     assetInfo: { name?: string },
 ): string {
     const assetsFolder = "assets"

@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    @apply bg-neutral-900;
+/* Finally, make the document reappear now that the entire stylesheet has been
+   applied and a flash of unstyled content has been avoided.
+   This rule overrides the styles applied in `index.html` due to the cascade
+   algorithm in CSS. */
+html {
+    visibility: visible;
 }

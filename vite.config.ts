@@ -2,6 +2,7 @@ import preactPlugin from "@preact/preset-vite"
 import { unlinkSync } from "fs"
 import { minify as minifyHtml } from "html-minifier-terser"
 import { basename, extname, resolve as resolvePath } from "path"
+import { gray as colourGray } from "tailwindcss/colors"
 import type { ConfigEnv, Plugin, UserConfig } from "vite"
 import { defineConfig, loadEnv } from "vite"
 
@@ -70,7 +71,8 @@ export default defineConfig(({ mode }) => {
 
 /**
  * Substitutes the placeholders in `index.html` with the HTML fragments
- * exported by `main-server.tsx`.
+ * exported by `main-server.tsx` and a background colour from Tailwind CSS
+ * that corresponds to `bg-neutral-900`.
  */
 function preRenderIndexHtmlPlugin(): Plugin {
     return {
@@ -81,6 +83,7 @@ function preRenderIndexHtmlPlugin(): Plugin {
             const { title, body } = staticHtml
             
             return html
+                .replace("/* [tailwindcss bg-neutral-900] */", `background-color: ${colourGray["900"]};`)
                 .replace("<title>[main-server.tsx title]</title>", title)
                 .replace("<!-- [main-server.tsx body] -->", body)
         },
@@ -113,6 +116,7 @@ function minifyIndexHtmlPlugin(): Plugin {
         apply: isClientOrientedProductionBuild,
         transformIndexHtml: async (html: string) => minifyHtml(html, {
             collapseWhitespace: true,
+            minifyCSS: true,
         }),
     }
 }

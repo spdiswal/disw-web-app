@@ -10,7 +10,7 @@ const colors = require("tailwindcss/colors")
  * @type {import("tailwindcss/tailwind-config").TailwindConfig}
  */
 module.exports = {
-    content: ["./main/**/*.{ts,tsx}"],
+    content: ["./main/**/*.{html,ts,tsx}"],
     theme: {
         colors: {
             "accent": colors.blue,

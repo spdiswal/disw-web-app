@@ -41,18 +41,88 @@ test("The profile page displays a greeting.", () => {
     expect(theProfilePage()).toHaveTextContent("Hi! My name is Perseverance.")
 })
 
-test("The profile page displays an ambition.", () => {
+test("The profile page displays an area of expertise.", () => {
     // GIVEN a profile page in Danish.
     const driver = givenAProfilePageInDanish(options)
     
-    // THEN it displays an ambition in Danish.
-    expect(theProfilePage()).toHaveTextContent("Og jeg elsker at grave i sandet på Mars!")
+    // THEN it displays an area of expertise in Danish.
+    expect(theProfilePage()).toHaveTextContent("Og jeg er en Mars-rover.")
     
     // WHEN rendering the profile page in English.
     driver.whenRenderingTheProfilePageInEnglish()
     
-    // THEN it displays the ambition in English.
-    expect(theProfilePage()).toHaveTextContent("And I enjoy digging through the Martian soil!")
+    // THEN it displays the area of expertise in English.
+    expect(theProfilePage()).toHaveTextContent("And I'm a Mars rover.")
+})
+
+test("The profile page displays an age.", () => {
+    // GIVEN a profile page in Danish.
+    const driver = givenAProfilePageInDanish(options)
+    
+    // THEN it displays an age in Danish.
+    expect(theProfilePage()).toHaveTextContent("Alder" + "10 år")
+    
+    // WHEN rendering the profile page in English.
+    driver.whenRenderingTheProfilePageInEnglish()
+    
+    // THEN it displays the age in English.
+    expect(theProfilePage()).toHaveTextContent("Age" + "10 years")
+})
+
+test("The profile page displays a residence.", () => {
+    // GIVEN a profile page in Danish.
+    const driver = givenAProfilePageInDanish(options)
+    
+    // THEN it displays a residence in Danish.
+    expect(theProfilePage()).toHaveTextContent("Bopæl" + "Jezero")
+    
+    // WHEN rendering the profile page in English.
+    driver.whenRenderingTheProfilePageInEnglish()
+    
+    // THEN it displays the residence in English.
+    expect(theProfilePage()).toHaveTextContent("Residence" + "Jezero")
+})
+
+test("The profile page displays an academic discipline.", () => {
+    // GIVEN a profile page in Danish.
+    const driver = givenAProfilePageInDanish(options)
+    
+    // THEN it displays an academic discipline in Danish.
+    expect(theProfilePage()).toHaveTextContent("Faglig baggrund" + "Astrobiologi")
+    
+    // WHEN rendering the profile page in English.
+    driver.whenRenderingTheProfilePageInEnglish()
+    
+    // THEN it displays the academic discipline in English.
+    expect(theProfilePage()).toHaveTextContent("Academic Discipline" + "Astrobiology")
+})
+
+test("The profile page displays work experience.", () => {
+    // GIVEN a profile page in Danish.
+    const driver = givenAProfilePageInDanish(options)
+    
+    // THEN it displays work experience in Danish.
+    expect(theProfilePage()).toHaveTextContent("Joberfaring" + "2 år")
+    
+    // WHEN rendering the profile page in English.
+    driver.whenRenderingTheProfilePageInEnglish()
+    
+    // THEN it displays work experience in English.
+    expect(theProfilePage()).toHaveTextContent("Work Experience" + "2 years")
+})
+
+test("The profile page displays a biography.", () => {
+    // GIVEN a profile page in Danish.
+    const driver = givenAProfilePageInDanish(options)
+    
+    // THEN it displays a biography in Danish.
+    expect(theProfilePage()).toHaveTextContent("Jeg elsker at grave i sandet på Mars!")
+    
+    // WHEN rendering the profile page in English.
+    driver.whenRenderingTheProfilePageInEnglish()
+    
+    // THEN it displays the biography in English.
+    expect(theProfilePage()).toHaveTextContent("I enjoy digging through the Martian soil!")
 })
 
 test("The profile page displays a career of three occupations.", () => {
@@ -63,7 +133,7 @@ test("The profile page displays a career of three occupations.", () => {
     expect(theOccupations()).toHaveLength(3)
 })
 
-test("The profile page displays a 'Astrobiolog'/'Astrobiologist' occupation.", () => {
+test("The profile page displays an 'Astrobiolog'/'Astrobiologist' occupation.", () => {
     // GIVEN a profile page in Danish.
     const driver = givenAProfilePageInDanish(options)
     
@@ -75,7 +145,7 @@ test("The profile page displays a 'Astrobiolog'/'Astrobiologist' occupation.", (
     expect(danishOccupation).toHaveTextContent("Astrobiolog")
     
     // AND it displays the period of the occupation in Danish.
-    expect(danishOccupation).toHaveTextContent("2021\u2013nu")
+    expect(danishOccupation).toHaveTextContent("juni 2021\u2013nu")
     
     // AND it displays the organisation of the occupation in Danish.
     expect(danishOccupation).toHaveTextContent("NASA")
@@ -101,7 +171,7 @@ test("The profile page displays a 'Astrobiolog'/'Astrobiologist' occupation.", (
     expect(englishOccupation).toHaveTextContent("Astrobiologist")
     
     // AND it displays the period of the occupation in English.
-    expect(englishOccupation).toHaveTextContent("2021\u2013present")
+    expect(englishOccupation).toHaveTextContent("June 2021\u2013present")
     
     // AND it displays the organisation of the occupation in English.
     expect(englishOccupation).toHaveTextContent("NASA")
@@ -117,22 +187,22 @@ test("The profile page displays a 'Astrobiolog'/'Astrobiologist' occupation.", (
     )
 })
 
-test("The profile page displays a 'Interplanetarisk cinematografi-agent'/'Interplanetary Cinematography Agent' occupation.", () => {
+test("The profile page displays a 'Interplanetarisk cinematografiagent'/'Interplanetary Cinematography Agent' occupation.", () => {
     // GIVEN a profile page in Danish.
     const driver = givenAProfilePageInDanish(options)
     
     // THEN it has an occupation with an accessible name in Danish.
-    const danishOccupation = theOccupation({ name: "Interplanetarisk cinematografi\u00ADagent" })
+    const danishOccupation = theOccupation({ name: "Interplanetarisk cinematografiagent" })
     expect(danishOccupation).toBeInTheDocument()
     
     // AND it displays the title of the occupation in Danish.
-    expect(danishOccupation).toHaveTextContent("Interplanetarisk cinematografi\u00ADagent")
+    expect(danishOccupation).toHaveTextContent("Interplanetarisk cinematografiagent")
     
     // AND it displays the period of the occupation in Danish.
-    expect(danishOccupation).toHaveTextContent("2020\u20132021")
+    expect(danishOccupation).toHaveTextContent("juli 2020\u2013februar 2021")
     
     // AND it displays the organisation of the occupation in Danish.
-    expect(danishOccupation).toHaveTextContent("Verdensrums\u00ADagenturet")
+    expect(danishOccupation).toHaveTextContent("Verdensrumsagenturet")
     
     // AND it displays the activities of the occupation in Danish.
     expect(danishOccupation).toHaveTextContent(
@@ -154,7 +224,7 @@ test("The profile page displays a 'Interplanetarisk cinematografi-agent'/'Interp
     expect(englishOccupation).toHaveTextContent("Interplanetary Cinematography Agent")
     
     // AND it displays the period of the occupation in English.
-    expect(englishOccupation).toHaveTextContent("2020\u20132021")
+    expect(englishOccupation).toHaveTextContent("July 2020\u2013February 2021")
     
     // AND it displays the organisation of the occupation in English.
     expect(englishOccupation).toHaveTextContent("The Interplanetary Space Agency")
@@ -181,7 +251,7 @@ test("The profile page displays a 'Opfinder'/'Deviser' occupation.", () => {
     expect(danishOccupation).toHaveTextContent("Opfinder")
     
     // AND it displays the period of the occupation in Danish.
-    expect(danishOccupation).toHaveTextContent("2012\u20132020")
+    expect(danishOccupation).toHaveTextContent("december 2012\u2013juli 2020")
     
     // AND it displays the organisation of the occupation in Danish.
     expect(danishOccupation).toHaveTextContent("NASA")
@@ -205,7 +275,7 @@ test("The profile page displays a 'Opfinder'/'Deviser' occupation.", () => {
     expect(englishOccupation).toHaveTextContent("Deviser")
     
     // AND it displays the period of the occupation in English.
-    expect(englishOccupation).toHaveTextContent("2012\u20132020")
+    expect(englishOccupation).toHaveTextContent("December 2012\u2013July 2020")
     
     // AND it displays the organisation of the occupation in English.
     expect(englishOccupation).toHaveTextContent("NASA")

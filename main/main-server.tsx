@@ -8,5 +8,5 @@ const dependencies: AppDependencies = {
 }
 
 // Dynamically imported by `vite.config.ts` when pre-rendering `index.html`.
-export const title = `<title>${content.name}</title>`
+export const title = `<title>${content.identity.name}</title>`
 export const body = renderToString(<App dependencies={dependencies}/>)

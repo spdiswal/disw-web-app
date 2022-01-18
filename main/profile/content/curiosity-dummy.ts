@@ -3,22 +3,44 @@ import type { Content } from "+profile"
 import { parseISO } from "date-fns"
 import portraitAssetUrl from "./curiosity-dummy.webp"
 
+const age = 18
+const workExperience = 10
+
 /**
  * Portrait: Courtesy NASA/JPL-Caltech.
  * https://www.jpl.nasa.gov/jpl-image-use-policy
  */
 export const content: Content = {
-    portrait: {
-        assetUrl: portraitAssetUrl,
-        caption: {
-            da: "Mit selvportræt. Courtesy NASA/JPL-Caltech.",
-            en: "My self-portrait. Courtesy NASA/JPL-Caltech.",
+    identity: {
+        portrait: {
+            assetUrl: portraitAssetUrl,
+            caption: {
+                da: "Mit selvportræt. Courtesy NASA/JPL-Caltech.",
+                en: "My self-portrait. Courtesy NASA/JPL-Caltech.",
+            },
+        },
+        name: "Curiosity",
+        areaOfExpertise: {
+            da: "en Mars-rover",
+            en: "a Mars rover",
+        },
+        age: {
+            da: `${age} år`,
+            en: `${age} years`,
+        },
+        residence: indistinguishable("Gale"),
+        academicDiscipline: {
+            da: "Geologi",
+            en: "Geology",
+        },
+        workExperience: {
+            da: `${workExperience} år`,
+            en: `${workExperience} years`,
         },
     },
-    name: "Curiosity",
-    ambition: {
-        da: "Og jeg er vild med klimaet på Mars!",
-        en: "And the climate on Mars thrills me!",
+    biography: {
+        da: "Jeg er vild med klimaet på Mars!",
+        en: "The climate on Mars thrills me!",
     },
     career: [
         {
@@ -67,7 +89,7 @@ export const content: Content = {
                 en: "Interplanetary Cruiser",
             },
             organisation: {
-                da: "Verdensrums\u00ADagenturet",
+                da: "Verdensrumsagenturet",
                 en: "The Interplanetary Space Agency",
             },
             period: {
@@ -102,6 +124,8 @@ export const content: Content = {
                 },
             ],
         },
+    ],
+    education: [
         {
             id: "04-nasa",
             title: {

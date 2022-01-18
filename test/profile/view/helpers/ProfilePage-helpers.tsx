@@ -12,9 +12,7 @@ export function givenAProfilePageInDanish({ content }: {
     
     return {
         whenRenderingTheProfilePageInEnglish: () => {
-            rerender(
-                <ProfilePage content={content} activeLanguage="en"/>,
-            )
+            rerender(<ProfilePage content={content} activeLanguage="en"/>)
         },
     }
 }
@@ -34,5 +32,6 @@ export function theOccupation(queryOptions?: ByRoleOptions): HTMLElement {
 export function theOccupations(
     queryOptions?: ByRoleOptions,
 ): ReadonlyArray<HTMLElement> {
-    return screen.getAllByRole("article", queryOptions)
+    const articles = screen.getAllByRole("article", queryOptions)
+    return articles.filter((article) => article.id !== "biography")
 }

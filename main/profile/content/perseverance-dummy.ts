@@ -3,22 +3,44 @@ import type { Content } from "+profile"
 import { parseISO } from "date-fns"
 import portraitAssetUrl from "./perseverance-dummy.webp"
 
+const age = 10
+const workExperience = 2
+
 /**
  * Portrait: Courtesy NASA/JPL-Caltech.
  * https://www.jpl.nasa.gov/jpl-image-use-policy
  */
 export const content: Content = {
-    portrait: {
-        assetUrl: portraitAssetUrl,
-        caption: {
-            da: "Mit selvportræt. Courtesy NASA/JPL-Caltech.",
-            en: "My self-portrait. Courtesy NASA/JPL-Caltech.",
+    identity: {
+        portrait: {
+            assetUrl: portraitAssetUrl,
+            caption: {
+                da: "Mit selvportræt. Courtesy NASA/JPL-Caltech.",
+                en: "My self-portrait. Courtesy NASA/JPL-Caltech.",
+            },
+        },
+        name: "Perseverance",
+        areaOfExpertise: {
+            da: "en Mars-rover",
+            en: "a Mars rover",
+        },
+        age: {
+            da: `${age} år`,
+            en: `${age} years`,
+        },
+        residence: indistinguishable("Jezero"),
+        academicDiscipline: {
+            da: "Astrobiologi",
+            en: "Astrobiology",
+        },
+        workExperience: {
+            da: `${workExperience} år`,
+            en: `${workExperience} years`,
         },
     },
-    name: "Perseverance",
-    ambition: {
-        da: "Og jeg elsker at grave i sandet på Mars!",
-        en: "And I enjoy digging through the Martian soil!",
+    biography: {
+        da: "Jeg elsker at grave i sandet på Mars!",
+        en: "I enjoy digging through the Martian soil!",
     },
     career: [
         {
@@ -68,11 +90,11 @@ export const content: Content = {
         {
             id: "20-space",
             title: {
-                da: "Interplanetarisk cinematografi\u00ADagent",
+                da: "Interplanetarisk cinematografiagent",
                 en: "Interplanetary Cinematography Agent",
             },
             organisation: {
-                da: "Verdensrums\u00ADagenturet",
+                da: "Verdensrumsagenturet",
                 en: "The Interplanetary Space Agency",
             },
             period: {
@@ -107,6 +129,8 @@ export const content: Content = {
                 },
             ],
         },
+    ],
+    education: [
         {
             id: "12-nasa",
             title: {

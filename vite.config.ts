@@ -2,7 +2,7 @@ import preactPlugin from "@preact/preset-vite"
 import { unlinkSync } from "fs"
 import { minify as minifyHtml } from "html-minifier-terser"
 import { basename, extname, resolve as resolvePath } from "path"
-import { gray as colourGray } from "tailwindcss/colors"
+import { slate as tailwindColourSlate } from "tailwindcss/colors"
 import type { ConfigEnv, Plugin, UserConfig } from "vite"
 import { defineConfig, loadEnv } from "vite"
 
@@ -30,6 +30,7 @@ export default defineConfig(({ mode }) => {
                 "+profile/content/predefined": path(`main/profile/content/${env.VITE_PROFILE_NAME}`),
                 //
                 "+elements/icons": path("main/elements/icons/"),
+                "+elements/layout": path("main/elements/layout/"),
                 "+elements/listbox": path("main/elements/listbox/"),
                 "+i18n": path("main/i18n/"),
                 "+profile": path("main/profile/"),
@@ -83,7 +84,7 @@ function preRenderIndexHtmlPlugin(): Plugin {
             const { title, body } = staticHtml
             
             return html
-                .replace("/* [tailwindcss bg-neutral-900] */", `background-color: ${colourGray["900"]};`)
+                .replace("/* [tailwindcss bg-neutral-50] */", `background-color: ${tailwindColourSlate["50"]};`)
                 .replace("<title>[main-server.tsx title]</title>", title)
                 .replace("<!-- [main-server.tsx body] -->", body)
         },

@@ -11,6 +11,7 @@
             "+profile/content/predefined": [ "main/profile/content/perseverance-dummy" ],
             //
             "+elements/icons": [ "main/elements/icons/index" ],
+            "+elements/layout": [ "main/elements/layout/index" ],
             "+elements/listbox": [ "main/elements/listbox/index" ],
             "+i18n": [ "main/i18n/index" ],
             "+profile": [ "main/profile/index" ],

@@ -1,7 +1,14 @@
 import { LanguagePicker, useActiveLanguage, usePreferredLanguage } from "+i18n"
 import { ProfilePage } from "+profile"
 import { content } from "+profile/content/predefined"
+import { Fragment } from "preact"
 import { useEffect } from "preact/hooks"
+import { Footer } from "./Footer"
+
+const copyright = {
+    year: new Date().getFullYear(),
+    owner: content.identity.name,
+}
 
 type AppProps = {
     readonly dependencies: AppDependencies
@@ -17,7 +24,7 @@ export function App({
     },
 }: AppProps) {
     useEffect(() => {
-        document.title = content.name
+        document.title = content.identity.name
     }, [])
     
     const { preferredLanguage } = usePreferredLanguage({
@@ -30,9 +37,9 @@ export function App({
     })
     
     return (
-        <div class="flex flex-col min-w-min px-8 py-12 / md:py-20 / lg:py-32">
+        <Fragment>
             <LanguagePicker
-                class="mb-12 -mt-4 mx-auto relative w-48 / md:absolute md:my-0 md:right-4 md:top-4"
+                class="mt-4 mx-auto relative w-48 / md:absolute md:my-0 md:right-4 md:top-4"
                 selection={activeLanguage}
                 onLanguageSelected={setActiveLanguage}
             />
@@ -40,6 +47,7 @@ export function App({
                 content={content}
                 activeLanguage={activeLanguage}
             />
-        </div>
+            <Footer copyright={copyright}/>
+        </Fragment>
     )
 }

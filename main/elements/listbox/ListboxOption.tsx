@@ -23,13 +23,13 @@ export function ListboxOption({
             aria-selected={isSelected}
             onClick={onClick}
         >
-            <div class="flex items-center text-black group-hover:text-white">
+            <div class="flex items-center text-neutral-900 group-hover:text-white">
                 {children}
             </div>
             <span
                 class={clsx(
                     !isSelected && "hidden",
-                    "absolute flex inset-y-0 items-center pr-4 right-0 text-accent-800 group-hover:text-white",
+                    "absolute flex inset-y-0 items-center pr-4 right-0 text-accent-600 group-hover:text-white",
                 )}
             >
                 <HeroIconCheck class="h-5"/>

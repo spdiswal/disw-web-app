@@ -16,6 +16,7 @@ module.exports = {
         "^\\+profile/content/predefined$": "<rootDir>/main/profile/content/perseverance-dummy",
         //
         "^\\+elements/icons$": "<rootDir>/main/elements/icons/index",
+        "^\\+elements/layout$": "<rootDir>/main/elements/layout/index",
         "^\\+elements/listbox$": "<rootDir>/main/elements/listbox/index",
         "^\\+i18n$": "<rootDir>/main/i18n/index",
         "^\\+profile$": "<rootDir>/main/profile/index",

@@ -98,7 +98,7 @@ module.exports = {
         "no-extra-label": "error",
         "no-extra-parens": "off",
         "@typescript-eslint/no-extra-parens": ["error", "all", {
-            ignoreJSX: "multi-line",
+            ignoreJSX: "all",
         }],
         "@typescript-eslint/no-extraneous-class": "error",
         "no-floating-decimal": "error",
@@ -331,6 +331,7 @@ module.exports = {
                         "stroke-linejoin",
                     ],
                 }],
+                "react/no-multi-comp": "error",
                 "react/no-unstable-nested-components": "error",
                 "react/prefer-stateless-function": "error",
                 "react/react-in-jsx-scope": "off",

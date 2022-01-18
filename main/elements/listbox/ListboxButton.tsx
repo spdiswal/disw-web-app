@@ -15,7 +15,7 @@ export function ListboxButton({
     return (
         <button
             type="button"
-            class="bg-transparent border border-neutral-400 focus:border-neutral-300 hover:border-neutral-300 cursor-default focus:outline-none pl-3 pr-10 py-2 relative focus:ring-1 focus:ring-neutral-300 rounded-md shadow-sm text-neutral-300 focus:text-neutral-200 hover:text-neutral-200 text-left w-full / sm:text-sm"
+            class="bg-neutral-100 hover:bg-neutral-50 border border-neutral-400 focus:border-accent-600 cursor-default focus:outline-none pl-3 pr-10 py-2 relative focus:ring-1 focus:ring-accent-600 rounded-md shadow-sm text-neutral-900 text-left w-full / md:text-sm"
             aria-expanded={isOpen}
             onClick={onClick}
         >

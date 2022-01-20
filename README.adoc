@@ -8,7 +8,6 @@ This repository contains the app for web browsers.
 * https://nodejs.org/en/[Node.js], version 16 or newer.
 * https://yarnpkg.com/getting-started/install[Yarn], which you can install with npm:
 +
-[source,shell script]
 ----
 npm install -g yarn
 ----
@@ -36,7 +35,6 @@ Upon cloning the Git repository, the `.yarn/cache` folder contains a cache of mo
 However, a few dependencies (usually executable binaries) remain _unplugged_.
 They must be installed explicitly by executing this command from the project root folder:
 
-[source,shell script]
 ----
 yarn install
 ----
@@ -45,23 +43,21 @@ yarn install
 A profile describes the content to display in the web app.
 
 The `VITE_PROFILE_NAME` environment variable specifies the profile to use.
-As declared in `.env.development`, it uses the `perseverance-dummy` profile during development.
+It is defined in `.env.development`.
 
 You can create a new profile (e.g. named `my-profile`):
 
 . In the `main/profile/content` folder, save the portrait as a https://developers.google.com/speed/webp/docs/using[WebP] image file named `my-profile.webp`.
 . In the same folder, create a TypeScript file named `my-profile.ts` and import the portrait:
 +
-[source,typescript]
 ----
 import portraitAssetUrl from "./my-profile.webp"
 ----
 . Export a constant named `content` of the `Content` type, in which you describe the content and set the portrait.
 . In the project root folder, create a new file named `.env.development.local` (or `.env.production.local` when building for production).
 Git will ignore this file.
-Insert this content into the file to override the `VITE_PROFILE_NAME` environment variable:
+Let it override the `VITE_PROFILE_NAME` environment variable to use the new profile:
 +
-[source,properties]
 ----
 VITE_PROFILE_NAME=my-profile
 ----
@@ -75,7 +71,6 @@ For example: `my-profile.local.ts` and `my-profile.local.webp`.
 
 You must override the `VITE_PROFILE_NAME` environment variable accordingly:
 
-[source,properties]
 ----
 VITE_PROFILE_NAME=my-profile.local
 ----
@@ -89,7 +84,6 @@ They have been defined in the `scripts` field in `package.json`.
 === Starting a Development Server
 To start a development server that hosts the web app under construction at http://localhost:5000:
 
-[source,shell script]
 ----
 yarn run develop
 ----
@@ -100,7 +94,6 @@ Equipped with hot module replacement (HMR), it reflects any changes you make imm
 === Validating the Software Quality
 To validate the quality of the software:
 
-[source,shell script]
 ----
 yarn run validate
 ----
@@ -113,7 +106,6 @@ It runs the following means of validation:
 
 You can apply an automated fix of certain issues reported by ESLint:
 
-[source,shell script]
 ----
 yarn run validate:lint:fix
 ----
@@ -121,7 +113,6 @@ yarn run validate:lint:fix
 === Building for Production
 To make a production-grade distribution of the web app:
 
-[source,shell script]
 ----
 yarn run build
 ----
@@ -132,7 +123,6 @@ It saves the output in the `build/www` folder.
 
 After building the distribution, you can start a web server that hosts a preview at http://localhost:80:
 
-[source,shell script]
 ----
 yarn run build:preview
 ----
@@ -143,7 +133,12 @@ yarn run build:preview
 Following the Node.js convention, this project distinguishes between _runtime_ dependencies and _development_ dependencies.
 The `dependencies` and `devDependencies` fields in `package.json` declare these two sets of dependencies, respectively.
 
-TIP: A runtime dependency leaves direct marks in the distribution of the web app, without which the web app would cease to function correctly.
+[TIP]
+====
+When a dependency is imported by the source code or declares values in the global namespace, it is a runtime dependency.
+
+For example, `preact` is imported by `main-client.tsx` and `tailwindcss` defines globally accessible CSS properties, which are imported indirectly by `main-client.tsx` via `index.css`.
+====
 
 Use the custom `dependenciesComments` and `devDependenciesComments` fields to associate each dependency to a maintenance comment or a description that justifies its use in this project.
 
@@ -176,7 +171,7 @@ For IntelliJ IDEA users:
 https://tailwindcss.com/[Tailwind CSS] is a utility-first CSS framework.
 It encourages the developer to reuse styles by extracting components (e.g. via Preact) rather than defining CSS rules and abstractions as practised in traditional CSS development.
 
-`tailwind.config.cjs` defines the https://tailwindcss.com/docs/configuration[configuration] of the Tailwind CSS environment, including custom extensions of the default theme.
+`tailwind.config.cjs` defines the https://tailwindcss.com/docs/configuration[configuration] of the Tailwind CSS environment.
 
 NOTE: The `.cjs` file extension indicates that the JavaScript file follows the CommonJS module standard of Node.js instead of the modern ECMAScript module standard (ESM).
 The latter is usually indicated by the `.mjs` file extension.
@@ -192,16 +187,9 @@ https://www.typescriptlang.org/[TypeScript] is a programming language that exten
 
 `tsconfig.json` defines the https://www.typescriptlang.org/tsconfig[configuration] of the TypeScript environment, except for the set of globally visible types which `global.d.ts` defines.
 
-The `target` is `ES2017`, which is supported by a wide range of modern web browsers.
-The `jsx` setting is `react-jsx`, in which the JSX syntax is transformed to `_jsx` function calls and imported automatically according to the `jsxImportSource` setting.
-Preact 10 supports this kind of JSX transformation.
-
 === Vite
 https://vitejs.dev/[Vite] is a frontend build tool.
 It hosts the development server and generates the distribution of the web app for production.
-
-It has native support for PostCSS and TypeScript (minus the type checking).
-It relies on PostCSS to support Tailwind CSS and on a https://github.com/preactjs/preset-vite[plugin] to support JSX transformations for Preact.
 
 `vite.config.ts` defines the https://vitejs.dev/config/[configuration] of Vite.
 It picks up the PostCSS configuration in `postcss.config.cjs` automatically.
@@ -217,7 +205,7 @@ To load the correct profile into the web app, the Vite configuration defines `+p
 
 Generating a production-grade distribution of the web app consists of two phases:
 
-. A *server-oriented build* which produces a CommonJS module that generates a static HTML tree from the initial state of the web app.
+. A *server-oriented build* which produces a CommonJS module that generates static HTML from the initial state of the web app.
 The entry point is `main-server.tsx`.
 Vite operates in `ssr` mode during this phase.
 
@@ -239,20 +227,17 @@ _Hydration_ is a process carried out by the web framework (e.g. Preact) that att
 https://jestjs.io/[Jest] is a unit testing framework for JavaScript.
 It is independent of Vite and does not inherit any of its capabilities.
 
-`jest.config.cjs` defines the https://jestjs.io/docs/configuration[configuration] of Jest, including the location of the unit test suites to run and the use of the built-in `jsdom` test environment.
+`jest.config.cjs` defines the https://jestjs.io/docs/configuration[configuration] of Jest.
 It relies on the `ts-jest` transformer to support TypeScript and Preact-compatible JSX transformations via `tsconfig.json`.
 
 === ESLint
-https://eslint.org/[ESLint] is a static program analysis tool that flags code issues in JavaScript sources.
-It also covers TypeScript, JSX, React hooks, and unit test suites in Jest through a wide range of plugins.
+https://eslint.org/[ESLint] is a static program analysis tool that flags issues in the source code.
 
 `.eslintrc.cjs` defines the https://eslint.org/docs/user-guide/configuring/[configuration] of ESLint, including the set of rules to be enforced.
 Every rule must be set to either `error` or `off`.
 We do not use the `warning` level, which would only pollute the linting report while allowing rules to be violated without interrupting the build step.
 
-It uses https://typescript-eslint.io/[TypeScript ESLint] to read TypeScript source code and perform type-aware analysis according to `tsconfig.json`.
-
-When enforcing the rules for JSX and React hooks, it uses the API of React 17, which matches the API provided by Preact 10.
+It uses https://typescript-eslint.io/[TypeScript ESLint] to parse TypeScript sources and perform type-aware analysis according to `tsconfig.json`.
 
 === AsciiDoc
 https://docs.asciidoctor.org/asciidoc/latest/[AsciiDoc] is a markup language for writing documentation.
@@ -267,9 +252,8 @@ Git will ignore this folder.
 . Copy your stylesheet (e.g. `my-preview-stylesheet.css`) into the `.asciidoctor` folder.
 . In the project root folder, create a new file named `.asciidoctorconfig`.
 Git will ignore this file.
-Insert this content into the file:
+Insert this content into the file to apply the stylesheet:
 +
-[source,asciidoc]
 ----
 :experimental:
 :stylesdir: {asciidoctorconfigdir}/.asciidoctor/

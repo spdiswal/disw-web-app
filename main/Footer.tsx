@@ -11,7 +11,7 @@ export function Footer({
     copyright: { year, owner },
 }: FooterProps) {
     return (
-        <footer class="bg-neutral-200 p-8 / md:py-16">
+        <footer class="p-8 bg-neutral-200 md:py-16">
             <SplitContainer class="font-light text-neutral-600">
                 &copy; {year} {owner}
             </SplitContainer>

@@ -12,7 +12,7 @@ export function ProfileBiography({
     activeLanguage,
 }: ProfileBiographyProps) {
     return (
-        <article id="biography" class="bg-neutral-300 p-8 / md:py-12">
+        <article id="biography" class="p-8 bg-neutral-300 md:py-12">
             <SplitContainer>
                 <Paragraph>{biography[activeLanguage]}</Paragraph>
             </SplitContainer>

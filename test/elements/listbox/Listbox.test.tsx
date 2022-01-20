@@ -1,5 +1,4 @@
 import { Listbox } from "+elements/listbox"
-import type { ClassList } from "+types"
 import type { ByRoleOptions } from "@testing-library/preact"
 import { fireEvent, render, screen, waitFor } from "@testing-library/preact"
 import userEvent from "@testing-library/user-event"
@@ -281,7 +280,7 @@ test("The change handler is not invoked when the window loses focus.", async () 
 function givenAListboxOfAppleCultivars(options?: {
     selection?: AppleCultivar,
     handleChange?: (selection: AppleCultivar) => void,
-    class?: ClassList
+    class?: string
 }) {
     render((
         <Listbox

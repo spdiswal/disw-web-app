@@ -1,4 +1,5 @@
-import type { ClassList } from "+types"
+import type { ClassValue } from "clsx"
+import clsx from "clsx"
 import type { ComponentChildren } from "preact"
 import { useRef, useState } from "preact/hooks"
 import { ListboxButton } from "./ListboxButton"
@@ -15,7 +16,7 @@ type ListboxProps<Option> = {
         readonly element: ComponentChildren
         readonly key: string
     }
-    readonly class?: ClassList
+    readonly class?: ClassValue
 }
 
 export function Listbox<Option>({
@@ -35,7 +36,7 @@ export function Listbox<Option>({
     useMouseDownOutsideElementEvent(listboxRef, closePopup)
     
     return (
-        <div ref={listboxRef} class={_class}>
+        <div ref={listboxRef} class={clsx(_class)}>
             <ListboxButton isOpen={isOpen} onClick={togglePopup}>
                 {render(selection).element}
             </ListboxButton>

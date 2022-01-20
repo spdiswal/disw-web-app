@@ -11,7 +11,7 @@ export function ListboxPopup({ isOpen, children }: ListboxPopupProps) {
         <ul
             class={clsx(
                 !isOpen && "hidden",
-                "absolute backdrop-blur-md bg-white/75 max-h-56 mt-1 py-1 focus:outline-none overflow-auto ring-1 ring-neutral-900 ring-opacity-10 rounded-md shadow-lg text-base w-full z-50 / md:text-sm",
+                "overflow-auto absolute z-50 py-1 mt-1 w-full max-h-56 text-base bg-white/75 rounded-md focus:outline-none ring-1 ring-neutral-900/10 shadow-lg backdrop-blur-md md:text-sm",
             )}
             role="listbox"
         >

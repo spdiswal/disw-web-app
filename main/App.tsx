@@ -39,7 +39,7 @@ export function App({
     return (
         <Fragment>
             <LanguagePicker
-                class="mt-4 mx-auto relative w-48 / md:absolute md:my-0 md:right-4 md:top-4"
+                class="relative mx-auto mt-4 w-48 md:absolute md:top-4 md:right-4 md:my-0"
                 selection={activeLanguage}
                 onLanguageSelected={setActiveLanguage}
             />

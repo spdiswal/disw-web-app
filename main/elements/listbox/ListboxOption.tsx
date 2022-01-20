@@ -17,7 +17,7 @@ export function ListboxOption({
         <li
             class={clsx(
                 isSelected ? "font-bold" : "font-normal",
-                "hover:bg-accent-600 cursor-default group pl-3 pr-9 py-2 relative select-none",
+                "group relative py-2 pr-9 pl-3 hover:bg-accent-600 cursor-default select-none",
             )}
             role="option"
             aria-selected={isSelected}
@@ -29,7 +29,7 @@ export function ListboxOption({
             <span
                 class={clsx(
                     !isSelected && "hidden",
-                    "absolute flex inset-y-0 items-center pr-4 right-0 text-accent-600 group-hover:text-white",
+                    "flex absolute inset-y-0 right-0 items-center pr-4 text-accent-600 group-hover:text-white",
                 )}
             >
                 <HeroIconCheck class="h-5"/>

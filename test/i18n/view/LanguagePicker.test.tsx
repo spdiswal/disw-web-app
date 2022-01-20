@@ -1,6 +1,5 @@
 import type { Language } from "+i18n"
 import { LanguagePicker } from "+i18n"
-import type { ClassList } from "+types"
 import type { ByRoleOptions } from "@testing-library/preact"
 import { render, screen, waitFor } from "@testing-library/preact"
 import userEvent from "@testing-library/user-event"
@@ -92,7 +91,7 @@ test("The change handler is invoked when left-clicking on the English option in 
 function givenALanguagePicker(options?: {
     selection?: Language,
     handleChange?: (selection: Language) => void,
-    class?: ClassList
+    class?: string
 }) {
     render((
         <LanguagePicker

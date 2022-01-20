@@ -1,7 +1,8 @@
-import type { ClassList } from "+types"
+import type { ClassValue } from "clsx"
+import clsx from "clsx"
 
 type ProfileIdentityQuickFactProps = {
-    readonly class?: ClassList
+    readonly class?: ClassValue
     readonly term: string
     readonly definition: string
 }
@@ -12,9 +13,9 @@ export function ProfileIdentityQuickFact({
     definition,
 }: ProfileIdentityQuickFactProps) {
     return (
-        <div class={`text-center ${_class ?? ""}`}>
+        <div class={clsx("text-center", _class)}>
             <dt>{term}</dt>
-            <dd class="font-bold text-primary-600 / md:text-2xl">{definition}</dd>
+            <dd class="font-bold text-primary-600 md:text-2xl">{definition}</dd>
         </div>
     )
 }

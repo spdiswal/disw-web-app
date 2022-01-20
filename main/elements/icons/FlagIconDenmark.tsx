@@ -1,7 +1,8 @@
-import type { ClassList } from "+types"
+import type { ClassValue } from "clsx"
+import clsx from "clsx"
 
 type FlagIconDenmarkProps = {
-    readonly class?: ClassList
+    readonly class?: ClassValue
 }
 
 /**
@@ -15,7 +16,7 @@ export function FlagIconDenmark({
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            class={`aspect-square ${_class ?? ""}`}
+            class={clsx("aspect-square", _class)}
             viewBox="0 0 32 32"
         >
             <rect width="32" height="32" fill="#da291c"/>

@@ -1,7 +1,8 @@
-import type { ClassList } from "+types"
+import type { ClassValue } from "clsx"
+import clsx from "clsx"
 
 type HeroIconCheckProps = {
-    readonly class?: ClassList
+    readonly class?: ClassValue
 }
 
 /**
@@ -13,7 +14,7 @@ export function HeroIconCheck({ class: _class }: HeroIconCheckProps) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            class={`aspect-square ${_class ?? ""}`}
+            class={clsx("aspect-square", _class)}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

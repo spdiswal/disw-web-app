@@ -16,8 +16,8 @@ export function ProfileOccupationEntry({
         <article aria-labelledby={id}>
             <SplitContainer
                 complementary={
-                    <div class="flex flex-row gap-x-12 h-full justify-start overflow-y-clip relative / md:justify-end / lg:gap-x-16">
-                        <div class="flex flex-row font-light mb-4 / md:flex-col md:items-end md:mb-0 md:text-right">
+                    <div class="flex overflow-y-clip relative flex-row gap-x-12 justify-start h-full md:justify-end lg:gap-x-16">
+                        <div class="flex flex-row mb-4 font-light md:flex-col md:items-end md:mb-0 md:text-right">
                             <ProfileOccupationDate
                                 class="md:mb-1 md:text-2xl"
                                 date={period.since}
@@ -32,21 +32,21 @@ export function ProfileOccupationEntry({
                             </span>
                         </div>
                         <span
-                            class="aspect-square border-2 border-neutral-600 h-8 hidden relative rounded-full w-8 z-10 / md:block"
+                            class="aspect-square hidden relative z-10 w-8 h-8 rounded-full border-2 border-neutral-600 md:block"
                             aria-hidden="true"
                         />
                         <span
-                            class="absolute bg-neutral-600/40 h-full hidden right-4 top-8 w-px z-0 / md:block"
+                            class="hidden absolute top-8 right-4 z-0 w-px h-full bg-neutral-600/40 md:block"
                             aria-hidden="true"
                         />
                     </div>
                 }
             >
                 <header class="mb-4">
-                    <h1 id={id} class="font-bold text-primary-600 / md:mb-1 md:text-2xl">{title[activeLanguage]}</h1>
+                    <h1 id={id} class="font-bold text-primary-600 md:mb-1 md:text-2xl">{title[activeLanguage]}</h1>
                     <p class="font-semibold">{organisation[activeLanguage]}</p>
                 </header>
-                <div class="flex flex-col gap-y-2 mb-12 / md:mb-24">
+                <div class="flex flex-col gap-y-2 mb-12 md:mb-24">
                     {activities.map((activity) => (
                         <Paragraph key={activity.id}>
                             {activity[activeLanguage]}

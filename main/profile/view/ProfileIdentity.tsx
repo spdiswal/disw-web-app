@@ -28,18 +28,18 @@ export function ProfileIdentity({
     activeLanguage,
 }: ProfileIdentityProps) {
     return (
-        <div class="bg-gradient-to-br border-b-8 border-primary-600 from-neutral-50 p-8 to-primary-50">
+        <div class="p-8 bg-gradient-to-br from-neutral-50 to-primary-50 border-b-8 border-primary-600">
             <SplitContainer
                 class="md:items-end"
                 complementary={
                     <img
-                        class="aspect-square drop-shadow-xl h-auto mb-8 mx-auto rounded-1/3 w-60 / md:-mt-12 md:relative md:top-36 md:w-full md:z-10"
+                        class="aspect-square mx-auto mb-8 w-60 h-auto rounded-1/3 drop-shadow-xl md:relative md:top-36 md:z-10 md:-mt-12 md:w-full"
                         src={portrait.assetUrl}
                         alt={portrait.caption[activeLanguage]}
                     />
                 }
             >
-                <div class="drop-shadow-sm flex flex-col font-bold gap-y-2 mb-8 text-2xl text-center / sm:mb-12 sm:text-3xl / md:text-4xl md:text-left / lg:text-5xl">
+                <div class="flex flex-col gap-y-2 mb-8 text-2xl font-bold text-center drop-shadow-sm sm:mb-12 sm:text-3xl md:text-4xl md:text-left lg:text-5xl">
                     <p>
                         {namePreamble[activeLanguage]}{" "}<span class="font-black text-primary-600 whitespace-nowrap">{name}</span>.
                     </p>
@@ -47,7 +47,7 @@ export function ProfileIdentity({
                         {areaOfExpertisePreamble[activeLanguage]}{" "}{areaOfExpertise[activeLanguage]}.
                     </p>
                 </div>
-                <dl class="flex flex-col gap-y-6 items-center / sm:flex-row sm:gap-x-10 sm:justify-center sm:mb-4 / md:gap-x-12 md:justify-start / lg:gap-x-16">
+                <dl class="flex flex-col gap-y-6 items-center sm:flex-row sm:gap-x-10 sm:justify-center sm:mb-4 md:gap-x-12 md:justify-start lg:gap-x-16">
                     <ProfileIdentityQuickFact
                         term={ageTerm[activeLanguage]}
                         definition={age[activeLanguage]}

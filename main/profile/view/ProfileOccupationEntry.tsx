@@ -32,11 +32,11 @@ export function ProfileOccupationEntry({
                             </span>
                         </div>
                         <span
-                            class="aspect-square hidden relative z-10 w-8 h-8 rounded-full border-2 border-neutral-600 md:block"
+                            class="aspect-square hidden relative z-10 w-8 h-8 rounded-full border-2 border-neutral-600 dark:border-neutral-400 md:block"
                             aria-hidden="true"
                         />
                         <span
-                            class="hidden absolute top-8 right-4 z-0 w-px h-full bg-neutral-600/40 md:block"
+                            class="hidden absolute top-8 right-4 z-0 w-px h-full bg-neutral-600/40 dark:bg-neutral-400/40 md:block"
                             aria-hidden="true"
                         />
                     </div>

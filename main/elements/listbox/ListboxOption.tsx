@@ -23,7 +23,7 @@ export function ListboxOption({
             aria-selected={isSelected}
             onClick={onClick}
         >
-            <div class="flex items-center text-neutral-900 group-hover:text-white">
+            <div class="flex items-center text-neutral-800 group-hover:text-white dark:text-neutral-900">
                 {children}
             </div>
             <span

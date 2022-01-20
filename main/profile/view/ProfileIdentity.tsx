@@ -28,7 +28,7 @@ export function ProfileIdentity({
     activeLanguage,
 }: ProfileIdentityProps) {
     return (
-        <div class="p-8 bg-gradient-to-br from-neutral-50 to-primary-50 border-b-8 border-primary-600">
+        <div class="p-8 bg-gradient-to-br from-neutral-50 dark:from-neutral-900 to-primary-50 dark:to-neutral-800 border-b-8 border-primary-600">
             <SplitContainer
                 class="md:items-end"
                 complementary={

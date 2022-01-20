@@ -33,7 +33,7 @@ export function ProfilePage({
                 activeLanguage={activeLanguage}
             />
             <ProfileOccupationTimeline
-                class="bg-neutral-100"
+                class="bg-neutral-100 dark:bg-neutral-800"
                 label={educationLabel}
                 labelId="education"
                 occupations={education}

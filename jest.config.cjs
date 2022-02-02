@@ -15,11 +15,10 @@ module.exports = {
         // The alias below lets Jest rely on a dummy profile.
         "^\\+profile/content/predefined$": "<rootDir>/main/profile/content/perseverance-dummy",
         //
-        "^\\+elements/icons$": "<rootDir>/main/elements/icons/index",
-        "^\\+elements/layout$": "<rootDir>/main/elements/layout/index",
-        "^\\+elements/listbox$": "<rootDir>/main/elements/listbox/index",
+        "^\\+elements$": "<rootDir>/main/elements/index",
         "^\\+i18n$": "<rootDir>/main/i18n/index",
         "^\\+profile$": "<rootDir>/main/profile/index",
+        "^\\+theme$": "<rootDir>/main/theme/index",
         "^\\+types$": "<rootDir>/main/types/index",
         //
         "^.+\\.css$": "<rootDir>/test/jest/generic-asset-file-stub.cjs",

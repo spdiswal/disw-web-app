@@ -10,13 +10,16 @@ type HeroIconCheckProps = {
  *
  * @see https://heroicons.com/
  */
-export function HeroIconCheck({ class: _class }: HeroIconCheckProps) {
+export function HeroIconCheck({
+    class: _class,
+}: HeroIconCheckProps) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
             class={clsx("aspect-square", _class)}
-            fill="none"
+            height="24"
             viewBox="0 0 24 24"
+            fill="none"
             stroke="currentColor"
         >
             <path

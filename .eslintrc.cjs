@@ -81,6 +81,7 @@ module.exports = {
         "no-extra-label": "error",
         "no-extra-parens": "off",
         "@typescript-eslint/no-extra-parens": ["error", "all", {
+            enforceForArrowConditionals: false,
             ignoreJSX: "all",
         }],
         "no-floating-decimal": "error",
@@ -391,13 +392,14 @@ module.exports = {
         project: ["./tsconfig.json"],
     },
     settings: {
-        react: {
+        "react": {
             // Preact 10 provides an API similar to React 17.
             version: "17",
         },
-        tailwindcss: {
+        "tailwindcss": {
             config: "./tailwind.config.cjs",
         },
+        "testing-library/custom-renders": "off",
     },
     plugins: [
         "@typescript-eslint",

@@ -17,6 +17,7 @@ export function FlagIconDenmark({
         <svg
             xmlns="http://www.w3.org/2000/svg"
             class={clsx("aspect-square", _class)}
+            height="24"
             viewBox="0 0 32 32"
         >
             <rect width="32" height="32" fill="#da291c"/>

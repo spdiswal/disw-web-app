@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+    <title>[main-server.tsx title]</title>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css"/>
     <style>
         /* Hide the document initially to prevent a flash of unstyled content
            from occurring. */
@@ -15,11 +20,23 @@
             }
         }
     </style>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css"/>
-    <title>[main-server.tsx title]</title>
+    <script type="text/javascript">
+        // Read more:
+        // https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually
+        //
+        const restoredThemeSelection = sessionStorage.getItem("theme")
+        const wantsDarkTheme = (
+            restoredThemeSelection === "dark"
+            || (restoredThemeSelection === null
+                && window.matchMedia("(prefers-color-scheme: dark)").matches)
+        )
+        
+        if (wantsDarkTheme) {
+            document.documentElement.classList.add("dark")
+        } else {
+            document.documentElement.classList.remove("dark")
+        }
+    </script>
 </head>
 <body class="min-w-min text-neutral-800 dark:text-neutral-50 bg-neutral-50 dark:bg-neutral-900">
     <!-- [main-server.tsx body] -->

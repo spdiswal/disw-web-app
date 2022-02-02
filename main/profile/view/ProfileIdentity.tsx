@@ -1,4 +1,4 @@
-import { SplitContainer } from "+elements/layout"
+import { SplitContainer } from "+elements"
 import type { Language, Multilingual } from "+i18n"
 import type { Identity } from "+profile"
 import { ProfileIdentityQuickFact } from "./ProfileIdentityQuickFact"
@@ -33,13 +33,13 @@ export function ProfileIdentity({
                 class="md:items-end"
                 complementary={
                     <img
-                        class="aspect-square mx-auto mb-8 w-60 h-auto rounded-1/3 drop-shadow-xl md:relative md:top-36 md:z-10 md:-mt-12 md:w-full"
+                        class="aspect-square my-8 mx-auto w-60 h-auto rounded-1/3 drop-shadow-xl md:relative md:top-36 md:z-10 md:-mt-12 md:w-full"
                         src={portrait.assetUrl}
                         alt={portrait.caption[activeLanguage]}
                     />
                 }
             >
-                <div class="flex flex-col gap-y-2 mb-8 text-2xl font-bold text-center drop-shadow-sm sm:mb-12 sm:text-3xl md:text-4xl md:text-left lg:text-5xl">
+                <div class="flex flex-col gap-y-2 mb-8 text-2xl font-bold text-center drop-shadow-sm sm:mt-4 sm:mb-12 sm:text-3xl md:mt-28 md:text-4xl md:text-left lg:text-5xl">
                     <p>
                         {namePreamble[activeLanguage]}{" "}<span class="font-black text-primary-600 whitespace-nowrap">{name}</span>.
                     </p>

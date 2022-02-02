@@ -2,41 +2,53 @@ import type { Language, UseActiveLanguageHook, UseActiveLanguageOptions } from "
 import { useActiveLanguage } from "+i18n"
 import { act, renderHook } from "@testing-library/preact-hooks"
 
-test("The 'lang' attribute of the document may be 'da' initially.", () => {
+test("The active language may be Danish initially.", () => {
     // GIVEN that the initial language is Danish.
-    givenAUseActiveLanguageHook({ initialLanguage: "da" })
+    const subject = givenAUseActiveLanguageHook({ initialLanguage: "da" })
     
-    // THEN the 'lang' attribute of the document is 'da'.
+    // THEN the active language is Danish.
+    expect(subject.activeLanguage).toBe("da")
+    
+    // AND the 'lang' attribute of the document is 'da'.
     expect(document.documentElement.lang).toBe("da")
 })
 
-test("The 'lang' attribute of the document may be 'en' initially.", () => {
+test("The active language may be English initially.", () => {
     // GIVEN that the initial language is English.
-    givenAUseActiveLanguageHook({ initialLanguage: "en" })
+    const subject = givenAUseActiveLanguageHook({ initialLanguage: "en" })
     
-    // THEN the 'lang' attribute of the document is 'en'.
+    // THEN the active language is English.
+    expect(subject.activeLanguage).toBe("en")
+    
+    // AND the 'lang' attribute of the document is 'en'.
     expect(document.documentElement.lang).toBe("en")
 })
 
-test("The 'lang' attribute of the document may change to 'en'.", async () => {
+test("The active language may change from Danish to English.", async () => {
     // GIVEN that the initial language is Danish.
     const subject = givenAUseActiveLanguageHook({ initialLanguage: "da" })
     
     // WHEN setting the active language to English.
     await whenSettingTheActiveLanguage(subject, "en")
     
-    // THEN the 'lang' attribute of the document is 'en'.
+    // THEN the active language is English.
+    expect(subject.activeLanguage).toBe("en")
+    
+    // AND the 'lang' attribute of the document is 'en'.
     expect(document.documentElement.lang).toBe("en")
 })
 
-test("The 'lang' attribute of the document may change to 'da'.", async () => {
+test("The active language may change from English to Danish.", async () => {
     // GIVEN that the initial language is English.
     const subject = givenAUseActiveLanguageHook({ initialLanguage: "en" })
     
     // WHEN setting the active language to Danish.
     await whenSettingTheActiveLanguage(subject, "da")
     
-    // THEN the 'lang' attribute of the document is 'da'.
+    // THEN the active language is Danish.
+    expect(subject.activeLanguage).toBe("da")
+    
+    // AND the 'lang' attribute of the document is 'da'.
     expect(document.documentElement.lang).toBe("da")
 })
 
@@ -45,8 +57,20 @@ function givenAUseActiveLanguageHook(
 ): UseActiveLanguageHook {
     const { result } = renderHook(() => useActiveLanguage(options))
     
-    expect(result.current).toBeDefined()
-    return result.current! // eslint-disable-line @typescript-eslint/no-non-null-assertion
+    // Returns a proxy object that may access the state of the hook instance
+    // at any point during the unit test.
+    // `result.current` is mutable and would provide only a snapshot of the
+    // hook state if returned directly.
+    return {
+        get activeLanguage() {
+            expect(result.current).toBeDefined()
+            return result.current!.activeLanguage // eslint-disable-line @typescript-eslint/no-non-null-assertion
+        },
+        setActiveLanguage: (value) => {
+            expect(result.current).toBeDefined()
+            result.current!.setActiveLanguage(value) // eslint-disable-line @typescript-eslint/no-non-null-assertion
+        },
+    }
 }
 
 async function whenSettingTheActiveLanguage(

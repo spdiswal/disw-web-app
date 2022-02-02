@@ -1,4 +1,4 @@
-import { Paragraph, SplitContainer } from "+elements/layout"
+import { Paragraph, SplitContainer } from "+elements"
 import type { Language } from "+i18n"
 import type { Biography } from "+profile"
 

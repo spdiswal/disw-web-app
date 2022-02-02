@@ -1,4 +1,4 @@
-import { SplitContainer } from "+elements/layout"
+import { SplitContainer } from "+elements"
 import type { Language, Multilingual } from "+i18n"
 import type { OccupationList } from "+profile"
 import type { Id } from "+types"

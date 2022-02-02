@@ -1,4 +1,4 @@
-import { Paragraph, SplitContainer } from "+elements/layout"
+import { Paragraph, SplitContainer } from "+elements"
 import type { Language } from "+i18n"
 import type { Occupation } from "+profile"
 import { ProfileOccupationDate } from "./ProfileOccupationDate"
@@ -16,10 +16,10 @@ export function ProfileOccupationEntry({
         <article aria-labelledby={id}>
             <SplitContainer
                 complementary={
-                    <div class="flex overflow-y-clip relative flex-row gap-x-12 justify-start h-full md:justify-end lg:gap-x-16">
-                        <div class="flex flex-row mb-4 font-light md:flex-col md:items-end md:mb-0 md:text-right">
+                    <div class="flex overflow-y-clip relative gap-x-12 justify-start h-full md:justify-end lg:gap-x-16">
+                        <div class="flex mb-4 font-light md:flex-col md:items-end md:mb-0 md:text-right">
                             <ProfileOccupationDate
-                                class="md:mb-1 md:text-2xl"
+                                class="md:mb-1 md:text-xl lg:text-2xl"
                                 date={period.since}
                                 activeLanguage={activeLanguage}
                             />

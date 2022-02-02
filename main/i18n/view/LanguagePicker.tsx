@@ -1,47 +1,60 @@
-import { FlagIconDenmark, FlagIconUnitedKingdom } from "+elements/icons"
-import { Listbox } from "+elements/listbox"
-import type { Language, Multilingual } from "+i18n"
+import { FlagIconDenmark, FlagIconUnitedKingdom, HeroIconCheck, HeroIconSelector, Listbox, ListboxOption, ListboxResponsiveButton } from "+elements"
+import type { Language } from "+i18n"
 import { supportedLanguages } from "+i18n"
 import type { ClassValue } from "clsx"
 import type { JSX } from "preact"
-import { Fragment } from "preact"
 
-const caption: Multilingual<string> = { da: "Dansk", en: "English" }
+const caption: Readonly<Record<Language, string>> = {
+    da: "Dansk",
+    en: "English",
+}
 
-const flagIcon: Multilingual<JSX.Element> = {
+const icon: Readonly<Record<Language, JSX.Element>> = {
     da: <FlagIconDenmark class="shrink-0 h-5 rounded-full"/>,
     en: <FlagIconUnitedKingdom class="shrink-0 h-5 rounded-full"/>,
 }
 
 type LanguagePickerProps = {
-    readonly selection: Language
-    readonly onLanguageSelected?: (language: Language) => void
     readonly class?: ClassValue
+    
+    readonly selectedLanguage: Language
+    readonly onLanguageSelected?: (language: Language) => void
 }
 
 export function LanguagePicker({
     class: _class,
-    selection,
+    selectedLanguage,
     onLanguageSelected,
 }: LanguagePickerProps) {
     return (
         <Listbox
             class={_class}
             options={supportedLanguages}
-            selection={selection}
-            onChange={onLanguageSelected}
-        >
-            {(language) => ({
-                key: language,
-                element: (
-                    <Fragment>
-                        {flagIcon[language]}
-                        <span class="block ml-3 truncate">
-                            {caption[language]}
-                        </span>
-                    </Fragment>
-                ),
-            })}
-        </Listbox>
+            selectedOption={selectedLanguage}
+            onOptionSelected={onLanguageSelected}
+            renderButton={(state) => (
+                <ListboxResponsiveButton
+                    class="flex gap-x-4 items-center md:w-full"
+                    state={state}
+                >
+                    {icon[selectedLanguage]}
+                    <span class="hidden md:block md:grow md:truncate">
+                        {caption[selectedLanguage]}
+                    </span>
+                    <HeroIconSelector class="hidden h-5 md:block"/>
+                </ListboxResponsiveButton>
+            )}
+            renderOption={(option, { isSelected }) => (
+                <ListboxOption class="flex gap-x-4 items-center">
+                    {icon[option]}
+                    <span class="block grow truncate">
+                        {caption[option]}
+                    </span>
+                    {isSelected
+                        ? <HeroIconCheck class="h-5 text-accent-600 group-hover:text-white"/>
+                        : null}
+                </ListboxOption>
+            )}
+        />
     )
 }

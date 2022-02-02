@@ -16,6 +16,7 @@ const relativeServerOrientedBuildArtifactFile = `${relativeOutputFolder}/main-se
 //
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, process.cwd())
+    const profileName = env.VITE_PROFILE_NAME
     
     return {
         root: path("main"),
@@ -27,13 +28,12 @@ export default defineConfig(({ mode }) => {
                 // The alias below lets Vite embed just the specified profile
                 // content into the production distribution while preserving hot
                 // module replacement during development.
-                "+profile/content/predefined": path(`main/profile/content/${env.VITE_PROFILE_NAME}`),
+                "+profile/content/predefined": path(`main/profile/content/${profileName}`),
                 //
-                "+elements/icons": path("main/elements/icons/"),
-                "+elements/layout": path("main/elements/layout/"),
-                "+elements/listbox": path("main/elements/listbox/"),
+                "+elements": path("main/elements/"),
                 "+i18n": path("main/i18n/"),
                 "+profile": path("main/profile/"),
+                "+theme": path("main/theme/"),
                 "+types": path("main/types/"),
             },
         },
@@ -85,6 +85,7 @@ function preRenderIndexHtmlPlugin(): Plugin {
             
             return html
                 .replace("/* [tailwindcss bg-neutral-50] */", `background-color: ${tailwindColourSlate["50"]};`)
+                .replace("/* [tailwindcss bg-neutral-900] */", `background-color: ${tailwindColourSlate["900"]};`)
                 .replace("<title>[main-server.tsx title]</title>", title)
                 .replace("<!-- [main-server.tsx body] -->", body)
         },
@@ -118,6 +119,7 @@ function minifyIndexHtmlPlugin(): Plugin {
         transformIndexHtml: async (html: string) => minifyHtml(html, {
             collapseWhitespace: true,
             minifyCSS: true,
+            minifyJS: true,
         }),
     }
 }

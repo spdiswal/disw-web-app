@@ -1,9 +1,12 @@
-import { LanguagePicker, useActiveLanguage, usePreferredLanguage } from "+i18n"
+import { SplitContainer } from "+elements"
+import type { PreferredLanguagePort } from "+i18n"
+import { LanguagePicker, useActiveLanguage } from "+i18n"
 import { ProfilePage } from "+profile"
 import { content } from "+profile/content/predefined"
+import type { MediaThemePort, ThemeStoragePort } from "+theme"
+import { ThemePicker, useTheme } from "+theme"
 import { Fragment } from "preact"
 import { useEffect } from "preact/hooks"
-import { Footer } from "./Footer"
 
 const copyright = {
     year: new Date().getFullYear(),
@@ -11,25 +14,23 @@ const copyright = {
 }
 
 type AppProps = {
-    readonly dependencies: AppDependencies
-}
-
-export type AppDependencies = {
-    readonly languagesOrderedByPreference: ReadonlyArray<string>
+    readonly preferredLanguagePort: PreferredLanguagePort
+    readonly mediaThemePort: MediaThemePort
+    readonly themeStoragePort: ThemeStoragePort
 }
 
 export function App({
-    dependencies: {
-        languagesOrderedByPreference,
-    },
+    preferredLanguagePort: { preferredLanguage },
+    mediaThemePort,
+    themeStoragePort,
 }: AppProps) {
     useEffect(() => {
         document.title = content.identity.name
     }, [])
     
-    const { preferredLanguage } = usePreferredLanguage({
-        languagesOrderedByPreference,
-        fallbackLanguage: "da",
+    const { mediaTheme, themeSelection, selectTheme } = useTheme({
+        mediaThemePort,
+        themeStoragePort,
     })
     
     const { activeLanguage, setActiveLanguage } = useActiveLanguage({
@@ -38,16 +39,29 @@ export function App({
     
     return (
         <Fragment>
-            <LanguagePicker
-                class="relative mx-auto mt-4 w-48 md:absolute md:top-4 md:right-4 md:my-0"
-                selection={activeLanguage}
-                onLanguageSelected={setActiveLanguage}
-            />
+            <header class="flex absolute top-4 right-4 justify-end items-center md:gap-x-2">
+                <ThemePicker
+                    class="w-fit"
+                    activeLanguage={activeLanguage}
+                    mediaTheme={mediaTheme}
+                    selectedTheme={themeSelection}
+                    onThemeSelected={selectTheme}
+                />
+                <LanguagePicker
+                    class="w-fit md:w-48"
+                    selectedLanguage={activeLanguage}
+                    onLanguageSelected={setActiveLanguage}
+                />
+            </header>
             <ProfilePage
                 content={content}
                 activeLanguage={activeLanguage}
             />
-            <Footer copyright={copyright}/>
+            <footer class="p-8 bg-neutral-200 dark:bg-neutral-900 md:py-16">
+                <SplitContainer class="font-light text-neutral-600 dark:text-neutral-300">
+                    &copy; {copyright.year} {copyright.owner}
+                </SplitContainer>
+            </footer>
         </Fragment>
     )
 }

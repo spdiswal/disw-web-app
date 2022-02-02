@@ -1,4 +1,7 @@
 export * from "./FlagIconDenmark"
 export * from "./FlagIconUnitedKingdom"
 export * from "./HeroIconCheck"
+export * from "./HeroIconDesktopComputer"
+export * from "./HeroIconMoon"
 export * from "./HeroIconSelector"
+export * from "./HeroIconSun"

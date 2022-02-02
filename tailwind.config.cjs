@@ -11,6 +11,7 @@ const colors = require("tailwindcss/colors")
  */
 module.exports = {
     content: ["./main/**/*.{html,ts,tsx}"],
+    darkMode: "class",
     theme: {
         colors: {
             "accent": colors.blue,

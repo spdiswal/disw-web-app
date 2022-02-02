@@ -1,10 +1,18 @@
+import { adaptPreferredLanguageToNavigator } from "+i18n"
+import { adaptMediaThemeToQuery, adaptThemeStorageToSessionStorage } from "+theme"
 import { hydrate } from "preact"
-import type { AppDependencies } from "./App"
 import { App } from "./App"
 import "./index.css"
 
-const dependencies: AppDependencies = {
-    languagesOrderedByPreference: navigator.languages,
-}
+const preferredLanguagePort = adaptPreferredLanguageToNavigator()
+const mediaThemePort = adaptMediaThemeToQuery()
+const themeStoragePort = adaptThemeStorageToSessionStorage()
 
-hydrate(<App dependencies={dependencies}/>, document.body)
+hydrate(
+    <App
+        preferredLanguagePort={preferredLanguagePort}
+        mediaThemePort={mediaThemePort}
+        themeStoragePort={themeStoragePort}
+    />,
+    document.body,
+)

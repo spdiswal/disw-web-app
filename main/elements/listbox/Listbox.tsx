@@ -1,65 +1,93 @@
 import type { ClassValue } from "clsx"
 import clsx from "clsx"
-import type { ComponentChildren } from "preact"
+import type { JSX } from "preact"
+import type { Ref } from "preact/hooks"
 import { useRef, useState } from "preact/hooks"
-import { ListboxButton } from "./ListboxButton"
-import { ListboxOption } from "./ListboxOption"
-import { ListboxPopup } from "./ListboxPopup"
-import { useMouseDownOutsideElementEvent } from "./useMouseDownOutsideElementEvent"
-import { useWindowEvent } from "./useWindowEvent"
+import { useWindowEvent } from "../useWindowEvent"
 
-type ListboxProps<Option> = {
-    readonly options: ReadonlyArray<Option>
-    readonly selection: Option
-    readonly onChange?: (selection: Option) => void
-    readonly children: (optionToRender: Option) => {
-        readonly element: ComponentChildren
-        readonly key: string
-    }
+type ListboxProps<Option extends string> = {
     readonly class?: ClassValue
+    
+    readonly options: ReadonlyArray<Option>
+    readonly selectedOption: Option
+    readonly onOptionSelected?: (option: Option) => void
+    
+    readonly renderButton: (state: ListboxButtonState) => JSX.Element
+    readonly renderOption: (
+        option: Option,
+        state: ListboxOptionState,
+    ) => JSX.Element
 }
 
-export function Listbox<Option>({
-    options,
-    selection,
-    onChange,
-    children: render,
+export type ListboxButtonState = {
+    readonly ref: Ref<HTMLButtonElement>
+    readonly isExpanded: boolean
+    readonly onMouseDown: () => void
+}
+
+export type ListboxOptionState = {
+    readonly isSelected: boolean
+}
+
+export function Listbox<Option extends string>({
     class: _class,
+    options,
+    selectedOption,
+    onOptionSelected,
+    renderButton,
+    renderOption,
 }: ListboxProps<Option>) {
-    const listboxRef = useRef<HTMLDivElement>(null)
-    const [isOpen, setOpen] = useState(false)
+    const buttonRef = useRef<HTMLButtonElement>(null)
+    const popupRef = useRef<HTMLUListElement>(null)
+    const [isPopupOpen, setPopupOpen] = useState(false)
     
-    const closePopup = () => setOpen(false)
-    const togglePopup = () => setOpen(!isOpen)
-    
-    useWindowEvent("blur", closePopup)
-    useMouseDownOutsideElementEvent(listboxRef, closePopup)
+    useWindowEvent("blur", () => setPopupOpen(false))
+    useWindowEvent("mousedown", ({ target }) => {
+        const occurredInListbox = target instanceof Element
+            && (buttonRef.current?.contains(target)
+                || popupRef.current?.contains(target))
+        
+        if (!occurredInListbox) {
+            setPopupOpen(false)
+        }
+    })
     
     return (
-        <div ref={listboxRef} class={clsx(_class)}>
-            <ListboxButton isOpen={isOpen} onClick={togglePopup}>
-                {render(selection).element}
-            </ListboxButton>
-            <ListboxPopup isOpen={isOpen}>
-                {options.map((optionToRender) => {
-                    const { element, key } = render(optionToRender)
-                    
-                    const handleOptionClick = () => {
-                        closePopup()
-                        onChange?.(optionToRender)
-                    }
-                    
+        <div class={clsx("relative", _class)}>
+            {renderButton({
+                ref: buttonRef,
+                isExpanded: isPopupOpen,
+                onMouseDown: () => setPopupOpen(!isPopupOpen),
+            })}
+            <ul
+                ref={popupRef}
+                class={clsx(
+                    !isPopupOpen && "hidden",
+                    "overflow-auto absolute right-0 z-50 py-1 mt-1 w-48 max-h-56 text-base bg-white/75 dark:bg-neutral-100/75 rounded-md focus-visible:outline-none ring-1 ring-neutral-900/10 shadow-lg backdrop-blur-md md:text-sm",
+                )}
+                role="listbox"
+            >
+                {options.map((option) => {
+                    const isSelected = option === selectedOption
                     return (
-                        <ListboxOption
-                            key={key}
-                            isSelected={optionToRender === selection}
-                            onClick={handleOptionClick}
+                        <li
+                            key={option}
+                            class={clsx(
+                                isSelected ? "font-bold" : "font-normal",
+                                "group relative py-2 px-3 hover:bg-accent-600 cursor-default select-none",
+                            )}
+                            role="option"
+                            aria-selected={isSelected}
+                            onMouseUp={() => {
+                                onOptionSelected?.(option)
+                                setPopupOpen(false)
+                            }}
                         >
-                            {element}
-                        </ListboxOption>
+                            {renderOption(option, { isSelected })}
+                        </li>
                     )
                 })}
-            </ListboxPopup>
+            </ul>
         </div>
     )
 }

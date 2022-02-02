@@ -1,5 +1,4 @@
-import { Listbox } from "+elements/listbox"
-import type { ByRoleOptions } from "@testing-library/preact"
+import { Listbox, ListboxOption, ListboxResponsiveButton } from "+elements"
 import { fireEvent, render, screen, waitFor } from "@testing-library/preact"
 import userEvent from "@testing-library/user-event"
 
@@ -14,343 +13,241 @@ const appleCultivars = [
 
 type AppleCultivar = (typeof appleCultivars)[number]
 
-test("The listbox propagates the class list.", () => {
-    // GIVEN a listbox of apple cultivars.
-    // AND the class list is 'alice bramley cox-orange'.
-    givenAListboxOfAppleCultivars({ class: "alice bramley cox-orange" })
-    
-    // THEN the listbox has classes 'alice', 'bramley', and 'cox-orange'.
-    expect(theListbox()).toHaveClass("alice", "bramley", "cox-orange")
-})
-
 test("The listbox button displays the selected option.", () => {
-    // GIVEN a listbox of apple cultivars.
-    // AND 'Ambrosia' is the selected option.
-    givenAListboxOfAppleCultivars({ selection: "Ambrosia" })
+    // GIVEN a test subject.
+    // GIVEN that the selected option is 'Ambrosia'.
+    const listbox = renderListboxComponentOfAppleCultivars({
+        selectedOption: "Ambrosia",
+    })
     
-    // THEN the listbox button says 'Ambrosia'.
-    expect(theListboxButton()).toHaveTextContent("Ambrosia")
+    // THEN the listbox button displays the selected option.
+    expect(listbox.getButton()).toHaveAccessibleName("Ambrosia")
 })
 
 test("The listbox popup is hidden initially.", () => {
-    // GIVEN a listbox of apple cultivars.
-    givenAListboxOfAppleCultivars()
+    // GIVEN a test subject.
+    const listbox = renderListboxComponentOfAppleCultivars()
     
     // THEN the listbox popup is hidden.
-    expect(theListboxPopup()).toHaveClass("hidden")
-    
     // AND the listbox button is marked as collapsed.
-    expect(theListboxButton({ expanded: false })).toBeInTheDocument()
+    expect(listbox.getPopup()).toHaveClass("hidden")
+    expect(listbox.getButton()).toHaveAttribute("aria-expanded", "false")
 })
 
-test("The listbox popup appears when left-clicking on the listbox button.", async () => {
-    // GIVEN a listbox of apple cultivars.
-    givenAListboxOfAppleCultivars()
+test("The listbox popup appears upon clicking on the listbox button.", async () => {
+    // GIVEN a test subject.
+    const listbox = renderListboxComponentOfAppleCultivars()
     
-    // WHEN left-clicking on the listbox button.
-    whenLeftClickingOnTheListboxButton()
+    // WHEN clicking on the listbox button.
+    listbox.clickButton()
     
     // THEN the listbox popup is no longer hidden.
-    await waitFor(() => {
-        expect(theListboxPopup()).not.toHaveClass("hidden")
-    })
-    
     // AND the listbox button is marked as expanded.
-    expect(theListboxButton({ expanded: true })).toBeInTheDocument()
+    await waitFor(() => {
+        expect(listbox.getPopup()).not.toHaveClass("hidden")
+    })
+    expect(listbox.getButton()).toHaveAttribute("aria-expanded", "true")
 })
 
-test("The listbox popup disappears when left-clicking on the listbox button again.", async () => {
-    // GIVEN a listbox of apple cultivars.
-    givenAListboxOfAppleCultivars()
+test("The listbox popup disappears upon clicking on the button again.", async () => {
+    // GIVEN a test subject.
+    const listbox = renderListboxComponentOfAppleCultivars()
     
-    // GIVEN a visible the listbox popup.
-    await givenAVisibleListboxPopup()
+    // GIVEN that the listbox popup is visible.
+    listbox.clickButton()
     
-    // WHEN left-clicking on the listbox button.
-    whenLeftClickingOnTheListboxButton()
+    await waitFor(() => {
+        expect(listbox.getPopup()).not.toHaveClass("hidden")
+    })
+    
+    // WHEN clicking on the listbox button again.
+    listbox.clickButton()
     
     // THEN the listbox popup is hidden.
-    await waitFor(() => {
-        expect(theListboxPopup()).toHaveClass("hidden")
-    })
-    
     // AND the listbox button is marked as collapsed.
-    expect(theListboxButton({ expanded: false })).toBeInTheDocument()
+    await waitFor(() => {
+        expect(listbox.getPopup()).toHaveClass("hidden")
+    })
+    expect(listbox.getButton()).toHaveAttribute("aria-expanded", "false")
 })
 
-test("The change handler is not invoked when left-clicking on the listbox button again.", async () => {
-    // GIVEN a spying change handler.
-    const handleChange = jest.fn()
+test("The listbox popup displays all options.", () => {
+    // GIVEN a test subject.
+    const listbox = renderListboxComponentOfAppleCultivars()
     
-    // GIVEN a listbox of apple cultivars.
-    givenAListboxOfAppleCultivars({ handleChange })
-    
-    // GIVEN a visible the listbox popup.
-    await givenAVisibleListboxPopup()
-    
-    // WHEN left-clicking on the listbox button.
-    whenLeftClickingOnTheListboxButton()
-    
-    // THEN the change handler is not invoked.
-    expect(handleChange).not.toHaveBeenCalled()
-})
-
-test("The listbox popup displays all options.", async () => {
-    // GIVEN a listbox of apple cultivars.
-    givenAListboxOfAppleCultivars()
-    
-    // GIVEN a visible the listbox popup.
-    await givenAVisibleListboxPopup()
-    
-    // THEN the listbox popup displays all apple cultivars.
-    const options = theListboxOptions()
+    // THEN the listbox displays all apple cultivars.
+    const options = listbox.getOptions()
     expect(options).toHaveLength(appleCultivars.length)
     
     for (let i = 0; i < appleCultivars.length; i++) {
-        expect(options[i]).toHaveTextContent(appleCultivars[i])
+        expect(options[i]).toHaveAccessibleName(appleCultivars[i])
     }
 })
 
-test("Only the selected option is marked as selected.", async () => {
-    // GIVEN a listbox of apple cultivars.
-    // AND 'Belle de Boskoop' is the selected option.
-    givenAListboxOfAppleCultivars({ selection: "Belle de Boskoop" })
-    
-    // GIVEN a visible the listbox popup.
-    await givenAVisibleListboxPopup()
+test("Only the selected option is marked as selected.", () => {
+    // GIVEN a test subject.
+    // GIVEN that the selected option is 'Belle de Boskoop'.
+    const listbox = renderListboxComponentOfAppleCultivars({
+        selectedOption: "Belle de Boskoop",
+    })
     
     // THEN the selected option is marked as selected.
-    expect(theListboxOption({ selected: true })).toHaveTextContent("Belle de Boskoop")
-    
     // AND none of the other options are marked as selected.
-    expect(theListboxOptions({ selected: false }))
+    expect(listbox.getSelectedOption()).toHaveAccessibleName("Belle de Boskoop")
+    expect(listbox.getNonSelectedOptions())
         .toHaveLength(appleCultivars.length - 1)
 })
 
-test("The listbox popup disappears when left-clicking on an option in the listbox popup.", async () => {
-    // GIVEN a listbox of apple cultivars.
-    // AND 'Crimson Delight' is the selected option.
-    givenAListboxOfAppleCultivars({ selection: "Crimson Delight" })
+test("The change handler is invoked upon selecting an option.", () => {
+    // GIVEN a spying change handler.
+    const spyingChangeHandler = jest.fn()
     
-    // GIVEN a visible the listbox popup.
-    await givenAVisibleListboxPopup()
+    // GIVEN a test subject.
+    // GIVEN that the selected option is 'Golden Delicious'.
+    const listbox = renderListboxComponentOfAppleCultivars({
+        selectedOption: "Golden Delicious",
+        onOptionSelected: spyingChangeHandler,
+    })
     
-    // WHEN left-clicking on the 'Spartan' option in the listbox popup.
-    whenLeftClickingOnAnOptionInTheListboxPopup("Spartan")
+    // WHEN selecting the 'Royal Gala' option.
+    listbox.selectOption("Royal Gala")
+    
+    // THEN the change handler has been invoked once.
+    // AND the selected option is passed as the argument.
+    expect(spyingChangeHandler).toHaveBeenCalledTimes(1)
+    expect(spyingChangeHandler).toHaveBeenCalledWith("Royal Gala")
+})
+
+test("The listbox popup disappears upon selecting an option.", async () => {
+    // GIVEN a test subject.
+    // GIVEN that the selected option is 'Crimson Delight'.
+    const listbox = renderListboxComponentOfAppleCultivars({
+        selectedOption: "Crimson Delight",
+    })
+    
+    // GIVEN that the listbox popup is visible.
+    listbox.clickButton()
+    
+    await waitFor(() => {
+        expect(listbox.getPopup()).not.toHaveClass("hidden")
+    })
+    
+    // WHEN selecting the 'Spartan' option.
+    listbox.selectOption("Spartan")
     
     // THEN the listbox popup is hidden.
     await waitFor(() => {
-        expect(theListboxPopup()).toHaveClass("hidden")
+        expect(listbox.getPopup()).toHaveClass("hidden")
     })
-    
-    // AND the listbox button is marked as collapsed.
-    expect(theListboxButton({ expanded: false })).toBeInTheDocument()
 })
 
-test("The change handler is invoked when left-clicking on an option in the listbox popup.", async () => {
-    // GIVEN a spying change handler.
-    const handleChange = jest.fn()
+test("The listbox popup disappears upon clicking outside the listbox.", async () => {
+    // GIVEN a test subject.
+    const listbox = renderListboxComponentOfAppleCultivars()
     
-    // GIVEN a listbox of apple cultivars.
-    // AND 'Golden Delicious' is the selected option.
-    givenAListboxOfAppleCultivars({
-        selection: "Golden Delicious",
-        handleChange,
+    // GIVEN that the listbox popup is visible.
+    listbox.clickButton()
+    
+    await waitFor(() => {
+        expect(listbox.getPopup()).not.toHaveClass("hidden")
     })
     
-    // GIVEN a visible the listbox popup.
-    await givenAVisibleListboxPopup()
-    
-    // WHEN left-clicking on the 'Royal Gala' option in the listbox popup.
-    whenLeftClickingOnAnOptionInTheListboxPopup("Royal Gala")
-    
-    // THEN the change handler is invoked once.
-    expect(handleChange).toHaveBeenCalledTimes(1)
-    
-    // AND the change handler is invoked with the 'Royal Gala' option as argument.
-    expect(handleChange).toHaveBeenCalledWith("Royal Gala")
-})
-
-test("The listbox popup disappears when left-clicking outside the listbox popup.", async () => {
-    // GIVEN a listbox of apple cultivars.
-    givenAListboxOfAppleCultivars()
-    
-    // GIVEN a visible the listbox popup.
-    await givenAVisibleListboxPopup()
-    
-    // WHEN left-clicking outside the listbox popup.
-    whenLeftClickingOutsideTheListboxPopup()
+    // WHEN clicking outside the listbox.
+    listbox.clickOutside()
     
     // THEN the listbox popup is hidden.
     await waitFor(() => {
-        expect(theListboxPopup()).toHaveClass("hidden")
+        expect(listbox.getPopup()).toHaveClass("hidden")
+    })
+})
+
+test("The listbox popup remains visible upon clicking on its border.", async () => {
+    // GIVEN a test subject.
+    const listbox = renderListboxComponentOfAppleCultivars()
+    
+    // GIVEN that the listbox popup is visible.
+    listbox.clickButton()
+    
+    await waitFor(() => {
+        expect(listbox.getPopup()).not.toHaveClass("hidden")
     })
     
-    // AND the listbox button is marked as collapsed.
-    expect(theListboxButton({ expanded: false })).toBeInTheDocument()
-})
-
-test("The change handler is not invoked when left-clicking outside the listbox popup.", async () => {
-    // GIVEN a spying change handler.
-    const handleChange = jest.fn()
-    
-    // GIVEN a listbox of apple cultivars.
-    givenAListboxOfAppleCultivars({ handleChange })
-    
-    // GIVEN a visible the listbox popup.
-    await givenAVisibleListboxPopup()
-    
-    // WHEN left-clicking outside the listbox popup.
-    whenLeftClickingOutsideTheListboxPopup()
-    
-    // THEN the change handler is not invoked.
-    expect(handleChange).not.toHaveBeenCalled()
-})
-
-test("The listbox popup remains visible when left-clicking on its border.", async () => {
-    // GIVEN a listbox of apple cultivars.
-    givenAListboxOfAppleCultivars()
-    
-    // GIVEN a visible the listbox popup.
-    await givenAVisibleListboxPopup()
-    
-    // WHEN left-clicking on the border of the listbox popup.
-    whenLeftClickingOnTheBorderOfTheListboxPopup()
+    // WHEN clicking on the border of the listbox popup.
+    listbox.clickPopupBorder()
     
     // THEN the listbox popup remains visible.
     await waitFor(() => {
-        expect(theListboxPopup()).not.toHaveClass("hidden")
+        expect(listbox.getPopup()).not.toHaveClass("hidden")
     })
-    
-    // AND the listbox button remains marked as expanded.
-    expect(theListboxButton({ expanded: true })).toBeInTheDocument()
-})
-
-test("The change handler is not invoked when left-clicking on the border of the listbox popup.", async () => {
-    // GIVEN a spying change handler.
-    const handleChange = jest.fn()
-    
-    // GIVEN a listbox of apple cultivars.
-    givenAListboxOfAppleCultivars({ handleChange })
-    
-    // GIVEN a visible the listbox popup.
-    await givenAVisibleListboxPopup()
-    
-    // WHEN left-clicking on the border of the listbox popup.
-    whenLeftClickingOnTheBorderOfTheListboxPopup()
-    
-    // THEN the change handler is not invoked.
-    expect(handleChange).not.toHaveBeenCalled()
 })
 
 test("The listbox popup disappears when the window loses focus.", async () => {
-    // GIVEN a listbox of apple cultivars.
-    givenAListboxOfAppleCultivars()
+    // GIVEN a test subject.
+    const listbox = renderListboxComponentOfAppleCultivars()
     
-    // GIVEN a visible the listbox popup.
-    await givenAVisibleListboxPopup()
-    
-    // WHEN the window loses focus.
-    whenTheWindowLosesFocus()
-    
-    // THEN the listbox popup is hidden.
-    expect(theListboxPopup()).toHaveClass("hidden")
-    
-    // AND the listbox button is marked as collapsed.
-    expect(theListboxButton({ expanded: false })).toBeInTheDocument()
-})
-
-test("The change handler is not invoked when the window loses focus.", async () => {
-    // GIVEN a spying change handler.
-    const handleChange = jest.fn()
-    
-    // GIVEN a listbox of apple cultivars.
-    givenAListboxOfAppleCultivars({ handleChange })
-    
-    // GIVEN a visible the listbox popup.
-    await givenAVisibleListboxPopup()
-    
-    // WHEN the window loses focus.
-    whenTheWindowLosesFocus()
-    
-    // THEN the change handler is not invoked.
-    expect(handleChange).not.toHaveBeenCalled()
-})
-
-function givenAListboxOfAppleCultivars(options?: {
-    selection?: AppleCultivar,
-    handleChange?: (selection: AppleCultivar) => void,
-    class?: string
-}) {
-    render((
-        <Listbox
-            class={options?.class}
-            options={appleCultivars}
-            selection={options?.selection ?? "Ambrosia"}
-            onChange={options?.handleChange}
-        >
-            {(optionToRender: string) => ({
-                key: optionToRender,
-                element: <span>{optionToRender}</span>,
-            })}
-        </Listbox>
-    ))
-}
-
-async function givenAVisibleListboxPopup() {
-    whenLeftClickingOnTheListboxButton()
+    // GIVEN that the listbox popup is visible.
+    listbox.clickButton()
     
     await waitFor(() => {
-        expect(theListboxPopup()).not.toHaveClass("hidden")
+        expect(listbox.getPopup()).not.toHaveClass("hidden")
     })
-}
-
-function whenLeftClickingOnTheListboxButton() {
-    userEvent.click(theListboxButton())
-}
-
-function whenLeftClickingOnTheBorderOfTheListboxPopup() {
-    userEvent.click(theListboxPopup())
-}
-
-function whenLeftClickingOnAnOptionInTheListboxPopup(
-    accessibleNameOfOption: AppleCultivar,
-) {
-    userEvent.click(theListboxOption({ name: accessibleNameOfOption }))
-}
-
-function whenLeftClickingOutsideTheListboxPopup() {
-    userEvent.click(document.body)
-}
-
-function whenTheWindowLosesFocus() {
-    fireEvent.blur(window)
-}
-
-function theListbox(): HTMLElement {
-    const listboxElement = theListboxButton().parentElement // eslint-disable-line testing-library/no-node-access
     
-    // When the assumption of the listbox being a <div> element fails,
-    // it may open the door to an easier way of retrieving the listbox element.
-    expect(listboxElement).toBeInstanceOf(HTMLDivElement)
+    // WHEN the window loses focus.
+    listbox.blurWindow()
     
-    return listboxElement! // eslint-disable-line @typescript-eslint/no-non-null-assertion
-}
+    // THEN the listbox popup is hidden.
+    await waitFor(() => {
+        expect(listbox.getPopup()).toHaveClass("hidden")
+    })
+})
 
-function theListboxButton(queryOptions?: ByRoleOptions): HTMLElement {
-    return screen.getByRole("button", queryOptions)
-}
-
-function theListboxPopup(queryOptions?: ByRoleOptions): HTMLElement {
-    return screen.getByRole("listbox", queryOptions)
-}
-
-function theListboxOption(queryOptions?: ByRoleOptions): HTMLElement {
-    return screen.getByRole("option", queryOptions)
-}
-
-function theListboxOptions(
-    queryOptions?: ByRoleOptions,
-): ReadonlyArray<HTMLElement> {
-    return screen.getAllByRole("option", queryOptions)
+function renderListboxComponentOfAppleCultivars(options?: {
+    selectedOption?: AppleCultivar,
+    onOptionSelected?: (selectedOption: AppleCultivar) => void,
+}) {
+    const selectedOption = options?.selectedOption ?? "Ambrosia"
+    const onOptionSelected = options?.onOptionSelected
+    
+    render((
+        <Listbox
+            options={appleCultivars}
+            selectedOption={selectedOption}
+            onOptionSelected={onOptionSelected}
+            renderButton={(state) => (
+                <ListboxResponsiveButton state={state}>
+                    {selectedOption}
+                </ListboxResponsiveButton>
+            )}
+            renderOption={(option) => (
+                <ListboxOption>
+                    {option}
+                </ListboxOption>
+            )}
+        />
+    ))
+    
+    return {
+        getButton: () => screen.getByRole("button"),
+        getPopup: () => screen.getByRole("listbox"),
+        getOptions: () => screen.getAllByRole("option"),
+        getSelectedOption: () => screen.getByRole("option", { selected: true }),
+        getNonSelectedOptions: () => screen.getAllByRole("option", { selected: false }),
+        clickButton: () => {
+            const button = screen.getByRole("button")
+            userEvent.click(button)
+        },
+        clickPopupBorder: () => {
+            userEvent.click(screen.getByRole("listbox"))
+        },
+        clickOutside: () => {
+            userEvent.click(document.body)
+        },
+        blurWindow: () => {
+            fireEvent.blur(window)
+        },
+        selectOption: (accessibleName: string) => {
+            const option = screen.getByRole("option", { name: accessibleName })
+            userEvent.click(option)
+        },
+    }
 }

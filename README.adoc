@@ -209,7 +209,7 @@ Generating a production-grade distribution of the web app consists of two phases
 The entry point is `main-server.tsx`.
 Vite operates in `ssr` mode during this phase.
 
-. A *client-oriented build* which pre-renders the HTML page and produces a browser script that makes the web app interactive by hydrating the HTML page.
+. A *client-oriented build* which pre-renders the HTML page and produces a browser script that makes the web app interactive.
 The entry point is `index.html`, which in turn imports `main-client.tsx`.
 Vite operates in its normal mode during this phase.
 Additionally, the Vite configuration imports the CommonJS module produced by the server-oriented build to complete pre-rendering the HTML page at build-time.
@@ -217,10 +217,9 @@ Additionally, the Vite configuration imports the CommonJS module produced by the
 [NOTE]
 ====
 _Pre-Rendering_, also known as _Static Site Generation_ (SSG), is a technique in which a static HTML page is generated at build-time.
+
 _Server-Side Rendering_ (SSR) is a slightly different technique in which the HTML page is generated dynamically by the web server at request-time.
 Both techniques allow search engines to discover the contents of the web app without having to execute any browser scripts.
-
-_Hydration_ is a process carried out by the web framework (e.g. Preact) that attaches event listeners to the pre- or server-side-rendered HTML document and constructs a reactive component tree equivalent to it.
 ====
 
 If you need to debug the _production-grade distribution_, you can set the `VITE_DEBUG_PRODUCTION_BUILD` environment variable to be `true` in `.env.production.local`.

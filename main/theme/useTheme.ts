@@ -1,15 +1,15 @@
-import type { MediaThemePort, ThemeStoragePort } from "+theme"
+import type { MediaThemePort, ThemeCachePort } from "+theme"
 import { useCallback, useEffect, useState } from "preact/hooks"
 import type { ThemeSelection } from "./models"
 
 type UseThemeProps = {
     readonly mediaThemePort: MediaThemePort
-    readonly themeStoragePort: ThemeStoragePort
+    readonly themeCachePort: ThemeCachePort
 }
 
 export function useTheme({
     mediaThemePort: { initialMediaTheme, subscribeToMediaTheme },
-    themeStoragePort: { restoredThemeSelection, saveThemeSelection },
+    themeCachePort: { restoredThemeSelection, saveThemeSelection },
 }: UseThemeProps) {
     const [mediaTheme, setMediaTheme] = useState(initialMediaTheme)
     const [themeSelection, setThemeSelection] = useState(restoredThemeSelection)

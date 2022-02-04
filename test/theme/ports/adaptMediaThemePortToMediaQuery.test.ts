@@ -1,5 +1,5 @@
-import { adaptMediaThemeToQuery } from "+theme"
-import { mockMediaQuery, raiseFakeMediaQueryChangeEvent } from "../fakes"
+import { mockMediaQuery, raiseFakeMediaQueryChangeEvent } from "+test/fakes"
+import { adaptMediaThemePortToMediaQuery } from "+theme"
 
 const prefersDarkColourSchemeQuery = "(prefers-color-scheme: dark)"
 
@@ -8,7 +8,7 @@ test("The initial media theme is 'dark' when the media prefers a dark colour sch
     mockMediaQuery(prefersDarkColourSchemeQuery, true)
     
     // GIVEN a test subject.
-    const { initialMediaTheme } = adaptMediaThemeToQuery()
+    const { initialMediaTheme } = adaptMediaThemePortToMediaQuery()
     
     // THEN the initial media theme is 'dark'.
     expect(initialMediaTheme).toBe("dark")
@@ -19,7 +19,7 @@ test("The initial media theme is 'light' when the media does not prefer a dark c
     mockMediaQuery(prefersDarkColourSchemeQuery, false)
     
     // GIVEN a test subject.
-    const { initialMediaTheme } = adaptMediaThemeToQuery()
+    const { initialMediaTheme } = adaptMediaThemePortToMediaQuery()
     
     // THEN the initial media theme is 'light'.
     expect(initialMediaTheme).toBe("light")
@@ -30,7 +30,7 @@ test("The media theme adapter invokes the subscribers when the media starts pref
     mockMediaQuery(prefersDarkColourSchemeQuery, false)
     
     // GIVEN a test subject.
-    const { subscribeToMediaTheme } = adaptMediaThemeToQuery()
+    const { subscribeToMediaTheme } = adaptMediaThemePortToMediaQuery()
     
     // GIVEN a spying subscriber to the media theme.
     const spyingSubscriber = jest.fn()
@@ -50,7 +50,7 @@ test("The media theme adapter invokes the subscribers when the media stops prefe
     mockMediaQuery(prefersDarkColourSchemeQuery, true)
     
     // GIVEN a test subject.
-    const { subscribeToMediaTheme } = adaptMediaThemeToQuery()
+    const { subscribeToMediaTheme } = adaptMediaThemePortToMediaQuery()
     
     // GIVEN a spying subscriber to the media theme.
     const spyingSubscriber = jest.fn()

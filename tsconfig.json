@@ -14,7 +14,8 @@
             "+i18n": [ "main/i18n/index" ],
             "+profile": [ "main/profile/index" ],
             "+theme": [ "main/theme/index" ],
-            "+types": [ "main/types/index" ]
+            "+types": [ "main/types/index" ],
+            "+test/fakes": [ "test/fakes/index" ]
         },
         "target": "ES2017",
         "module": "ES2020",

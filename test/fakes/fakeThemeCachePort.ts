@@ -1,8 +1,8 @@
-import type { ThemeSelection, ThemeStoragePort } from "+theme"
+import type { ThemeSelection, ThemeCachePort } from "+theme"
 
-export function fakeThemeStorage(
+export function fakeThemeCachePort(
     restoredThemeSelection: ThemeSelection,
-): ThemeStoragePort {
+): ThemeCachePort {
     let savedThemeSelection = restoredThemeSelection
     
     return {

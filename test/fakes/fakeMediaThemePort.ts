@@ -4,7 +4,7 @@ type FakeMediaThemePort = MediaThemePort & {
     readonly changeMediaTheme: (newMediaTheme: Theme) => void
 }
 
-export function fakeMediaTheme(
+export function fakeMediaThemePort(
     initialMediaTheme: Theme,
 ): FakeMediaThemePort {
     const subscribers: Array<MediaThemeSubscriber> = []

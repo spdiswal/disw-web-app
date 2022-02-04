@@ -1,11 +1,11 @@
 import type { ThemeSelection } from "+theme"
 
-export type ThemeStoragePort = {
+export type ThemeCachePort = {
     readonly restoredThemeSelection: ThemeSelection
     readonly saveThemeSelection: (themeSelection: ThemeSelection) => void
 }
 
-export function adaptThemeStorageToSessionStorage(): ThemeStoragePort {
+export function adaptThemeCachePortToSessionStorage(): ThemeCachePort {
     const sessionStorageKey = "theme"
     
     return {
@@ -27,7 +27,7 @@ export function adaptThemeStorageToSessionStorage(): ThemeStoragePort {
     }
 }
 
-export function dummyThemeStorage(): ThemeStoragePort {
+export function dummyThemeCachePort(): ThemeCachePort {
     return {
         restoredThemeSelection: "match-media",
         saveThemeSelection: () => { /* Do nothing. */ },

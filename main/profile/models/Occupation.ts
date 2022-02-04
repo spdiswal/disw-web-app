@@ -1,4 +1,4 @@
-import type { Multilingual } from "+i18n"
+import type { Localisable } from "+i18n"
 import type { Flavour, Id } from "+types"
 
 export type Occupation = {
@@ -9,8 +9,8 @@ export type Occupation = {
     readonly activities: ActivityList
 }
 
-export type Title = Multilingual<string> & Flavour<"Title">
-export type Organisation = Multilingual<string> & Flavour<"Organisation">
+export type Title = Localisable<string> & Flavour<"Title">
+export type Organisation = Localisable<string> & Flavour<"Organisation">
 
 export type Period = {
     readonly since: PeriodStart
@@ -21,4 +21,4 @@ export type PeriodStart = Date & Flavour<"PeriodStart">
 export type PeriodEnd = Date & Flavour<"PeriodEnd">
 
 export type ActivityList = ReadonlyArray<Activity>
-export type Activity = Multilingual<string> & { readonly id: Id<"Activity"> }
+export type Activity = Localisable<string> & { readonly id: Id<"Activity"> }

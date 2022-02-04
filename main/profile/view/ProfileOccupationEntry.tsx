@@ -1,16 +1,16 @@
 import { Paragraph, SplitContainer } from "+elements"
-import type { Language } from "+i18n"
+import type { Locale } from "+i18n"
 import type { Occupation } from "+profile"
 import { ProfileOccupationDate } from "./ProfileOccupationDate"
 
 type ProfileOccupationEntryProps = {
     readonly occupation: Occupation
-    readonly activeLanguage: Language
+    readonly locale: Locale
 }
 
 export function ProfileOccupationEntry({
     occupation: { id, title, organisation, period, activities },
-    activeLanguage,
+    locale,
 }: ProfileOccupationEntryProps) {
     return (
         <article aria-labelledby={id}>
@@ -21,13 +21,13 @@ export function ProfileOccupationEntry({
                             <ProfileOccupationDate
                                 class="md:mb-1 md:text-xl lg:text-2xl"
                                 date={period.since}
-                                activeLanguage={activeLanguage}
+                                locale={locale}
                             />
                             <span>
                                 &ndash;
                                 <ProfileOccupationDate
                                     date={period.until}
-                                    activeLanguage={activeLanguage}
+                                    locale={locale}
                                 />
                             </span>
                         </div>
@@ -43,13 +43,13 @@ export function ProfileOccupationEntry({
                 }
             >
                 <header class="mb-4">
-                    <h1 id={id} class="font-bold text-primary-600 md:mb-1 md:text-2xl">{title[activeLanguage]}</h1>
-                    <p class="font-semibold">{organisation[activeLanguage]}</p>
+                    <h1 id={id} class="font-bold text-primary-600 md:mb-1 md:text-2xl">{title[locale]}</h1>
+                    <p class="font-semibold">{organisation[locale]}</p>
                 </header>
                 <div class="flex flex-col gap-y-2 mb-12 md:mb-24">
                     {activities.map((activity) => (
                         <Paragraph key={activity.id}>
-                            {activity[activeLanguage]}
+                            {activity[locale]}
                         </Paragraph>
                     ))}
                 </div>

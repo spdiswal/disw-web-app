@@ -1,4 +1,4 @@
-import type { Multilingual } from "+i18n"
+import type { Localisable } from "+i18n"
 import type { Flavour } from "+types"
 import type { Identity } from "./Identity"
 import type { Occupation } from "./Occupation"
@@ -10,7 +10,7 @@ export type Content = {
     readonly education: Education
 }
 
-export type Biography = Multilingual<string> & Flavour<"Biography">
+export type Biography = Localisable<string> & Flavour<"Biography">
 
 export type Career = OccupationList & Flavour<"Career">
 export type Education = OccupationList & Flavour<"Education">

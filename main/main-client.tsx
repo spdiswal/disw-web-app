@@ -1,18 +1,20 @@
-import { adaptPreferredLanguageToNavigator } from "+i18n"
-import { adaptMediaThemeToQuery, adaptThemeStorageToSessionStorage } from "+theme"
+import { adaptLocaleCachePortToSessionStorage, adaptPreferredLocalePortToNavigatorLanguages } from "+i18n"
+import { adaptMediaThemePortToMediaQuery, adaptThemeCachePortToSessionStorage } from "+theme"
 import { hydrate } from "preact"
 import { App } from "./App"
 import "./index.css"
 
-const preferredLanguagePort = adaptPreferredLanguageToNavigator()
-const mediaThemePort = adaptMediaThemeToQuery()
-const themeStoragePort = adaptThemeStorageToSessionStorage()
+const localeCachePort = adaptLocaleCachePortToSessionStorage()
+const mediaThemePort = adaptMediaThemePortToMediaQuery()
+const preferredLocalePort = adaptPreferredLocalePortToNavigatorLanguages()
+const themeCachePort = adaptThemeCachePortToSessionStorage()
 
 hydrate(
     <App
-        preferredLanguagePort={preferredLanguagePort}
+        localeCachePort={localeCachePort}
         mediaThemePort={mediaThemePort}
-        themeStoragePort={themeStoragePort}
+        preferredLocalePort={preferredLocalePort}
+        themeCachePort={themeCachePort}
     />,
     document.body,
 )

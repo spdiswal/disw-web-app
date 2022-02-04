@@ -1,2 +1,2 @@
-export * from "./Language"
-export * from "./Multilingual"
+export * from "./Locale"
+export * from "./Localisable"

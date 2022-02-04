@@ -7,12 +7,12 @@ export function givenAProfilePageInDanish({ content }: {
     readonly content: Content,
 }) {
     const { rerender } = render(
-        <ProfilePage content={content} activeLanguage="da"/>,
+        <ProfilePage content={content} locale="da"/>,
     )
     
     return {
         whenRenderingTheProfilePageInEnglish: () => {
-            rerender(<ProfilePage content={content} activeLanguage="en"/>)
+            rerender(<ProfilePage content={content} locale="en"/>)
         },
     }
 }

@@ -1,4 +1,4 @@
-import type { Multilingual } from "+i18n"
+import type { Localisable } from "+i18n"
 import type { Flavour } from "+types"
 
 export type Portrait = {
@@ -7,4 +7,4 @@ export type Portrait = {
 }
 
 export type AssetUrl = string & Flavour<"AssetUrl">
-export type Caption = Multilingual<string> & Flavour<"Caption">
+export type Caption = Localisable<string> & Flavour<"Caption">

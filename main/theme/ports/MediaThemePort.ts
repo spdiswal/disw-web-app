@@ -11,7 +11,7 @@ export type MediaThemeSubscription = {
     readonly unsubscribe: () => void
 }
 
-export function adaptMediaThemeToQuery(): MediaThemePort {
+export function adaptMediaThemePortToMediaQuery(): MediaThemePort {
     const mediaQuery = "(prefers-color-scheme: dark)"
     const matchResult = window.matchMedia(mediaQuery)
     const initialMediaTheme = toTheme(matchResult.matches)
@@ -38,7 +38,7 @@ export function adaptMediaThemeToQuery(): MediaThemePort {
     }
 }
 
-export function dummyMediaTheme(): MediaThemePort {
+export function dummyMediaThemePort(): MediaThemePort {
     return {
         initialMediaTheme: "light",
         subscribeToMediaTheme: () => ({

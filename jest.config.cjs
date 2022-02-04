@@ -20,6 +20,7 @@ module.exports = {
         "^\\+profile$": "<rootDir>/main/profile/index",
         "^\\+theme$": "<rootDir>/main/theme/index",
         "^\\+types$": "<rootDir>/main/types/index",
+        "^\\+test/fakes$": "<rootDir>/test/fakes/index",
         //
         "^.+\\.css$": "<rootDir>/test/jest/generic-asset-file-stub.cjs",
     },

@@ -1,8 +1,8 @@
-import type { Language, Multilingual } from "+i18n"
+import type { Locale, Localisable } from "+i18n"
 import type { ClassValue } from "clsx"
 import clsx from "clsx"
 
-const months: ReadonlyArray<Multilingual<string>> = [
+const months: ReadonlyArray<Localisable<string>> = [
     { da: "januar", en: "January" },
     { da: "februar", en: "February" },
     { da: "marts", en: "March" },
@@ -17,26 +17,26 @@ const months: ReadonlyArray<Multilingual<string>> = [
     { da: "december", en: "December" },
 ]
 
-const thePresent: Multilingual<string> = { da: "nu", en: "present" }
+const thePresent: Localisable<string> = { da: "nu", en: "present" }
 
 type ProfileOccupationDateProps = {
     readonly class?: ClassValue
     readonly date: Date | null
-    readonly activeLanguage: Language
+    readonly locale: Locale
 }
 
 export function ProfileOccupationDate({
     class: _class,
     date,
-    activeLanguage,
+    locale,
 }: ProfileOccupationDateProps) {
     return date !== null
         ? (
             <time class={clsx(_class)} dateTime={date.toISOString()}>
                 {/* The `format` function of `date-fns` is very heavy as it
                     covers many other cases of date formatting. */}
-                {months[date.getMonth()][activeLanguage]}{" "}{date.getFullYear()}
+                {months[date.getMonth()][locale]}{" "}{date.getFullYear()}
             </time>
         )
-        : <span>{thePresent[activeLanguage]}</span>
+        : <span>{thePresent[locale]}</span>
 }

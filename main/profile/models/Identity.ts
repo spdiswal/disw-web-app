@@ -1,4 +1,4 @@
-import type { Multilingual } from "+i18n"
+import type { Localisable } from "+i18n"
 import type { Portrait } from "+profile"
 import type { Flavour } from "+types"
 
@@ -13,8 +13,8 @@ export type Identity = {
 }
 
 export type Name = string & Flavour<"Name">
-export type AreaOfExpertise = Multilingual<string> & Flavour<"AreaOfExpertise">
-export type Age = Multilingual<string> & Flavour<"Age">
-export type Residence = Multilingual<string> & Flavour<"Residence">
-export type AcademicDiscipline = Multilingual<string> & Flavour<"AcademicDiscipline">
-export type WorkExperience = Multilingual<string> & Flavour<"WorkExperience">
+export type AreaOfExpertise = Localisable<string> & Flavour<"AreaOfExpertise">
+export type Age = Localisable<string> & Flavour<"Age">
+export type Residence = Localisable<string> & Flavour<"Residence">
+export type AcademicDiscipline = Localisable<string> & Flavour<"AcademicDiscipline">
+export type WorkExperience = Localisable<string> & Flavour<"WorkExperience">

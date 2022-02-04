@@ -1,12 +1,12 @@
-import { adaptThemeStorageToSessionStorage } from "+theme"
-import { mockSessionStorage, sabotageSessionStorage } from "../fakes"
+import { adaptThemeCachePortToSessionStorage } from "+theme"
+import { mockSessionStorage, sabotageSessionStorage } from "+test/fakes"
 
 test("The restored theme selection is 'match-media' when the session storage is empty.", () => {
     // GIVEN that the session storage is empty.
     mockSessionStorage(null)
     
     // GIVEN a test subject.
-    const { restoredThemeSelection } = adaptThemeStorageToSessionStorage()
+    const { restoredThemeSelection } = adaptThemeCachePortToSessionStorage()
     
     // THEN the restored theme selection is 'match-media'.
     expect(restoredThemeSelection).toBe("match-media")
@@ -17,7 +17,7 @@ test("The restored theme selection is 'dark' when the session storage has a 'the
     mockSessionStorage({ key: "theme", value: "dark" })
     
     // GIVEN a test subject.
-    const { restoredThemeSelection } = adaptThemeStorageToSessionStorage()
+    const { restoredThemeSelection } = adaptThemeCachePortToSessionStorage()
     
     // THEN the restored theme selection is 'dark'.
     expect(restoredThemeSelection).toBe("dark")
@@ -28,7 +28,7 @@ test("The restored theme selection is 'light' when the session storage has a 'th
     mockSessionStorage({ key: "theme", value: "light" })
     
     // GIVEN a test subject.
-    const { restoredThemeSelection } = adaptThemeStorageToSessionStorage()
+    const { restoredThemeSelection } = adaptThemeCachePortToSessionStorage()
     
     // THEN the restored theme selection is 'light'.
     expect(restoredThemeSelection).toBe("light")
@@ -39,7 +39,7 @@ test("The restored theme selection is 'match-media' when the session storage has
     mockSessionStorage({ key: "theme", value: "a wish upon a star" })
     
     // GIVEN a test subject.
-    const { restoredThemeSelection } = adaptThemeStorageToSessionStorage()
+    const { restoredThemeSelection } = adaptThemeCachePortToSessionStorage()
     
     // THEN the restored theme selection is 'match-media'.
     expect(restoredThemeSelection).toBe("match-media")
@@ -50,7 +50,7 @@ test("The session storage has a 'theme' entry with a value of 'dark' upon saving
     mockSessionStorage(null)
     
     // GIVEN a test subject.
-    const { saveThemeSelection } = adaptThemeStorageToSessionStorage()
+    const { saveThemeSelection } = adaptThemeCachePortToSessionStorage()
     
     // WHEN saving a 'dark' theme selection.
     saveThemeSelection("dark")
@@ -64,7 +64,7 @@ test("The session storage has a 'theme' entry with a value of 'light' upon savin
     mockSessionStorage(null)
     
     // GIVEN a test subject.
-    const { saveThemeSelection } = adaptThemeStorageToSessionStorage()
+    const { saveThemeSelection } = adaptThemeCachePortToSessionStorage()
     
     // WHEN saving a 'light' theme selection.
     saveThemeSelection("light")
@@ -78,7 +78,7 @@ test("The session storage becomes empty upon saving a 'match-media' theme select
     mockSessionStorage({ key: "theme", value: "light" })
     
     // GIVEN a test subject.
-    const { saveThemeSelection } = adaptThemeStorageToSessionStorage()
+    const { saveThemeSelection } = adaptThemeCachePortToSessionStorage()
     
     // WHEN saving a 'match-media' theme selection.
     saveThemeSelection("match-media")
@@ -95,7 +95,7 @@ test("The session storage is unchanged when it fails to save the theme selection
     sabotageSessionStorage()
     
     // GIVEN a test subject.
-    const { saveThemeSelection } = adaptThemeStorageToSessionStorage()
+    const { saveThemeSelection } = adaptThemeCachePortToSessionStorage()
     
     // WHEN trying to save a 'dark' theme selection.
     saveThemeSelection("dark")

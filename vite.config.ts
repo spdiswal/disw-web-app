@@ -35,6 +35,7 @@ export default defineConfig(({ mode }) => {
                 "+profile": path("main/profile/"),
                 "+theme": path("main/theme/"),
                 "+types": path("main/types/"),
+                "+test/fakes": path("test/fakes/"),
             },
         },
         publicDir: false,

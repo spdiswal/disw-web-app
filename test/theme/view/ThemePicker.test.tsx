@@ -1,4 +1,4 @@
-import type { Language } from "+i18n"
+import type { Locale } from "+i18n"
 import type { Theme, ThemeSelection } from "+theme"
 import { ThemePicker } from "+theme"
 import { render, screen } from "@testing-library/preact"
@@ -6,16 +6,16 @@ import userEvent from "@testing-library/user-event"
 
 test("The theme picker button has an accessibility label.", () => {
     // GIVEN a test subject.
-    // GIVEN that the active language is Danish.
+    // GIVEN that the locale is Danish.
     const themePicker = renderThemePickerComponent({
-        activeLanguage: "da",
+        locale: "da",
     })
     
     // THEN the theme picker button has an accessibility label in Danish.
     expect(themePicker.getButton()).toHaveAccessibleName("Skift visuelt tema")
     
-    // WHEN changing the active language to English.
-    themePicker.changeActiveLanguage("en")
+    // WHEN changing the locale to English.
+    themePicker.changeLocale("en")
     
     // THEN the theme picker button has an accessibility label in English.
     expect(themePicker.getButton()).toHaveAccessibleName("Change visual theme")
@@ -23,9 +23,9 @@ test("The theme picker button has an accessibility label.", () => {
 
 test("The theme picker has three options.", () => {
     // GIVEN a test subject.
-    // GIVEN that the active language is Danish.
+    // GIVEN that the locale is Danish.
     const themePicker = renderThemePickerComponent({
-        activeLanguage: "da",
+        locale: "da",
     })
     
     // THEN the theme picker has three options in Danish.
@@ -36,8 +36,8 @@ test("The theme picker has three options.", () => {
     expect(options[1]).toHaveAccessibleName("Lyst")
     expect(options[2]).toHaveAccessibleName("Mørkt")
     
-    // WHEN changing the active language to English.
-    themePicker.changeActiveLanguage("en")
+    // WHEN changing the locale to English.
+    themePicker.changeLocale("en")
     
     // THEN the theme picker has three options in English.
     expect(options).toHaveLength(3)
@@ -51,9 +51,9 @@ test("The change handler is invoked upon selecting the 'match-media' option.", (
     const spyingChangeHandler = jest.fn()
     
     // GIVEN a test subject.
-    // GIVEN that the active language is English.
+    // GIVEN that the locale is English.
     const themePicker = renderThemePickerComponent({
-        activeLanguage: "en",
+        locale: "en",
         onThemeSelected: spyingChangeHandler,
     })
     
@@ -71,9 +71,9 @@ test("The change handler is invoked upon selecting the 'light' option.", () => {
     const spyingChangeHandler = jest.fn()
     
     // GIVEN a test subject.
-    // GIVEN that the active language is English.
+    // GIVEN that the locale is English.
     const themePicker = renderThemePickerComponent({
-        activeLanguage: "en",
+        locale: "en",
         onThemeSelected: spyingChangeHandler,
     })
     
@@ -91,9 +91,9 @@ test("The change handler is invoked upon selecting the 'dark' option.", () => {
     const spyingChangeHandler = jest.fn()
     
     // GIVEN a test subject.
-    // GIVEN that the active language is English.
+    // GIVEN that the locale is English.
     const themePicker = renderThemePickerComponent({
-        activeLanguage: "en",
+        locale: "en",
         onThemeSelected: spyingChangeHandler,
     })
     
@@ -107,17 +107,17 @@ test("The change handler is invoked upon selecting the 'dark' option.", () => {
 })
 
 function renderThemePickerComponent(options?: {
-    activeLanguage?: Language,
+    locale?: Locale,
     onThemeSelected?: (selectedTheme: ThemeSelection) => void,
 }) {
-    const activeLanguage = options?.activeLanguage ?? "en"
+    const locale = options?.locale ?? "en"
     const mediaTheme: Theme = "light"
     const selectedTheme: ThemeSelection = "match-media"
     const onThemeSelected = options?.onThemeSelected
     
     const { rerender } = render((
         <ThemePicker
-            activeLanguage={activeLanguage}
+            locale={locale}
             mediaTheme={mediaTheme}
             selectedTheme={selectedTheme}
             onThemeSelected={onThemeSelected}
@@ -131,10 +131,10 @@ function renderThemePickerComponent(options?: {
             const option = screen.getByRole("option", { name: accessibleName })
             userEvent.click(option)
         },
-        changeActiveLanguage: (language: Language) => {
+        changeLocale: (newLocale: Locale) => {
             rerender((
                 <ThemePicker
-                    activeLanguage={language}
+                    locale={newLocale}
                     mediaTheme={mediaTheme}
                     selectedTheme={selectedTheme}
                     onThemeSelected={onThemeSelected}

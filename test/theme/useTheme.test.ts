@@ -1,20 +1,43 @@
-import { dummyMediaTheme, useTheme } from "+theme"
+import { fakeMediaThemePort, fakeThemeCachePort } from "+test/fakes"
+import { dummyMediaThemePort, useTheme } from "+theme"
 import { act, renderHook } from "@testing-library/preact-hooks"
-import { fakeMediaTheme, fakeThemeStorage } from "./fakes"
 
-test("The document applies the media theme when the selected theme is 'match-media' and media theme changes from 'dark' to 'light'.", async () => {
-    // GIVEN that the media theme is 'dark'.
-    const mediaThemePort = fakeMediaTheme("dark")
-    
+test("The document applies the 'dark' theme when the restored theme selection is 'match-media' and the media theme is 'dark'.", () => {
     // GIVEN a test subject.
-    // GIVEN that the theme selection is 'match-media'.
+    // GIVEN that the media theme is 'dark'.
+    // GIVEN that the restored theme selection is 'match-media'.
     renderHook(() => useTheme({
-        mediaThemePort,
-        themeStoragePort: fakeThemeStorage("match-media"),
+        mediaThemePort: fakeMediaThemePort("dark"),
+        themeCachePort: fakeThemeCachePort("match-media"),
     }))
     
     // THEN the document applies the 'dark' theme.
     expect(document.documentElement.classList).toContain("dark")
+})
+
+test("The document applies the 'light' theme when the restored theme selection is 'match-media' and the media theme is 'light'.", () => {
+    // GIVEN a test subject.
+    // GIVEN that the media theme is 'light'.
+    // GIVEN that the restored theme selection is 'match-media'.
+    renderHook(() => useTheme({
+        mediaThemePort: fakeMediaThemePort("light"),
+        themeCachePort: fakeThemeCachePort("match-media"),
+    }))
+    
+    // THEN the document applies the 'light' theme.
+    expect(document.documentElement.classList).not.toContain("dark")
+})
+
+test("The document applies the 'light' media theme when the restored theme selection is 'match-media' and media theme changes from 'dark' to 'light'.", async () => {
+    // GIVEN that the media theme is 'dark'.
+    const mediaThemePort = fakeMediaThemePort("dark")
+    
+    // GIVEN a test subject.
+    // GIVEN that the restored theme selection is 'match-media'.
+    renderHook(() => useTheme({
+        mediaThemePort,
+        themeCachePort: fakeThemeCachePort("match-media"),
+    }))
     
     // WHEN the media theme changes to 'light'.
     await act(() => {
@@ -25,19 +48,16 @@ test("The document applies the media theme when the selected theme is 'match-med
     expect(document.documentElement.classList).not.toContain("dark")
 })
 
-test("The document applies the media theme when the selected theme is 'match-media' and media theme changes from 'light' to 'dark'.", async () => {
+test("The document applies the 'dark' theme when the restored theme selection is 'match-media' and media theme changes from 'light' to 'dark'.", async () => {
     // GIVEN that the media theme is 'light'.
-    const mediaThemePort = fakeMediaTheme("light")
+    const mediaThemePort = fakeMediaThemePort("light")
     
     // GIVEN a test subject.
-    // GIVEN that the theme selection is 'match-media'.
+    // GIVEN that the restored theme selection is 'match-media'.
     renderHook(() => useTheme({
         mediaThemePort,
-        themeStoragePort: fakeThemeStorage("match-media"),
+        themeCachePort: fakeThemeCachePort("match-media"),
     }))
-    
-    // THEN the document applies the 'light' theme.
-    expect(document.documentElement.classList).not.toContain("dark")
     
     // WHEN the media theme changes to 'dark'.
     await act(() => {
@@ -48,17 +68,40 @@ test("The document applies the media theme when the selected theme is 'match-med
     expect(document.documentElement.classList).toContain("dark")
 })
 
-test("The document applies the selected 'dark' theme.", async () => {
+test("The document applies the 'dark' theme when the restored theme selection is 'dark'.", () => {
+    // GIVEN a test subject.
+    // GIVEN that the media theme is 'light'.
+    // GIVEN that the theme selection is 'dark'.
+    renderHook(() => useTheme({
+        mediaThemePort: fakeMediaThemePort("light"),
+        themeCachePort: fakeThemeCachePort("dark"),
+    }))
+    
+    // THEN the document applies the 'dark' theme.
+    expect(document.documentElement.classList).toContain("dark")
+})
+
+test("The document applies the 'light' theme when the restored theme selection is 'light'.", () => {
+    // GIVEN a test subject.
+    // GIVEN that the media theme is 'dark'.
+    // GIVEN that the theme selection is 'light'.
+    renderHook(() => useTheme({
+        mediaThemePort: fakeMediaThemePort("dark"),
+        themeCachePort: fakeThemeCachePort("light"),
+    }))
+    
+    // THEN the document applies the 'light' theme.
+    expect(document.documentElement.classList).not.toContain("dark")
+})
+
+test("The document applies the 'dark' theme when it is selected.", async () => {
     // GIVEN a test subject.
     // GIVEN that the media theme is 'light'.
     // GIVEN that the theme selection is 'match-media'.
     const { result } = renderHook(() => useTheme({
-        mediaThemePort: fakeMediaTheme("light"),
-        themeStoragePort: fakeThemeStorage("match-media"),
+        mediaThemePort: fakeMediaThemePort("light"),
+        themeCachePort: fakeThemeCachePort("match-media"),
     }))
-    
-    // THEN the document applies the 'light' theme.
-    expect(document.documentElement.classList).not.toContain("dark")
     
     // WHEN selecting the 'dark' theme.
     await act(() => {
@@ -69,17 +112,14 @@ test("The document applies the selected 'dark' theme.", async () => {
     expect(document.documentElement.classList).toContain("dark")
 })
 
-test("The document applies the selected 'light' theme.", async () => {
+test("The document applies the 'light' theme when it is selected.", async () => {
     // GIVEN a test subject.
     // GIVEN that the media theme is 'dark'.
     // GIVEN that the theme selection is 'match-media'.
     const { result } = renderHook(() => useTheme({
-        mediaThemePort: fakeMediaTheme("dark"),
-        themeStoragePort: fakeThemeStorage("match-media"),
+        mediaThemePort: fakeMediaThemePort("dark"),
+        themeCachePort: fakeThemeCachePort("match-media"),
     }))
-    
-    // THEN the document applies the 'dark' theme.
-    expect(document.documentElement.classList).toContain("dark")
     
     // WHEN selecting the 'light' theme.
     await act(() => {
@@ -90,14 +130,14 @@ test("The document applies the selected 'light' theme.", async () => {
     expect(document.documentElement.classList).not.toContain("dark")
 })
 
-test("The theme storage saves the selected 'dark' theme.", async () => {
+test("The theme cache saves the 'dark' theme when it is selected.", async () => {
     // GIVEN that the theme selection is 'match-media'.
-    const themeStoragePort = fakeThemeStorage("match-media")
+    const themeCachePort = fakeThemeCachePort("match-media")
     
     // GIVEN a test subject.
     const { result } = renderHook(() => useTheme({
-        mediaThemePort: dummyMediaTheme(),
-        themeStoragePort,
+        mediaThemePort: dummyMediaThemePort(),
+        themeCachePort,
     }))
     
     // WHEN selecting the 'dark' theme.
@@ -105,18 +145,18 @@ test("The theme storage saves the selected 'dark' theme.", async () => {
         result.current!.selectTheme("dark") // eslint-disable-line @typescript-eslint/no-non-null-assertion
     })
     
-    // THEN the theme storage saves the 'dark' theme.
-    expect(themeStoragePort.restoredThemeSelection).toBe("dark")
+    // THEN the theme cache saves the 'dark' theme.
+    expect(themeCachePort.restoredThemeSelection).toBe("dark")
 })
 
-test("The theme storage saves the selected 'light' theme.", async () => {
+test("The theme cache saves the 'light' theme when it is selected.", async () => {
     // GIVEN that the theme selection is 'match-media'.
-    const themeStoragePort = fakeThemeStorage("match-media")
+    const themeCachePort = fakeThemeCachePort("match-media")
     
     // GIVEN a test subject.
     const { result } = renderHook(() => useTheme({
-        mediaThemePort: dummyMediaTheme(),
-        themeStoragePort,
+        mediaThemePort: dummyMediaThemePort(),
+        themeCachePort,
     }))
     
     // WHEN selecting the 'light' theme.
@@ -124,18 +164,18 @@ test("The theme storage saves the selected 'light' theme.", async () => {
         result.current!.selectTheme("light") // eslint-disable-line @typescript-eslint/no-non-null-assertion
     })
     
-    // THEN the theme storage saves the 'light' theme.
-    expect(themeStoragePort.restoredThemeSelection).toBe("light")
+    // THEN the theme cache saves the 'light' theme.
+    expect(themeCachePort.restoredThemeSelection).toBe("light")
 })
 
-test("The theme storage saves the selected 'match-media' theme.", async () => {
+test("The theme cache saves the 'match-media' theme when it is selected.", async () => {
     // GIVEN that the theme selection is 'dark'.
-    const themeStoragePort = fakeThemeStorage("dark")
+    const themeCachePort = fakeThemeCachePort("dark")
     
     // GIVEN a test subject.
     const { result } = renderHook(() => useTheme({
-        mediaThemePort: dummyMediaTheme(),
-        themeStoragePort,
+        mediaThemePort: dummyMediaThemePort(),
+        themeCachePort,
     }))
     
     // WHEN selecting the 'match-media' theme.
@@ -143,6 +183,6 @@ test("The theme storage saves the selected 'match-media' theme.", async () => {
         result.current!.selectTheme("match-media") // eslint-disable-line @typescript-eslint/no-non-null-assertion
     })
     
-    // THEN the theme storage saves the 'match-media' theme.
-    expect(themeStoragePort.restoredThemeSelection).toBe("match-media")
+    // THEN the theme cache saves the 'match-media' theme.
+    expect(themeCachePort.restoredThemeSelection).toBe("match-media")
 })

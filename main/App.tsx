@@ -1,9 +1,9 @@
 import { SplitContainer } from "+elements"
-import type { PreferredLanguagePort } from "+i18n"
-import { LanguagePicker, useActiveLanguage } from "+i18n"
+import type { LocaleCachePort, PreferredLocalePort } from "+i18n"
+import { LocalePicker, useLocale } from "+i18n"
 import { ProfilePage } from "+profile"
 import { content } from "+profile/content/predefined"
-import type { MediaThemePort, ThemeStoragePort } from "+theme"
+import type { MediaThemePort, ThemeCachePort } from "+theme"
 import { ThemePicker, useTheme } from "+theme"
 import { Fragment } from "preact"
 import { useEffect } from "preact/hooks"
@@ -14,15 +14,17 @@ const copyright = {
 }
 
 type AppProps = {
-    readonly preferredLanguagePort: PreferredLanguagePort
+    readonly localeCachePort: LocaleCachePort
     readonly mediaThemePort: MediaThemePort
-    readonly themeStoragePort: ThemeStoragePort
+    readonly preferredLocalePort: PreferredLocalePort
+    readonly themeCachePort: ThemeCachePort
 }
 
 export function App({
-    preferredLanguagePort: { preferredLanguage },
+    localeCachePort,
     mediaThemePort,
-    themeStoragePort,
+    preferredLocalePort,
+    themeCachePort,
 }: AppProps) {
     useEffect(() => {
         document.title = content.identity.name
@@ -30,11 +32,12 @@ export function App({
     
     const { mediaTheme, themeSelection, selectTheme } = useTheme({
         mediaThemePort,
-        themeStoragePort,
+        themeCachePort,
     })
     
-    const { activeLanguage, setActiveLanguage } = useActiveLanguage({
-        initialLanguage: preferredLanguage,
+    const { locale, selectLocale } = useLocale({
+        localeCachePort,
+        preferredLocalePort,
     })
     
     return (
@@ -42,20 +45,20 @@ export function App({
             <header class="flex absolute top-4 right-4 justify-end items-center md:gap-x-2">
                 <ThemePicker
                     class="w-fit"
-                    activeLanguage={activeLanguage}
+                    locale={locale}
                     mediaTheme={mediaTheme}
                     selectedTheme={themeSelection}
                     onThemeSelected={selectTheme}
                 />
-                <LanguagePicker
+                <LocalePicker
                     class="w-fit md:w-48"
-                    selectedLanguage={activeLanguage}
-                    onLanguageSelected={setActiveLanguage}
+                    selectedLocale={locale}
+                    onLocaleSelected={selectLocale}
                 />
             </header>
             <ProfilePage
                 content={content}
-                activeLanguage={activeLanguage}
+                locale={locale}
             />
             <footer class="p-8 bg-neutral-200 dark:bg-neutral-900 md:py-16">
                 <SplitContainer class="font-light text-neutral-600 dark:text-neutral-300">

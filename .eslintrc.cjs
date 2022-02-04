@@ -53,7 +53,8 @@ module.exports = {
             code: 80,
             tabWidth: 4,
             ignoreComments: true,
-            ignorePattern: "^import\\s.+\\sfrom\\s.+$",
+            // language=RegExp
+            ignorePattern: "(^import\\s.+\\sfrom\\s.+$)|(^(export\\s)?function\\s.+\\(\\):\\s.+\\{$)",
             ignoreRegExpLiterals: true,
             ignoreStrings: true,
             ignoreTemplateLiterals: true,

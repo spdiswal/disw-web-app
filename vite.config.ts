@@ -2,12 +2,15 @@ import preactPlugin from "@preact/preset-vite"
 import { unlinkSync } from "fs"
 import { minify as minifyHtml } from "html-minifier-terser"
 import { basename, extname, resolve as resolvePath } from "path"
-import { slate as tailwindColourSlate } from "tailwindcss/colors"
 import type { ConfigEnv, Plugin, UserConfig } from "vite"
 import { defineConfig, loadEnv } from "vite"
+import type * as MainServerTsx from "./main/main-server"
+import tailwindConfig from "./tailwind.config.cjs"
+
+type ServerOrientedBuild = typeof MainServerTsx
 
 const relativeOutputFolder = "./build/www"
-const relativeServerOrientedBuildArtifactFile = `${relativeOutputFolder}/main-server.js`
+const relativeServerOrientedBuild = `${relativeOutputFolder}/main-server.js`
 
 // Read more:
 // https://vitejs.dev/config/
@@ -17,6 +20,7 @@ const relativeServerOrientedBuildArtifactFile = `${relativeOutputFolder}/main-se
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, process.cwd())
     const profileName = env.VITE_PROFILE_NAME
+    const debugProductionBuild = env.VITE_DEBUG_PRODUCTION_BUILD === "true"
     
     return {
         root: path("main"),
@@ -40,10 +44,14 @@ export default defineConfig(({ mode }) => {
         },
         publicDir: false,
         plugins: [
-            preactPlugin(),
-            preRenderIndexHtmlPlugin(),
-            minifyIndexHtmlPlugin(),
-            deleteServerOrientedBuildArtifactPlugin(),
+            preactPlugin({
+                devtoolsInProd: debugProductionBuild,
+            }),
+            preRenderIndexHtmlPlugin({
+                debugProductionBuild,
+            }),
+            !debugProductionBuild && minifyIndexHtmlPlugin(),
+            !debugProductionBuild && deleteServerOrientedBuildArtifactPlugin(),
         ],
         server: {
             port: 5000,
@@ -56,6 +64,7 @@ export default defineConfig(({ mode }) => {
         build: {
             emptyOutDir: false, // Overridden by `--emptyOutDir` when making a server-oriented build.
             outDir: path(relativeOutputFolder),
+            minify: !debugProductionBuild,
             rollupOptions: {
                 output: {
                     // Read more:
@@ -71,43 +80,38 @@ export default defineConfig(({ mode }) => {
     }
 })
 
+type PreRenderIndexHtmlPluginOptions = {
+    readonly debugProductionBuild: boolean
+}
+
 /**
- * Substitutes the placeholders in `index.html` with the HTML fragments
- * exported by `main-server.tsx` and a background colour from Tailwind CSS
- * that corresponds to `bg-neutral-900`.
+ * Substitutes the placeholders in `index.html` with the HTML fragments defined
+ * by `main-server.tsx`.
  */
-function preRenderIndexHtmlPlugin(): Plugin {
+function preRenderIndexHtmlPlugin({
+    debugProductionBuild,
+}: PreRenderIndexHtmlPluginOptions): Plugin {
     return {
         name: "pre-render-index-html",
         apply: isClientOrientedProductionBuild,
         transformIndexHtml: async (html: string) => {
-            const staticHtml = await importStaticHtmlFromServerOrientedBuild()
-            const { title, body } = staticHtml
+            const serverOrientedBuild = await importServerOrientedBuild()
             
-            return html
-                .replace("/* [tailwindcss bg-neutral-50] */", `background-color: ${tailwindColourSlate["50"]};`)
-                .replace("/* [tailwindcss bg-neutral-900] */", `background-color: ${tailwindColourSlate["900"]};`)
-                .replace("<title>[main-server.tsx title]</title>", title)
-                .replace("<!-- [main-server.tsx body] -->", body)
+            return serverOrientedBuild.substituteHtmlFragments(html, {
+                indentBody: debugProductionBuild,
+                tailwindConfig,
+            })
         },
     }
 }
 
-async function importStaticHtmlFromServerOrientedBuild(): Promise<StaticHtml> {
+async function importServerOrientedBuild(): Promise<ServerOrientedBuild> {
     // The module to be imported does not exist until Vite has completed the
     // server-oriented build.
-    // Using a separate variable, `relativeServerOrientedBuildArtifactFile`,
-    // instead of a string literal as argument to the `import()` directive
-    // halts TypeScript from statically checking if the module exists.
-    return await import(relativeServerOrientedBuildArtifactFile) as StaticHtml
-}
-
-/**
- * `title` and `body` are exported by `main-server.tsx`.
- */
-type StaticHtml = {
-    readonly title: string
-    readonly body: string
+    // Using a separate variable, `relativeServerOrientedBuild`, instead of a
+    // string literal as argument to the `import()` directive halts TypeScript
+    // from statically checking if the module exists.
+    return await import(relativeServerOrientedBuild) as ServerOrientedBuild
 }
 
 /**
@@ -134,7 +138,7 @@ function deleteServerOrientedBuildArtifactPlugin(): Plugin {
         name: "delete-server-oriented-build-artifact",
         apply: isClientOrientedProductionBuild,
         closeBundle: () => {
-            unlinkSync(path(relativeServerOrientedBuildArtifactFile))
+            unlinkSync(path(relativeServerOrientedBuild))
         },
     }
 }

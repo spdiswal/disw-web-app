@@ -28,6 +28,8 @@
         "useDefineForClassFields": true,
         "lib": [ "DOM", "DOM.Iterable", "ES2017" ],
         "importHelpers": true,
+        "allowJs": true,
+        "checkJs": false,
         "jsx": "react-jsx",
         "jsxImportSource": "preact",
         "noEmit": true,

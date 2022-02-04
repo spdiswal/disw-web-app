@@ -223,6 +223,9 @@ Both techniques allow search engines to discover the contents of the web app wit
 _Hydration_ is a process carried out by the web framework (e.g. Preact) that attaches event listeners to the pre- or server-side-rendered HTML document and constructs a reactive component tree equivalent to it.
 ====
 
+If you need to debug the _production-grade distribution_, you can set the `VITE_DEBUG_PRODUCTION_BUILD` environment variable to be `true` in `.env.production.local`.
+This enables Preact debugging tools on runtime and skips minification of the build artifacts.
+
 === Jest
 https://jestjs.io/[Jest] is a unit testing framework for JavaScript.
 It is independent of Vite and does not inherit any of its capabilities.

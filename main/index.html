@@ -4,19 +4,19 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-    <title>[main-server.tsx title]</title>
+    <title>DISW Web App</title> <!-- [main-server.tsx fragment: title] -->
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css"/>
     <style>
         /* Hide the document initially to prevent a flash of unstyled content
            from occurring. */
         html {
-            /* [tailwindcss bg-neutral-50] */
+            /* [main-server.tsx fragment: tailwind-bg-neutral-50] */
             visibility: hidden;
         }
         
         @media (prefers-color-scheme: dark) {
             html {
-                /* [tailwindcss bg-neutral-900] */
+                /* [main-server.tsx fragment: tailwind-bg-neutral-900] */
             }
         }
     </style>
@@ -39,7 +39,7 @@
     </script>
 </head>
 <body class="min-w-min text-neutral-800 dark:text-neutral-50 bg-neutral-50 dark:bg-neutral-900">
-    <!-- [main-server.tsx body] -->
+    <!-- [main-server.tsx fragment: body] -->
     <script type="module" src="/main-client.tsx"></script>
 </body>
 </html>

@@ -3,7 +3,10 @@ import type { Content, Organisation } from "+profile"
 import { parseISO } from "date-fns"
 import portraitAssetUrl from "./perseverance-dummy.webp"
 
-const nasa: Organisation = indistinguishable("NASA")
+const nasa: Organisation = {
+    name: indistinguishable("NASA"),
+    url: "https://www.nasa.gov/",
+}
 
 /**
  * Portrait: Courtesy NASA/JPL-Caltech.
@@ -33,7 +36,10 @@ export const content: Content = {
         {
             id: "21-astrobiologist",
             title: { da: "Astrobiolog", en: "Astrobiologist" },
-            organisation: { da: "Røde Planet", en: "Red Planet" },
+            organisation: {
+                name: { da: "Røde Planet", en: "Red Planet" },
+                url: "https://www.nasa.gov/",
+            },
             period: { since: parseISO("2021-12-01"), until: null },
             activities: [
                 {
@@ -94,7 +100,10 @@ export const content: Content = {
         {
             id: "20-interplanetary-agent",
             title: { da: "Interplanetarisk agent", en: "Interplanetary Agent" },
-            organisation: { da: "Verdensrumsagenturet", en: "The Interplanetary Space Agency" },
+            organisation: {
+                name: { da: "Verdensrumsagenturet", en: "The Interplanetary Space Agency" },
+                url: "https://www.nasa.gov/",
+            },
             period: { since: parseISO("2020-08-01"), until: parseISO("2021-02-28") },
             activities: [
                 {

@@ -35,7 +35,6 @@ const accessibilityLabel: Localisable<string> = {
 type ThemePickerProps = {
     readonly class?: ClassValue
     readonly locale: Locale
-    
     readonly mediaTheme: Theme
     readonly selectedTheme: ThemeSelection
     readonly onThemeSelected?: (selectedTheme: ThemeSelection) => void

@@ -1,6 +1,6 @@
 import { ProfilePage } from "+profile"
 import { content } from "+profile/content"
-import { render, screen } from "@testing-library/preact"
+import { render, screen, within } from "@testing-library/preact"
 
 test("The profile page specifies the source of the portrait.", () => {
     // GIVEN a test subject.
@@ -144,6 +144,9 @@ test("The profile page displays an 'Astrobiolog'/'Astrobiologist' occupation.", 
     // AND it displays the organisation of the occupation in Danish.
     expect(occupation).toHaveTextContent("Røde Planet")
     
+    // AND it specifies a hyperlink to the organisation.
+    expect(within(occupation).getByRole("link")).toHaveAttribute("href", "https://www.nasa.gov/")
+    
     // AND it displays the activities of the occupation in Danish.
     expect(occupation).toHaveTextContent(
         "Udstationeret i Jezero-krateret på planeten Mars."
@@ -191,6 +194,9 @@ test("The profile page displays a 'Førsteofficer'/'First Officer' occupation.",
     // AND it displays the organisation of the occupation in Danish.
     expect(occupation).toHaveTextContent("NASA")
     
+    // AND it specifies a hyperlink to the organisation.
+    expect(within(occupation).getByRole("link")).toHaveAttribute("href", "https://www.nasa.gov/")
+    
     // AND it displays the activities of the occupation in Danish.
     expect(occupation).toHaveTextContent(
         "Hjalp helikopteren Ingenuity med at gennemføre den allerførste menneskeskabte, motoriserede flyvning på et andet himmellegeme end Jorden."
@@ -231,6 +237,9 @@ test("The profile page displays an 'Interplanetarisk agent'/'Interplanetary Agen
     
     // AND it displays the organisation of the occupation in Danish.
     expect(occupation).toHaveTextContent("Verdensrumsagenturet")
+    
+    // AND it specifies a hyperlink to the organisation.
+    expect(within(occupation).getByRole("link")).toHaveAttribute("href", "https://www.nasa.gov/")
     
     // AND it displays the activities of the occupation in Danish.
     expect(occupation).toHaveTextContent(
@@ -275,6 +284,9 @@ test("The profile page displays a 'Kandidat i kontinuitet'/'MSc in Continuity' o
     // AND it displays the organisation of the occupation in Danish.
     expect(occupation).toHaveTextContent("NASA")
     
+    // AND it specifies a hyperlink to the organisation.
+    expect(within(occupation).getByRole("link")).toHaveAttribute("href", "https://www.nasa.gov/")
+    
     // AND it displays the activities of the occupation in Danish.
     expect(occupation).toHaveTextContent(
         "Medbragte en plutonium-238-baseret termoelektrisk radioisotopgenerator til at oplade to litium-ion-batterier, der muliggør arbejde om natten og under støvstorme."
@@ -315,6 +327,9 @@ test("The profile page displays a 'Bachelor i roverdesign'/'BSc in Rover Design'
     
     // AND it displays the organisation of the occupation in Danish.
     expect(occupation).toHaveTextContent("NASA")
+    
+    // AND it specifies a hyperlink to the organisation.
+    expect(within(occupation).getByRole("link")).toHaveAttribute("href", "https://www.nasa.gov/")
     
     // AND it displays the activities of the occupation in Danish.
     expect(occupation).toHaveTextContent(

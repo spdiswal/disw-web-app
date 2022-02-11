@@ -17,7 +17,6 @@ const icon: Readonly<Record<Locale, JSX.Element>> = {
 
 type LocalePickerProps = {
     readonly class?: ClassValue
-    
     readonly selectedLocale: Locale
     readonly onLocaleSelected?: (locale: Locale) => void
 }

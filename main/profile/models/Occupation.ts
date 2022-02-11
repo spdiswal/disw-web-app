@@ -10,7 +10,14 @@ export type Occupation = {
 }
 
 export type Title = Localisable<string> & Flavour<"Title">
-export type Organisation = Localisable<string> & Flavour<"Organisation">
+
+export type Organisation = {
+    readonly name: OrganisationName
+    readonly url: OrganisationUrl
+}
+
+export type OrganisationName = Localisable<string> & Flavour<"OrganisationName">
+export type OrganisationUrl = string & Flavour<"OrganisationUrl">
 
 export type Period = {
     readonly since: PeriodStart

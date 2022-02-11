@@ -7,11 +7,9 @@ import { useWindowEvent } from "../useWindowEvent"
 
 type ListboxProps<Option extends string> = {
     readonly class?: ClassValue
-    
     readonly options: ReadonlyArray<Option>
     readonly selectedOption: Option
     readonly onOptionSelected?: (option: Option) => void
-    
     readonly renderButton: (state: ListboxButtonState) => JSX.Element
     readonly renderOption: (
         option: Option,
@@ -53,7 +51,7 @@ export function Listbox<Option extends string>({
     })
     
     return (
-        <div class={clsx("relative", _class)}>
+        <div class={clsx(_class, "relative")}>
             {renderButton({
                 ref: buttonRef,
                 isExpanded: isPopupOpen,

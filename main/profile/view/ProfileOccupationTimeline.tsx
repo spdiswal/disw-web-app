@@ -8,7 +8,6 @@ import { ProfileOccupationEntry } from "./ProfileOccupationEntry"
 
 type ProfileOccupationTimelineProps = {
     readonly class?: ClassValue
-    
     readonly label: Localisable<string>
     readonly labelId: Id<"ProfileOccupationTimeline">
     readonly occupations: OccupationList
@@ -23,7 +22,7 @@ export function ProfileOccupationTimeline({
     locale,
 }: ProfileOccupationTimelineProps) {
     return (
-        <section class={clsx("px-8 pt-8 md:pt-24", _class)} aria-labelledby={labelId}>
+        <section class={clsx(_class, "px-8 pt-8 md:pt-24")} aria-labelledby={labelId}>
             <header class="mb-12">
                 <SplitContainer>
                     <h1 id={labelId} class="font-light md:text-2xl">{label[locale]}</h1>

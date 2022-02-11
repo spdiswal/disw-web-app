@@ -13,7 +13,7 @@ export function ProfileIdentityQuickFact({
     definition,
 }: ProfileIdentityQuickFactProps) {
     return (
-        <div class={clsx("text-center", _class)}>
+        <div class={clsx(_class, "text-center")}>
             <dt>{term}</dt>
             <dd class="font-bold text-primary-600 md:text-2xl">{definition}</dd>
         </div>

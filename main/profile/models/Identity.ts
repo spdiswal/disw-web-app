@@ -1,5 +1,4 @@
 import type { Localisable } from "+i18n"
-import type { Portrait } from "+profile"
 import type { Flavour } from "+types"
 
 export type Identity = {
@@ -11,6 +10,14 @@ export type Identity = {
     readonly academicDiscipline: AcademicDiscipline
     readonly workExperience: WorkExperience
 }
+
+export type Portrait = {
+    readonly assetUrl: AssetUrl
+    readonly caption: Caption
+}
+
+export type AssetUrl = string & Flavour<"AssetUrl">
+export type Caption = Localisable<string> & Flavour<"Caption">
 
 export type Name = string & Flavour<"Name">
 export type AreaOfExpertise = Localisable<string> & Flavour<"AreaOfExpertise">

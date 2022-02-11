@@ -1,4 +1,4 @@
-import { Paragraph, SplitContainer } from "+elements"
+import { ExternalHyperlink, Paragraph, SplitContainer } from "+elements"
 import type { Locale } from "+i18n"
 import type { Occupation } from "+profile"
 import { ProfileOccupationDate } from "./ProfileOccupationDate"
@@ -42,11 +42,13 @@ export function ProfileOccupationEntry({
                     </div>
                 }
             >
-                <header class="mb-4">
-                    <h1 id={id} class="font-bold text-primary-600 md:mb-1 md:text-2xl">{title[locale]}</h1>
-                    <p class="font-semibold">{organisation[locale]}</p>
+                <header class="mb-3 md:mb-1">
+                    <h1 id={id} class="font-bold text-primary-600 md:text-2xl">{title[locale]}</h1>
+                    <ExternalHyperlink url={organisation.url} class="block pr-3 pb-1 w-fit font-semibold md:pt-1 md:pb-3">
+                        {organisation.name[locale]}
+                    </ExternalHyperlink>
                 </header>
-                <div class="flex flex-col gap-y-2 mb-12 md:mb-24">
+                <div class="flex flex-col gap-y-2 mb-16 md:mb-24">
                     {activities.map((activity) => (
                         <Paragraph key={activity.id}>
                             {activity[locale]}

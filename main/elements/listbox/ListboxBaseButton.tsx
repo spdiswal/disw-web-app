@@ -17,7 +17,7 @@ export function ListboxBaseButton({
     return (
         <button
             ref={ref}
-            class={clsx("text-neutral-800 dark:text-neutral-100 rounded-md focus-visible:border focus-visible:border-accent-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-600", _class)}
+            class={clsx(_class, "text-neutral-800 dark:text-neutral-100 rounded-md focus-visible:border focus-visible:border-accent-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-600")}
             type="button"
             aria-expanded={isExpanded}
             onMouseDown={onMouseDown}

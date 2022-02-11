@@ -1,10 +1,9 @@
 import { indistinguishable } from "+i18n"
-import type { Content } from "+profile"
+import type { Content, Organisation } from "+profile"
 import { parseISO } from "date-fns"
 import portraitAssetUrl from "./perseverance-dummy.webp"
 
-const age = 10
-const workExperience = 2
+const nasa: Organisation = indistinguishable("NASA")
 
 /**
  * Portrait: Courtesy NASA/JPL-Caltech.
@@ -15,45 +14,27 @@ export const content: Content = {
         portrait: {
             assetUrl: portraitAssetUrl,
             caption: {
-                da: "Mit selvportræt. Courtesy NASA/JPL-Caltech.",
-                en: "My self-portrait. Courtesy NASA/JPL-Caltech.",
+                da: "Mit selvportræt. Jeg har boret to huller i et klippestykke foran mig og lavet hjulspor i det røde sand. Horisonten er en smule diset. Courtesy NASA/JPL-Caltech.",
+                en: "My self-portrait. I have drilled two holes in a rock in front of me and made wheel tracks in the red soil. The horizon is slightly hazy. Courtesy NASA/JPL-Caltech.",
             },
         },
         name: "Perseverance",
-        areaOfExpertise: {
-            da: "en Mars-rover",
-            en: "a Mars rover",
-        },
-        age: {
-            da: `${age} år`,
-            en: `${age} years`,
-        },
+        areaOfExpertise: { da: "Og jeg er astrobiolog på Mars.", en: "And I'm an astrobiologist on Mars." },
+        age: { da: "10 år", en: "10 years" },
         residence: indistinguishable("Jezero"),
-        academicDiscipline: {
-            da: "Astrobiologi",
-            en: "Astrobiology",
-        },
-        workExperience: {
-            da: `${workExperience} år`,
-            en: `${workExperience} years`,
-        },
+        academicDiscipline: { da: "Astrobiologi", en: "Astrobiology" },
+        workExperience: { da: "2 år", en: "2 years" },
     },
     biography: {
-        da: "Jeg elsker at grave i sandet på Mars!",
-        en: "I enjoy digging through the Martian soil!",
+        da: "Jeg elsker at grave i sandet på Mars! Og jeg drømmer om at opdage liv på den røde planet.",
+        en: "I enjoy digging through the Martian soil! And I dream about discovering life on the Red Planet.",
     },
     career: [
         {
-            id: "21-nasa",
-            title: {
-                da: "Astrobiolog",
-                en: "Astrobiologist",
-            },
-            organisation: indistinguishable("NASA"),
-            period: {
-                since: parseISO("2021-06-01"),
-                until: null,
-            },
+            id: "21-astrobiologist",
+            title: { da: "Astrobiolog", en: "Astrobiologist" },
+            organisation: { da: "Røde Planet", en: "Red Planet" },
+            period: { since: parseISO("2021-12-01"), until: null },
             activities: [
                 {
                     id: "jezero",
@@ -61,12 +42,17 @@ export const content: Content = {
                     en: "Deployed at the Jezero Crater on Planet Mars.",
                 },
                 {
-                    id: "life",
-                    da: "Leder efter tegn på tidligere liv ved at nærstudere visse typer klippe.",
-                    en: "Searching for signs of past life by studying certain types of rock.",
+                    id: "chemical-composition",
+                    da: "Analyserer den kemiske sammensætning af materialet på Mars' overflade.",
+                    en: "Analysing the chemical composition of the material on the Martian surface.",
                 },
                 {
-                    id: "samples",
+                    id: "life",
+                    da: "Leder efter tegn på tidligere liv ved at kigge efter biosignaturer i materialet, fx fossiler og organiske molekyler.",
+                    en: "Searching for signs of past life by looking for biosignatures in this material, e.g. fossils and organic matter.",
+                },
+                {
+                    id: "rock-samples",
                     da: "Indsamler klippestykker og jordprøver, der senere skal samles op af en anden rover.",
                     en: "Collecting rock and soil samples to be picked up later by another rover.",
                 },
@@ -76,36 +62,45 @@ export const content: Content = {
                     en: "Attempting to produce oxygen from carbon dioxide in the Martian atmosphere.",
                 },
                 {
-                    id: "ingenuity",
-                    da: "Medbringer helikopteren Ingenuity, som gennemførte den allerførste menneskeskabte, motoriserede flyvning på et andet himmellegeme end Jorden.",
-                    en: "Carrying the Ingenuity rotorcraft, which accomplished the very first man-made, powered flight on another celestial body than Earth.",
-                },
-                {
-                    id: "video",
-                    da: "Laver videooptagelser af Ingenuitys flyvninger.",
-                    en: "Making video recordings of Ingenuity's flights.",
+                    id: "weather",
+                    da: "Observerer vejrforholdene på Mars' overflade ved hjælp af sensorer, der måler temperatur, vindhastighed, relativ luftfugtighed, støvkorn og radioaktiv stråling.",
+                    en: "Observing the surface weather on Mars with a set of sensors that measure the temperature, wind speed, relative humidity, dust particles, and radiation.",
                 },
             ],
         },
         {
-            id: "20-space",
-            title: {
-                da: "Interplanetarisk cinematografiagent",
-                en: "Interplanetary Cinematography Agent",
-            },
-            organisation: {
-                da: "Verdensrumsagenturet",
-                en: "The Interplanetary Space Agency",
-            },
-            period: {
-                since: parseISO("2020-07-30"),
-                until: parseISO("2021-02-18"),
-            },
+            id: "21-first-officer",
+            title: { da: "Førsteofficer", en: "First Officer" },
+            organisation: nasa,
+            period: { since: parseISO("2021-03-01"), until: parseISO("2021-08-30") },
+            activities: [
+                {
+                    id: "ingenuity",
+                    da: "Hjalp helikopteren Ingenuity med at gennemføre den allerførste menneskeskabte, motoriserede flyvning på et andet himmellegeme end Jorden.",
+                    en: "Assisted the Ingenuity rotorcraft in accomplishing the very first man-made, powered flight on another celestial body than Earth.",
+                },
+                {
+                    id: "video",
+                    da: "Lavede videooptagelser af Ingenuitys flyvninger.",
+                    en: "Made video recordings of Ingenuity's flights.",
+                },
+                {
+                    id: "audio",
+                    da: "Optog det første lydklip fra en anden planets overflade, herunder den summen der blev skabt af Ingenuitys rotorer.",
+                    en: "Captured the first audio clip from the surface of another planet, including the hum made by Ingenuity's rotor blades.",
+                },
+            ],
+        },
+        {
+            id: "20-interplanetary-agent",
+            title: { da: "Interplanetarisk agent", en: "Interplanetary Agent" },
+            organisation: { da: "Verdensrumsagenturet", en: "The Interplanetary Space Agency" },
+            period: { since: parseISO("2020-08-01"), until: parseISO("2021-02-28") },
             activities: [
                 {
                     id: "liftoff",
-                    da: "Opsendt fra Florida, planeten Jorden, om bord på en Atlas V-løfteraket.",
-                    en: "Lifted off from Florida, Planet Earth, aboard an Atlas V carrier rocket.",
+                    da: "Sendt til vejrs fra Cape Canaveral, Florida, om bord på en Atlas V-løfteraket.",
+                    en: "Launched from Cape Canaveral, Florida, aboard an Atlas V carrier rocket.",
                 },
                 {
                     id: "journey",
@@ -122,46 +117,53 @@ export const content: Content = {
                     da: "Producerede en videooptagelse i høj opløsning af faldskærmens udfoldning under landingen.",
                     en: "Made a high-resolution video recording of the parachute deployment during descent.",
                 },
-                {
-                    id: "audio",
-                    da: "Optog det første lydklip fra en anden planets overflade.",
-                    en: "Captured the first audio clip from the surface of another planet.",
-                },
             ],
         },
     ],
     education: [
         {
-            id: "12-nasa",
-            title: {
-                da: "Opfinder",
-                en: "Deviser",
-            },
-            organisation: indistinguishable("NASA"),
-            period: {
-                since: parseISO("2012-12-04"),
-                until: parseISO("2020-07-30"),
-            },
+            id: "17-msc-continuity",
+            title: { da: "Kandidat i kontinuitet", en: "MSc in Continuity" },
+            organisation: nasa,
+            period: { since: parseISO("2017-09-01"), until: parseISO("2020-06-30") },
             activities: [
                 {
-                    id: "design",
-                    da: "Baseret på Curiosity-roverens design.",
-                    en: "Based the design on the Curiosity rover.",
-                },
-                {
-                    id: "wheels",
-                    da: "Valgte slidstærke hjul i aluminium med et godt vejgreb.",
-                    en: "Chose durable wheels of aluminium with great traction.",
+                    id: "radioisotope",
+                    da: "Medbragte en plutonium-238-baseret termoelektrisk radioisotopgenerator til at oplade to litium-ion-batterier, der muliggør arbejde om natten og under støvstorme.",
+                    en: "Brought a plutonium-238-based radioisotope thermoelectric power generator to charge two lithium-ion batteries, allowing for operation at night and during dust storms.",
                 },
                 {
                     id: "antennas",
-                    da: "Leverede redundans på datasignalet ved at medbringe to ekstra antenner i X-båndets frekvensområde ud over den primære antenne i UHF-båndets frekvensområde.",
+                    da: "Leverede redundans på datasignalet med to ekstra antenner i X-båndets frekvensområde ud over den primære antenne i UHF-båndets frekvensområde.",
                     en: "Provided data signal redundancy by including two extra X-band frequency antennas in addition to the primary ultra-high frequency antenna.",
                 },
                 {
                     id: "debugging",
                     da: "Implementerede en tvillingerover til fejlsøgning på planeten Jorden.",
                     en: "Implemented a twin rover to be used for debugging on Planet Earth.",
+                },
+            ],
+        },
+        {
+            id: "13-bsc-rover-design",
+            title: { da: "Bachelor i roverdesign", en: "BSc in Rover Design" },
+            organisation: nasa,
+            period: { since: parseISO("2013-09-01"), until: parseISO("2017-06-30") },
+            activities: [
+                {
+                    id: "wheels",
+                    da: "Valgte slidstærke hjul i aluminium med et godt vejgreb.",
+                    en: "Chose durable wheels of aluminium with great traction.",
+                },
+                {
+                    id: "rocker-bogie",
+                    da: "Implementerede en sekshjulet rocker-bogie-opstilling til at bestige stejle klitter og modstå hældninger uden at vælte.",
+                    en: "Implemented a six-wheeled rocker-bogie system to climb steep sand dunes and withstand tilts without overturning.",
+                },
+                {
+                    id: "heat-rejection",
+                    da: "Anskaffede et varmeafvisende system til at opretholde en optimal arbejdstemperatur.",
+                    en: "Acquired a heat rejection system to maintain optimal operation temperatures.",
                 },
             ],
         },

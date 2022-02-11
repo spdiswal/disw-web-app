@@ -4,7 +4,6 @@ import type { Identity } from "+profile"
 import { ProfileIdentityQuickFact } from "./ProfileIdentityQuickFact"
 
 const namePreamble: Localisable<string> = { da: "Hej! Jeg hedder", en: "Hi! My name is" }
-const areaOfExpertisePreamble: Localisable<string> = { da: "Og jeg er", en: "And I'm" }
 const ageTerm: Localisable<string> = { da: "Alder", en: "Age" }
 const residenceTerm: Localisable<string> = { da: "Bopæl", en: "Residence" }
 const academicDisciplineTerm: Localisable<string> = { da: "Faglig baggrund", en: "Academic Discipline" }
@@ -40,12 +39,8 @@ export function ProfileIdentity({
                 }
             >
                 <div class="flex flex-col gap-y-2 mb-8 text-2xl font-bold text-center drop-shadow-sm sm:mt-4 sm:mb-12 sm:text-3xl md:mt-28 md:text-4xl md:text-left lg:text-5xl">
-                    <p>
-                        {namePreamble[locale]}{" "}<span class="font-black text-primary-600 whitespace-nowrap">{name}</span>.
-                    </p>
-                    <p>
-                        {areaOfExpertisePreamble[locale]}{" "}{areaOfExpertise[locale]}.
-                    </p>
+                    <p>{namePreamble[locale]}{" "}<span class="font-black text-primary-600 whitespace-nowrap">{name}</span>.</p>
+                    <p>{areaOfExpertise[locale]}</p>
                 </div>
                 <dl class="flex flex-col gap-y-6 items-center sm:flex-row sm:gap-x-10 sm:justify-center sm:mb-4 md:gap-x-12 md:justify-start lg:gap-x-16">
                     <ProfileIdentityQuickFact

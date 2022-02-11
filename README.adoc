@@ -201,7 +201,7 @@ You can define the configurations of PostCSS and Tailwind CSS directly in the Vi
 However, doing so would prevent Vite from instantly applying configuration changes, particularly in Tailwind CSS themes, without requiring a restart of the development server.
 ====
 
-To load the correct profile into the web app, the Vite configuration defines `+profile/content/predefined` to be an alias for the TypeScript module designated by `VITE_PROFILE_NAME`.
+To load the correct profile into the web app, the Vite configuration defines `+profile/content` to be an alias for the TypeScript module designated by `VITE_PROFILE_NAME`.
 
 Generating a production-grade distribution of the web app consists of two phases:
 

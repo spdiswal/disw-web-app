@@ -13,7 +13,7 @@ module.exports = {
     moduleFileExtensions: ["ts", "tsx", "js"],
     moduleNameMapper: {
         // The alias below lets Jest rely on a dummy profile.
-        "^\\+profile/content/predefined$": "<rootDir>/main/profile/content/perseverance-dummy",
+        "^\\+profile/content$": "<rootDir>/main/profile/content/perseverance-dummy",
         //
         "^\\+elements$": "<rootDir>/main/elements/index",
         "^\\+i18n$": "<rootDir>/main/i18n/index",

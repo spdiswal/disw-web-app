@@ -32,7 +32,7 @@ export default defineConfig(({ mode }) => {
                 // The alias below lets Vite embed just the specified profile
                 // content into the production distribution while preserving hot
                 // module replacement during development.
-                "+profile/content/predefined": path(`main/profile/content/${profileName}`),
+                "+profile/content": path(`main/profile/content/${profileName}`),
                 //
                 "+elements": path("main/elements/"),
                 "+i18n": path("main/i18n/"),

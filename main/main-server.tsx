@@ -1,5 +1,5 @@
 import { dummyLocaleCachePort, dummyPreferredLocalePort } from "+i18n"
-import { content } from "+profile/content/predefined"
+import { content } from "+profile/content"
 import { dummyMediaThemePort, dummyThemeCachePort } from "+theme"
 import { renderToString } from "preact-render-to-string"
 import type { TailwindColorGroup, TailwindConfig } from "tailwindcss/tailwind-config"

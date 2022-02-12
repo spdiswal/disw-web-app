@@ -1,5 +1,6 @@
 export * from "./FlagIconDenmark"
 export * from "./FlagIconUnitedKingdom"
+export * from "./GlyphIconGitHub"
 export * from "./HeroIconCheck"
 export * from "./HeroIconDesktopComputer"
 export * from "./HeroIconExternalLink"

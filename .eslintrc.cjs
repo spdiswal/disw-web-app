@@ -328,6 +328,7 @@ module.exports = {
                 "react/no-unknown-property": ["error", {
                     ignore: [
                         "class",
+                        "fill-rule",
                         "for",
                         "stroke-width",
                         "stroke-linecap",

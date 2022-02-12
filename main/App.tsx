@@ -1,4 +1,4 @@
-import { SplitContainer } from "+elements"
+import { GlyphIconGitHub } from "+elements"
 import type { LocaleCachePort, PreferredLocalePort } from "+i18n"
 import { LocalePicker, useLocale } from "+i18n"
 import { ProfilePage } from "+profile"
@@ -61,9 +61,17 @@ export function App({
                 locale={locale}
             />
             <footer class="p-8 bg-neutral-200 dark:bg-neutral-900 md:py-16">
-                <SplitContainer class="font-light text-neutral-600 dark:text-neutral-300">
-                    &copy; {copyright.year} {copyright.owner}
-                </SplitContainer>
+                <div class="flex flex-col gap-y-2 items-center md:gap-y-4">
+                    <div class="flex gap-x-2 justify-center text-neutral-500 dark:text-neutral-400">
+                        <a href={content.socialLinks.githubUrl}>
+                            <span class="sr-only">GitHub</span>
+                            <GlyphIconGitHub class="h-8 hover:text-neutral-700 dark:hover:text-neutral-200" aria-hidden="true"/>
+                        </a>
+                    </div>
+                    <span class="font-light text-neutral-600 dark:text-neutral-300">
+                        &copy; {copyright.year} {copyright.owner}
+                    </span>
+                </div>
             </footer>
         </Fragment>
     )

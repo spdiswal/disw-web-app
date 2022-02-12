@@ -8,11 +8,17 @@ export type Content = {
     readonly biography: Biography
     readonly career: Career
     readonly education: Education
+    readonly socialLinks: SocialLinks
 }
 
 export type Biography = Localisable<string> & Flavour<"Biography">
 
 export type Career = OccupationList & Flavour<"Career">
 export type Education = OccupationList & Flavour<"Education">
-
 export type OccupationList = ReadonlyArray<Occupation>
+
+export type SocialLinks = {
+    readonly githubUrl: GitHubUrl
+}
+
+export type GitHubUrl = string & Flavour<"GitHubUrl">

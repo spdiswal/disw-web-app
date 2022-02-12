@@ -177,4 +177,7 @@ export const content: Content = {
             ],
         },
     ],
+    socialLinks: {
+        githubUrl: "https://github.com/spdiswal/",
+    },
 }

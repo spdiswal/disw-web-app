@@ -1,4 +1,5 @@
 import { FlagIconDenmark, FlagIconUnitedKingdom, HeroIconCheck, HeroIconSelector, Listbox, ListboxOption, ListboxResponsiveButton } from "+elements"
+import { useLocale } from "+i18n"
 import type { Locale } from "+i18n"
 import type { ClassValue } from "clsx"
 import type { JSX } from "preact"
@@ -17,15 +18,15 @@ const icon: Readonly<Record<Locale, JSX.Element>> = {
 
 type LocalePickerProps = {
     readonly class?: ClassValue
-    readonly selectedLocale: Locale
     readonly onLocaleSelected?: (locale: Locale) => void
 }
 
 export function LocalePicker({
     class: _class,
-    selectedLocale,
     onLocaleSelected,
 }: LocalePickerProps) {
+    const selectedLocale = useLocale()
+    
     return (
         <Listbox
             class={_class}

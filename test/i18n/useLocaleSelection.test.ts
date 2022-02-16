@@ -1,4 +1,4 @@
-import { dummyPreferredLocalePort, useLocale } from "+i18n"
+import { dummyPreferredLocalePort, useLocaleSelection } from "+i18n"
 import { fakeLocaleCachePort, fakePreferredLocalePort } from "+test/fakes"
 import { act, renderHook } from "@testing-library/preact-hooks"
 
@@ -6,7 +6,7 @@ test("The locale is 'da' when the restored locale selection is 'match-preferred'
     // GIVEN a test subject.
     // GIVEN that the restored locale selection is 'match-preferred'.
     // GIVEN that the preferred locale is 'da'.
-    const { result } = renderHook(() => useLocale({
+    const { result } = renderHook(() => useLocaleSelection({
         localeCachePort: fakeLocaleCachePort("match-preferred"),
         preferredLocalePort: fakePreferredLocalePort("da"),
     }))
@@ -21,7 +21,7 @@ test("The locale is 'en' when the restored locale selection is 'match-preferred'
     // GIVEN a test subject.
     // GIVEN that the restored locale selection is 'match-preferred'.
     // GIVEN that the preferred locale is 'dena'.
-    const { result } = renderHook(() => useLocale({
+    const { result } = renderHook(() => useLocaleSelection({
         localeCachePort: fakeLocaleCachePort("match-preferred"),
         preferredLocalePort: fakePreferredLocalePort("en"),
     }))
@@ -36,7 +36,7 @@ test("The locale is 'da' when the restored locale selection is 'da'.", () => {
     // GIVEN a test subject.
     // GIVEN that the restored locale selection is 'da'.
     // GIVEN that the preferred locale is 'en'.
-    const { result } = renderHook(() => useLocale({
+    const { result } = renderHook(() => useLocaleSelection({
         localeCachePort: fakeLocaleCachePort("da"),
         preferredLocalePort: fakePreferredLocalePort("en"),
     }))
@@ -51,7 +51,7 @@ test("The locale is 'en' when the restored locale selection is 'en'.", () => {
     // GIVEN a test subject.
     // GIVEN that the restored locale selection is 'en'.
     // GIVEN that the preferred locale is 'da'.
-    const { result } = renderHook(() => useLocale({
+    const { result } = renderHook(() => useLocaleSelection({
         localeCachePort: fakeLocaleCachePort("en"),
         preferredLocalePort: fakePreferredLocalePort("da"),
     }))
@@ -66,7 +66,7 @@ test("The locale is 'da' when it is selected.", async () => {
     // GIVEN a test subject.
     // GIVEN that the restored locale selection is 'match-preferred'.
     // GIVEN that the preferred locale is 'en'.
-    const { result } = renderHook(() => useLocale({
+    const { result } = renderHook(() => useLocaleSelection({
         localeCachePort: fakeLocaleCachePort("match-preferred"),
         preferredLocalePort: fakePreferredLocalePort("en"),
     }))
@@ -86,7 +86,7 @@ test("The locale is 'en' when it is selected.", async () => {
     // GIVEN a test subject.
     // GIVEN that the restored locale selection is 'match-preferred'.
     // GIVEN that the preferred locale is 'da'.
-    const { result } = renderHook(() => useLocale({
+    const { result } = renderHook(() => useLocaleSelection({
         localeCachePort: fakeLocaleCachePort("match-preferred"),
         preferredLocalePort: fakePreferredLocalePort("da"),
     }))
@@ -107,7 +107,7 @@ test("The locale cache saves the 'da' locale when it is selected.", async () => 
     const localeCachePort = fakeLocaleCachePort("match-preferred")
     
     // GIVEN a test subject.
-    const { result } = renderHook(() => useLocale({
+    const { result } = renderHook(() => useLocaleSelection({
         localeCachePort,
         preferredLocalePort: dummyPreferredLocalePort(),
     }))
@@ -126,7 +126,7 @@ test("The locale cache saves the 'en' locale when it is selected.", async () => 
     const localeCachePort = fakeLocaleCachePort("match-preferred")
     
     // GIVEN a test subject.
-    const { result } = renderHook(() => useLocale({
+    const { result } = renderHook(() => useLocaleSelection({
         localeCachePort,
         preferredLocalePort: dummyPreferredLocalePort(),
     }))

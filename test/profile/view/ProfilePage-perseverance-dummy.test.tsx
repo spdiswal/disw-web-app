@@ -1,3 +1,4 @@
+import { LocaleProvider } from "+i18n"
 import { ProfilePage } from "+profile"
 import { content } from "+profile/content"
 import { render, screen, within } from "@testing-library/preact"
@@ -360,7 +361,9 @@ test("The profile page displays a 'Bachelor i roverdesign'/'BSc in Rover Design'
 
 function renderProfilePage() {
     const { rerender } = render((
-        <ProfilePage content={content} locale="da"/>
+        <LocaleProvider value="da">
+            <ProfilePage content={content}/>
+        </LocaleProvider>
     ))
     
     return {
@@ -372,7 +375,11 @@ function renderProfilePage() {
             return articles.filter((article) => article.id !== "biography")
         },
         changeToEnglishLocale: () => {
-            rerender(<ProfilePage content={content} locale="en"/>)
+            rerender((
+                <LocaleProvider value="en">
+                    <ProfilePage content={content}/>
+                </LocaleProvider>
+            ))
         },
     }
 }

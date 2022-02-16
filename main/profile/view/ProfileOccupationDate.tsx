@@ -1,4 +1,5 @@
-import type { Locale, Localisable } from "+i18n"
+import type { Localisable } from "+i18n"
+import { useLocale } from "+i18n"
 import type { ClassValue } from "clsx"
 import clsx from "clsx"
 
@@ -22,14 +23,14 @@ const thePresent: Localisable<string> = { da: "nu", en: "present" }
 type ProfileOccupationDateProps = {
     readonly class?: ClassValue
     readonly date: Date | null
-    readonly locale: Locale
 }
 
 export function ProfileOccupationDate({
     class: _class,
     date,
-    locale,
 }: ProfileOccupationDateProps) {
+    const locale = useLocale()
+    
     return date !== null
         ? (
             <time class={clsx(_class)} dateTime={date.toISOString()}>

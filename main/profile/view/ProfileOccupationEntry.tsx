@@ -1,17 +1,17 @@
 import { ExternalHyperlink, Paragraph, SplitContainer } from "+elements"
-import type { Locale } from "+i18n"
+import { useLocale } from "+i18n"
 import type { Occupation } from "+profile"
 import { ProfileOccupationDate } from "./ProfileOccupationDate"
 
 type ProfileOccupationEntryProps = {
     readonly occupation: Occupation
-    readonly locale: Locale
 }
 
 export function ProfileOccupationEntry({
     occupation: { id, title, organisation, period, activities },
-    locale,
 }: ProfileOccupationEntryProps) {
+    const locale = useLocale()
+    
     return (
         <article aria-labelledby={id}>
             <SplitContainer
@@ -21,14 +21,10 @@ export function ProfileOccupationEntry({
                             <ProfileOccupationDate
                                 class="md:mb-1 md:text-xl lg:text-2xl"
                                 date={period.since}
-                                locale={locale}
                             />
                             <span>
                                 &ndash;
-                                <ProfileOccupationDate
-                                    date={period.until}
-                                    locale={locale}
-                                />
+                                <ProfileOccupationDate date={period.until}/>
                             </span>
                         </div>
                         <span

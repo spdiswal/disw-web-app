@@ -1,6 +1,6 @@
 import type { Locale } from "+i18n"
 
-const defaultLocale: Locale = "da"
+export const defaultLocale: Locale = "da"
 
 export type PreferredLocalePort = {
     readonly preferredLocale: Locale

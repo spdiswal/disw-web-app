@@ -1,5 +1,5 @@
 import type { Locale } from "+i18n"
-import { LocalePicker } from "+i18n"
+import { LocalePicker, LocaleProvider } from "+i18n"
 import { render, screen } from "@testing-library/preact"
 import userEvent from "@testing-library/user-event"
 
@@ -81,10 +81,9 @@ function renderLocalePickerComponent(options?: {
     const onLocaleSelected = options?.onLocaleSelected
     
     render((
-        <LocalePicker
-            selectedLocale={selectedLocale}
-            onLocaleSelected={onLocaleSelected}
-        />
+        <LocaleProvider value={selectedLocale}>
+            <LocalePicker onLocaleSelected={onLocaleSelected}/>
+        </LocaleProvider>
     ))
     
     return {

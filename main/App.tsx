@@ -1,11 +1,10 @@
 import { GlyphIconGitHub } from "+elements"
 import type { LocaleCachePort, PreferredLocalePort } from "+i18n"
-import { LocalePicker, useLocale } from "+i18n"
+import { LocalePicker, LocaleProvider, useLocaleSelection } from "+i18n"
 import { ProfilePage } from "+profile"
 import { content } from "+profile/content"
 import type { MediaThemePort, ThemeCachePort } from "+theme"
 import { ThemePicker, useTheme } from "+theme"
-import { Fragment } from "preact"
 import { useEffect } from "preact/hooks"
 
 const copyright = {
@@ -35,31 +34,26 @@ export function App({
         themeCachePort,
     })
     
-    const { locale, selectLocale } = useLocale({
+    const { locale, selectLocale } = useLocaleSelection({
         localeCachePort,
         preferredLocalePort,
     })
     
     return (
-        <Fragment>
+        <LocaleProvider value={locale}>
             <header class="flex absolute top-4 right-4 justify-end items-center md:gap-x-2">
                 <ThemePicker
                     class="w-fit"
-                    locale={locale}
                     mediaTheme={mediaTheme}
                     selectedTheme={themeSelection}
                     onThemeSelected={selectTheme}
                 />
                 <LocalePicker
                     class="w-fit md:w-48"
-                    selectedLocale={locale}
                     onLocaleSelected={selectLocale}
                 />
             </header>
-            <ProfilePage
-                content={content}
-                locale={locale}
-            />
+            <ProfilePage content={content}/>
             <footer class="p-8 bg-neutral-200 dark:bg-neutral-900 md:py-16">
                 <div class="flex flex-col gap-y-2 items-center md:gap-y-4">
                     <div class="flex gap-x-2 justify-center text-neutral-500 dark:text-neutral-400">
@@ -73,6 +67,6 @@ export function App({
                     </span>
                 </div>
             </footer>
-        </Fragment>
+        </LocaleProvider>
     )
 }

@@ -1,12 +1,17 @@
 import type { Locale, LocaleCachePort, PreferredLocalePort } from "+i18n"
-import { useCallback, useEffect, useState } from "preact/hooks"
+import { defaultLocale } from "+i18n"
+import { createContext } from "preact"
+import { useCallback, useContext, useEffect, useState } from "preact/hooks"
 
 export type UseLocaleProps = {
     readonly localeCachePort: LocaleCachePort
     readonly preferredLocalePort: PreferredLocalePort
 }
 
-export function useLocale({
+const LocaleContext = createContext<Locale>(defaultLocale)
+export const LocaleProvider = LocaleContext.Provider
+
+export function useLocaleSelection({
     localeCachePort: { restoredLocaleSelection, saveLocaleSelection },
     preferredLocalePort: { preferredLocale },
 }: UseLocaleProps) {
@@ -29,4 +34,8 @@ export function useLocale({
         locale,
         selectLocale,
     }
+}
+
+export function useLocale(): Locale {
+    return useContext(LocaleContext)
 }

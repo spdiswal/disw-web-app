@@ -1,5 +1,6 @@
 import { HeroIconCheck, HeroIconDesktopComputer, HeroIconMoon, HeroIconSun, Listbox, ListboxIconButton, ListboxOption } from "+elements"
-import type { Locale, Localisable } from "+i18n"
+import type { Localisable } from "+i18n"
+import { useLocale } from "+i18n"
 import type { Theme, ThemeSelection } from "+theme"
 import type { ClassValue } from "clsx"
 import type { JSX } from "preact"
@@ -34,7 +35,6 @@ const accessibilityLabel: Localisable<string> = {
 
 type ThemePickerProps = {
     readonly class?: ClassValue
-    readonly locale: Locale
     readonly mediaTheme: Theme
     readonly selectedTheme: ThemeSelection
     readonly onThemeSelected?: (selectedTheme: ThemeSelection) => void
@@ -42,11 +42,12 @@ type ThemePickerProps = {
 
 export function ThemePicker({
     class: _class,
-    locale,
     mediaTheme,
     selectedTheme,
     onThemeSelected,
 }: ThemePickerProps) {
+    const locale = useLocale()
+    
     return (
         <Listbox
             class={_class}

@@ -1,4 +1,5 @@
 import type { Locale } from "+i18n"
+import { LocaleProvider } from "+i18n"
 import type { Theme, ThemeSelection } from "+theme"
 import { ThemePicker } from "+theme"
 import { render, screen } from "@testing-library/preact"
@@ -116,12 +117,13 @@ function renderThemePickerComponent(options?: {
     const onThemeSelected = options?.onThemeSelected
     
     const { rerender } = render((
-        <ThemePicker
-            locale={locale}
-            mediaTheme={mediaTheme}
-            selectedTheme={selectedTheme}
-            onThemeSelected={onThemeSelected}
-        />
+        <LocaleProvider value={locale}>
+            <ThemePicker
+                mediaTheme={mediaTheme}
+                selectedTheme={selectedTheme}
+                onThemeSelected={onThemeSelected}
+            />
+        </LocaleProvider>
     ))
     
     return {
@@ -133,12 +135,13 @@ function renderThemePickerComponent(options?: {
         },
         changeLocale: (newLocale: Locale) => {
             rerender((
-                <ThemePicker
-                    locale={newLocale}
-                    mediaTheme={mediaTheme}
-                    selectedTheme={selectedTheme}
-                    onThemeSelected={onThemeSelected}
-                />
+                <LocaleProvider value={newLocale}>
+                    <ThemePicker
+                        mediaTheme={mediaTheme}
+                        selectedTheme={selectedTheme}
+                        onThemeSelected={onThemeSelected}
+                    />
+                </LocaleProvider>
             ))
         },
     }

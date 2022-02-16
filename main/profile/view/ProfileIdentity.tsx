@@ -1,5 +1,6 @@
 import { SplitContainer } from "+elements"
-import type { Locale, Localisable } from "+i18n"
+import type { Localisable } from "+i18n"
+import { useLocale } from "+i18n"
 import type { Identity } from "+profile"
 import { ProfileIdentityQuickFact } from "./ProfileIdentityQuickFact"
 
@@ -11,7 +12,6 @@ const workExperienceTerm: Localisable<string> = { da: "Joberfaring", en: "Work E
 
 type ProfileIdentityProps = {
     readonly identity: Identity
-    readonly locale: Locale
 }
 
 export function ProfileIdentity({
@@ -24,8 +24,9 @@ export function ProfileIdentity({
         academicDiscipline,
         workExperience,
     },
-    locale,
 }: ProfileIdentityProps) {
+    const locale = useLocale()
+    
     return (
         <div class="p-8 bg-gradient-to-br from-neutral-50 dark:from-neutral-900 to-primary-50 dark:to-neutral-800 border-b-8 border-primary-600">
             <SplitContainer

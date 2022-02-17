@@ -47,13 +47,14 @@ It is defined in `.env.development`.
 
 You can create a new profile (e.g. named `my-profile`):
 
-. In the `main/profile/content` folder, save the portrait as a https://developers.google.com/speed/webp/docs/using[WebP] image file named `my-profile.webp`.
-. In the same folder, create a TypeScript file named `my-profile.ts` and import the portrait:
+. In the `main/content` folder, save the portrait as a https://developers.google.com/speed/webp/docs/using[WebP] image file named `my-profile.webp`.
+. In the same folder, create a TypeScript file named `my-profile.tsx` and import the portrait:
 +
 ----
 import portraitAssetUrl from "./my-profile.webp"
 ----
-. Export a constant named `content` of the `Content` type, in which you describe the content and set the portrait.
+. Export a constant named `ContentSection` for which you use the `<Content/>` component from the `+profile` module to describe the profile content and set the portrait.
+. Export a `string` constant named `name` with the name to display in the title bar.
 . In the project root folder, create a new file named `.env.development.local` (or `.env.production.local` when building for production).
 Git will ignore this file.
 Let it override the `VITE_PROFILE_NAME` environment variable to use the new profile:
@@ -67,7 +68,7 @@ VITE_PROFILE_NAME=my-profile
 Git will ignore filenames that contain the substring `.local`.
 Use this to prevent personal information from leaking into the repository.
 
-For example: `my-profile.local.ts` and `my-profile.local.webp`.
+For example: `my-profile.local.tsx` and `my-profile.local.webp`.
 
 You must override the `VITE_PROFILE_NAME` environment variable accordingly:
 
@@ -201,7 +202,7 @@ You can define the configurations of PostCSS and Tailwind CSS directly in the Vi
 However, doing so would prevent Vite from instantly applying configuration changes, particularly in Tailwind CSS themes, without requiring a restart of the development server.
 ====
 
-To load the correct profile into the web app, the Vite configuration defines `+profile/content` to be an alias for the TypeScript module designated by `VITE_PROFILE_NAME`.
+To load the correct profile into the web app, the Vite configuration defines `+content` to be an alias for the TypeScript module designated by `VITE_PROFILE_NAME`.
 
 Generating a production-grade distribution of the web app consists of two phases:
 

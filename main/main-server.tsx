@@ -1,5 +1,5 @@
 import { dummyLocaleCachePort, dummyPreferredLocalePort } from "+i18n"
-import { content } from "+profile/content"
+import { name } from "+content"
 import { dummyMediaThemePort, dummyThemeCachePort } from "+theme"
 import { renderToString } from "preact-render-to-string"
 import type { TailwindColorGroup, TailwindConfig } from "tailwindcss/tailwind-config"
@@ -45,7 +45,7 @@ export function substituteHtmlFragments(
         },
         {
             placeholderToReplace: "<title>DISW Web App</title> <!-- [main-server.tsx fragment: title] -->",
-            fragmentToInsert: `<title>${content.identity.name}</title>`,
+            fragmentToInsert: `<title>${name}</title>`,
         },
         {
             placeholderToReplace: "<!-- [main-server.tsx fragment: body] -->",

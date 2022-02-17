@@ -1,16 +1,9 @@
-import { GlyphIconGitHub } from "+elements"
 import type { LocaleCachePort, PreferredLocalePort } from "+i18n"
 import { LocalePicker, LocaleProvider, useLocaleSelection } from "+i18n"
-import { ProfilePage } from "+profile"
-import { content } from "+profile/content"
+import { ContentSection, name } from "+content"
 import type { MediaThemePort, ThemeCachePort } from "+theme"
 import { ThemePicker, useTheme } from "+theme"
 import { useEffect } from "preact/hooks"
-
-const copyright = {
-    year: new Date().getFullYear(),
-    owner: content.identity.name,
-}
 
 type AppProps = {
     readonly localeCachePort: LocaleCachePort
@@ -26,7 +19,7 @@ export function App({
     themeCachePort,
 }: AppProps) {
     useEffect(() => {
-        document.title = content.identity.name
+        document.title = name
     }, [])
     
     const { mediaTheme, themeSelection, selectTheme } = useTheme({
@@ -53,20 +46,7 @@ export function App({
                     onLocaleSelected={selectLocale}
                 />
             </header>
-            <ProfilePage content={content}/>
-            <footer class="p-8 bg-neutral-200 dark:bg-neutral-900 md:py-16">
-                <div class="flex flex-col gap-y-2 items-center md:gap-y-4">
-                    <div class="flex gap-x-2 justify-center text-neutral-500 dark:text-neutral-400">
-                        <a href={content.socialLinks.githubUrl}>
-                            <span class="sr-only">GitHub</span>
-                            <GlyphIconGitHub class="h-8 hover:text-neutral-700 dark:hover:text-neutral-200" aria-hidden="true"/>
-                        </a>
-                    </div>
-                    <span class="font-light text-neutral-600 dark:text-neutral-300">
-                        &copy; {copyright.year} {copyright.owner}
-                    </span>
-                </div>
-            </footer>
+            <ContentSection/>
         </LocaleProvider>
     )
 }

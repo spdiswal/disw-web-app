@@ -1,142 +1,141 @@
+import { ContentSection } from "+content"
 import { LocaleProvider } from "+i18n"
-import { ProfilePage } from "+profile"
-import { content } from "+profile/content"
 import { render, screen, within } from "@testing-library/preact"
 
-test("The profile page specifies the source of the portrait.", () => {
+test("The content specifies the source of the portrait.", () => {
     // GIVEN a test subject.
-    const profilePage = renderProfilePage()
+    const content = renderContent()
     
-    // THEN the profile page specifies the source of the portrait.
-    expect(profilePage.getPortrait()).toHaveAttribute("src", "perseverance-dummy.webp")
+    // THEN the content specifies the source of the portrait.
+    expect(content.getPortrait()).toHaveAttribute("src", "perseverance-dummy.webp")
 })
 
-test("The profile page specifies the alternative text of the portrait.", () => {
+test("The content specifies the alternative text of the portrait.", () => {
     // GIVEN a test subject.
-    const profilePage = renderProfilePage()
+    const content = renderContent()
     
-    // THEN the profile page specifies an alternative text of the portrait in Danish.
-    expect(profilePage.getPortrait()).toHaveAttribute("alt", "Mit selvportræt. Jeg har boret to huller i et klippestykke foran mig og lavet hjulspor i det røde sand. Horisonten er en smule diset. Courtesy NASA/JPL-Caltech.")
+    // THEN the content specifies an alternative text of the portrait in Danish.
+    expect(content.getPortrait()).toHaveAttribute("alt", "Mit selvportræt. Jeg har boret to huller i et klippestykke foran mig og lavet hjulspor i det røde sand. Horisonten er en smule diset. Courtesy NASA/JPL-Caltech.")
     
     // WHEN changing the locale to English.
-    profilePage.changeToEnglishLocale()
+    content.changeToEnglishLocale()
     
-    // THEN the profile page specifies the alternative text of the portrait in English.
-    expect(profilePage.getPortrait()).toHaveAttribute("alt", "My self-portrait. I have drilled two holes in a rock in front of me and made wheel tracks in the red soil. The horizon is slightly hazy. Courtesy NASA/JPL-Caltech.")
+    // THEN the content specifies the alternative text of the portrait in English.
+    expect(content.getPortrait()).toHaveAttribute("alt", "My self-portrait. I have drilled two holes in a rock in front of me and made wheel tracks in the red soil. The horizon is slightly hazy. Courtesy NASA/JPL-Caltech.")
 })
 
-test("The profile page displays a greeting.", () => {
+test("The content displays a greeting.", () => {
     // GIVEN a test subject.
-    const profilePage = renderProfilePage()
+    const content = renderContent()
     
-    // THEN the profile page displays a greeting in Danish.
-    expect(profilePage.getContent()).toHaveTextContent("Hej! Jeg hedder Perseverance.")
+    // THEN the content displays a greeting in Danish.
+    expect(content.getMainSection()).toHaveTextContent("Hej! Jeg hedder Perseverance.")
     
     // WHEN changing the locale to English.
-    profilePage.changeToEnglishLocale()
+    content.changeToEnglishLocale()
     
-    // THEN the profile page displays a greeting in English.
-    expect(profilePage.getContent()).toHaveTextContent("Hi! My name is Perseverance.")
+    // THEN the content displays a greeting in English.
+    expect(content.getMainSection()).toHaveTextContent("Hi! My name is Perseverance.")
 })
 
-test("The profile page displays an area of expertise.", () => {
+test("The content displays a status.", () => {
     // GIVEN a test subject.
-    const profilePage = renderProfilePage()
+    const content = renderContent()
     
-    // THEN the profile page displays an area of expertise in Danish.
-    expect(profilePage.getContent()).toHaveTextContent("Og jeg er astrobiolog på Mars.")
+    // THEN the content displays a status in Danish.
+    expect(content.getMainSection()).toHaveTextContent("Og jeg er astrobiolog på Mars.")
     
     // WHEN changing the locale to English.
-    profilePage.changeToEnglishLocale()
+    content.changeToEnglishLocale()
     
-    // THEN the profile page displays an area of expertise in English.
-    expect(profilePage.getContent()).toHaveTextContent("And I'm an astrobiologist on Mars.")
+    // THEN the content displays a status in English.
+    expect(content.getMainSection()).toHaveTextContent("And I'm an astrobiologist on Mars.")
 })
 
-test("The profile page displays an age.", () => {
+test("The content displays an age.", () => {
     // GIVEN a test subject.
-    const profilePage = renderProfilePage()
+    const content = renderContent()
     
-    // THEN the profile page displays an age in Danish.
-    expect(profilePage.getContent()).toHaveTextContent("Alder" + "10 år")
+    // THEN the content displays an age in Danish.
+    expect(content.getMainSection()).toHaveTextContent("Alder" + "10 år")
     
     // WHEN changing the locale to English.
-    profilePage.changeToEnglishLocale()
+    content.changeToEnglishLocale()
     
-    // THEN the profile page displays the age in English.
-    expect(profilePage.getContent()).toHaveTextContent("Age" + "10 years")
+    // THEN the content displays the age in English.
+    expect(content.getMainSection()).toHaveTextContent("Age" + "10 years")
 })
 
-test("The profile page displays a residence.", () => {
+test("The content displays a residence.", () => {
     // GIVEN a test subject.
-    const profilePage = renderProfilePage()
+    const content = renderContent()
     
-    // THEN the profile page displays a residence in Danish.
-    expect(profilePage.getContent()).toHaveTextContent("Bopæl" + "Jezero")
+    // THEN the content displays a residence in Danish.
+    expect(content.getMainSection()).toHaveTextContent("Bopæl" + "Jezero")
     
     // WHEN changing the locale to English.
-    profilePage.changeToEnglishLocale()
+    content.changeToEnglishLocale()
     
-    // THEN the profile page displays the residence in English.
-    expect(profilePage.getContent()).toHaveTextContent("Residence" + "Jezero")
+    // THEN the content displays the residence in English.
+    expect(content.getMainSection()).toHaveTextContent("Residence" + "Jezero")
 })
 
-test("The profile page displays an academic discipline.", () => {
+test("The content displays an academic discipline.", () => {
     // GIVEN a test subject.
-    const profilePage = renderProfilePage()
+    const content = renderContent()
     
-    // THEN the profile page displays an academic discipline in Danish.
-    expect(profilePage.getContent()).toHaveTextContent("Faglig baggrund" + "Astrobiologi")
+    // THEN the content displays an academic discipline in Danish.
+    expect(content.getMainSection()).toHaveTextContent("Faglig baggrund" + "Astrobiologi")
     
     // WHEN changing the locale to English.
-    profilePage.changeToEnglishLocale()
+    content.changeToEnglishLocale()
     
-    // THEN the profile page displays the academic discipline in English.
-    expect(profilePage.getContent()).toHaveTextContent("Academic Discipline" + "Astrobiology")
+    // THEN the content displays the academic discipline in English.
+    expect(content.getMainSection()).toHaveTextContent("Academic Discipline" + "Astrobiology")
 })
 
-test("The profile page displays work experience.", () => {
+test("The content displays work experience.", () => {
     // GIVEN a test subject.
-    const profilePage = renderProfilePage()
+    const content = renderContent()
     
-    // THEN the profile page displays work experience in Danish.
-    expect(profilePage.getContent()).toHaveTextContent("Joberfaring" + "2 år")
+    // THEN the content displays work experience in Danish.
+    expect(content.getMainSection()).toHaveTextContent("Joberfaring" + "2 år")
     
     // WHEN changing the locale to English.
-    profilePage.changeToEnglishLocale()
+    content.changeToEnglishLocale()
     
-    // THEN the profile page displays work experience in English.
-    expect(profilePage.getContent()).toHaveTextContent("Work Experience" + "2 years")
+    // THEN the content displays work experience in English.
+    expect(content.getMainSection()).toHaveTextContent("Work Experience" + "2 years")
 })
 
-test("The profile page displays a biography.", () => {
+test("The content displays a biography.", () => {
     // GIVEN a test subject.
-    const profilePage = renderProfilePage()
+    const content = renderContent()
     
-    // THEN the profile page displays a biography in Danish.
-    expect(profilePage.getContent()).toHaveTextContent("Jeg elsker at grave i sandet på Mars! Og jeg drømmer om at opdage liv på den røde planet.")
+    // THEN the content displays a biography in Danish.
+    expect(content.getMainSection()).toHaveTextContent("Jeg elsker at grave i sandet på Mars! Og jeg drømmer om at opdage liv på den røde planet.")
     
     // WHEN changing the locale to English.
-    profilePage.changeToEnglishLocale()
+    content.changeToEnglishLocale()
     
-    // THEN the profile page displays the biography in English.
-    expect(profilePage.getContent()).toHaveTextContent("I enjoy digging through the Martian soil! And I dream about discovering life on the Red Planet.")
+    // THEN the content displays the biography in English.
+    expect(content.getMainSection()).toHaveTextContent("I enjoy digging through the Martian soil! And I dream about discovering life on the Red Planet.")
 })
 
-test("The profile page displays a career of five occupations.", () => {
+test("The content displays a career of five occupations.", () => {
     // GIVEN a test subject.
-    const profilePage = renderProfilePage()
+    const content = renderContent()
     
-    // THEN the profile page displays a career of five occupations.
-    expect(profilePage.getOccupations()).toHaveLength(5)
+    // THEN the content displays a career of five occupations.
+    expect(content.getOccupations()).toHaveLength(5)
 })
 
-test("The profile page displays an 'Astrobiolog'/'Astrobiologist' occupation.", () => {
+test("The content displays an 'Astrobiolog'/'Astrobiologist' occupation.", () => {
     // GIVEN a test subject.
-    const profilePage = renderProfilePage()
+    const content = renderContent()
     
-    // THEN the profile page has an occupation with an accessible name in Danish.
-    const occupation = profilePage.getOccupation("Astrobiolog")
+    // THEN the content has an occupation with an accessible name in Danish.
+    const occupation = content.getOccupation("Astrobiolog")
     expect(occupation).toBeInTheDocument()
     
     // AND it displays the period of the occupation in Danish.
@@ -159,7 +158,7 @@ test("The profile page displays an 'Astrobiolog'/'Astrobiologist' occupation.", 
     )
     
     // WHEN changing the locale to English.
-    profilePage.changeToEnglishLocale()
+    content.changeToEnglishLocale()
     
     // THEN the occupation has an accessible name in English.
     expect(occupation).toHaveAccessibleName("Astrobiologist")
@@ -181,16 +180,16 @@ test("The profile page displays an 'Astrobiolog'/'Astrobiologist' occupation.", 
     )
 })
 
-test("The profile page displays a 'Førsteofficer'/'First Officer' occupation.", () => {
+test("The content displays a 'Førsteofficer'/'First Officer' occupation.", () => {
     // GIVEN a test subject.
-    const profilePage = renderProfilePage()
+    const content = renderContent()
     
-    // THEN the profile page has an occupation with an accessible name in Danish.
-    const occupation = profilePage.getOccupation("Førsteofficer")
+    // THEN the content has an occupation with an accessible name in Danish.
+    const occupation = content.getOccupation("Førsteofficer")
     expect(occupation).toBeInTheDocument()
     
     // AND it displays the period of the occupation in Danish.
-    expect(occupation).toHaveTextContent("marts 2021\u2013august 2021")
+    expect(occupation).toHaveTextContent("marts 2021\u2013oktober 2021")
     
     // AND it displays the organisation of the occupation in Danish.
     expect(occupation).toHaveTextContent("NASA")
@@ -206,13 +205,13 @@ test("The profile page displays a 'Førsteofficer'/'First Officer' occupation.",
     )
     
     // WHEN changing the locale to English.
-    profilePage.changeToEnglishLocale()
+    content.changeToEnglishLocale()
     
     // THEN the occupation has an accessible name in English.
     expect(occupation).toHaveAccessibleName("First Officer")
     
     // AND it displays the period of the occupation in English.
-    expect(occupation).toHaveTextContent("March 2021\u2013August 2021")
+    expect(occupation).toHaveTextContent("March 2021\u2013October 2021")
     
     // AND it displays the organisation of the occupation in English.
     expect(occupation).toHaveTextContent("NASA")
@@ -225,12 +224,12 @@ test("The profile page displays a 'Førsteofficer'/'First Officer' occupation.",
     )
 })
 
-test("The profile page displays an 'Interplanetarisk agent'/'Interplanetary Agent' occupation.", () => {
+test("The content displays an 'Interplanetarisk agent'/'Interplanetary Agent' occupation.", () => {
     // GIVEN a test subject.
-    const profilePage = renderProfilePage()
+    const content = renderContent()
     
-    // THEN the profile page has an occupation with an accessible name in Danish.
-    const occupation = profilePage.getOccupation("Interplanetarisk agent")
+    // THEN the content has an occupation with an accessible name in Danish.
+    const occupation = content.getOccupation("Interplanetarisk agent")
     expect(occupation).toBeInTheDocument()
     
     // AND it displays the period of the occupation in Danish.
@@ -251,7 +250,7 @@ test("The profile page displays an 'Interplanetarisk agent'/'Interplanetary Agen
     )
     
     // WHEN changing the locale to English.
-    profilePage.changeToEnglishLocale()
+    content.changeToEnglishLocale()
     
     // THEN the occupation has an accessible name in English.
     expect(occupation).toHaveAccessibleName("Interplanetary Agent")
@@ -271,12 +270,12 @@ test("The profile page displays an 'Interplanetarisk agent'/'Interplanetary Agen
     )
 })
 
-test("The profile page displays a 'Kandidat i kontinuitet'/'MSc in Continuity' occupation.", () => {
+test("The content displays a 'Kandidat i kontinuitet'/'MSc in Continuity' occupation.", () => {
     // GIVEN a test subject.
-    const profilePage = renderProfilePage()
+    const content = renderContent()
     
-    // THEN the profile page has an occupation with an accessible name in Danish.
-    const occupation = profilePage.getOccupation("Kandidat i kontinuitet")
+    // THEN the content has an occupation with an accessible name in Danish.
+    const occupation = content.getOccupation("Kandidat i kontinuitet")
     expect(occupation).toBeInTheDocument()
     
     // AND it displays the period of the occupation in Danish.
@@ -296,7 +295,7 @@ test("The profile page displays a 'Kandidat i kontinuitet'/'MSc in Continuity' o
     )
     
     // WHEN changing the locale to English.
-    profilePage.changeToEnglishLocale()
+    content.changeToEnglishLocale()
     
     // THEN the occupation has an accessible name in English.
     expect(occupation).toHaveAccessibleName("MSc in Continuity")
@@ -315,16 +314,16 @@ test("The profile page displays a 'Kandidat i kontinuitet'/'MSc in Continuity' o
     )
 })
 
-test("The profile page displays a 'Bachelor i roverdesign'/'BSc in Rover Design' occupation.", () => {
+test("The content displays a 'Bachelor i roverdesign'/'BSc in Rover Design' occupation.", () => {
     // GIVEN a test subject.
-    const profilePage = renderProfilePage()
+    const content = renderContent()
     
-    // THEN the profile page has an occupation with an accessible name in Danish.
-    const occupation = profilePage.getOccupation("Bachelor i roverdesign")
+    // THEN the content has an occupation with an accessible name in Danish.
+    const occupation = content.getOccupation("Bachelor i roverdesign")
     expect(occupation).toBeInTheDocument()
     
     // AND it displays the period of the occupation in Danish.
-    expect(occupation).toHaveTextContent("september 2013\u2013juni 2017")
+    expect(occupation).toHaveTextContent("juli 2013\u2013maj 2017")
     
     // AND it displays the organisation of the occupation in Danish.
     expect(occupation).toHaveTextContent("NASA")
@@ -340,13 +339,13 @@ test("The profile page displays a 'Bachelor i roverdesign'/'BSc in Rover Design'
     )
     
     // WHEN changing the locale to English.
-    profilePage.changeToEnglishLocale()
+    content.changeToEnglishLocale()
     
     // THEN the occupation has an accessible name in English.
     expect(occupation).toHaveAccessibleName("BSc in Rover Design")
     
     // AND it displays the period of the occupation in English.
-    expect(occupation).toHaveTextContent("September 2013\u2013June 2017")
+    expect(occupation).toHaveTextContent("July 2013\u2013May 2017")
     
     // AND it displays the organisation of the occupation in English.
     expect(occupation).toHaveTextContent("NASA")
@@ -359,25 +358,42 @@ test("The profile page displays a 'Bachelor i roverdesign'/'BSc in Rover Design'
     )
 })
 
-function renderProfilePage() {
+test("The content displays the copyright owner.", () => {
+    // GIVEN a test subject.
+    const content = renderContent()
+
+    // THEN the content displays the copyright owner.
+    expect(content.getFooterSection()).toHaveTextContent("The Perseverance Dummy Profile")
+})
+
+test("The content specifies a hyperlink to GitHub.", () => {
+    // GIVEN a test subject.
+    const content = renderContent()
+    
+    // THEN the content specifies a hyperlink to GitHub.
+    expect(within(content.getFooterSection()).getByRole("link")).toHaveAttribute("href", "https://github.com/spdiswal/")
+})
+
+function renderContent() {
     const { rerender } = render((
         <LocaleProvider value="da">
-            <ProfilePage content={content}/>
+            <ContentSection/>
         </LocaleProvider>
     ))
     
     return {
-        getContent: () => screen.getByRole("main"),
+        getMainSection: () => screen.getByRole("main"),
         getPortrait: () => screen.getByRole("img"),
         getOccupation: (title: string) => screen.getByRole("article", { name: title }),
         getOccupations: () => {
             const articles = screen.getAllByRole("article")
             return articles.filter((article) => article.id !== "biography")
         },
+        getFooterSection: () => screen.getByRole("contentinfo"),
         changeToEnglishLocale: () => {
             rerender((
                 <LocaleProvider value="en">
-                    <ProfilePage content={content}/>
+                    <ContentSection/>
                 </LocaleProvider>
             ))
         },

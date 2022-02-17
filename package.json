@@ -12,14 +12,12 @@
     },
     "dependencies": {
         "clsx": "1.1.1",
-        "date-fns": "2.27.0",
         "preact": "10.6.4",
         "tailwindcss": "3.0.15",
         "tslib": "2.3.1"
     },
     "dependenciesComments": {
         "clsx": "A runtime library for constructing conditional class attribute strings from JavaScript objects and arrays.",
-        "date-fns": "A runtime library for date and time manipulation.",
         "preact": "Preact; a virtual DOM-based UI library with JSX support inspired by React. It is a runtime dependency, as it provides the API for mounting the web app onto the DOM.",
         "tailwindcss": "Tailwind CSS; a utility-first CSS framework. It is a runtime dependency, as it provides a CSS reset and helper rules in the CSS distribution.",
         "tslib": "A runtime library that optimises TypeScript applications."

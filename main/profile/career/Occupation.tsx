@@ -1,15 +1,32 @@
-import { ExternalHyperlink, Paragraph, SplitContainer } from "+elements"
+import { ExternalHyperlink, SplitContainer } from "+elements"
+import type { Localisable } from "+i18n"
 import { useLocale } from "+i18n"
-import type { Occupation } from "+profile"
-import { ProfileOccupationDate } from "./ProfileOccupationDate"
+import type { ComponentChildren } from "preact"
+import type { YearMonth } from "./FormattedYearMonth"
+import { FormattedYearMonth } from "./FormattedYearMonth"
 
-type ProfileOccupationEntryProps = {
-    readonly occupation: Occupation
+type OccupationProps = {
+    readonly id: string
+    readonly title: Localisable<string>
+    readonly organisation: Organisation
+    readonly since: YearMonth
+    readonly until: YearMonth | "present"
+    readonly children: ComponentChildren
 }
 
-export function ProfileOccupationEntry({
-    occupation: { id, title, organisation, period, activities },
-}: ProfileOccupationEntryProps) {
+export type Organisation = {
+    readonly name: Localisable<string>
+    readonly url: string
+}
+
+export function Occupation({
+    id,
+    title,
+    organisation,
+    since,
+    until,
+    children,
+}: OccupationProps) {
     const locale = useLocale()
     
     return (
@@ -18,13 +35,12 @@ export function ProfileOccupationEntry({
                 complementary={
                     <div class="flex overflow-y-clip relative gap-x-12 justify-start h-full md:justify-end lg:gap-x-16">
                         <div class="flex mb-4 font-light md:flex-col md:items-end md:mb-0 md:text-right">
-                            <ProfileOccupationDate
-                                class="md:mb-1 md:text-xl lg:text-2xl"
-                                date={period.since}
-                            />
+                            <FormattedYearMonth class="md:mb-1 md:text-xl lg:text-2xl" yearMonth={since}/>
                             <span>
                                 &ndash;
-                                <ProfileOccupationDate date={period.until}/>
+                                {until !== "present"
+                                    ? <FormattedYearMonth yearMonth={until}/>
+                                    : <span>{{ da: "nu", en: "present" }[locale]}</span>}
                             </span>
                         </div>
                         <span
@@ -45,11 +61,7 @@ export function ProfileOccupationEntry({
                     </ExternalHyperlink>
                 </header>
                 <div class="flex flex-col gap-y-2 mb-16 md:mb-24">
-                    {activities.map((activity) => (
-                        <Paragraph key={activity.id}>
-                            {activity[locale]}
-                        </Paragraph>
-                    ))}
+                    {children}
                 </div>
             </SplitContainer>
         </article>

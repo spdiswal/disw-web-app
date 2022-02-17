@@ -29,10 +29,10 @@ export default defineConfig(({ mode }) => {
             // in this order. Thus, the longer and more specific aliases should
             // be declared first.
             alias: {
-                // The alias below lets Vite embed just the specified profile
-                // content into the production distribution while preserving hot
-                // module replacement during development.
-                "+profile/content": path(`main/profile/content/${profileName}`),
+                // The alias below lets Vite embed just the specified content
+                // into the production distribution while preserving hot module
+                // replacement during development.
+                "+content": path(`main/content/${profileName}`),
                 //
                 "+elements": path("main/elements/"),
                 "+i18n": path("main/i18n/"),

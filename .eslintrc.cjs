@@ -314,7 +314,6 @@ module.exports = {
                     arrow: "parens-new-line",
                 }],
                 "react/button-has-type": "error",
-                "react/destructuring-assignment": ["error", "always"],
                 "react/forbid-dom-props": ["error", {
                     forbid: ["style"],
                 }],
@@ -348,7 +347,6 @@ module.exports = {
                 "tailwindcss/classnames-order": "error",
                 "tailwindcss/enforces-shorthand": "error",
                 "tailwindcss/migration-from-tailwind-2": "error",
-                "tailwindcss/no-arbitrary-value": "off",
                 "tailwindcss/no-contradicting-classname": "error",
                 "tailwindcss/no-custom-classname": "error",
             },

@@ -8,7 +8,7 @@
         "baseUrl": ".",
         "paths": {
             // The alias below lets the type checker rely on a dummy profile.
-            "+profile/content": [ "main/profile/content/perseverance-dummy" ],
+            "+content": [ "main/content/perseverance-dummy" ],
             //
             "+elements": [ "main/elements/index" ],
             "+i18n": [ "main/i18n/index" ],

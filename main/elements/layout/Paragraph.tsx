@@ -1,13 +1,10 @@
-import type { ComponentChildren } from "preact"
+import type { Localisable } from "+i18n"
+import { useLocale } from "+i18n"
 
-type ParagraphProps = {
-    readonly children: ComponentChildren
-}
-
-export function Paragraph({
-    children,
-}: ParagraphProps) {
+export function Paragraph(props: Localisable<string>) {
+    const locale = useLocale()
+    
     return (
-        <p class="max-w-xl">{children}</p>
+        <p class="max-w-xl">{props[locale]}</p>
     )
 }

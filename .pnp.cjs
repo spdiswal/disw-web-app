@@ -54,7 +54,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["autoprefixer", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:10.4.2"],
             ["babel-plugin-transform-hook-names", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:1.0.2"],
             ["clsx", "npm:1.1.1"],
-            ["date-fns", "npm:2.27.0"],
             ["eslint", "npm:8.7.0"],
             ["eslint-plugin-compat", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:4.0.1"],
             ["eslint-plugin-jest", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:25.7.0"],
@@ -3436,15 +3435,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["abab", "npm:2.0.5"],
             ["whatwg-mimetype", "npm:2.3.0"],
             ["whatwg-url", "npm:8.7.0"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["date-fns", [
-        ["npm:2.27.0", {
-          "packageLocation": "./.yarn/cache/date-fns-npm-2.27.0-8177de8a5e-db62036b38.zip/node_modules/date-fns/",
-          "packageDependencies": [
-            ["date-fns", "npm:2.27.0"]
           ],
           "linkType": "HARD",
         }]
@@ -7463,7 +7453,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["autoprefixer", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:10.4.2"],
             ["babel-plugin-transform-hook-names", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:1.0.2"],
             ["clsx", "npm:1.1.1"],
-            ["date-fns", "npm:2.27.0"],
             ["eslint", "npm:8.7.0"],
             ["eslint-plugin-compat", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:4.0.1"],
             ["eslint-plugin-jest", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:25.7.0"],

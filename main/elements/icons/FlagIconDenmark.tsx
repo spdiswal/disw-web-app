@@ -10,13 +10,11 @@ type FlagIconDenmarkProps = {
  *
  * @see https://flagcolor.com/denmark-flag-colors/
  */
-export function FlagIconDenmark({
-    class: _class,
-}: FlagIconDenmarkProps) {
+export function FlagIconDenmark(props: FlagIconDenmarkProps) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            class={clsx(_class, "aspect-square")}
+            class={clsx(props.class, "aspect-square")}
             height="24"
             viewBox="0 0 32 32"
         >

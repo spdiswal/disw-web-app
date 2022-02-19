@@ -33,9 +33,9 @@ export function Occupation({
         <article aria-labelledby={id}>
             <SplitContainer
                 complementary={
-                    <div class="flex overflow-y-clip relative gap-x-12 justify-start h-full md:justify-end lg:gap-x-16">
+                    <div class="flex overflow-y-clip relative gap-x-10 justify-start h-full md:justify-end lg:gap-x-16">
                         <div class="flex mb-4 font-light md:flex-col md:items-end md:mb-0 md:text-right">
-                            <FormattedYearMonth class="md:mb-1 md:text-xl lg:text-2xl" yearMonth={since}/>
+                            <FormattedYearMonth class="md:text-xl lg:mb-1 lg:text-2xl" yearMonth={since}/>
                             <span>
                                 &ndash;
                                 {until !== "present"

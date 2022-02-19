@@ -29,13 +29,13 @@ test("The content displays a greeting.", () => {
     const content = renderContent()
     
     // THEN the content displays a greeting in Danish.
-    expect(content.getMainSection()).toHaveTextContent("Hej! Jeg hedder Perseverance.")
+    expect(content.getMainSection()).toHaveTextContent("Hej! Jeg hedder" + "Perseverance")
     
     // WHEN changing the locale to English.
     content.changeToEnglishLocale()
     
     // THEN the content displays a greeting in English.
-    expect(content.getMainSection()).toHaveTextContent("Hi! My name is Perseverance.")
+    expect(content.getMainSection()).toHaveTextContent("Hi! My name is" + "Perseverance")
 })
 
 test("The content displays a status.", () => {
@@ -43,13 +43,13 @@ test("The content displays a status.", () => {
     const content = renderContent()
     
     // THEN the content displays a status in Danish.
-    expect(content.getMainSection()).toHaveTextContent("Og jeg er astrobiolog på Mars.")
+    expect(content.getMainSection()).toHaveTextContent("… og jeg er astrobiolog på Mars.")
     
     // WHEN changing the locale to English.
     content.changeToEnglishLocale()
     
     // THEN the content displays a status in English.
-    expect(content.getMainSection()).toHaveTextContent("And I'm an astrobiologist on Mars.")
+    expect(content.getMainSection()).toHaveTextContent("… and I'm an astrobiologist on Mars.")
 })
 
 test("The content displays an age.", () => {
@@ -80,32 +80,32 @@ test("The content displays a residence.", () => {
     expect(content.getMainSection()).toHaveTextContent("Residence" + "Jezero")
 })
 
-test("The content displays an academic discipline.", () => {
+test("The content displays a discipline.", () => {
     // GIVEN a test subject.
     const content = renderContent()
     
-    // THEN the content displays an academic discipline in Danish.
-    expect(content.getMainSection()).toHaveTextContent("Faglig baggrund" + "Astrobiologi")
+    // THEN the content displays a discipline in Danish.
+    expect(content.getMainSection()).toHaveTextContent("Baggrund" + "Astrobiologi")
     
     // WHEN changing the locale to English.
     content.changeToEnglishLocale()
     
-    // THEN the content displays the academic discipline in English.
-    expect(content.getMainSection()).toHaveTextContent("Academic Discipline" + "Astrobiology")
+    // THEN the content displays the discipline in English.
+    expect(content.getMainSection()).toHaveTextContent("Discipline" + "Astrobiology")
 })
 
-test("The content displays work experience.", () => {
+test("The content displays experience.", () => {
     // GIVEN a test subject.
     const content = renderContent()
     
-    // THEN the content displays work experience in Danish.
-    expect(content.getMainSection()).toHaveTextContent("Joberfaring" + "2 år")
+    // THEN the content displays experience in Danish.
+    expect(content.getMainSection()).toHaveTextContent("Erfaring" + "2 år")
     
     // WHEN changing the locale to English.
     content.changeToEnglishLocale()
     
-    // THEN the content displays work experience in English.
-    expect(content.getMainSection()).toHaveTextContent("Work Experience" + "2 years")
+    // THEN the content displays the experience in English.
+    expect(content.getMainSection()).toHaveTextContent("Experience" + "2 years")
 })
 
 test("The content displays a biography.", () => {
@@ -361,7 +361,7 @@ test("The content displays a 'Bachelor i roverdesign'/'BSc in Rover Design' occu
 test("The content displays the copyright owner.", () => {
     // GIVEN a test subject.
     const content = renderContent()
-
+    
     // THEN the content displays the copyright owner.
     expect(content.getFooterSection()).toHaveTextContent("The Perseverance Dummy Profile")
 })

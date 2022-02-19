@@ -20,7 +20,7 @@ module.exports = {
             "white": colors.white,
         },
         screens: {
-            "sm": "600px",
+            "sm": "560px",
             "md": "900px",
             "lg": "1500px",
         },
@@ -30,6 +30,11 @@ module.exports = {
             },
             fontFamily: {
                 "sans": [`"Inter var"`, ...defaultTheme.fontFamily.sans],
+            },
+            maxWidth: {
+                "until-sm": "calc(min(36rem, 100vw) - 6rem)",
+                "until-md": "calc(min(48rem, 100vw) - 6rem)",
+                "until-lg": "calc(min(72rem, 100vw) - 6rem)",
             },
             width: {
                 "1/8": "12.5%",

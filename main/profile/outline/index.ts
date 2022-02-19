@@ -1,5 +1,5 @@
-export * from "./AcademicDiscipline"
+export * from "./Discipline"
 export * from "./Age"
 export * from "./LinearOutline"
 export * from "./Residence"
-export * from "./WorkExperience"
+export * from "./Experience"

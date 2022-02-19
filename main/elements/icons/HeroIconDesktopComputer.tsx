@@ -10,13 +10,11 @@ type HeroIconDesktopComputerProps = {
  *
  * @see https://heroicons.com/
  */
-export function HeroIconDesktopComputer({
-    class: _class,
-}: HeroIconDesktopComputerProps) {
+export function HeroIconDesktopComputer(props: HeroIconDesktopComputerProps) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            class={clsx(_class, "aspect-square")}
+            class={clsx(props.class, "aspect-square")}
             height="24"
             viewBox="0 0 24 24"
             fill="none"

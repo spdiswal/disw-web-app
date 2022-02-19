@@ -1,7 +1,7 @@
 import { Paragraph } from "+elements"
 import { indistinguishable } from "+i18n"
 import type { Organisation } from "+profile"
-import { AcademicDiscipline, Age, Biography, Career, Content, Education, ElevatedRoundedPortrait, Employments, Footer, Identity, LinearOutline, Occupation, Residence, WorkExperience } from "+profile"
+import { Discipline, Age, Biography, Career, Content, Education, ElevatedRoundedPortrait, Employments, Footer, Identity, LinearOutline, Occupation, Residence, Experience } from "+profile"
 import portraitAssetUrl from "./perseverance-dummy.webp"
 
 export const ContentSection = PerseveranceDummyContentSection
@@ -23,8 +23,8 @@ function PerseveranceDummyContentSection() {
                 <Identity
                     name={name}
                     status={{
-                        da: "Og jeg er astrobiolog på Mars.",
-                        en: "And I'm an astrobiologist on Mars.",
+                        da: "… og jeg er astrobiolog på Mars.",
+                        en: "… and I'm an astrobiologist on Mars.",
                     }}
                     portrait={
                         <ElevatedRoundedPortrait
@@ -37,10 +37,10 @@ function PerseveranceDummyContentSection() {
                     }
                     outline={
                         <LinearOutline>
-                            <Age da="10 år" en="10 years"/>
-                            <Residence da="Jezero" en="Jezero"/>
-                            <AcademicDiscipline da="Astrobiologi" en="Astrobiology"/>
-                            <WorkExperience da="2 år" en="2 years"/>
+                            <Age class="whitespace-nowrap" da="10 år" en="10 years"/>
+                            <Residence class="whitespace-nowrap" da="Jezero" en="Jezero"/>
+                            <Discipline class="md:w-min lg:w-auto" da="Astrobiologi" en="Astrobiology"/>
+                            <Experience class="whitespace-nowrap" da="2 år" en="2 years"/>
                         </LinearOutline>
                     }
                 />

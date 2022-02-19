@@ -3,16 +3,16 @@ import { useLocale } from "+i18n"
 import type { ClassValue } from "clsx"
 import clsx from "clsx"
 
-type AgeProps = Localisable<string> & {
+type ExperienceProps = Localisable<string> & {
     readonly class?: ClassValue
 }
 
-export function Age(props: AgeProps) {
+export function Experience(props: ExperienceProps) {
     const locale = useLocale()
     
     return (
         <div class={clsx(props.class, "text-center")}>
-            <dt>{{ da: "Alder", en: "Age" }[locale]}</dt>
+            <dt>{{ da: "Erfaring", en: "Experience" }[locale]}</dt>
             <dd class="font-bold text-primary-600 md:text-xl lg:text-2xl">{props[locale]}</dd>
         </div>
     )

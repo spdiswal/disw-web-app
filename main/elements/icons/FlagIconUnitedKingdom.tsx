@@ -11,13 +11,11 @@ type FlagIconUnitedKingdomProps = {
  *
  * @see https://flagcolor.com/british-flag-colors/
  */
-export function FlagIconUnitedKingdom({
-    class: _class,
-}: FlagIconUnitedKingdomProps) {
+export function FlagIconUnitedKingdom(props: FlagIconUnitedKingdomProps) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            class={clsx(_class, "aspect-square")}
+            class={clsx(props.class, "aspect-square")}
             height="24"
             viewBox="0 0 32 32"
         >

@@ -14,9 +14,9 @@ export function SplitContainer({
     children,
 }: SplitContainerProps) {
     return (
-        <div class={clsx(_class, "flex flex-col md:flex-row md:gap-x-12 md:mx-auto md:max-w-7xl lg:gap-x-16")}>
-            <div class="md:w-1/4 lg:w-3/8">{complementary}</div>
-            <div class="md:w-3/4 lg:w-5/8">{children}</div>
+        <div class={clsx(_class, "flex flex-col mx-auto max-w-until-sm sm:max-w-until-md md:flex-row md:gap-x-10 md:max-w-until-lg lg:gap-x-16 lg:max-w-7xl")}>
+            <div class="md:shrink-0 md:w-1/3 lg:w-3/8">{complementary}</div>
+            <div class="md:overflow-x-hidden md:w-2/3 lg:w-5/8">{children}</div>
         </div>
     )
 }

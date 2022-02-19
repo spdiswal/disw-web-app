@@ -10,13 +10,11 @@ type HeroIconSunProps = {
  *
  * @see https://heroicons.com/
  */
-export function HeroIconSun({
-    class: _class,
-}: HeroIconSunProps) {
+export function HeroIconSun(props: HeroIconSunProps) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            class={clsx(_class, "aspect-square")}
+            class={clsx(props.class, "aspect-square")}
             height="24"
             viewBox="0 0 24 24"
             fill="none"

@@ -8,7 +8,7 @@ export function LinearOutline({
     children,
 }: LinearOutlineProps) {
     return (
-        <dl class="flex flex-col gap-y-6 items-center sm:flex-row sm:gap-x-10 sm:justify-center sm:mb-4 md:gap-x-12 md:justify-start lg:gap-x-16">
+        <dl class="flex flex-col gap-y-6 items-center sm:flex-row sm:gap-x-10 sm:justify-center sm:mb-2 md:justify-start md:mb-0 lg:gap-x-16 lg:mb-4">
             {children}
         </dl>
     )

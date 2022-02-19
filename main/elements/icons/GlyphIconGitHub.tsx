@@ -10,13 +10,11 @@ type GlyphIconGitHubProps = {
  *
  * @see https://glyphicons.com/tools/social/
  */
-export function GlyphIconGitHub({
-    class: _class,
-}: GlyphIconGitHubProps) {
+export function GlyphIconGitHub(props: GlyphIconGitHubProps) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            class={clsx(_class, "aspect-square")}
+            class={clsx(props.class, "aspect-square")}
             height="24"
             viewBox="0 0 32 32"
             fill="currentColor"

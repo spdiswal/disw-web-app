@@ -40,7 +40,9 @@ module.exports = {
         "function-paren-newline": ["error", "multiline-arguments"],
         "generator-star-spacing": ["error", "before"],
         "implicit-arrow-linebreak": ["error", "beside"],
-        "indent": ["error", 4],
+        "indent": ["error", 4, {
+            SwitchCase: 1,
+        }],
         "key-spacing": "error",
         "keyword-spacing": "off",
         "@typescript-eslint/keyword-spacing": "error",
@@ -54,7 +56,10 @@ module.exports = {
             tabWidth: 4,
             ignoreComments: true,
             // language=RegExp
-            ignorePattern: "(^import\\s.+\\sfrom\\s.+$)|(^(export\\s)?function\\s.+\\(\\):\\s.+\\{$)",
+            ignorePattern:
+                "(^import\\s.+\\sfrom\\s.+$)"
+                + "|(^\\s*(export\\s)?function\\s\\w+(<.+>)?\\((\\)(:\\s.+)?\\s\\{)?$)"
+                + "|(^\\s*(export\\s)?(const|let)\\s\\w+:\\s.+\\s=(\\s([({\\[]))?$)",
             ignoreRegExpLiterals: true,
             ignoreStrings: true,
             ignoreTemplateLiterals: true,

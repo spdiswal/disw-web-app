@@ -1,5 +1,7 @@
+export * from "./description-list"
 export * from "./icons"
 export * from "./layout"
 export * from "./listbox"
+export * from "./table"
 export * from "./ExternalHyperlink"
 export * from "./useWindowEvent"

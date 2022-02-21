@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+
 import { fakeMediaThemePort, fakeThemeCachePort } from "+test/fakes"
 import { dummyMediaThemePort, useTheme } from "+theme"
 import { act, renderHook } from "@testing-library/preact-hooks"
@@ -105,7 +107,7 @@ test("The document applies the 'dark' theme when it is selected.", async () => {
     
     // WHEN selecting the 'dark' theme.
     await act(() => {
-        result.current!.selectTheme("dark") // eslint-disable-line @typescript-eslint/no-non-null-assertion
+        result.current!.selectTheme("dark")
     })
     
     // THEN the document applies the 'dark' theme.
@@ -123,7 +125,7 @@ test("The document applies the 'light' theme when it is selected.", async () => 
     
     // WHEN selecting the 'light' theme.
     await act(() => {
-        result.current!.selectTheme("light") // eslint-disable-line @typescript-eslint/no-non-null-assertion
+        result.current!.selectTheme("light")
     })
     
     // THEN the document applies the 'light' theme.
@@ -142,7 +144,7 @@ test("The theme cache saves the 'dark' theme when it is selected.", async () => 
     
     // WHEN selecting the 'dark' theme.
     await act(() => {
-        result.current!.selectTheme("dark") // eslint-disable-line @typescript-eslint/no-non-null-assertion
+        result.current!.selectTheme("dark")
     })
     
     // THEN the theme cache saves the 'dark' theme.
@@ -161,7 +163,7 @@ test("The theme cache saves the 'light' theme when it is selected.", async () =>
     
     // WHEN selecting the 'light' theme.
     await act(() => {
-        result.current!.selectTheme("light") // eslint-disable-line @typescript-eslint/no-non-null-assertion
+        result.current!.selectTheme("light")
     })
     
     // THEN the theme cache saves the 'light' theme.
@@ -180,7 +182,7 @@ test("The theme cache saves the 'match-media' theme when it is selected.", async
     
     // WHEN selecting the 'match-media' theme.
     await act(() => {
-        result.current!.selectTheme("match-media") // eslint-disable-line @typescript-eslint/no-non-null-assertion
+        result.current!.selectTheme("match-media")
     })
     
     // THEN the theme cache saves the 'match-media' theme.

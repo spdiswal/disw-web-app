@@ -54,13 +54,13 @@ export function Occupation({
                     </div>
                 }
             >
-                <header class="mb-3 md:mb-1">
+                <header class="mb-3 md:mb-2">
                     <h1 id={id} class="font-bold text-primary-600 md:text-2xl">{title[locale]}</h1>
                     <ExternalHyperlink url={organisation.url} class="block pr-3 pb-1 w-fit font-semibold md:pt-1 md:pb-3">
                         {organisation.name[locale]}
                     </ExternalHyperlink>
                 </header>
-                <div class="flex flex-col gap-y-2 mb-16 md:mb-24">
+                <div class="flex flex-col gap-y-6 mb-16 md:mb-24">
                     {children}
                 </div>
             </SplitContainer>

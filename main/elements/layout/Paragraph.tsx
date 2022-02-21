@@ -5,6 +5,6 @@ export function Paragraph(props: Localisable<string>) {
     const locale = useLocale()
     
     return (
-        <p class="max-w-prose">{props[locale]}</p>
+        <p>{props[locale]}</p>
     )
 }

@@ -31,6 +31,9 @@ module.exports = {
             fontFamily: {
                 "sans": [`"Inter var"`, ...defaultTheme.fontFamily.sans],
             },
+            gridTemplateColumns: {
+                "description-list": "max-content 1fr",
+            },
             maxWidth: {
                 "until-sm": "calc(min(36rem, 100vw) - 6rem)",
                 "until-md": "calc(min(48rem, 100vw) - 6rem)",

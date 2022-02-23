@@ -1,4 +1,4 @@
-import { HeroIconChevronDown, HeroIconChevronUp, Table, TableCell, useSortableTableRows } from "+elements"
+import { Expandable, HeroIconChevronDown, HeroIconChevronUp, Table, TableCell, useSortableTableRows } from "+elements"
 import type { Locale, Localisable } from "+i18n"
 import { useLocale } from "+i18n"
 import type { Comparator, Year } from "+types"
@@ -50,6 +50,8 @@ export function UniversityCourseTable({
 }: UniversityCourseTableProps) {
     const locale = useLocale()
     
+    const [isExpanded, setExpanded] = useState(false)
+    
     const [activeColumn, setActiveColumn] =
         useState<UniversityCourseColumn>("term")
     
@@ -68,7 +70,47 @@ export function UniversityCourseTable({
     const { sortedRows, order, setOrder } =
         useSortableTableRows({ rows: Object.keys(courses), comparator })
     
-    function sortByColumn(column: UniversityCourseColumn) {
+    return (
+        <Expandable
+            expandButtonLabel={{ da: "Vis alle kurser", en: "Show all courses" }}
+            isExpanded={isExpanded}
+            onExpansionButtonClicked={expand}
+        >
+            <Table
+                columns={columns}
+                rows={sortedRows}
+                onColumnHeaderClicked={expandAndSortByColumn}
+                renderColumnHeader={(column) => {
+                    const isUnsorted = column !== activeColumn
+                    
+                    return (
+                        <span class="flex gap-x-2 items-center">
+                            {columnHeaderLabel[column][locale]}
+                            {order === "ascending"
+                                ? <HeroIconChevronUp class={clsx(isUnsorted && "invisible", "h-4")}/>
+                                : <HeroIconChevronDown class={clsx(isUnsorted && "invisible", "h-4")}/>}
+                        </span>
+                    )
+                }}
+                renderRow={(row) => {
+                    const { name, year, term, weight, grade } = courses[row]
+                    
+                    return (
+                        <Fragment>
+                            <TableCell class="font-semibold">{name[locale]}</TableCell>
+                            <TableCell class="whitespace-nowrap">{termLabel[term][locale]}{" "}{year}</TableCell>
+                            <TableCell class="whitespace-nowrap">{weight}{" "}ECTS</TableCell>
+                            <TableCell class="whitespace-nowrap">{gradeLabel[grade][locale]}</TableCell>
+                        </Fragment>
+                    )
+                }}
+            />
+        </Expandable>
+    )
+    
+    function expandAndSortByColumn(column: UniversityCourseColumn) {
+        expand()
+        
         if (column !== activeColumn) {
             setActiveColumn(column)
             setOrder("ascending")
@@ -77,37 +119,9 @@ export function UniversityCourseTable({
         }
     }
     
-    return (
-        <Table
-            columns={columns}
-            rows={sortedRows}
-            onColumnHeaderClicked={sortByColumn}
-            renderColumnHeader={(column) => {
-                const isUnsorted = column !== activeColumn
-                
-                return (
-                    <span class="flex gap-x-2 items-center">
-                        {columnHeaderLabel[column][locale]}
-                        {order === "ascending"
-                            ? <HeroIconChevronUp class={clsx(isUnsorted && "invisible", "w-4 h-4")}/>
-                            : <HeroIconChevronDown class={clsx(isUnsorted && "invisible", "w-4 h-4")}/>}
-                    </span>
-                )
-            }}
-            renderRow={(row) => {
-                const { name, year, term, weight, grade } = courses[row]
-                
-                return (
-                    <Fragment>
-                        <TableCell class="font-semibold">{name[locale]}</TableCell>
-                        <TableCell class="whitespace-nowrap">{termLabel[term][locale]}{" "}{year}</TableCell>
-                        <TableCell class="whitespace-nowrap">{weight}{" "}ECTS</TableCell>
-                        <TableCell class="whitespace-nowrap">{gradeLabel[grade][locale]}</TableCell>
-                    </Fragment>
-                )
-            }}
-        />
-    )
+    function expand() {
+        setExpanded(true)
+    }
 }
 
 const byDanishName: Comparator<UniversityCourse> =

@@ -1,1 +1,2 @@
-export const defaultFocusBorderClasses = "focus-visible:border focus-visible:border-accent-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-600"
+export const defaultFocusOutlineClasses = "focus-visible:outline-3 focus-visible:outline-accent-600"
+export const focusOutlineInsideClasses = "focus-visible:-outline-offset-2"

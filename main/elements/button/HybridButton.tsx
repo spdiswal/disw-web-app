@@ -2,7 +2,7 @@ import type { ClassValue } from "clsx"
 import clsx from "clsx"
 import type { ComponentChildren } from "preact"
 import type { Ref } from "preact/hooks"
-import { defaultFocusBorderClasses } from "../constants"
+import { defaultFocusOutlineClasses, focusOutlineInsideClasses } from "../constants"
 import { commonButtonClasses, transparentButtonClasses } from "./button-constants"
 
 type HybridButtonProps = {
@@ -32,7 +32,8 @@ export function HybridButton({
                 commonButtonClasses,
                 transparentButtonClasses,
                 "md:py-2 md:px-4 md:text-sm md:bg-neutral-50 md:hover:bg-white md:dark:bg-neutral-800 md:dark:hover:bg-neutral-700 md:border md:border-neutral-400 md:drop-shadow-sm",
-                defaultFocusBorderClasses,
+                defaultFocusOutlineClasses,
+                focusOutlineInsideClasses,
             )}
             onClick={onClick}
             onMouseDown={onMouseDown}

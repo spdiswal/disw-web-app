@@ -458,15 +458,15 @@ function renderUniversityCourseTable() {
     
     return {
         getTable: () => screen.getByRole("table"),
-        getExpandButton: () => screen.getByRole("button"),
+        getExpandButton: (locale: Locale = "en") => screen.getByRole("button", { name: getExpandButtonLabel(locale) }),
         clickColumnHeader: (column: UniversityCourseColumn, locale: Locale = "en") => {
-            const columnHeader = screen.getByRole("columnheader", {
+            const columnHeader = screen.getByRole("button", {
                 name: mapColumnToExpectedHeaderLabel(column, locale),
             })
             userEvent.click(columnHeader)
         },
-        clickExpandButton: () => {
-            const expandButton = screen.getByRole("button")
+        clickExpandButton: (locale: Locale = "en") => {
+            const expandButton = screen.getByRole("button", { name: getExpandButtonLabel(locale) })
             userEvent.click(expandButton)
         },
         changeToDanishLocale: () => {
@@ -553,4 +553,8 @@ function mapGradeToExpectedLabel(grade: Grade, locale: Locale): string {
         case "12":
             return { da: "12", en: "A" }[locale]
     }
+}
+
+function getExpandButtonLabel(locale: Locale): string {
+    return { da: "Vis alle kurser", en: "Show all courses" }[locale]
 }

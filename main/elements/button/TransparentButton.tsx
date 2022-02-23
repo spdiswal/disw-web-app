@@ -2,7 +2,7 @@ import type { ClassValue } from "clsx"
 import clsx from "clsx"
 import type { ComponentChildren } from "preact"
 import type { Ref } from "preact/hooks"
-import { defaultFocusBorderClasses } from "../constants"
+import { defaultFocusOutlineClasses, focusOutlineInsideClasses } from "../constants"
 import { commonButtonClasses, transparentButtonClasses } from "./button-constants"
 
 type TransparentButtonProps = {
@@ -31,7 +31,8 @@ export function TransparentButton({
                 _class,
                 commonButtonClasses,
                 transparentButtonClasses,
-                defaultFocusBorderClasses,
+                defaultFocusOutlineClasses,
+                focusOutlineInsideClasses,
             )}
             onClick={onClick}
             onMouseDown={onMouseDown}

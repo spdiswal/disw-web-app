@@ -2,7 +2,7 @@ import type { ClassValue } from "clsx"
 import clsx from "clsx"
 import type { ComponentChildren } from "preact"
 import type { Ref } from "preact/hooks"
-import { defaultFocusBorderClasses } from "../constants"
+import { defaultFocusOutlineClasses, focusOutlineInsideClasses } from "../constants"
 import { commonButtonClasses } from "./button-constants"
 
 type OpaqueButtonProps = {
@@ -31,7 +31,8 @@ export function OpaqueButton({
                 _class,
                 commonButtonClasses,
                 "py-2 px-4 bg-neutral-50 hover:bg-white dark:bg-neutral-800 dark:hover:bg-neutral-700 border border-neutral-400 drop-shadow-sm md:text-sm",
-                defaultFocusBorderClasses,
+                defaultFocusOutlineClasses,
+                focusOutlineInsideClasses,
             )}
             onClick={onClick}
             onMouseDown={onMouseDown}

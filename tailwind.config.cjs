@@ -39,6 +39,12 @@ module.exports = {
                 "until-md": "calc(min(48rem, 100vw) - 6rem)",
                 "until-lg": "calc(min(72rem, 100vw) - 6rem)",
             },
+            outlineOffset: {
+                "-2": "-2px",
+            },
+            outlineWidth: {
+                3: "3px",
+            },
             width: {
                 "1/3-minus-gap-10": "calc(33.333333% - 1/3*(2.5rem))",
                 "2/3-minus-gap-10": "calc(66.666667% - 2/3*(2.5rem))",

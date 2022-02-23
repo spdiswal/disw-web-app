@@ -17,6 +17,7 @@ export function FlagIconDenmark(props: FlagIconDenmarkProps) {
             class={clsx(props.class, "aspect-square")}
             height="24"
             viewBox="0 0 32 32"
+            aria-hidden="true"
         >
             <rect width="32" height="32" fill="#da291c"/>
             <path

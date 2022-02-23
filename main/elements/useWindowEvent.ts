@@ -22,14 +22,14 @@ export function useWindowEvent<EventType extends WindowEventType>(
     cachedListener.current = listener
     
     useEffect(() => {
-        const handleEvent = (event: WindowEventMap[EventType]) => {
-            cachedListener.current.call(window, event)
-        }
-        
         window.addEventListener(eventType, handleEvent, options)
         
         return function cleanUp() {
             window.removeEventListener(eventType, handleEvent, options)
+        }
+        
+        function handleEvent(event: WindowEventMap[EventType]) {
+            cachedListener.current.call(window, event)
         }
     }, [eventType, options])
 }

@@ -1,4 +1,4 @@
-import { Listbox, ListboxOption, ListboxResponsiveButton } from "+elements"
+import { Listbox, ListboxOption, OpaqueButton } from "+elements"
 import { fireEvent, render, screen, waitFor } from "@testing-library/preact"
 import userEvent from "@testing-library/user-event"
 
@@ -213,10 +213,14 @@ function renderListboxComponentOfAppleCultivars(options?: {
             options={appleCultivars}
             selectedOption={selectedOption}
             onOptionSelected={onOptionSelected}
-            renderButton={(state) => (
-                <ListboxResponsiveButton state={state}>
+            renderButton={({ ref, onMouseDown }, { isExpanded }) => (
+                <OpaqueButton
+                    forwardRef={ref}
+                    forwardAriaExpanded={isExpanded}
+                    onMouseDown={onMouseDown}
+                >
                     {selectedOption}
-                </ListboxResponsiveButton>
+                </OpaqueButton>
             )}
             renderOption={(option) => (
                 <ListboxOption>

@@ -34,7 +34,7 @@ export function Occupation({
             <SplitContainer
                 complementary={
                     <div class="flex overflow-y-clip relative gap-x-10 justify-start h-full md:justify-end lg:gap-x-16">
-                        <div class="flex mb-4 font-light md:flex-col md:items-end md:mb-0 md:text-right">
+                        <div class="flex mb-6 font-light md:flex-col md:items-end md:mb-0 md:text-right">
                             <FormattedYearMonth class="md:text-xl lg:mb-1 lg:text-2xl" yearMonth={since}/>
                             <span>
                                 &ndash;
@@ -54,9 +54,9 @@ export function Occupation({
                     </div>
                 }
             >
-                <header class="mb-3 md:mb-2">
+                <header class="flex flex-col mb-4 md:gap-y-1 md:mb-6">
                     <h1 id={id} class="font-bold text-primary-600 md:text-2xl">{title[locale]}</h1>
-                    <ExternalHyperlink url={organisation.url} class="block pr-3 pb-1 w-fit font-semibold md:pt-1 md:pb-3">
+                    <ExternalHyperlink url={organisation.url} class="block w-fit font-semibold">
                         {organisation.name[locale]}
                     </ExternalHyperlink>
                 </header>

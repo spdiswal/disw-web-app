@@ -10,17 +10,23 @@ type ListboxProps<Option extends string> = {
     readonly options: ReadonlyArray<Option>
     readonly selectedOption: Option
     readonly onOptionSelected?: (option: Option) => void
-    readonly renderButton: (state: ListboxButtonState) => JSX.Element
+    readonly renderButton: (
+        configuration: ListboxButtonConfiguration,
+        state: ListboxButtonState,
+    ) => JSX.Element
     readonly renderOption: (
         option: Option,
         state: ListboxOptionState,
     ) => JSX.Element
 }
 
-export type ListboxButtonState = {
+export type ListboxButtonConfiguration = {
     readonly ref: Ref<HTMLButtonElement>
-    readonly isExpanded: boolean
     readonly onMouseDown: () => void
+}
+
+export type ListboxButtonState = {
+    readonly isExpanded: boolean
 }
 
 export type ListboxOptionState = {
@@ -39,29 +45,28 @@ export function Listbox<Option extends string>({
     const popupRef = useRef<HTMLUListElement>(null)
     const [isPopupOpen, setPopupOpen] = useState(false)
     
-    useWindowEvent("blur", () => setPopupOpen(false))
+    useWindowEvent("blur", closePopup)
     useWindowEvent("mousedown", ({ target }) => {
         const occurredInListbox = target instanceof Element
             && (buttonRef.current?.contains(target)
                 || popupRef.current?.contains(target))
         
         if (!occurredInListbox) {
-            setPopupOpen(false)
+            closePopup()
         }
     })
     
     return (
         <div class={clsx(_class, "relative")}>
-            {renderButton({
-                ref: buttonRef,
-                isExpanded: isPopupOpen,
-                onMouseDown: () => setPopupOpen(!isPopupOpen),
-            })}
+            {renderButton(
+                { ref: buttonRef, onMouseDown: togglePopup },
+                { isExpanded: isPopupOpen },
+            )}
             <ul
                 ref={popupRef}
                 class={clsx(
                     !isPopupOpen && "hidden",
-                    "overflow-auto absolute right-0 z-50 py-1 mt-1 w-48 max-h-56 text-base bg-white/75 dark:bg-neutral-100/75 rounded-md focus-visible:outline-none ring-1 ring-neutral-900/10 shadow-lg backdrop-blur-md md:text-sm",
+                    "overflow-auto absolute right-0 z-50 py-1 mt-1 w-48 max-h-56 text-base bg-white/75 dark:bg-neutral-100/75 rounded-xl focus-visible:outline-none ring-1 ring-neutral-900/10 shadow-lg backdrop-blur-md md:text-sm",
                 )}
                 role="listbox"
             >
@@ -78,7 +83,7 @@ export function Listbox<Option extends string>({
                             aria-selected={isSelected}
                             onMouseUp={() => {
                                 onOptionSelected?.(option)
-                                setPopupOpen(false)
+                                closePopup()
                             }}
                         >
                             {renderOption(option, { isSelected })}
@@ -88,4 +93,12 @@ export function Listbox<Option extends string>({
             </ul>
         </div>
     )
+    
+    function closePopup() {
+        setPopupOpen(false)
+    }
+    
+    function togglePopup() {
+        setPopupOpen(!isPopupOpen)
+    }
 }

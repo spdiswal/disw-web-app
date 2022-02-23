@@ -1,6 +1,6 @@
-import { FlagIconDenmark, FlagIconUnitedKingdom, HeroIconCheck, HeroIconSelector, Listbox, ListboxOption, ListboxResponsiveButton } from "+elements"
-import { useLocale } from "+i18n"
+import { FlagIconDenmark, FlagIconUnitedKingdom, HeroIconCheck, HeroIconSelector, HybridButton, Listbox, ListboxOption } from "+elements"
 import type { Locale } from "+i18n"
+import { useLocale } from "+i18n"
 import type { ClassValue } from "clsx"
 import type { JSX } from "preact"
 
@@ -33,17 +33,19 @@ export function LocalePicker({
             options={options}
             selectedOption={selectedLocale}
             onOptionSelected={onLocaleSelected}
-            renderButton={(state) => (
-                <ListboxResponsiveButton
-                    class="flex gap-x-4 items-center md:w-full"
-                    state={state}
+            renderButton={({ ref, onMouseDown }, { isExpanded }) => (
+                <HybridButton
+                    forwardRef={ref}
+                    forwardAriaExpanded={isExpanded}
+                    class="flex gap-x-4 items-center md:w-full md:text-sm"
+                    onMouseDown={onMouseDown}
                 >
                     {icon[selectedLocale]}
-                    <span class="hidden md:block md:grow md:truncate">
+                    <span class="hidden text-left md:block md:grow md:truncate">
                         {caption[selectedLocale]}
                     </span>
                     <HeroIconSelector class="hidden h-5 md:block"/>
-                </ListboxResponsiveButton>
+                </HybridButton>
             )}
             renderOption={(locale, { isSelected }) => (
                 <ListboxOption class="flex gap-x-4 items-center">

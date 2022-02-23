@@ -17,7 +17,7 @@ export function Footer({
                 <div class="flex gap-x-2 justify-center text-neutral-500 dark:text-neutral-400">
                     <a href={githubUrl}>
                         <span class="sr-only">GitHub</span>
-                        <GlyphIconGitHub class="h-8 hover:text-neutral-700 dark:hover:text-neutral-200" aria-hidden="true"/>
+                        <GlyphIconGitHub class="h-8 hover:text-neutral-700 dark:hover:text-neutral-200"/>
                     </a>
                 </div>
                 <span class="font-light text-neutral-600 dark:text-neutral-300">

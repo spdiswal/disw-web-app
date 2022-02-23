@@ -19,6 +19,7 @@ export function HeroIconCheck(props: HeroIconCheckProps) {
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
+            aria-hidden="true"
         >
             <path
                 stroke-linecap="round"

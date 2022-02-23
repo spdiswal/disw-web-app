@@ -1,4 +1,4 @@
-import { HeroIconCheck, HeroIconDesktopComputer, HeroIconMoon, HeroIconSun, Listbox, ListboxIconButton, ListboxOption } from "+elements"
+import { HeroIconCheck, HeroIconDesktopComputer, HeroIconMoon, HeroIconSun, Listbox, ListboxOption, TransparentButton } from "+elements"
 import type { Localisable } from "+i18n"
 import { useLocale } from "+i18n"
 import type { Theme, ThemeSelection } from "+theme"
@@ -54,15 +54,19 @@ export function ThemePicker({
             options={options}
             selectedOption={selectedTheme}
             onOptionSelected={onThemeSelected}
-            renderButton={(state) => (
-                <ListboxIconButton state={state}>
+            renderButton={({ ref, onMouseDown }, { isExpanded }) => (
+                <TransparentButton
+                    forwardRef={ref}
+                    forwardAriaExpanded={isExpanded}
+                    onMouseDown={onMouseDown}
+                >
                     <span class="sr-only">
                         {accessibilityLabel[locale]}
                     </span>
                     {selectedTheme === "match-media"
                         ? icon[mediaTheme]
                         : highlightedIcon[selectedTheme]}
-                </ListboxIconButton>
+                </TransparentButton>
             )}
             renderOption={(themeSelection, { isSelected }) => (
                 <ListboxOption class="flex gap-x-4 items-center">

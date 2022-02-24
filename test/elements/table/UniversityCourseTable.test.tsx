@@ -1,52 +1,51 @@
 import type { Grade, Term, UniversityCourse, UniversityCourseColumn } from "+elements"
 import { UniversityCourseTable } from "+elements"
-import type { Locale } from "+i18n"
-import { indistinguishable, LocaleProvider } from "+i18n"
+import { LocaleProvider } from "+i18n"
 import { render, screen, waitFor } from "@testing-library/preact"
 import userEvent from "@testing-library/user-event"
 
 const terraforming: UniversityCourse = {
-    name: { da: "Jordliggørelse", en: "Terraforming" },
+    name: "Terraforming",
     year: "2017", term: "autumn",
     weight: "10",
     grade: "10",
 }
 
 const launchVehicles: UniversityCourse = {
-    name: { da: "Rumraketter", en: "Launch Vehicles" },
+    name: "Launch Vehicles",
     year: "2017", term: "autumn", weight: "5", grade: "10",
 }
 
 const spaceCruise: UniversityCourse = {
-    name: { da: "Rumrejse", en: "Space Cruise" },
+    name: "Space Cruise",
     year: "2017", term: "spring",
     weight: "30",
     grade: "12",
 }
 
 const timeTravel: UniversityCourse = {
-    name: { da: "Tidsrejse", en: "Time Travel" },
+    name: "Time Travel",
     year: "2018", term: "spring",
     weight: "5",
     grade: "7",
 }
 
 const zeroGravityFields: UniversityCourse = {
-    name: { da: "Vægtløshed", en: "Zero Gravity Fields" },
+    name: "Zero Gravity Fields",
     year: "2017", term: "summer",
     weight: "5",
     grade: "12",
 }
 
 const terrainRelativeNavigation1: UniversityCourse = {
-    name: indistinguishable("Terrain Relative Navigation 1"),
+    name: "Terrain Relative Navigation 1",
     year: "2017", term: "autumn",
     weight: "5",
     grade: "pass",
 }
 
 const terrainRelativeNavigation2: UniversityCourse = {
-    name: indistinguishable("Terrain Relative Navigation 2"),
+    name: "Terrain Relative Navigation 2",
     year: "2018", term: "spring",
     weight: "5",
     grade: "12",
@@ -209,38 +208,6 @@ test("The table rows are sorted in ascending order by name by clicking on the 'n
                 timeTravel,
                 zeroGravityFields,
             ]),
-        )
-    })
-})
-
-test("The table rows are re-sorted by name when the locale changes while they are sorted by name.", async () => {
-    // GIVEN a test subject.
-    const courseTable = renderUniversityCourseTable()
-    
-    // GIVEN that the table rows are already sorted in ascending order by name.
-    courseTable.clickColumnHeader("name")
-    
-    await waitFor(() => {
-        expect(courseTable.getTable()).toHaveTextContent(
-            matchingTopCourse(launchVehicles),
-        )
-    })
-    
-    // WHEN changing the locale to Danish.
-    courseTable.changeToDanishLocale()
-    
-    // THEN the table rows are re-sorted accordingly.
-    await waitFor(() => {
-        expect(courseTable.getTable()).toHaveTextContent(
-            matchingCourseSequence([
-                terraforming,
-                launchVehicles,
-                spaceCruise,
-                terrainRelativeNavigation1,
-                terrainRelativeNavigation2,
-                timeTravel,
-                zeroGravityFields,
-            ], "da"),
         )
     })
 })
@@ -449,112 +416,79 @@ test("The table is expanded by clicking on the 'grade' column header.", async ()
     })
 })
 
+const columnHeaderLabels: Readonly<Record<UniversityCourseColumn, string>> = {
+    name: "Course",
+    term: "Term",
+    weight: "Weight",
+    grade: "Grade",
+}
+
 function renderUniversityCourseTable() {
-    const { rerender } = render((
+    render((
         <LocaleProvider value="en">
             <UniversityCourseTable courses={courses}/>
         </LocaleProvider>
     ))
     
+    function getTable() {
+        return screen.getByRole("table")
+    }
+    
+    function getExpandButton() {
+        return screen.getByRole("button", { name: "Show all courses" })
+    }
+    
+    function clickExpandButton() {
+        userEvent.click(getExpandButton())
+    }
+    
+    function clickColumnHeader(column: UniversityCourseColumn) {
+        const columnHeader = screen.getByRole("button", {
+            name: columnHeaderLabels[column],
+        })
+        userEvent.click(columnHeader)
+    }
+    
     return {
-        getTable: () => screen.getByRole("table"),
-        getExpandButton: (locale: Locale = "en") => screen.getByRole("button", { name: getExpandButtonLabel(locale) }),
-        clickColumnHeader: (column: UniversityCourseColumn, locale: Locale = "en") => {
-            const columnHeader = screen.getByRole("button", {
-                name: mapColumnToExpectedHeaderLabel(column, locale),
-            })
-            userEvent.click(columnHeader)
-        },
-        clickExpandButton: (locale: Locale = "en") => {
-            const expandButton = screen.getByRole("button", { name: getExpandButtonLabel(locale) })
-            userEvent.click(expandButton)
-        },
-        changeToDanishLocale: () => {
-            rerender((
-                <LocaleProvider value="da">
-                    <UniversityCourseTable courses={courses}/>
-                </LocaleProvider>
-            ))
-        },
+        getTable,
+        getExpandButton,
+        clickColumnHeader,
+        clickExpandButton,
     }
 }
 
-function matchingTopCourse(
-    expectedTopCourse: UniversityCourse,
-    locale: Locale = "en",
-): string {
-    const expectedTopCourseTextContent = mapCourse(expectedTopCourse, locale)
-    
-    return getExpectedColumnHeadersTextContent(locale)
-        + expectedTopCourseTextContent
+const columnHeadersTextContent =
+    columnHeaderLabels.name
+    + columnHeaderLabels.term
+    + columnHeaderLabels.weight
+    + columnHeaderLabels.grade
+
+function matchingTopCourse(expectedTopCourse: UniversityCourse): string {
+    return columnHeadersTextContent + mapCourse(expectedTopCourse)
 }
 
 function matchingCourseSequence(
     expectedCourseSequence: ReadonlyArray<UniversityCourse>,
-    locale: Locale = "en",
 ): string {
-    const expectedCoursesTextContent = expectedCourseSequence
-        .map((course) => mapCourse(course, locale))
-        .join("")
-    
-    return getExpectedColumnHeadersTextContent(locale)
-        + expectedCoursesTextContent
+    return columnHeadersTextContent
+        + expectedCourseSequence.map(mapCourse).join("")
+}
+
+const termLabels: Readonly<Record<Term, string>> = {
+    spring: "Spring",
+    summer: "Summer",
+    autumn: "Autumn",
+}
+
+const gradeLabels: Readonly<Record<Grade, string>> = {
+    pass: "pass",
+    7: "C",
+    10: "B",
+    12: "A",
 }
 
 function mapCourse(
     { name, year, term, weight, grade }: UniversityCourse,
-    locale: Locale,
 ): string {
-    return `${name[locale]}${mapTermToExpectedLabel(term, locale)} ${year}${weight} ECTS${mapGradeToExpectedLabel(grade, locale)}`
-}
-
-function getExpectedColumnHeadersTextContent(locale: Locale): string {
-    return mapColumnToExpectedHeaderLabel("name", locale)
-        + mapColumnToExpectedHeaderLabel("term", locale)
-        + mapColumnToExpectedHeaderLabel("weight", locale)
-        + mapColumnToExpectedHeaderLabel("grade", locale)
-}
-
-function mapColumnToExpectedHeaderLabel(
-    column: UniversityCourseColumn,
-    locale: Locale,
-): string {
-    switch (column) {
-        case "name":
-            return { da: "Kursus", en: "Course" }[locale]
-        case "term":
-            return { da: "Semester", en: "Term" }[locale]
-        case "weight":
-            return { da: "Belastning", en: "Weight" }[locale]
-        case "grade":
-            return { da: "Karakter", en: "Grade" }[locale]
-    }
-}
-
-function mapTermToExpectedLabel(term: Term, locale: Locale): string {
-    switch (term) {
-        case "spring":
-            return { da: "Forår", en: "Spring" }[locale]
-        case "summer":
-            return { da: "Sommer", en: "Summer" }[locale]
-        case "autumn":
-            return { da: "Efterår", en: "Autumn" }[locale]
-    }
-}
-
-function mapGradeToExpectedLabel(grade: Grade, locale: Locale): string {
-    switch (grade) {
-        case "pass":
-            return { da: "bestået", en: "pass" }[locale]
-        case "7":
-            return { da: "7", en: "C" }[locale]
-        case "10":
-            return { da: "10", en: "B" }[locale]
-        case "12":
-            return { da: "12", en: "A" }[locale]
-    }
-}
-
-function getExpandButtonLabel(locale: Locale): string {
-    return { da: "Vis alle kurser", en: "Show all courses" }[locale]
+    return `${name}${termLabels[term]} ${year}${weight} ECTS${gradeLabels[grade]}`
 }

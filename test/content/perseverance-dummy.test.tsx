@@ -142,10 +142,9 @@ test("The content displays an 'Astrobiolog'/'Astrobiologist' occupation.", () =>
     expect(occupation).toHaveTextContent("december 2021\u2013nu")
     
     // AND it displays the organisation of the occupation in Danish.
-    expect(occupation).toHaveTextContent("Røde Planet")
-    
-    // AND it specifies a hyperlink to the organisation.
-    expect(within(occupation).getByRole("link")).toHaveAttribute("href", "https://www.nasa.gov/")
+    // AND it specifies a hyperlink to the organisation website.
+    expect(within(occupation).getByRole("link", { name: "Røde Planet" }))
+        .toHaveAttribute("href", "https://www.nasa.gov/")
     
     // AND it displays the activities of the occupation in Danish.
     expect(occupation).toHaveTextContent(
@@ -167,7 +166,9 @@ test("The content displays an 'Astrobiolog'/'Astrobiologist' occupation.", () =>
     expect(occupation).toHaveTextContent("December 2021\u2013present")
     
     // AND it displays the organisation of the occupation in English.
-    expect(occupation).toHaveTextContent("Red Planet")
+    // AND it specifies a hyperlink to the organisation website.
+    expect(within(occupation).getByRole("link", { name: "Red Planet" }))
+        .toHaveAttribute("href", "https://www.nasa.gov/")
     
     // AND it displays the activities of the occupation in English.
     expect(occupation).toHaveTextContent(
@@ -192,10 +193,9 @@ test("The content displays a 'Førsteofficer'/'First Officer' occupation.", () =
     expect(occupation).toHaveTextContent("marts 2021\u2013oktober 2021")
     
     // AND it displays the organisation of the occupation in Danish.
-    expect(occupation).toHaveTextContent("NASA")
-    
-    // AND it specifies a hyperlink to the organisation.
-    expect(within(occupation).getByRole("link")).toHaveAttribute("href", "https://www.nasa.gov/")
+    // AND it specifies a hyperlink to the organisation website.
+    expect(within(occupation).getByRole("link", { name: "NASA" }))
+        .toHaveAttribute("href", "https://www.nasa.gov/")
     
     // AND it displays the activities of the occupation in Danish.
     expect(occupation).toHaveTextContent(
@@ -214,7 +214,9 @@ test("The content displays a 'Førsteofficer'/'First Officer' occupation.", () =
     expect(occupation).toHaveTextContent("March 2021\u2013October 2021")
     
     // AND it displays the organisation of the occupation in English.
-    expect(occupation).toHaveTextContent("NASA")
+    // AND it specifies a hyperlink to the organisation website.
+    expect(within(occupation).getByRole("link", { name: "NASA" }))
+        .toHaveAttribute("href", "https://www.nasa.gov/")
     
     // AND it displays the activities of the occupation in English.
     expect(occupation).toHaveTextContent(
@@ -236,10 +238,9 @@ test("The content displays an 'Interplanetarisk agent'/'Interplanetary Agent' oc
     expect(occupation).toHaveTextContent("august 2020\u2013februar 2021")
     
     // AND it displays the organisation of the occupation in Danish.
-    expect(occupation).toHaveTextContent("Verdensrumsagenturet")
-    
-    // AND it specifies a hyperlink to the organisation.
-    expect(within(occupation).getByRole("link")).toHaveAttribute("href", "https://www.nasa.gov/")
+    // AND it specifies a hyperlink to the organisation website.
+    expect(within(occupation).getByRole("link", { name: "Verdensrumsagenturet" }))
+        .toHaveAttribute("href", "https://www.nasa.gov/")
     
     // AND it displays the activities of the occupation in Danish.
     expect(occupation).toHaveTextContent(
@@ -259,7 +260,9 @@ test("The content displays an 'Interplanetarisk agent'/'Interplanetary Agent' oc
     expect(occupation).toHaveTextContent("August 2020\u2013February 2021")
     
     // AND it displays the organisation of the occupation in English.
-    expect(occupation).toHaveTextContent("The Interplanetary Space Agency")
+    // AND it specifies a hyperlink to the organisation website.
+    expect(within(occupation).getByRole("link", { name: "The Interplanetary Space Agency" }))
+        .toHaveAttribute("href", "https://www.nasa.gov/")
     
     // AND it displays the activities of the occupation in English.
     expect(occupation).toHaveTextContent(
@@ -282,10 +285,9 @@ test("The content displays a 'Kandidat i kontinuitet'/'MSc in Continuity' occupa
     expect(occupation).toHaveTextContent("september 2017\u2013juni 2020")
     
     // AND it displays the organisation of the occupation in Danish.
-    expect(occupation).toHaveTextContent("NASA")
-    
-    // AND it specifies a hyperlink to the organisation.
-    expect(within(occupation).getByRole("link")).toHaveAttribute("href", "https://www.nasa.gov/")
+    // AND it specifies a hyperlink to the organisation website.
+    expect(within(occupation).getByRole("link", { name: "NASA" }))
+        .toHaveAttribute("href", "https://www.nasa.gov/")
     
     // AND it displays the activities of the occupation in Danish.
     expect(occupation).toHaveTextContent(
@@ -304,7 +306,9 @@ test("The content displays a 'Kandidat i kontinuitet'/'MSc in Continuity' occupa
     expect(occupation).toHaveTextContent("September 2017\u2013June 2020")
     
     // AND it displays the organisation of the occupation in English.
-    expect(occupation).toHaveTextContent("NASA")
+    // AND it specifies a hyperlink to the organisation website.
+    expect(within(occupation).getByRole("link", { name: "NASA" }))
+        .toHaveAttribute("href", "https://www.nasa.gov/")
     
     // AND it displays the activities of the occupation in English.
     expect(occupation).toHaveTextContent(
@@ -326,10 +330,9 @@ test("The content displays a 'Bachelor i roverdesign'/'BSc in Rover Design' occu
     expect(occupation).toHaveTextContent("juli 2013\u2013maj 2017")
     
     // AND it displays the organisation of the occupation in Danish.
-    expect(occupation).toHaveTextContent("NASA")
-    
-    // AND it specifies a hyperlink to the organisation.
-    expect(within(occupation).getByRole("link")).toHaveAttribute("href", "https://www.nasa.gov/")
+    // AND it specifies a hyperlink to the organisation website.
+    expect(within(occupation).getByRole("link", { name: "NASA" }))
+        .toHaveAttribute("href", "https://www.nasa.gov/")
     
     // AND it displays the activities of the occupation in Danish.
     expect(occupation).toHaveTextContent(
@@ -348,7 +351,9 @@ test("The content displays a 'Bachelor i roverdesign'/'BSc in Rover Design' occu
     expect(occupation).toHaveTextContent("July 2013\u2013May 2017")
     
     // AND it displays the organisation of the occupation in English.
-    expect(occupation).toHaveTextContent("NASA")
+    // AND it specifies a hyperlink to the organisation website.
+    expect(within(occupation).getByRole("link", { name: "NASA" }))
+        .toHaveAttribute("href", "https://www.nasa.gov/")
     
     // AND it displays the activities of the occupation in English.
     expect(occupation).toHaveTextContent(
@@ -371,7 +376,8 @@ test("The content specifies a hyperlink to GitHub.", () => {
     const content = renderContent()
     
     // THEN the content specifies a hyperlink to GitHub.
-    expect(within(content.getFooterSection()).getByRole("link")).toHaveAttribute("href", "https://github.com/spdiswal/")
+    expect(within(content.getFooterSection()).getByRole("link"))
+        .toHaveAttribute("href", "https://github.com/spdiswal/")
 })
 
 function renderContent() {
@@ -381,21 +387,41 @@ function renderContent() {
         </LocaleProvider>
     ))
     
+    function getMainSection() {
+        return screen.getByRole("main")
+    }
+    
+    function getPortrait() {
+        return screen.getByRole("img")
+    }
+    
+    function getOccupation(title: string) {
+        return screen.getByRole("article", { name: title })
+    }
+    
+    function getOccupations() {
+        const articles = screen.getAllByRole("article")
+        return articles.filter((article) => article.id !== "biography")
+    }
+    
+    function getFooterSection() {
+        return screen.getByRole("contentinfo")
+    }
+    
+    function changeToEnglishLocale() {
+        rerender((
+            <LocaleProvider value="en">
+                <ContentSection/>
+            </LocaleProvider>
+        ))
+    }
+    
     return {
-        getMainSection: () => screen.getByRole("main"),
-        getPortrait: () => screen.getByRole("img"),
-        getOccupation: (title: string) => screen.getByRole("article", { name: title }),
-        getOccupations: () => {
-            const articles = screen.getAllByRole("article")
-            return articles.filter((article) => article.id !== "biography")
-        },
-        getFooterSection: () => screen.getByRole("contentinfo"),
-        changeToEnglishLocale: () => {
-            rerender((
-                <LocaleProvider value="en">
-                    <ContentSection/>
-                </LocaleProvider>
-            ))
-        },
+        getMainSection,
+        getPortrait,
+        getOccupation,
+        getOccupations,
+        getFooterSection,
+        changeToEnglishLocale,
     }
 }

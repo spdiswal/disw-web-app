@@ -230,28 +230,57 @@ function renderListboxComponentOfAppleCultivars(options?: {
         />
     ))
     
+    function getButton() {
+        return screen.getByRole("button")
+    }
+    
+    function getPopup() {
+        return screen.getByRole("listbox")
+    }
+    
+    function getOptions() {
+        return screen.getAllByRole("option")
+    }
+    
+    function getSelectedOption() {
+        return screen.getByRole("option", { selected: true })
+    }
+    
+    function getNonSelectedOptions() {
+        return screen.getAllByRole("option", { selected: false })
+    }
+    
+    function clickButton() {
+        userEvent.click(getButton())
+    }
+    
+    function clickPopupBorder() {
+        userEvent.click(getPopup())
+    }
+    
+    function clickOutside() {
+        userEvent.click(document.body)
+    }
+    
+    function blurWindow() {
+        fireEvent.blur(window)
+    }
+    
+    function selectOption(accessibleName: string) {
+        const option = screen.getByRole("option", { name: accessibleName })
+        userEvent.click(option)
+    }
+    
     return {
-        getButton: () => screen.getByRole("button"),
-        getPopup: () => screen.getByRole("listbox"),
-        getOptions: () => screen.getAllByRole("option"),
-        getSelectedOption: () => screen.getByRole("option", { selected: true }),
-        getNonSelectedOptions: () => screen.getAllByRole("option", { selected: false }),
-        clickButton: () => {
-            const button = screen.getByRole("button")
-            userEvent.click(button)
-        },
-        clickPopupBorder: () => {
-            userEvent.click(screen.getByRole("listbox"))
-        },
-        clickOutside: () => {
-            userEvent.click(document.body)
-        },
-        blurWindow: () => {
-            fireEvent.blur(window)
-        },
-        selectOption: (accessibleName: string) => {
-            const option = screen.getByRole("option", { name: accessibleName })
-            userEvent.click(option)
-        },
+        getButton,
+        getPopup,
+        getOptions,
+        getSelectedOption,
+        getNonSelectedOptions,
+        clickButton,
+        clickPopupBorder,
+        clickOutside,
+        blurWindow,
+        selectOption,
     }
 }

@@ -86,12 +86,22 @@ function renderLocalePickerComponent(options?: {
         </LocaleProvider>
     ))
     
+    function getButton() {
+        return screen.getByRole("button")
+    }
+    
+    function getOptions() {
+        return screen.getAllByRole("option")
+    }
+    
+    function selectOption(accessibleName: string) {
+        const option = screen.getByRole("option", { name: accessibleName })
+        userEvent.click(option)
+    }
+    
     return {
-        getButton: () => screen.getByRole("button"),
-        getOptions: () => screen.getAllByRole("option"),
-        selectOption: (accessibleName: string) => {
-            const option = screen.getByRole("option", { name: accessibleName })
-            userEvent.click(option)
-        },
+        getButton,
+        getOptions,
+        selectOption,
     }
 }

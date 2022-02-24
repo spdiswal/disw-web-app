@@ -126,23 +126,35 @@ function renderThemePickerComponent(options?: {
         </LocaleProvider>
     ))
     
+    function getButton() {
+        return screen.getByRole("button")
+    }
+    
+    function getOptions() {
+        return screen.getAllByRole("option")
+    }
+    
+    function selectOption(accessibleName: string) {
+        const option = screen.getByRole("option", { name: accessibleName })
+        userEvent.click(option)
+    }
+    
+    function changeLocale(newLocale: Locale) {
+        rerender((
+            <LocaleProvider value={newLocale}>
+                <ThemePicker
+                    mediaTheme={mediaTheme}
+                    selectedTheme={selectedTheme}
+                    onThemeSelected={onThemeSelected}
+                />
+            </LocaleProvider>
+        ))
+    }
+    
     return {
-        getButton: () => screen.getByRole("button"),
-        getOptions: () => screen.getAllByRole("option"),
-        selectOption: (accessibleName: string) => {
-            const option = screen.getByRole("option", { name: accessibleName })
-            userEvent.click(option)
-        },
-        changeLocale: (newLocale: Locale) => {
-            rerender((
-                <LocaleProvider value={newLocale}>
-                    <ThemePicker
-                        mediaTheme={mediaTheme}
-                        selectedTheme={selectedTheme}
-                        onThemeSelected={onThemeSelected}
-                    />
-                </LocaleProvider>
-            ))
-        },
+        getButton,
+        getOptions,
+        selectOption,
+        changeLocale,
     }
 }

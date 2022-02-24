@@ -1,5 +1,4 @@
 import { ExternalHyperlink, SplitContainer } from "+elements"
-import type { Localisable } from "+i18n"
 import { useLocale } from "+i18n"
 import type { ComponentChildren } from "preact"
 import type { YearMonth } from "./FormattedYearMonth"
@@ -7,7 +6,7 @@ import { FormattedYearMonth } from "./FormattedYearMonth"
 
 type OccupationProps = {
     readonly id: string
-    readonly title: Localisable<string>
+    readonly title: string
     readonly organisation: Organisation
     readonly since: YearMonth
     readonly until: YearMonth | "present"
@@ -15,7 +14,7 @@ type OccupationProps = {
 }
 
 export type Organisation = {
-    readonly name: Localisable<string>
+    readonly name: string
     readonly url: string
 }
 
@@ -55,12 +54,12 @@ export function Occupation({
                 }
             >
                 <header class="flex flex-col mb-4 md:gap-y-1 md:mb-6">
-                    <h1 id={id} class="font-bold text-primary-600 md:text-2xl">{title[locale]}</h1>
-                    <ExternalHyperlink url={organisation.url} class="block w-fit font-semibold">
-                        {organisation.name[locale]}
+                    <h1 id={id} class="font-bold text-primary-600 md:text-2xl">{title}</h1>
+                    <ExternalHyperlink url={organisation.url} class="font-semibold">
+                        {organisation.name}
                     </ExternalHyperlink>
                 </header>
-                <div class="flex flex-col gap-y-6 mb-16 md:mb-24">
+                <div class="flex flex-col gap-y-6 mb-16 md:mb-24 md:max-w-2xl">
                     {children}
                 </div>
             </SplitContainer>

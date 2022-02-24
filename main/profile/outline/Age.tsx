@@ -1,19 +1,23 @@
-import type { Localisable } from "+i18n"
 import { useLocale } from "+i18n"
 import type { ClassValue } from "clsx"
 import clsx from "clsx"
+import type { ComponentChildren } from "preact"
 
-type AgeProps = Localisable<string> & {
+type AgeProps = {
     readonly class?: ClassValue
+    readonly children: ComponentChildren
 }
 
-export function Age(props: AgeProps) {
+export function Age({
+    class: _class,
+    children,
+}: AgeProps) {
     const locale = useLocale()
     
     return (
-        <div class={clsx(props.class, "text-center")}>
+        <div class={clsx(_class, "text-center")}>
             <dt>{{ da: "Alder", en: "Age" }[locale]}</dt>
-            <dd class="font-bold text-primary-600 md:text-xl lg:text-2xl">{props[locale]}</dd>
+            <dd class="font-bold text-primary-600 md:text-xl lg:text-2xl">{children}</dd>
         </div>
     )
 }

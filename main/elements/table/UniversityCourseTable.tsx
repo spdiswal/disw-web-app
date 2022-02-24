@@ -1,5 +1,5 @@
 import { Expandable, HeroIconChevronDown, HeroIconChevronUp, Table, TableCell, useSortableTableRows } from "+elements"
-import type { Locale, Localisable } from "+i18n"
+import type { Localisable } from "+i18n"
 import { useLocale } from "+i18n"
 import type { Comparator, Year } from "+types"
 import clsx from "clsx"
@@ -34,7 +34,7 @@ type UniversityCourseTableProps = {
 }
 
 export type UniversityCourse = {
-    readonly name: Localisable<string>
+    readonly name: string
     readonly year: Year
     readonly term: Term
     readonly weight: Weight
@@ -64,15 +64,15 @@ export function UniversityCourseTable({
     
     const comparator =
         useMemo(() => {
-            return compareAsCourses(getColumnComparator(activeColumn, locale))
-        }, [compareAsCourses, activeColumn, locale])
+            return compareAsCourses(getColumnComparator(activeColumn))
+        }, [compareAsCourses, activeColumn])
     
     const { sortedRows, order, setOrder } =
         useSortableTableRows({ rows: Object.keys(courses), comparator })
     
     return (
         <Expandable
-            expandButtonLabel={{ da: "Vis alle kurser", en: "Show all courses" }}
+            expandButtonLabel={{ da: "Vis alle kurser", en: "Show all courses" }[locale]}
             isExpanded={isExpanded}
             onExpansionButtonClicked={expand}
         >
@@ -97,7 +97,7 @@ export function UniversityCourseTable({
                     
                     return (
                         <Fragment>
-                            <TableCell class="font-semibold">{name[locale]}</TableCell>
+                            <TableCell class="font-semibold">{name}</TableCell>
                             <TableCell class="whitespace-nowrap">{termLabel[term][locale]}{" "}{year}</TableCell>
                             <TableCell class="whitespace-nowrap">{weight}{" "}ECTS</TableCell>
                             <TableCell class="whitespace-nowrap">{gradeLabel[grade][locale]}</TableCell>
@@ -124,11 +124,8 @@ export function UniversityCourseTable({
     }
 }
 
-const byDanishName: Comparator<UniversityCourse> =
-    ({ name: left }, { name: right }) => left.da.localeCompare(right.da)
-
-const byEnglishName: Comparator<UniversityCourse> =
-    ({ name: left }, { name: right }) => left.en.localeCompare(right.en)
+const byName: Comparator<UniversityCourse> =
+    ({ name: left }, { name: right }) => left.localeCompare(right)
 
 const byYear: Comparator<UniversityCourse> =
     ({ year: left }, { year: right }) => Number(left) - Number(right)
@@ -174,13 +171,10 @@ const byGrade: Comparator<UniversityCourse> =
 
 function getColumnComparator(
     column: UniversityCourseColumn,
-    locale: Locale,
 ): Comparator<UniversityCourse> {
     switch (column) {
         case "name":
-            return locale === "da"
-                ? byDanishName
-                : byEnglishName
+            return byName
         
         case "term":
             return byYearAndTerm

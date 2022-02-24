@@ -1,11 +1,9 @@
 import { HeroIconPlus, OpaqueButton } from "+elements"
-import type { Localisable } from "+i18n"
-import { useLocale } from "+i18n"
 import clsx from "clsx"
 import type { ComponentChildren } from "preact"
 
 type ExpandableProps = {
-    readonly expandButtonLabel: Localisable<string>
+    readonly expandButtonLabel: string
     readonly isExpanded: boolean
     readonly onExpansionButtonClicked?: () => void
     readonly children: ComponentChildren
@@ -17,8 +15,6 @@ export function Expandable({
     onExpansionButtonClicked,
     children,
 }: ExpandableProps) {
-    const locale = useLocale()
-    
     return (
         <div class="flex flex-col items-center">
             <div class={clsx(!isExpanded && "overflow-y-clip h-40 border-b border-neutral-300 dark:border-neutral-600 shadow-lg", "w-full")}>
@@ -26,7 +22,7 @@ export function Expandable({
             </div>
             <OpaqueButton class={clsx(isExpanded && "hidden", "flex gap-x-1 items-center mt-4")} onClick={onExpansionButtonClicked}>
                 <HeroIconPlus class="h-4"/>
-                <span>{expandButtonLabel[locale]}</span>
+                <span>{expandButtonLabel}</span>
             </OpaqueButton>
         </div>
     )

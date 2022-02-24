@@ -1,5 +1,5 @@
 export * from "./career"
 export * from "./identity"
 export * from "./Biography"
-export * from "./Content"
 export * from "./Footer"
+export * from "./Main"

@@ -339,7 +339,6 @@ module.exports = {
                         "stroke-linejoin",
                     ],
                 }],
-                "react/no-multi-comp": "error",
                 "react/no-unstable-nested-components": "error",
                 "react/prefer-stateless-function": "error",
                 "react/react-in-jsx-scope": "off",

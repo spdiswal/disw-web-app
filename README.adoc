@@ -53,8 +53,9 @@ You can create a new profile (e.g. named `my-profile`):
 ----
 import portraitAssetUrl from "./my-profile.webp"
 ----
-. Export a constant named `ContentSection` for which you use the `<Content/>` component from the `+profile` module to describe the profile content and set the portrait.
 . Export a `string` constant named `name` with the name to display in the title bar.
+. Export a function component named `MainContent` for which you use the `<Main/>` component from the `+profile` module to describe the profile content and set the portrait.
+. Export a function component named `FooterContent` for which you use the `<Footer/>` component from the `+profile` module to define the page footer.
 . In the project root folder, create a new file named `.env.development.local` (or `.env.production.local` when building for production).
 Git will ignore this file.
 Let it override the `VITE_PROFILE_NAME` environment variable to use the new profile:

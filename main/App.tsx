@@ -1,6 +1,6 @@
 import type { LocaleCachePort, PreferredLocalePort } from "+i18n"
 import { LocalePicker, LocaleProvider, useLocaleSelection } from "+i18n"
-import { ContentSection, name } from "+content"
+import { FooterContent, MainContent, name } from "+content"
 import type { MediaThemePort, ThemeCachePort } from "+theme"
 import { ThemePicker, useTheme } from "+theme"
 import { useEffect } from "preact/hooks"
@@ -46,7 +46,8 @@ export function App({
                     onLocaleSelected={selectLocale}
                 />
             </header>
-            <ContentSection/>
+            <MainContent/>
+            <FooterContent/>
         </LocaleProvider>
     )
 }

@@ -1,6 +1,6 @@
-import type { Grade, Term, UniversityCourse, UniversityCourseColumn } from "+elements"
-import { UniversityCourseTable } from "+elements"
 import { LocaleProvider } from "+i18n"
+import type { Grade, Term, UniversityCourse, UniversityCourseColumn } from "+profile"
+import { UniversityCourseTable } from "+profile"
 import { render, screen, waitFor } from "@testing-library/preact"
 import userEvent from "@testing-library/user-event"
 

@@ -1,4 +1,6 @@
+export * from "./skills"
 export * from "./Career"
 export * from "./Education"
 export * from "./Employments"
 export * from "./Occupation"
+export * from "./UniversityCourseTable"

@@ -55,6 +55,8 @@ export function UniversityCourseTable({
     const [activeColumn, setActiveColumn] =
         useState<UniversityCourseColumn>("term")
     
+    const rows = useMemo(() => Object.keys(courses), [courses])
+    
     const compareAsCourses =
         useCallback((comparator: Comparator<UniversityCourse>) => {
             return (
@@ -68,7 +70,7 @@ export function UniversityCourseTable({
         }, [compareAsCourses, activeColumn])
     
     const { sortedRows, order, setOrder } =
-        useSortableTableRows({ rows: Object.keys(courses), comparator })
+        useSortableTableRows({ rows, comparator })
     
     return (
         <Expandable

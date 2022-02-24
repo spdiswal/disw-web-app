@@ -12,7 +12,7 @@ export function ListboxOption({
     children,
 }: ListboxOptionProps) {
     return (
-        <span class={clsx(_class, "text-neutral-800 group-hover:text-white dark:text-neutral-900")}>
+        <span class={clsx(_class, "group-hover:text-white dark:text-neutral-900")}>
             {children}
         </span>
     )

@@ -20,7 +20,7 @@ export function Table<Column extends string, Row extends string>({
     return (
         <div class="overflow-x-auto rounded-xl border border-neutral-200 dark:border-neutral-600">
             <table class="divide-y divide-neutral-300 dark:divide-neutral-500">
-                <thead class="bg-neutral-50 dark:bg-neutral-800">
+                <thead class="text-xs bg-neutral-50 dark:bg-neutral-800">
                     <tr>
                         {columns.map((column, index) => {
                             const isFirstColumn = index === 0
@@ -38,7 +38,7 @@ export function Table<Column extends string, Row extends string>({
                                     <button
                                         type="button"
                                         class={clsx(
-                                            "py-3 px-6 w-full h-full text-xs font-medium tracking-wider text-left uppercase",
+                                            "py-3 px-6 w-full h-full font-medium tracking-wider text-left uppercase",
                                             defaultFocusOutlineClasses,
                                             focusOutlineInsideClasses,
                                             isFirstColumn && "focus-visible:rounded-tl-xl",
@@ -55,7 +55,7 @@ export function Table<Column extends string, Row extends string>({
                         })}
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="text-sm">
                     {rows.map((row) => (
                         <tr key={row} class="odd:bg-white even:bg-neutral-50 dark:odd:bg-neutral-700 dark:even:bg-neutral-800">
                             {renderRow(row)}

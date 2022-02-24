@@ -34,6 +34,9 @@ module.exports = {
             gridTemplateColumns: {
                 "description-list": "max-content 1fr",
             },
+            height: {
+                "4.5": "1.125rem",
+            },
             maxWidth: {
                 "until-sm": "calc(min(36rem, 100vw) - 6rem)",
                 "until-md": "calc(min(48rem, 100vw) - 6rem)",

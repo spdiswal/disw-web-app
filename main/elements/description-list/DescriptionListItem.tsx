@@ -1,22 +1,27 @@
-import { useLocale } from "+i18n"
-import type { Localisable } from "+i18n"
+import clsx from "clsx"
+import type { ClassValue } from "clsx"
+import type { ComponentChildren } from "preact"
 import { Fragment } from "preact"
 
 type DescriptionListItemProps = {
-    readonly title: Localisable<string>
-    readonly value: Localisable<string>
+    readonly forwardClass?: ClassValue
+    readonly title: string
+    readonly children: ComponentChildren
 }
 
 export function DescriptionListItem({
+    forwardClass,
     title,
-    value,
+    children,
 }: DescriptionListItemProps) {
-    const locale = useLocale()
-    
     return (
         <Fragment>
-            <dt class="font-semibold text-neutral-600 dark:text-neutral-300">{title[locale]}</dt>
-            <dd class="-mt-4 text-neutral-900 dark:text-neutral-50 sm:mt-0">{value[locale]}</dd>
+            <dt class="font-semibold text-neutral-600 dark:text-neutral-300">
+                {title}
+            </dt>
+            <dd class={clsx(forwardClass, "-mt-4 sm:mt-0")}>
+                {children}
+            </dd>
         </Fragment>
     )
 }

@@ -1,3 +1,4 @@
+export * from "./achievements"
 export * from "./skills"
 export * from "./Education"
 export * from "./Employments"

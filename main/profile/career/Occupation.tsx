@@ -61,7 +61,7 @@ export function Occupation({
                         {organisation.name}
                     </ExternalHyperlink>
                 </header>
-                <div class="flex flex-col gap-y-6 mb-16 md:mb-24 md:max-w-2xl">
+                <div class="flex flex-col gap-y-8 mb-16 md:mb-24 md:max-w-2xl">
                     {children}
                 </div>
             </SplitContainer>

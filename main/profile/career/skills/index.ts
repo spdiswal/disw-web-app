@@ -1,2 +1,2 @@
 export * from "./CodingSkill"
-export * from "./Skills"
+export * from "./PractisedSkills"

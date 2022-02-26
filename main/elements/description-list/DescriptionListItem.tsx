@@ -4,13 +4,13 @@ import type { ComponentChildren } from "preact"
 import { Fragment } from "preact"
 
 type DescriptionListItemProps = {
-    readonly forwardClass?: ClassValue
+    readonly class?: ClassValue
     readonly title: string
     readonly children: ComponentChildren
 }
 
 export function DescriptionListItem({
-    forwardClass,
+    class: _class,
     title,
     children,
 }: DescriptionListItemProps) {
@@ -19,7 +19,7 @@ export function DescriptionListItem({
             <dt class="font-semibold text-neutral-600 dark:text-neutral-300">
                 {title}
             </dt>
-            <dd class={clsx(forwardClass, "-mt-4 sm:mt-0")}>
+            <dd class={clsx(_class, "-mt-4 sm:mt-0")}>
                 {children}
             </dd>
         </Fragment>

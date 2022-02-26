@@ -43,7 +43,7 @@ export function MainContent() {
                     </LinearOutline>
                 }
             />
-            <Biography>
+            <Biography id="biography">
                 {{
                     da: "Jeg elsker at grave i sandet på Mars! Og jeg drømmer om at opdage liv på den røde planet.",
                     en: "I enjoy digging through the Martian soil! And I dream about discovering life on the Red Planet.",

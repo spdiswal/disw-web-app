@@ -84,7 +84,7 @@ You should execute these scripts from the project root folder.
 They have been defined in the `scripts` field in `package.json`.
 
 === Starting a Development Server
-To start a development server that hosts the web app under construction at http://localhost:5000:
+To start a development server that hosts the web app under construction at http://localhost:8000:
 
 ----
 yarn run develop

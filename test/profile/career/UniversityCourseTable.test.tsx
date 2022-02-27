@@ -1,7 +1,7 @@
 import { LocaleProvider } from "+i18n"
 import type { Grade, Term, UniversityCourse, UniversityCourseColumn } from "+profile"
 import { UniversityCourseTable } from "+profile"
-import { render, screen, waitFor } from "@testing-library/preact"
+import { render, screen } from "@testing-library/preact"
 import userEvent from "@testing-library/user-event"
 
 const terraforming: UniversityCourse = {
@@ -61,24 +61,22 @@ const courses = {
     trn2: terrainRelativeNavigation2,
 } as const
 
-test("The table rows are sorted in ascending order by year and term initially.", async () => {
+test("The table rows are sorted in ascending order by year and term initially.", () => {
     // GIVEN a test subject.
     const courseTable = renderUniversityCourseTable()
     
     // THEN the table rows are sorted in ascending order by year and term initially (and then by key if their years and terms are equivalent).
-    await waitFor(() => {
-        expect(courseTable.getTable()).toHaveTextContent(
-            matchingCourseSequence([
-                spaceCruise,
-                zeroGravityFields,
-                terraforming,
-                launchVehicles,
-                terrainRelativeNavigation1,
-                timeTravel,
-                terrainRelativeNavigation2,
-            ]),
-        )
-    })
+    expect(courseTable.getTable()).toHaveTextContent(
+        matchingCourseSequence([
+            spaceCruise,
+            zeroGravityFields,
+            terraforming,
+            launchVehicles,
+            terrainRelativeNavigation1,
+            timeTravel,
+            terrainRelativeNavigation2,
+        ]),
+    )
 })
 
 test("The table rows are sorted in descending order by year and term by clicking on the 'term' column header.", async () => {
@@ -86,28 +84,24 @@ test("The table rows are sorted in descending order by year and term by clicking
     const courseTable = renderUniversityCourseTable()
     
     // GIVEN that the table rows are already sorted in ascending order by year and term.
-    await waitFor(() => {
-        expect(courseTable.getTable()).toHaveTextContent(
-            matchingTopCourse(spaceCruise),
-        )
-    })
+    expect(courseTable.getTable()).toHaveTextContent(
+        matchingTopCourse(spaceCruise),
+    )
     
     // WHEN clicking on the 'term' column header.
-    courseTable.clickColumnHeader("term")
+    await courseTable.clickColumnHeader("term")
     
-    await waitFor(() => {
-        expect(courseTable.getTable()).toHaveTextContent(
-            matchingCourseSequence([
-                timeTravel,
-                terrainRelativeNavigation2,
-                terraforming,
-                launchVehicles,
-                terrainRelativeNavigation1,
-                zeroGravityFields,
-                spaceCruise,
-            ]),
-        )
-    })
+    expect(courseTable.getTable()).toHaveTextContent(
+        matchingCourseSequence([
+            timeTravel,
+            terrainRelativeNavigation2,
+            terraforming,
+            launchVehicles,
+            terrainRelativeNavigation1,
+            zeroGravityFields,
+            spaceCruise,
+        ]),
+    )
 })
 
 test("The table rows are sorted in ascending order by name by clicking on the 'name' column header.", async () => {
@@ -115,29 +109,25 @@ test("The table rows are sorted in ascending order by name by clicking on the 'n
     const courseTable = renderUniversityCourseTable()
     
     // GIVEN that the table rows are already sorted in ascending order by year and term.
-    await waitFor(() => {
-        expect(courseTable.getTable()).toHaveTextContent(
-            matchingTopCourse(spaceCruise),
-        )
-    })
+    expect(courseTable.getTable()).toHaveTextContent(
+        matchingTopCourse(spaceCruise),
+    )
     
     // WHEN clicking on the 'name' column header.
-    courseTable.clickColumnHeader("name")
+    await courseTable.clickColumnHeader("name")
     
     // THEN the table rows are sorted in ascending order by name.
-    await waitFor(() => {
-        expect(courseTable.getTable()).toHaveTextContent(
-            matchingCourseSequence([
-                launchVehicles,
-                spaceCruise,
-                terraforming,
-                terrainRelativeNavigation1,
-                terrainRelativeNavigation2,
-                timeTravel,
-                zeroGravityFields,
-            ]),
-        )
-    })
+    expect(courseTable.getTable()).toHaveTextContent(
+        matchingCourseSequence([
+            launchVehicles,
+            spaceCruise,
+            terraforming,
+            terrainRelativeNavigation1,
+            terrainRelativeNavigation2,
+            timeTravel,
+            zeroGravityFields,
+        ]),
+    )
 })
 
 test("The table rows are sorted in descending order by name by clicking on the 'name' column header two times.", async () => {
@@ -145,31 +135,27 @@ test("The table rows are sorted in descending order by name by clicking on the '
     const courseTable = renderUniversityCourseTable()
     
     // GIVEN that the table rows are already sorted in ascending order by name.
-    courseTable.clickColumnHeader("name")
+    await courseTable.clickColumnHeader("name")
     
-    await waitFor(() => {
-        expect(courseTable.getTable()).toHaveTextContent(
-            matchingTopCourse(launchVehicles),
-        )
-    })
+    expect(courseTable.getTable()).toHaveTextContent(
+        matchingTopCourse(launchVehicles),
+    )
     
     // WHEN clicking on the 'name' column header.
-    courseTable.clickColumnHeader("name")
+    await courseTable.clickColumnHeader("name")
     
     // THEN the table rows are sorted in descending order by name.
-    await waitFor(() => {
-        expect(courseTable.getTable()).toHaveTextContent(
-            matchingCourseSequence([
-                zeroGravityFields,
-                timeTravel,
-                terrainRelativeNavigation2,
-                terrainRelativeNavigation1,
-                terraforming,
-                spaceCruise,
-                launchVehicles,
-            ]),
-        )
-    })
+    expect(courseTable.getTable()).toHaveTextContent(
+        matchingCourseSequence([
+            zeroGravityFields,
+            timeTravel,
+            terrainRelativeNavigation2,
+            terrainRelativeNavigation1,
+            terraforming,
+            spaceCruise,
+            launchVehicles,
+        ]),
+    )
 })
 
 test("The table rows are sorted in ascending order by name by clicking on the 'name' column header three times.", async () => {
@@ -177,39 +163,33 @@ test("The table rows are sorted in ascending order by name by clicking on the 'n
     const courseTable = renderUniversityCourseTable()
     
     // GIVEN that the table rows are already sorted in descending order by name.
-    courseTable.clickColumnHeader("name")
+    await courseTable.clickColumnHeader("name")
     
-    await waitFor(() => {
-        expect(courseTable.getTable()).toHaveTextContent(
-            matchingTopCourse(launchVehicles),
-        )
-    })
+    expect(courseTable.getTable()).toHaveTextContent(
+        matchingTopCourse(launchVehicles),
+    )
     
-    courseTable.clickColumnHeader("name")
+    await courseTable.clickColumnHeader("name")
     
-    await waitFor(() => {
-        expect(courseTable.getTable()).toHaveTextContent(
-            matchingTopCourse(zeroGravityFields),
-        )
-    })
+    expect(courseTable.getTable()).toHaveTextContent(
+        matchingTopCourse(zeroGravityFields),
+    )
     
     // WHEN clicking on the 'name' column header.
-    courseTable.clickColumnHeader("name")
+    await courseTable.clickColumnHeader("name")
     
     // THEN the table rows are sorted in ascending order by name.
-    await waitFor(() => {
-        expect(courseTable.getTable()).toHaveTextContent(
-            matchingCourseSequence([
-                launchVehicles,
-                spaceCruise,
-                terraforming,
-                terrainRelativeNavigation1,
-                terrainRelativeNavigation2,
-                timeTravel,
-                zeroGravityFields,
-            ]),
-        )
-    })
+    expect(courseTable.getTable()).toHaveTextContent(
+        matchingCourseSequence([
+            launchVehicles,
+            spaceCruise,
+            terraforming,
+            terrainRelativeNavigation1,
+            terrainRelativeNavigation2,
+            timeTravel,
+            zeroGravityFields,
+        ]),
+    )
 })
 
 test("The table rows are sorted in ascending order by weight by clicking on the 'weight' column header.", async () => {
@@ -217,29 +197,25 @@ test("The table rows are sorted in ascending order by weight by clicking on the 
     const courseTable = renderUniversityCourseTable()
     
     // GIVEN that the table rows are already sorted in ascending order by year and term.
-    await waitFor(() => {
-        expect(courseTable.getTable()).toHaveTextContent(
-            matchingTopCourse(spaceCruise),
-        )
-    })
+    expect(courseTable.getTable()).toHaveTextContent(
+        matchingTopCourse(spaceCruise),
+    )
     
     // WHEN clicking on the 'weight' column header.
-    courseTable.clickColumnHeader("weight")
+    await courseTable.clickColumnHeader("weight")
     
     // THEN the table rows are sorted in ascending order by weight (and then by key if their weights are equivalent).
-    await waitFor(() => {
-        expect(courseTable.getTable()).toHaveTextContent(
-            matchingCourseSequence([
-                launchVehicles,
-                timeTravel,
-                zeroGravityFields,
-                terrainRelativeNavigation1,
-                terrainRelativeNavigation2,
-                terraforming,
-                spaceCruise,
-            ]),
-        )
-    })
+    expect(courseTable.getTable()).toHaveTextContent(
+        matchingCourseSequence([
+            launchVehicles,
+            timeTravel,
+            zeroGravityFields,
+            terrainRelativeNavigation1,
+            terrainRelativeNavigation2,
+            terraforming,
+            spaceCruise,
+        ]),
+    )
 })
 
 test("The table rows are sorted in descending order by weight by clicking on the 'weight' column header two times.", async () => {
@@ -247,31 +223,27 @@ test("The table rows are sorted in descending order by weight by clicking on the
     const courseTable = renderUniversityCourseTable()
     
     // GIVEN that the table rows are already sorted in ascending order by weight.
-    courseTable.clickColumnHeader("weight")
+    await courseTable.clickColumnHeader("weight")
     
-    await waitFor(() => {
-        expect(courseTable.getTable()).toHaveTextContent(
-            matchingTopCourse(launchVehicles),
-        )
-    })
+    expect(courseTable.getTable()).toHaveTextContent(
+        matchingTopCourse(launchVehicles),
+    )
     
     // WHEN clicking on the 'weight' column header.
-    courseTable.clickColumnHeader("weight")
+    await courseTable.clickColumnHeader("weight")
     
     // THEN the table rows are sorted in descending order by weight (and then by key if their weights are equivalent).
-    await waitFor(() => {
-        expect(courseTable.getTable()).toHaveTextContent(
-            matchingCourseSequence([
-                spaceCruise,
-                terraforming,
-                launchVehicles,
-                timeTravel,
-                zeroGravityFields,
-                terrainRelativeNavigation1,
-                terrainRelativeNavigation2,
-            ]),
-        )
-    })
+    expect(courseTable.getTable()).toHaveTextContent(
+        matchingCourseSequence([
+            spaceCruise,
+            terraforming,
+            launchVehicles,
+            timeTravel,
+            zeroGravityFields,
+            terrainRelativeNavigation1,
+            terrainRelativeNavigation2,
+        ]),
+    )
 })
 
 test("The table rows are sorted in ascending order by grade by clicking on the 'grade' column header.", async () => {
@@ -279,29 +251,25 @@ test("The table rows are sorted in ascending order by grade by clicking on the '
     const courseTable = renderUniversityCourseTable()
     
     // GIVEN that the table rows are already sorted in ascending order by year and term.
-    await waitFor(() => {
-        expect(courseTable.getTable()).toHaveTextContent(
-            matchingTopCourse(spaceCruise),
-        )
-    })
+    expect(courseTable.getTable()).toHaveTextContent(
+        matchingTopCourse(spaceCruise),
+    )
     
     // WHEN clicking on the 'grade' column header.
-    courseTable.clickColumnHeader("grade")
+    await courseTable.clickColumnHeader("grade")
     
     // THEN the table rows are sorted in ascending order by grade (and then by key if their grades are equivalent).
-    await waitFor(() => {
-        expect(courseTable.getTable()).toHaveTextContent(
-            matchingCourseSequence([
-                terrainRelativeNavigation1,
-                timeTravel,
-                terraforming,
-                launchVehicles,
-                spaceCruise,
-                zeroGravityFields,
-                terrainRelativeNavigation2,
-            ]),
-        )
-    })
+    expect(courseTable.getTable()).toHaveTextContent(
+        matchingCourseSequence([
+            terrainRelativeNavigation1,
+            timeTravel,
+            terraforming,
+            launchVehicles,
+            spaceCruise,
+            zeroGravityFields,
+            terrainRelativeNavigation2,
+        ]),
+    )
 })
 
 test("The table rows are sorted in descending order by grade by clicking on the 'grade' column header two times.", async () => {
@@ -309,31 +277,27 @@ test("The table rows are sorted in descending order by grade by clicking on the 
     const courseTable = renderUniversityCourseTable()
     
     // GIVEN that the table rows are already sorted in ascending order by grade.
-    courseTable.clickColumnHeader("grade")
+    await courseTable.clickColumnHeader("grade")
     
-    await waitFor(() => {
-        expect(courseTable.getTable()).toHaveTextContent(
-            matchingTopCourse(terrainRelativeNavigation1),
-        )
-    })
+    expect(courseTable.getTable()).toHaveTextContent(
+        matchingTopCourse(terrainRelativeNavigation1),
+    )
     
     // WHEN clicking on the 'grade' column header.
-    courseTable.clickColumnHeader("grade")
+    await courseTable.clickColumnHeader("grade")
     
     // THEN the table rows are sorted in descending order by grade (and then by key if their grades are equivalent).
-    await waitFor(() => {
-        expect(courseTable.getTable()).toHaveTextContent(
-            matchingCourseSequence([
-                spaceCruise,
-                zeroGravityFields,
-                terrainRelativeNavigation2,
-                terraforming,
-                launchVehicles,
-                timeTravel,
-                terrainRelativeNavigation1,
-            ]),
-        )
-    })
+    expect(courseTable.getTable()).toHaveTextContent(
+        matchingCourseSequence([
+            spaceCruise,
+            zeroGravityFields,
+            terrainRelativeNavigation2,
+            terraforming,
+            launchVehicles,
+            timeTravel,
+            terrainRelativeNavigation1,
+        ]),
+    )
 })
 
 test("The table is expanded by clicking on the expansion button.", async () => {
@@ -344,12 +308,10 @@ test("The table is expanded by clicking on the expansion button.", async () => {
     expect(courseTable.getExpandButton()).not.toHaveClass("hidden")
     
     // WHEN clicking on the expansion button.
-    courseTable.clickExpandButton()
+    await courseTable.clickExpandButton()
     
     // THEN the table is expanded.
-    await waitFor(() => {
-        expect(courseTable.getExpandButton()).toHaveClass("hidden")
-    })
+    expect(courseTable.getExpandButton()).toHaveClass("hidden")
 })
 
 test("The table is expanded by clicking on the 'name' column header.", async () => {
@@ -360,12 +322,10 @@ test("The table is expanded by clicking on the 'name' column header.", async () 
     expect(courseTable.getExpandButton()).not.toHaveClass("hidden")
     
     // WHEN clicking on the 'name' column header.
-    courseTable.clickColumnHeader("name")
+    await courseTable.clickColumnHeader("name")
     
     // THEN the table is expanded.
-    await waitFor(() => {
-        expect(courseTable.getExpandButton()).toHaveClass("hidden")
-    })
+    expect(courseTable.getExpandButton()).toHaveClass("hidden")
 })
 
 test("The table is expanded by clicking on the 'term' column header.", async () => {
@@ -376,12 +336,10 @@ test("The table is expanded by clicking on the 'term' column header.", async () 
     expect(courseTable.getExpandButton()).not.toHaveClass("hidden")
     
     // WHEN clicking on the 'term' column header.
-    courseTable.clickColumnHeader("term")
+    await courseTable.clickColumnHeader("term")
     
     // THEN the table is expanded.
-    await waitFor(() => {
-        expect(courseTable.getExpandButton()).toHaveClass("hidden")
-    })
+    expect(courseTable.getExpandButton()).toHaveClass("hidden")
 })
 
 test("The table is expanded by clicking on the 'weight' column header.", async () => {
@@ -392,12 +350,10 @@ test("The table is expanded by clicking on the 'weight' column header.", async (
     expect(courseTable.getExpandButton()).not.toHaveClass("hidden")
     
     // WHEN clicking on the 'weight' column header.
-    courseTable.clickColumnHeader("weight")
+    await courseTable.clickColumnHeader("weight")
     
     // THEN the table is expanded.
-    await waitFor(() => {
-        expect(courseTable.getExpandButton()).toHaveClass("hidden")
-    })
+    expect(courseTable.getExpandButton()).toHaveClass("hidden")
 })
 
 test("The table is expanded by clicking on the 'grade' column header.", async () => {
@@ -408,12 +364,10 @@ test("The table is expanded by clicking on the 'grade' column header.", async ()
     expect(courseTable.getExpandButton()).not.toHaveClass("hidden")
     
     // WHEN clicking on the 'grade' column header.
-    courseTable.clickColumnHeader("grade")
+    await courseTable.clickColumnHeader("grade")
     
     // THEN the table is expanded.
-    await waitFor(() => {
-        expect(courseTable.getExpandButton()).toHaveClass("hidden")
-    })
+    expect(courseTable.getExpandButton()).toHaveClass("hidden")
 })
 
 const columnHeaderLabels: Readonly<Record<UniversityCourseColumn, string>> = {
@@ -424,6 +378,8 @@ const columnHeaderLabels: Readonly<Record<UniversityCourseColumn, string>> = {
 }
 
 function renderUniversityCourseTable() {
+    const user = userEvent.setup()
+    
     render((
         <LocaleProvider value="en">
             <UniversityCourseTable courses={courses}/>
@@ -438,15 +394,15 @@ function renderUniversityCourseTable() {
         return screen.getByRole("button", { name: "Show all courses" })
     }
     
-    function clickExpandButton() {
-        userEvent.click(getExpandButton())
+    async function clickExpandButton() {
+        await user.click(getExpandButton())
     }
     
-    function clickColumnHeader(column: UniversityCourseColumn) {
+    async function clickColumnHeader(column: UniversityCourseColumn) {
         const columnHeader = screen.getByRole("button", {
             name: columnHeaderLabels[column],
         })
-        userEvent.click(columnHeader)
+        await user.click(columnHeader)
     }
     
     return {

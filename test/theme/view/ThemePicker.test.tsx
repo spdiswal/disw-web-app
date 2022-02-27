@@ -47,7 +47,7 @@ test("The theme picker has three options.", () => {
     expect(options[2]).toHaveAccessibleName("Dark")
 })
 
-test("The change handler is invoked upon selecting the 'match-media' option.", () => {
+test("The change handler is invoked upon selecting the 'match-media' option.", async () => {
     // GIVEN a spying change handler.
     const spyingChangeHandler = jest.fn()
     
@@ -59,7 +59,7 @@ test("The change handler is invoked upon selecting the 'match-media' option.", (
     })
     
     // WHEN selecting the 'match-media' option.
-    themePicker.selectOption("Automatic")
+    await themePicker.selectOption("Automatic")
     
     // THEN the change handler has been invoked once.
     // AND the selected option is passed as the argument.
@@ -67,7 +67,7 @@ test("The change handler is invoked upon selecting the 'match-media' option.", (
     expect(spyingChangeHandler).toHaveBeenCalledWith("match-media")
 })
 
-test("The change handler is invoked upon selecting the 'light' option.", () => {
+test("The change handler is invoked upon selecting the 'light' option.", async () => {
     // GIVEN a spying change handler.
     const spyingChangeHandler = jest.fn()
     
@@ -79,7 +79,7 @@ test("The change handler is invoked upon selecting the 'light' option.", () => {
     })
     
     // WHEN selecting the 'light' option.
-    themePicker.selectOption("Light")
+    await themePicker.selectOption("Light")
     
     // THEN the change handler has been invoked once.
     // AND the selected option is passed as the argument.
@@ -87,7 +87,7 @@ test("The change handler is invoked upon selecting the 'light' option.", () => {
     expect(spyingChangeHandler).toHaveBeenCalledWith("light")
 })
 
-test("The change handler is invoked upon selecting the 'dark' option.", () => {
+test("The change handler is invoked upon selecting the 'dark' option.", async () => {
     // GIVEN a spying change handler.
     const spyingChangeHandler = jest.fn()
     
@@ -99,7 +99,7 @@ test("The change handler is invoked upon selecting the 'dark' option.", () => {
     })
     
     // WHEN selecting the 'dark' option.
-    themePicker.selectOption("Dark")
+    await themePicker.selectOption("Dark")
     
     // THEN the change handler has been invoked once.
     // AND the selected option is passed as the argument.
@@ -115,6 +115,8 @@ function renderThemePickerComponent(options?: {
     const mediaTheme: Theme = "light"
     const selectedTheme: ThemeSelection = "match-media"
     const onThemeSelected = options?.onThemeSelected
+    
+    const user = userEvent.setup()
     
     const { rerender } = render((
         <LocaleProvider value={locale}>
@@ -134,9 +136,9 @@ function renderThemePickerComponent(options?: {
         return screen.getAllByRole("option")
     }
     
-    function selectOption(accessibleName: string) {
+    async function selectOption(accessibleName: string) {
         const option = screen.getByRole("option", { name: accessibleName })
-        userEvent.click(option)
+        await user.click(option)
     }
     
     function changeLocale(newLocale: Locale) {

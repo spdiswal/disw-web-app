@@ -37,7 +37,7 @@ test("The locale picker has two options.", () => {
     expect(options[1]).toHaveAccessibleName("English")
 })
 
-test("The change handler is invoked upon selecting the 'da' option.", () => {
+test("The change handler is invoked upon selecting the 'da' option.", async () => {
     // GIVEN a spying change handler.
     const spyingChangeHandler = jest.fn()
     
@@ -47,7 +47,7 @@ test("The change handler is invoked upon selecting the 'da' option.", () => {
     })
     
     // WHEN selecting the 'da' option.
-    localePicker.selectOption("Dansk")
+    await localePicker.selectOption("Dansk")
     
     // THEN the change handler has been invoked once.
     // AND the selected option is passed as the argument.
@@ -55,7 +55,7 @@ test("The change handler is invoked upon selecting the 'da' option.", () => {
     expect(spyingChangeHandler).toHaveBeenCalledWith("da")
 })
 
-test("The change handler is invoked upon selecting the 'en' option.", () => {
+test("The change handler is invoked upon selecting the 'en' option.", async () => {
     // GIVEN a spying change handler.
     const spyingChangeHandler = jest.fn()
     
@@ -65,7 +65,7 @@ test("The change handler is invoked upon selecting the 'en' option.", () => {
     })
     
     // WHEN selecting the 'en' option.
-    localePicker.selectOption("English")
+    await localePicker.selectOption("English")
     
     // THEN the change handler has been invoked once.
     // AND the selected option is passed as the argument.
@@ -79,6 +79,8 @@ function renderLocalePickerComponent(options?: {
 }) {
     const selectedLocale = options?.selectedLocale ?? "da"
     const onLocaleSelected = options?.onLocaleSelected
+    
+    const user = userEvent.setup()
     
     render((
         <LocaleProvider value={selectedLocale}>
@@ -94,9 +96,9 @@ function renderLocalePickerComponent(options?: {
         return screen.getAllByRole("option")
     }
     
-    function selectOption(accessibleName: string) {
+    async function selectOption(accessibleName: string) {
         const option = screen.getByRole("option", { name: accessibleName })
-        userEvent.click(option)
+        await user.click(option)
     }
     
     return {

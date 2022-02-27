@@ -18,14 +18,14 @@ const caption: Readonly<Record<ThemeSelection, Localisable<string>>> = {
 }
 
 const highlightedIcon: Readonly<Record<Theme, JSX.Element>> = {
-    dark: <HeroIconMoon class="shrink-0 h-5 text-primary-600 rounded-full"/>,
-    light: <HeroIconSun class="shrink-0 h-5 text-primary-600 rounded-full"/>,
+    dark: <HeroIconMoon class="h-5 shrink-0 rounded-full text-primary-600"/>,
+    light: <HeroIconSun class="h-5 shrink-0 rounded-full text-primary-600"/>,
 }
 
 const icon: Readonly<Record<ThemeSelection, JSX.Element>> = {
-    "dark": <HeroIconMoon class="shrink-0 h-5 rounded-full"/>,
-    "light": <HeroIconSun class="shrink-0 h-5 rounded-full"/>,
-    "match-media": <HeroIconDesktopComputer class="shrink-0 h-5 rounded-full"/>,
+    "dark": <HeroIconMoon class="h-5 shrink-0 rounded-full"/>,
+    "light": <HeroIconSun class="h-5 shrink-0 rounded-full"/>,
+    "match-media": <HeroIconDesktopComputer class="h-5 shrink-0 rounded-full"/>,
 }
 
 const accessibilityLabel: Localisable<string> = {
@@ -69,7 +69,7 @@ export function ThemePicker({
                 </TransparentButton>
             )}
             renderOption={(themeSelection, { isSelected }) => (
-                <ListboxOption class="flex gap-x-4 items-center">
+                <ListboxOption class="flex items-center gap-x-4">
                     {icon[themeSelection]}
                     <span class="block grow truncate">
                         {caption[themeSelection][locale]}

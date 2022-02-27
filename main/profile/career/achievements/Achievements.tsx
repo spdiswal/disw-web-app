@@ -12,7 +12,7 @@ export function Achievements({
     
     return (
         <div class="flex flex-col gap-y-4">
-            <h2 class="text-xs tracking-wider uppercase">{{ da: "Præstationer", en: "Achievements" }[locale]}</h2>
+            <h2 class="text-xs uppercase tracking-wider">{{ da: "Præstationer", en: "Achievements" }[locale]}</h2>
             {children}
         </div>
     )

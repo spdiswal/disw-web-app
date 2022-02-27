@@ -25,7 +25,7 @@ export function ExternalHyperlink({
             href={url}
         >
             {children}
-            <HeroIconExternalLink class="hidden mb-0.5 ml-1 h-4.5 sm:inline sm:invisible sm:group-hover:visible"/>
+            <HeroIconExternalLink class="mb-0.5 ml-1 hidden h-4.5 sm:invisible sm:inline sm:group-hover:visible"/>
         </a>
     )
 }

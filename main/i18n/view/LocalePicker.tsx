@@ -12,8 +12,8 @@ const caption: Readonly<Record<Locale, string>> = {
 }
 
 const icon: Readonly<Record<Locale, JSX.Element>> = {
-    da: <FlagIconDenmark class="shrink-0 h-5 rounded-full"/>,
-    en: <FlagIconUnitedKingdom class="shrink-0 h-5 rounded-full"/>,
+    da: <FlagIconDenmark class="h-5 shrink-0 rounded-full"/>,
+    en: <FlagIconUnitedKingdom class="h-5 shrink-0 rounded-full"/>,
 }
 
 type LocalePickerProps = {
@@ -37,7 +37,7 @@ export function LocalePicker({
                 <HybridButton
                     forwardRef={ref}
                     forwardAriaExpanded={isExpanded}
-                    class="flex gap-x-4 items-center md:w-full md:text-sm"
+                    class="flex items-center gap-x-4 md:w-full md:text-sm"
                     onMouseDown={onMouseDown}
                 >
                     {icon[selectedLocale]}
@@ -48,7 +48,7 @@ export function LocalePicker({
                 </HybridButton>
             )}
             renderOption={(locale, { isSelected }) => (
-                <ListboxOption class="flex gap-x-4 items-center">
+                <ListboxOption class="flex items-center gap-x-4">
                     {icon[locale]}
                     <span class="block grow truncate">
                         {caption[locale]}

@@ -12,7 +12,7 @@ export function Badge({
     children,
 }: BadgeProps) {
     return (
-        <span class={clsx(_class, "inline-flex items-center py-0.5 px-2.5 font-medium rounded-lg")}>
+        <span class={clsx(_class, "inline-flex items-center rounded-lg py-0.5 px-2.5 font-medium")}>
             {children}
         </span>
     )

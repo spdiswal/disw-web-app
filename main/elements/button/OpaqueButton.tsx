@@ -30,7 +30,7 @@ export function OpaqueButton({
             class={clsx(
                 _class,
                 commonButtonClasses,
-                "py-2 px-4 bg-neutral-50 hover:bg-white dark:bg-neutral-800 dark:hover:bg-neutral-700 border border-neutral-400 drop-shadow-sm md:text-sm",
+                "border border-neutral-400 bg-neutral-50 py-2 px-4 drop-shadow-sm hover:bg-white dark:bg-neutral-800 dark:hover:bg-neutral-700 md:text-sm",
                 defaultFocusOutlineClasses,
                 focusOutlineInsideClasses,
             )}

@@ -86,7 +86,7 @@ export function UniversityCourseTable({
                     const isUnsorted = column !== activeColumn
                     
                     return (
-                        <span class="flex gap-x-2 items-center">
+                        <span class="flex items-center gap-x-2">
                             {columnHeaderLabel[column][locale]}
                             {order === "ascending"
                                 ? <HeroIconChevronUp class={clsx(isUnsorted && "invisible", "h-4")}/>

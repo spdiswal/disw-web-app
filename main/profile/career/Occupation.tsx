@@ -34,8 +34,8 @@ export function Occupation({
         <article aria-labelledby={id}>
             <SplitContainer
                 complementary={
-                    <div class="flex overflow-y-clip relative gap-x-10 justify-start h-full md:justify-end lg:gap-x-16">
-                        <div class="flex mb-6 font-light md:flex-col md:items-end md:mb-0 md:text-right">
+                    <div class="relative flex h-full justify-start gap-x-10 overflow-y-clip md:justify-end lg:gap-x-16">
+                        <div class="mb-6 flex font-light md:mb-0 md:flex-col md:items-end md:text-right">
                             <FormattedYearMonth class="md:text-xl lg:mb-1 lg:text-2xl" yearMonth={since}/>
                             <span>
                                 &ndash;
@@ -45,23 +45,23 @@ export function Occupation({
                             </span>
                         </div>
                         <span
-                            class="aspect-square hidden relative z-10 w-8 h-8 rounded-full border-2 border-neutral-600 dark:border-neutral-400 md:block"
+                            class="relative z-10 hidden aspect-square h-8 w-8 rounded-full border-2 border-neutral-600 dark:border-neutral-400 md:block"
                             aria-hidden="true"
                         />
                         <span
-                            class="hidden absolute top-8 right-4 z-0 w-px h-full bg-neutral-600/40 dark:bg-neutral-400/40 md:block"
+                            class="absolute top-8 right-4 z-0 hidden h-full w-px bg-neutral-600/40 dark:bg-neutral-400/40 md:block"
                             aria-hidden="true"
                         />
                     </div>
                 }
             >
-                <header class="flex flex-col mb-4 md:gap-y-1 md:mb-6">
+                <header class="mb-4 flex flex-col md:mb-6 md:gap-y-1">
                     <h1 id={id} class="font-bold text-primary-600 md:text-2xl">{title}</h1>
                     <ExternalHyperlink url={organisation.url} class="font-semibold">
                         {organisation.name}
                     </ExternalHyperlink>
                 </header>
-                <div class="flex flex-col gap-y-8 mb-16 md:mb-24 md:max-w-2xl">
+                <div class="mb-16 flex flex-col gap-y-8 md:mb-24 md:max-w-2xl">
                     {children}
                 </div>
             </SplitContainer>

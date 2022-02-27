@@ -34,7 +34,7 @@ export function App({
     
     return (
         <LocaleProvider value={locale}>
-            <header class="flex absolute top-4 right-4 justify-end items-center md:gap-x-2">
+            <header class="absolute top-4 right-4 flex items-center justify-end md:gap-x-2">
                 <ThemePicker
                     class="w-fit"
                     mediaTheme={mediaTheme}

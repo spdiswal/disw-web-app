@@ -66,7 +66,7 @@ export function Listbox<Option extends string>({
                 ref={popupRef}
                 class={clsx(
                     !isPopupOpen && "hidden",
-                    "overflow-auto absolute right-0 z-50 py-1 mt-1 w-48 max-h-56 text-base bg-white/75 dark:bg-neutral-100/75 rounded-xl focus-visible:outline-none ring-1 ring-neutral-900/10 shadow-lg backdrop-blur-md md:text-sm",
+                    "absolute right-0 z-50 mt-1 max-h-56 w-48 overflow-auto rounded-xl bg-white/75 py-1 text-base shadow-lg ring-1 ring-neutral-900/10 backdrop-blur-md focus-visible:outline-none dark:bg-neutral-100/75 md:text-sm",
                 )}
                 role="listbox"
             >
@@ -77,7 +77,7 @@ export function Listbox<Option extends string>({
                             key={option}
                             class={clsx(
                                 isSelected ? "font-bold" : "font-normal",
-                                "group relative py-2 px-3 hover:bg-accent-600 cursor-default select-none",
+                                "group relative cursor-default select-none py-2 px-3 hover:bg-accent-600",
                             )}
                             role="option"
                             aria-selected={isSelected}

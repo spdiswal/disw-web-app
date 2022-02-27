@@ -360,11 +360,31 @@ module.exports = {
                 }],
                 "react/void-dom-elements-no-children": "error",
                 "react-hooks/exhaustive-deps": "error",
-                "tailwindcss/classnames-order": "error",
-                "tailwindcss/enforces-shorthand": "error",
-                "tailwindcss/migration-from-tailwind-2": "error",
-                "tailwindcss/no-contradicting-classname": "error",
-                "tailwindcss/no-custom-classname": "error",
+                "tailwindcss/classnames-order": ["error", {
+                    callees: ["clsx"],
+                    config: "./tailwind.config.cjs",
+                    officialSorting: true,
+                }],
+                "tailwindcss/enforces-negative-arbitrary-values": ["error", {
+                    callees: ["clsx"],
+                    config: "./tailwind.config.cjs",
+                }],
+                "tailwindcss/enforces-shorthand": ["error", {
+                    callees: ["clsx"],
+                    config: "./tailwind.config.cjs",
+                }],
+                "tailwindcss/migration-from-tailwind-2": ["error", {
+                    callees: ["clsx"],
+                    config: "./tailwind.config.cjs",
+                }],
+                "tailwindcss/no-contradicting-classname": ["error", {
+                    callees: ["clsx"],
+                    config: "./tailwind.config.cjs",
+                }],
+                "tailwindcss/no-custom-classname": ["error", {
+                    callees: ["clsx"],
+                    config: "./tailwind.config.cjs",
+                }],
             },
         },
         {
@@ -411,9 +431,6 @@ module.exports = {
         "react": {
             // Preact 10 provides an API similar to React 17.
             version: "17",
-        },
-        "tailwindcss": {
-            config: "./tailwind.config.cjs",
         },
         "testing-library/custom-renders": "off",
     },

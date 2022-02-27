@@ -12,7 +12,7 @@ export function Achievement({
     children,
 }: AchievementProps) {
     return (
-        <div class={clsx(_class, "overflow-hidden flex-1 p-4 -mx-4 bg-white/75 dark:bg-white/5 rounded-lg border border-primary-300 dark:border-primary-500 shadow md:p-6 md:-mx-6")}>
+        <div class={clsx(_class, "-mx-4 flex-1 overflow-hidden rounded-lg border border-primary-300 bg-white/75 p-4 shadow dark:border-primary-500 dark:bg-white/5 md:-mx-6 md:p-6")}>
             {children}
         </div>
     )

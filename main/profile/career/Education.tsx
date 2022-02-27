@@ -12,7 +12,7 @@ export function Education({
     const locale = useLocale()
     
     return (
-        <section class="px-8 pt-8 bg-neutral-100 dark:bg-neutral-800 md:pt-24" aria-labelledby="education">
+        <section class="bg-neutral-100 px-8 pt-8 dark:bg-neutral-800 md:pt-24" aria-labelledby="education">
             <header class="mb-12">
                 <SplitContainer>
                     <h1 id="education" class="font-light md:text-2xl">{{ da: "Uddannelse", en: "Education" }[locale]}</h1>

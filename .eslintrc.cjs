@@ -278,7 +278,11 @@ module.exports = {
                 "react/jsx-child-element-spacing": "error",
                 "react/jsx-closing-bracket-location": ["error", "line-aligned"],
                 "react/jsx-closing-tag-location": "error",
-                "react/jsx-curly-brace-presence": ["error", "never"],
+                "react/jsx-curly-brace-presence": ["error", {
+                    props: "never",
+                    children: "never",
+                    propElementValues: "always",
+                }],
                 "react/jsx-curly-newline": "error",
                 "react/jsx-curly-spacing": ["error", "never"],
                 "react/jsx-equals-spacing": ["error", "never"],
@@ -289,6 +293,11 @@ module.exports = {
                     indentLogicalExpressions: true,
                 }],
                 "react/jsx-indent-props": ["error", 4],
+                "react/jsx-key": ["error", {
+                    checkFragmentShorthand: true,
+                    checkKeyMustBeforeSpread: true,
+                    warnOnDuplicates: true,
+                }],
                 "react/jsx-newline": ["error", {
                     prevent: true,
                 }],
@@ -326,6 +335,8 @@ module.exports = {
                     namedComponents: "function-declaration",
                     unnamedComponents: "arrow-function",
                 }],
+                "react/hook-use-state": "error",
+                "react/iframe-missing-sandbox": "error",
                 "react/no-access-state-in-setstate": "error",
                 "react/no-array-index-key": "error",
                 "react/no-danger": "error",

@@ -268,6 +268,7 @@ module.exports = {
         {
             files: ["*.tsx"],
             extends: [
+                "plugin:jsx-a11y/recommended",
                 "plugin:react/recommended",
                 "plugin:react-hooks/recommended",
                 "plugin:tailwindcss/recommended",
@@ -421,6 +422,7 @@ module.exports = {
         "jest",
         "jest-dom",
         "jest-formatting",
+        "jsx-a11y",
         "tailwindcss",
         "testing-library",
     ],

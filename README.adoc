@@ -151,6 +151,13 @@ For security reasons, *always specify the exact version* of a dependency in `pac
 Avoid using the `^` and `~` modifiers, which would otherwise allow the package manager to install a newer minor or patch version of the dependency than the one specified.
 ====
 
+To update a third-party dependency to its latest version, execute these two commands from the project root folder:
+
+----
+yarn up --exact <dependency>
+yarn up --recursive <dependency>
+----
+
 === Preact
 https://preactjs.com/[Preact] is a reactive web UI framework with an API similar to that of React.
 It lets you define components as JavaScript functions using https://reactjs.org/docs/introducing-jsx.html[JSX].

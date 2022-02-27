@@ -66,8 +66,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["html-minifier-terser", "npm:6.1.0"],
             ["jest", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:27.4.5"],
             ["postcss", "npm:8.4.5"],
-            ["preact", "npm:10.6.4"],
-            ["preact-render-to-string", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:5.1.19"],
+            ["preact", "npm:10.6.6"],
+            ["preact-render-to-string", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:5.1.20"],
             ["tailwindcss", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:3.0.15"],
             ["ts-jest", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:27.1.2"],
             ["tslib", "npm:2.3.1"],
@@ -1778,7 +1778,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/preact", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:2.0.1"],
             ["@testing-library/dom", "npm:7.31.2"],
             ["@types/preact", null],
-            ["preact", "npm:10.6.4"]
+            ["preact", "npm:10.6.6"]
           ],
           "packagePeers": [
             "@types/preact",
@@ -1802,7 +1802,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/preact", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:2.0.1"],
             ["@types/preact", null],
             ["@types/testing-library__preact", null],
-            ["preact", "npm:10.6.4"]
+            ["preact", "npm:10.6.6"]
           ],
           "packagePeers": [
             "@testing-library/preact",
@@ -7051,28 +7051,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["preact", [
-        ["npm:10.6.4", {
-          "packageLocation": "./.yarn/cache/preact-npm-10.6.4-71f87668fe-09c496bb3c.zip/node_modules/preact/",
+        ["npm:10.6.6", {
+          "packageLocation": "./.yarn/cache/preact-npm-10.6.6-69f6e36f09-d6a9581b22.zip/node_modules/preact/",
           "packageDependencies": [
-            ["preact", "npm:10.6.4"]
+            ["preact", "npm:10.6.6"]
           ],
           "linkType": "HARD",
         }]
       ]],
       ["preact-render-to-string", [
-        ["npm:5.1.19", {
-          "packageLocation": "./.yarn/cache/preact-render-to-string-npm-5.1.19-12c6fd3420-b8b454d7b4.zip/node_modules/preact-render-to-string/",
+        ["npm:5.1.20", {
+          "packageLocation": "./.yarn/cache/preact-render-to-string-npm-5.1.20-aa3a3eb1f8-69e3675141.zip/node_modules/preact-render-to-string/",
           "packageDependencies": [
-            ["preact-render-to-string", "npm:5.1.19"]
+            ["preact-render-to-string", "npm:5.1.20"]
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:5.1.19", {
-          "packageLocation": "./.yarn/__virtual__/preact-render-to-string-virtual-93815e83a4/0/cache/preact-render-to-string-npm-5.1.19-12c6fd3420-b8b454d7b4.zip/node_modules/preact-render-to-string/",
+        ["virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:5.1.20", {
+          "packageLocation": "./.yarn/__virtual__/preact-render-to-string-virtual-36e875064d/0/cache/preact-render-to-string-npm-5.1.20-aa3a3eb1f8-69e3675141.zip/node_modules/preact-render-to-string/",
           "packageDependencies": [
-            ["preact-render-to-string", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:5.1.19"],
+            ["preact-render-to-string", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:5.1.20"],
             ["@types/preact", null],
-            ["preact", "npm:10.6.4"],
+            ["preact", "npm:10.6.6"],
             ["pretty-format", "npm:3.8.0"]
           ],
           "packagePeers": [
@@ -7465,8 +7465,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["html-minifier-terser", "npm:6.1.0"],
             ["jest", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:27.4.5"],
             ["postcss", "npm:8.4.5"],
-            ["preact", "npm:10.6.4"],
-            ["preact-render-to-string", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:5.1.19"],
+            ["preact", "npm:10.6.6"],
+            ["preact-render-to-string", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:5.1.20"],
             ["tailwindcss", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:3.0.15"],
             ["ts-jest", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:27.1.2"],
             ["tslib", "npm:2.3.1"],

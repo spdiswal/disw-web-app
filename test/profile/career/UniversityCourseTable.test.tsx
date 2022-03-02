@@ -1,6 +1,7 @@
 import { LocaleProvider } from "+i18n"
 import type { Grade, Term, UniversityCourse, UniversityCourseColumn } from "+profile"
 import { UniversityCourseTable } from "+profile"
+import type { ReadonlyNonEmptyArray } from "+types"
 import { render, screen } from "@testing-library/preact"
 import userEvent from "@testing-library/user-event"
 
@@ -424,7 +425,7 @@ function matchingTopCourse(expectedTopCourse: UniversityCourse): string {
 }
 
 function matchingCourseSequence(
-    expectedCourseSequence: ReadonlyArray<UniversityCourse>,
+    expectedCourseSequence: ReadonlyNonEmptyArray<UniversityCourse>,
 ): string {
     return columnHeadersTextContent
         + expectedCourseSequence.map(mapCourse).join("")

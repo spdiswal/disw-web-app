@@ -1,9 +1,10 @@
+import type { ReadonlyNonEmptyArray } from "+types"
 import clsx from "clsx"
 import type { ComponentChild } from "preact"
 import { defaultFocusOutlineClasses, focusOutlineInsideClasses } from "../constants"
 
 type TableProps<Column extends string, Row extends string> = {
-    readonly columns: ReadonlyArray<Column>
+    readonly columns: ReadonlyNonEmptyArray<Column>
     readonly rows: ReadonlyArray<Row>
     readonly onColumnHeaderClicked?: (column: Column) => void
     readonly renderColumnHeader: (column: Column) => ComponentChild

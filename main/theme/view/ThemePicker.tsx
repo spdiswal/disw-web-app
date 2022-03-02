@@ -1,11 +1,12 @@
-import { HeroIconCheck, HeroIconDesktopComputer, HeroIconMoon, HeroIconSun, Listbox, ListboxOption, TransparentButton } from "+elements"
+import { HeroIconDesktopComputer, HeroIconMoon, HeroIconSun, Listbox, LinearListboxOption, TransparentButton } from "+elements"
 import type { Localisable } from "+i18n"
 import { useLocale } from "+i18n"
 import type { Theme, ThemeSelection } from "+theme"
+import type { ReadonlyNonEmptyArray } from "+types"
 import type { ClassValue } from "clsx"
 import type { JSX } from "preact"
 
-const options: ReadonlyArray<ThemeSelection> = [
+const options: ReadonlyNonEmptyArray<ThemeSelection> = [
     "match-media",
     "light",
     "dark",
@@ -54,12 +55,8 @@ export function ThemePicker({
             options={options}
             selectedOption={selectedTheme}
             onOptionSelected={onThemeSelected}
-            renderButton={({ ref, onMouseDown }, { isExpanded }) => (
-                <TransparentButton
-                    forwardRef={ref}
-                    forwardAriaExpanded={isExpanded}
-                    onMouseDown={onMouseDown}
-                >
+            renderButton={() => (
+                <TransparentButton>
                     <span class="sr-only">
                         {accessibilityLabel[locale]}
                     </span>
@@ -68,16 +65,13 @@ export function ThemePicker({
                         : highlightedIcon[selectedTheme]}
                 </TransparentButton>
             )}
-            renderOption={(themeSelection, { isSelected }) => (
-                <ListboxOption class="flex items-center gap-x-4">
+            renderOption={(themeSelection) => (
+                <LinearListboxOption>
                     {icon[themeSelection]}
                     <span class="block grow truncate">
                         {caption[themeSelection][locale]}
                     </span>
-                    {isSelected
-                        ? <HeroIconCheck class="h-5 text-accent-600 group-hover:text-white"/>
-                        : null}
-                </ListboxOption>
+                </LinearListboxOption>
             )}
         />
     )

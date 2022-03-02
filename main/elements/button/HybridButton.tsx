@@ -1,32 +1,37 @@
 import type { ClassValue } from "clsx"
 import clsx from "clsx"
 import type { ComponentChildren } from "preact"
-import type { Ref } from "preact/hooks"
 import { defaultFocusOutlineClasses, focusOutlineInsideClasses } from "../constants"
+import { useListboxButtonConfiguration } from "../listbox"
 import { commonButtonClasses, transparentButtonClasses } from "./button-constants"
 
 type HybridButtonProps = {
-    readonly forwardRef?: Ref<HTMLButtonElement>
-    readonly forwardAriaExpanded?: boolean
     readonly class?: ClassValue
-    readonly onClick?: () => void
-    readonly onMouseDown?: () => void
+    readonly onClick?: (event: MouseEvent) => void
+    readonly onKeyDown?: (event: KeyboardEvent) => void
+    readonly onMouseDown?: (event: MouseEvent) => void
     readonly children: ComponentChildren
 }
 
 export function HybridButton({
-    forwardRef,
-    forwardAriaExpanded,
     class: _class,
     onClick,
+    onKeyDown,
     onMouseDown,
     children,
 }: HybridButtonProps) {
+    const {
+        ref,
+        isExpanded,
+        handleKeyDown,
+        handleMouseDown,
+    } = useListboxButtonConfiguration()
+    
     return (
         <button
             type="button"
-            ref={forwardRef}
-            aria-expanded={forwardAriaExpanded}
+            ref={ref}
+            aria-expanded={isExpanded}
             class={clsx(
                 _class,
                 commonButtonClasses,
@@ -36,7 +41,8 @@ export function HybridButton({
                 focusOutlineInsideClasses,
             )}
             onClick={onClick}
-            onMouseDown={onMouseDown}
+            onKeyDown={handleKeyDown ?? onKeyDown}
+            onMouseDown={handleMouseDown ?? onMouseDown}
         >
             {children}
         </button>

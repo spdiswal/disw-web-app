@@ -1,10 +1,11 @@
-import { FlagIconDenmark, FlagIconUnitedKingdom, HeroIconCheck, HeroIconSelector, HybridButton, Listbox, ListboxOption } from "+elements"
+import { FlagIconDenmark, FlagIconUnitedKingdom, HeroIconSelector, HybridButton, Listbox, LinearListboxOption } from "+elements"
 import type { Locale } from "+i18n"
 import { useLocale } from "+i18n"
+import type { ReadonlyNonEmptyArray } from "+types"
 import type { ClassValue } from "clsx"
 import type { JSX } from "preact"
 
-const options: ReadonlyArray<Locale> = ["da", "en"]
+const options: ReadonlyNonEmptyArray<Locale> = ["da", "en"]
 
 const caption: Readonly<Record<Locale, string>> = {
     da: "Dansk",
@@ -33,13 +34,8 @@ export function LocalePicker({
             options={options}
             selectedOption={selectedLocale}
             onOptionSelected={onLocaleSelected}
-            renderButton={({ ref, onMouseDown }, { isExpanded }) => (
-                <HybridButton
-                    forwardRef={ref}
-                    forwardAriaExpanded={isExpanded}
-                    class="flex items-center gap-x-4 md:w-full md:text-sm"
-                    onMouseDown={onMouseDown}
-                >
+            renderButton={() => (
+                <HybridButton class="flex items-center gap-x-4 md:w-full md:text-sm">
                     {icon[selectedLocale]}
                     <span class="hidden text-left md:block md:grow md:truncate">
                         {caption[selectedLocale]}
@@ -47,16 +43,13 @@ export function LocalePicker({
                     <HeroIconSelector class="hidden h-5 md:block"/>
                 </HybridButton>
             )}
-            renderOption={(locale, { isSelected }) => (
-                <ListboxOption class="flex items-center gap-x-4">
+            renderOption={(locale) => (
+                <LinearListboxOption>
                     {icon[locale]}
                     <span class="block grow truncate">
                         {caption[locale]}
                     </span>
-                    {isSelected
-                        ? <HeroIconCheck class="h-5 text-accent-600 group-hover:text-white"/>
-                        : null}
-                </ListboxOption>
+                </LinearListboxOption>
             )}
         />
     )

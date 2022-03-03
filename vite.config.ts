@@ -124,7 +124,13 @@ function minifyIndexHtmlPlugin(): Plugin {
         transformIndexHtml: async (html: string) => minifyHtml(html, {
             collapseWhitespace: true,
             minifyCSS: true,
-            minifyJS: true,
+            minifyJS: {
+                ecma: 2017,
+                toplevel: true,
+            },
+            removeComments: true,
+            sortAttributes: true,
+            sortClassName: true,
         }),
     }
 }

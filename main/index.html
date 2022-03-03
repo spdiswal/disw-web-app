@@ -47,10 +47,16 @@
     <!-- [main-server.tsx fragment: body] -->
     <script type="module" src="/main-client.tsx"></script>
     <script nomodule>
-        const disclaimer = document.createElement("div")
-        disclaimer.textContent = "Hey um, if I were you... I'd take a moment to upgrade that worn out web browser of yours. Stay safe! :)"
-        disclaimer.style.cssText = "background-color:#fbbf24;padding:1.5rem;font-weight:600;"
-        document.body.insertBefore(disclaimer, document.body.firstChild)
+        /* Use a block scope to avoid hitting a bug in Internet Explorer 11
+           about re-declaring a const since the minifier might choose the same
+           identifier for the following const as it did for a const in the
+           theme selection script above. */
+        {
+            const disclaimer = document.createElement("div")
+            disclaimer.textContent = "Hey um, if I were you... I'd take a moment to upgrade that worn out web browser of yours. Stay safe! :)"
+            disclaimer.style.cssText = "background-color:#fbbf24;padding:1.5rem;font-weight:600;"
+            document.body.insertBefore(disclaimer, document.body.firstChild)
+        }
     </script>
 </body>
 </html>

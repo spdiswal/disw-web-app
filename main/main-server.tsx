@@ -36,12 +36,20 @@ export function substituteHtmlFragments(
     
     const fragmentsToSubstitute = [
         {
-            placeholderToReplace: "/* [main-server.tsx fragment: tailwind-bg-neutral-50] */",
-            fragmentToInsert: `background-color: ${tailwindNeutralColourGroup["50"]};`,
-        },
-        {
-            placeholderToReplace: "/* [main-server.tsx fragment: tailwind-bg-neutral-900] */",
-            fragmentToInsert: `background-color: ${tailwindNeutralColourGroup["900"]};`,
+            placeholderToReplace: "<!-- [main-server.tsx fragment: prevent-flash-of-unstyled-content] -->",
+            fragmentToInsert: `
+                <style>
+                    html {
+                        background-color: ${tailwindNeutralColourGroup["50"]};
+                        visibility: hidden;
+                    }
+                    
+                    @media (prefers-color-scheme: dark) {
+                        html {
+                            background-color: ${tailwindNeutralColourGroup["900"]};
+                        }
+                    }
+                </style>`,
         },
         {
             placeholderToReplace: "<title>DISW Web App</title> <!-- [main-server.tsx fragment: title] -->",

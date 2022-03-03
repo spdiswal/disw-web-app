@@ -1,0 +1,7 @@
+/* Make the document reappear when the entire set of rules have been applied
+   and a flash of unstyled content has been avoided.
+   Due to the cascade algorithm in CSS, this rule overrides the styles applied
+   to `index.html` via `main-server.tsx`. */
+html {
+    visibility: visible;
+}

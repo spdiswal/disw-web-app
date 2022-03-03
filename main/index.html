@@ -5,21 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
     <title>DISW Web App</title> <!-- [main-server.tsx fragment: title] -->
+    <!-- [main-server.tsx fragment: prevent-flash-of-unstyled-content] -->
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css"/>
-    <style>
-        /* Hide the document initially to prevent a flash of unstyled content
-           from occurring. */
-        html {
-            /* [main-server.tsx fragment: tailwind-bg-neutral-50] */
-            visibility: hidden;
-        }
-        
-        @media (prefers-color-scheme: dark) {
-            html {
-                /* [main-server.tsx fragment: tailwind-bg-neutral-900] */
-            }
-        }
-    </style>
     <script type="text/javascript">
         // Read more:
         // https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually

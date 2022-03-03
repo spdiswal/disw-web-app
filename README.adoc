@@ -139,7 +139,7 @@ The `dependencies` and `devDependencies` fields in `package.json` declare these 
 ====
 When a dependency is imported by the source code or declares values in the global namespace, it is a runtime dependency.
 
-For example, `preact` is imported by `main-client.tsx` and `tailwindcss` defines globally accessible CSS properties, which are imported indirectly by `main-client.tsx` via `index.css`.
+For example, `preact` is imported by `main-client.tsx` and `tailwindcss` defines globally accessible CSS properties, which are imported indirectly by `main-client.tsx` via `initialise-tailwind.css`.
 ====
 
 Use the custom `dependenciesComments` and `devDependenciesComments` fields to associate each dependency to a maintenance comment or a description that justifies its use in this project.

@@ -1,8 +1,7 @@
-import { Expandable, HeroIconChevronDown, HeroIconChevronUp, Table, TableCell, useSortableTableRows } from "+elements"
+import { Expandable, SortableTableColumnHeader, Table, TableCell, useSortableTableRows } from "+elements"
 import type { Localisable } from "+i18n"
 import { useLocale } from "+i18n"
 import type { Comparator, Year } from "+types"
-import clsx from "clsx"
 import { Fragment } from "preact"
 import { useCallback, useMemo, useState } from "preact/hooks"
 
@@ -81,19 +80,14 @@ export function UniversityCourseTable({
             <Table
                 columns={columns}
                 rows={sortedRows}
-                onColumnHeaderClicked={expandAndSortByColumn}
-                renderColumnHeader={(column) => {
-                    const isUnsorted = column !== activeColumn
-                    
-                    return (
-                        <span class="flex items-center gap-x-2">
-                            {columnHeaderLabel[column][locale]}
-                            {order === "ascending"
-                                ? <HeroIconChevronUp class={clsx(isUnsorted && "invisible", "h-4")}/>
-                                : <HeroIconChevronDown class={clsx(isUnsorted && "invisible", "h-4")}/>}
-                        </span>
-                    )
-                }}
+                renderColumnHeader={(column) => (
+                    <SortableTableColumnHeader
+                        order={column === activeColumn ? order : undefined}
+                        onClick={() => expandAndSortByColumn(column)}
+                    >
+                        {columnHeaderLabel[column][locale]}
+                    </SortableTableColumnHeader>
+                )}
                 renderRow={(row) => {
                     const { name, year, term, weight, grade } = courses[row]
                     

@@ -17,6 +17,7 @@ module.exports = {
             "accent": colors.blue,
             "neutral": colors.slate,
             "primary": colors.orange,
+            "warning": colors.amber,
             "white": colors.white,
         },
         screens: {

@@ -39,7 +39,18 @@
     </script>
 </head>
 <body class="min-w-min text-neutral-900 dark:text-neutral-50 bg-neutral-50 dark:bg-neutral-900">
+    <noscript>
+        <div class="bg-warning-400 p-6 font-semibold">
+            Hey, I'd be very happy if you would let this website use JavaScript :)
+        </div>
+    </noscript>
     <!-- [main-server.tsx fragment: body] -->
     <script type="module" src="/main-client.tsx"></script>
+    <script nomodule>
+        const disclaimer = document.createElement("div")
+        disclaimer.textContent = "Hey um, if I were you... I'd take a moment to upgrade that worn out web browser of yours. Stay safe! :)"
+        disclaimer.style.cssText = "background-color:#fbbf24;padding:1.5rem;font-weight:600;"
+        document.body.insertBefore(disclaimer, document.body.firstChild)
+    </script>
 </body>
 </html>

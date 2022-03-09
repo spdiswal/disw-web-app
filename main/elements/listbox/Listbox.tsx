@@ -1,15 +1,14 @@
 import type { ReadonlyNonEmptyArray } from "+types"
-import type { ClassValue } from "clsx"
 import clsx from "clsx"
 import type { JSX } from "preact"
 import { useRef, useState } from "preact/hooks"
-import { defaultFocusOutlineClasses, focusOutlineInsideClasses } from "../constants"
+import { defaultFocusOutlineClasses, defaultTransitionClasses, focusOutlineInsideClasses } from "../constants"
 import { useWindowEvent } from "../useWindowEvent"
 import { ListboxButtonConfigurationProvider } from "./useListboxButtonConfiguration"
 import { ListboxOptionStateProvider } from "./useListboxOptionState"
 
 type ListboxProps<Option extends string> = {
-    readonly class?: ClassValue
+    readonly class?: string
     readonly options: ReadonlyNonEmptyArray<Option>
     readonly selectedOption: Option
     readonly onOptionSelected?: (option: Option) => void
@@ -53,7 +52,8 @@ export function Listbox<Option extends string>({
                 ref={popupRef}
                 class={clsx(
                     !isPopupOpen && "hidden",
-                    "absolute right-0 z-50 mt-1.5 max-h-56 w-48 overflow-auto rounded-xl bg-white/75 py-2 text-base shadow-lg ring-1 ring-neutral-900/10 backdrop-blur-md focus-visible:outline-none dark:bg-neutral-100/75 md:text-sm",
+                    "absolute right-0 z-50 mt-1 max-h-56 w-48 overflow-auto rounded-2xl bg-neutral-100/80 py-2 text-base shadow-lg ring-1 ring-neutral-900/20 backdrop-blur-md focus-visible:outline-none dark:bg-neutral-800/80 dark:ring-white/20 md:text-sm",
+                    defaultTransitionClasses,
                 )}
                 role="listbox"
             >
@@ -70,6 +70,7 @@ export function Listbox<Option extends string>({
                                     defaultFocusOutlineClasses,
                                     focusOutlineInsideClasses,
                                     "cursor-pointer select-none py-2 px-3",
+                                    defaultTransitionClasses,
                                 )}
                                 role="option"
                                 aria-selected={isSelected}

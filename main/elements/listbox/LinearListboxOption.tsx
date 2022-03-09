@@ -1,5 +1,6 @@
 import clsx from "clsx"
 import type { ComponentChildren } from "preact"
+import { defaultTransitionClasses } from "../constants"
 import { HeroIconCheck } from "../icons"
 import { useListboxOptionState } from "./useListboxOptionState"
 
@@ -15,14 +16,23 @@ export function LinearListboxOption({
     return (
         <span
             class={clsx(
-                isHighlighted ? "text-white dark:text-white" : "dark:text-neutral-900",
+                isHighlighted && "text-white dark:text-white",
                 isSelected ? "font-bold" : "font-normal",
-                "flex items-center gap-x-4"
+                "flex items-center gap-x-4",
+                defaultTransitionClasses,
             )}
         >
             {children}
             {isSelected
-                ? <HeroIconCheck class={clsx(isHighlighted ? "text-white" : "text-accent-600", "h-5")}/>
+                ? (
+                    <HeroIconCheck
+                        class={clsx(
+                            isHighlighted ? "text-white" : "text-accent-600 dark:text-accent-500",
+                            "h-5 w-5",
+                            defaultTransitionClasses,
+                        )}
+                    />
+                )
                 : null}
         </span>
     )

@@ -1,5 +1,7 @@
 import type { Theme } from "+theme"
 
+export const defaultTheme: Theme = "light"
+
 export type MediaThemePort = {
     readonly initialMediaTheme: Theme
     readonly subscribeToMediaTheme:
@@ -40,7 +42,7 @@ export function adaptMediaThemePortToMediaQuery(): MediaThemePort {
 
 export function dummyMediaThemePort(): MediaThemePort {
     return {
-        initialMediaTheme: "light",
+        initialMediaTheme: defaultTheme,
         subscribeToMediaTheme: () => ({
             unsubscribe: () => { /* Do nothing. */ },
         }),

@@ -1,6 +1,7 @@
-import { SplitContainer } from "+elements"
+import { HeroIconBriefcase } from "+elements"
 import { useLocale } from "+i18n"
 import type { ComponentChildren } from "preact"
+import { CareerSection } from "./CareerSection"
 
 type EmploymentsProps = {
     readonly children: ComponentChildren
@@ -12,13 +13,12 @@ export function Employments({
     const locale = useLocale()
     
     return (
-        <section class="px-8 pt-8 md:pt-24" aria-labelledby="employments">
-            <header class="mb-12">
-                <SplitContainer>
-                    <h1 id="employments" class="font-light md:text-2xl">{{ da: "Ansættelser", en: "Employments" }[locale]}</h1>
-                </SplitContainer>
-            </header>
+        <CareerSection
+            labelId="employments"
+            icon={<HeroIconBriefcase class="h-8 w-8 md:h-10 md:w-10"/>}
+            title={{ da: "Ansættelser", en: "Employments" }[locale]}
+        >
             {children}
-        </section>
+        </CareerSection>
     )
 }

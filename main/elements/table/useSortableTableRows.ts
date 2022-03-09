@@ -15,7 +15,7 @@ export function useSortableTableRows<Row extends string>({
     const [order, setOrder] = useState<SortOrder>("ascending")
     
     const sortedRows =
-        useMemo(() => (
+        useMemo<ReadonlyArray<Row>>(() => (
             order === "ascending"
                 ? [...rows].sort(comparator)
                 : [...rows].sort(reversed(comparator))

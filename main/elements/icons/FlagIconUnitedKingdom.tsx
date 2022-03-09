@@ -1,8 +1,5 @@
-import type { ClassValue } from "clsx"
-import clsx from "clsx"
-
 type FlagIconUnitedKingdomProps = {
-    readonly class?: ClassValue
+    readonly class?: string
 }
 
 /**
@@ -15,7 +12,7 @@ export function FlagIconUnitedKingdom(props: FlagIconUnitedKingdomProps) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            class={clsx(props.class, "aspect-square")}
+            class={props.class}
             height="24"
             viewBox="0 0 32 32"
             aria-hidden="true"

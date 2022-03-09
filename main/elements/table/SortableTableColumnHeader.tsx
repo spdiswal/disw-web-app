@@ -1,6 +1,6 @@
 import clsx from "clsx"
 import type { ComponentChildren } from "preact"
-import { defaultFocusOutlineClasses, focusOutlineInsideClasses } from "../constants"
+import { defaultFocusOutlineClasses, defaultTransitionClasses, focusOutlineInsideClasses } from "../constants"
 import { HeroIconChevronDown, HeroIconChevronUp } from "../icons"
 import type { SortOrder } from "./useSortableTableRows"
 
@@ -18,7 +18,10 @@ export function SortableTableColumnHeader({
     return (
         <th
             scope="col"
-            class="group pointer-events-none p-0 text-neutral-600 hover:bg-neutral-200 hover:text-neutral-700 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:hover:text-neutral-50"
+            class={clsx(
+                "group pointer-events-none p-0 text-neutral-600 hover:bg-neutral-200 hover:text-neutral-700 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:hover:text-neutral-50",
+                defaultTransitionClasses,
+            )}
             aria-sort={order}
         >
             <button
@@ -50,9 +53,9 @@ function SortOrderIcon({
     
     switch (order) {
         case "ascending":
-            return <HeroIconChevronUp class="h-4"/>
+            return <HeroIconChevronUp class="h-4 w-4"/>
         
         case "descending":
-            return <HeroIconChevronDown class="h-4"/>
+            return <HeroIconChevronDown class="h-4 w-4"/>
     }
 }

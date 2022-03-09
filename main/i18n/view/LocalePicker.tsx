@@ -1,8 +1,7 @@
-import { FlagIconDenmark, FlagIconUnitedKingdom, HeroIconSelector, HybridButton, Listbox, LinearListboxOption } from "+elements"
+import { FlagIconDenmark, FlagIconUnitedKingdom, HeroIconSelector, HybridButton, LinearListboxOption, Listbox } from "+elements"
 import type { Locale } from "+i18n"
 import { useLocale } from "+i18n"
 import type { ReadonlyNonEmptyArray } from "+types"
-import type { ClassValue } from "clsx"
 import type { JSX } from "preact"
 
 const options: ReadonlyNonEmptyArray<Locale> = ["da", "en"]
@@ -13,12 +12,12 @@ const caption: Readonly<Record<Locale, string>> = {
 }
 
 const icon: Readonly<Record<Locale, JSX.Element>> = {
-    da: <FlagIconDenmark class="h-5 shrink-0 rounded-full"/>,
-    en: <FlagIconUnitedKingdom class="h-5 shrink-0 rounded-full"/>,
+    da: <FlagIconDenmark class="h-5 w-5 shrink-0 rounded-full"/>,
+    en: <FlagIconUnitedKingdom class="h-5 w-5 shrink-0 rounded-full"/>,
 }
 
 type LocalePickerProps = {
-    readonly class?: ClassValue
+    readonly class?: string
     readonly onLocaleSelected?: (locale: Locale) => void
 }
 
@@ -40,7 +39,7 @@ export function LocalePicker({
                     <span class="hidden text-left md:block md:grow md:truncate">
                         {caption[selectedLocale]}
                     </span>
-                    <HeroIconSelector class="hidden h-5 md:block"/>
+                    <HeroIconSelector class="hidden h-5 w-5 md:block"/>
                 </HybridButton>
             )}
             renderOption={(locale) => (

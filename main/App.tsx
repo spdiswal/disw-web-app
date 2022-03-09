@@ -1,8 +1,10 @@
+import { FooterContent, HeaderContent, MainContent, name } from "+content"
+import { defaultTransitionClasses } from "+elements"
 import type { LocaleCachePort, PreferredLocalePort } from "+i18n"
 import { LocalePicker, LocaleProvider, useLocaleSelection } from "+i18n"
-import { FooterContent, MainContent, name } from "+content"
 import type { MediaThemePort, ThemeCachePort } from "+theme"
-import { ThemePicker, useTheme } from "+theme"
+import { ThemePicker, ThemeProvider, useThemeSelection } from "+theme"
+import clsx from "clsx"
 import { useEffect } from "preact/hooks"
 
 type AppProps = {
@@ -22,10 +24,8 @@ export function App({
         document.title = name
     }, [])
     
-    const { mediaTheme, themeSelection, selectTheme } = useTheme({
-        mediaThemePort,
-        themeCachePort,
-    })
+    const { appliedTheme, mediaTheme, themeSelection, selectTheme } =
+        useThemeSelection({ mediaThemePort, themeCachePort })
     
     const { locale, selectLocale } = useLocaleSelection({
         localeCachePort,
@@ -33,21 +33,31 @@ export function App({
     })
     
     return (
-        <LocaleProvider value={locale}>
-            <header class="absolute top-4 right-4 flex items-center justify-end md:gap-x-2">
-                <ThemePicker
-                    class="w-fit"
-                    mediaTheme={mediaTheme}
-                    selectedTheme={themeSelection}
-                    onThemeSelected={selectTheme}
-                />
-                <LocalePicker
-                    class="w-fit md:w-48"
-                    onLocaleSelected={selectLocale}
-                />
-            </header>
-            <MainContent/>
-            <FooterContent/>
-        </LocaleProvider>
+        <ThemeProvider value={appliedTheme}>
+            <LocaleProvider value={locale}>
+                <div class="relative min-w-main-xs">
+                    <div
+                        class={clsx(
+                            "absolute top-4 right-4 z-40 flex items-center justify-end gap-x-2 rounded-full bg-neutral-100/95 p-2 shadow-xl ring-1 ring-neutral-900/20 dark:bg-neutral-800/95 dark:ring-white/20 xs:fixed md:gap-x-4 md:p-3",
+                            defaultTransitionClasses,
+                        )}
+                    >
+                        <ThemePicker
+                            class="w-fit"
+                            mediaTheme={mediaTheme}
+                            selectedTheme={themeSelection}
+                            onThemeSelected={selectTheme}
+                        />
+                        <LocalePicker
+                            class="w-fit md:w-48"
+                            onLocaleSelected={selectLocale}
+                        />
+                    </div>
+                </div>
+                <HeaderContent/>
+                <MainContent/>
+                <FooterContent/>
+            </LocaleProvider>
+        </ThemeProvider>
     )
 }

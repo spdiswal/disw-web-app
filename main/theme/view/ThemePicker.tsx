@@ -1,9 +1,8 @@
-import { HeroIconDesktopComputer, HeroIconMoon, HeroIconSun, Listbox, LinearListboxOption, TransparentButton } from "+elements"
+import { HeroIconDesktopComputer, HeroIconMoon, HeroIconSun, LinearListboxOption, Listbox, TransparentButton } from "+elements"
 import type { Localisable } from "+i18n"
 import { useLocale } from "+i18n"
 import type { Theme, ThemeSelection } from "+theme"
 import type { ReadonlyNonEmptyArray } from "+types"
-import type { ClassValue } from "clsx"
 import type { JSX } from "preact"
 
 const options: ReadonlyNonEmptyArray<ThemeSelection> = [
@@ -19,14 +18,14 @@ const caption: Readonly<Record<ThemeSelection, Localisable<string>>> = {
 }
 
 const highlightedIcon: Readonly<Record<Theme, JSX.Element>> = {
-    dark: <HeroIconMoon class="h-5 shrink-0 rounded-full text-primary-600"/>,
-    light: <HeroIconSun class="h-5 shrink-0 rounded-full text-primary-600"/>,
+    dark: <HeroIconMoon class="h-5 w-5 shrink-0 rounded-full text-primary-500"/>,
+    light: <HeroIconSun class="h-5 w-5 shrink-0 rounded-full text-primary-500"/>,
 }
 
 const icon: Readonly<Record<ThemeSelection, JSX.Element>> = {
-    "dark": <HeroIconMoon class="h-5 shrink-0 rounded-full"/>,
-    "light": <HeroIconSun class="h-5 shrink-0 rounded-full"/>,
-    "match-media": <HeroIconDesktopComputer class="h-5 shrink-0 rounded-full"/>,
+    "dark": <HeroIconMoon class="h-5 w-5 shrink-0 rounded-full"/>,
+    "light": <HeroIconSun class="h-5 w-5 shrink-0 rounded-full"/>,
+    "match-media": <HeroIconDesktopComputer class="h-5 w-5 shrink-0 rounded-full"/>,
 }
 
 const accessibilityLabel: Localisable<string> = {
@@ -35,7 +34,7 @@ const accessibilityLabel: Localisable<string> = {
 }
 
 type ThemePickerProps = {
-    readonly class?: ClassValue
+    readonly class?: string
     readonly mediaTheme: Theme
     readonly selectedTheme: ThemeSelection
     readonly onThemeSelected?: (selectedTheme: ThemeSelection) => void

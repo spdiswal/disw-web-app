@@ -1,6 +1,7 @@
-import { SplitContainer } from "+elements"
+import { HeroIconAcademicCap } from "+elements"
 import { useLocale } from "+i18n"
 import type { ComponentChildren } from "preact"
+import { CareerSection } from "./CareerSection"
 
 type EducationProps = {
     readonly children: ComponentChildren
@@ -12,13 +13,12 @@ export function Education({
     const locale = useLocale()
     
     return (
-        <section class="bg-neutral-100 px-8 pt-8 dark:bg-neutral-800 md:pt-24" aria-labelledby="education">
-            <header class="mb-12">
-                <SplitContainer>
-                    <h1 id="education" class="font-light md:text-2xl">{{ da: "Uddannelse", en: "Education" }[locale]}</h1>
-                </SplitContainer>
-            </header>
+        <CareerSection
+            labelId="education"
+            icon={<HeroIconAcademicCap class="h-8 w-8 md:h-10 md:w-10"/>}
+            title={{ da: "Uddannelse", en: "Education" }[locale]}
+        >
             {children}
-        </section>
+        </CareerSection>
     )
 }

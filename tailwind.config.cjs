@@ -10,7 +10,10 @@ const colors = require("tailwindcss/colors")
  * @type {import("tailwindcss/tailwind-config").TailwindConfig}
  */
 module.exports = {
-    content: ["./main/**/*.{html,ts,tsx}"],
+    content: [
+        "./main/**/*.{ts,tsx}",
+        "./main/index.html",
+    ],
     darkMode: "class",
     theme: {
         colors: {
@@ -21,9 +24,16 @@ module.exports = {
             "white": colors.white,
         },
         screens: {
-            "sm": "560px",
-            "md": "900px",
-            "lg": "1500px",
+            // Breakpoints are defined by 'rem' units instead of 'px' units to
+            // allow the page to adapt properly to root font sizes larger than
+            // the usual 16px.
+            // The 'xs' breakpoint defines the minimum width supported by the
+            // page. It is triggered only by very small devices or by zooming
+            // in.
+            "xs": "20rem",
+            "sm": "40rem",
+            "md": "60rem",
+            "lg": "80rem",
         },
         extend: {
             borderRadius: {
@@ -38,10 +48,20 @@ module.exports = {
             height: {
                 "4.5": "1.125rem",
             },
+            maxHeight: {
+                "120": "30rem",
+                "160": "40rem",
+            },
             maxWidth: {
-                "until-sm": "calc(min(36rem, 100vw) - 6rem)",
-                "until-md": "calc(min(48rem, 100vw) - 6rem)",
-                "until-lg": "calc(min(72rem, 100vw) - 6rem)",
+                "main-xs": "calc(100vw - 2*2rem)",
+                "main-sm": "min(45rem, calc(100vw - 2*3rem))",
+                "main-md": "calc(100vw - 2*4rem)",
+                "main-lg": "min(100rem, calc(100vw - 2*5rem))",
+                "main-xl": "calc(120rem - 2*6rem)",
+            },
+            minWidth: {
+                "main-xs-minus-margin": "calc(20rem - 2*2rem)",
+                "main-xs": "20rem",
             },
             outlineOffset: {
                 "-2": "-2px",
@@ -49,16 +69,18 @@ module.exports = {
             outlineWidth: {
                 3: "3px",
             },
+            spacing: {
+                "main-xs": "2rem",
+                "main-2xs": "calc(2*2rem)",
+                "main-sm": "3rem",
+                "main-2sm": "calc(2*3rem)",
+                "main-md": "4rem",
+                "main-lg": "6rem",
+            },
             width: {
-                "1/3-minus-gap-10": "calc(33.333333% - 1/3*(2.5rem))",
-                "2/3-minus-gap-10": "calc(66.666667% - 2/3*(2.5rem))",
-                "1/8-minus-gap-16": "calc(12.5% - 1/8*(4rem))",
-                "2/8-minus-gap-16": "calc(25% - 2/8*(4rem))",
-                "3/8-minus-gap-16": "calc(37.5% - 3/8*(4rem))",
-                "4/8-minus-gap-16": "calc(50% - 4/8*(4rem))",
-                "5/8-minus-gap-16": "calc(62.5% - 5/8*(4rem))",
-                "6/8-minus-gap-16": "calc(75% - 6/8*(4rem))",
-                "7/8-minus-gap-16": "calc(87.5% - 7/8*(4rem))",
+                "4.5": "1.125rem",
+                "1/2-minus-gap-main-md": "calc(50% - 1/2*(4rem))",
+                "1/2-minus-gap-main-lg": "calc(50% - 1/2*(5rem))",
             },
         },
     },

@@ -27,6 +27,7 @@ module.exports = {
     transform: {
         "^.+\\.ts$": "ts-jest",
         "^.+\\.tsx$": "ts-jest",
+        "^.+\\.jpg$": "<rootDir>/test/jest/image-asset-file-stub.cjs",
         "^.+\\.webp$": "<rootDir>/test/jest/image-asset-file-stub.cjs",
     },
     setupFilesAfterEnv: [

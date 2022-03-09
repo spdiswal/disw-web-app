@@ -1,9 +1,8 @@
-import type { ClassValue } from "clsx"
 import clsx from "clsx"
 import type { ComponentChildren } from "preact"
 
 type TableCellProps = {
-    readonly class?: ClassValue
+    readonly class?: string
     readonly children: ComponentChildren
 }
 

@@ -1,2 +1,2 @@
 export * from "./Expandable"
-export * from "./SplitContainer"
+export * from "./Prose"

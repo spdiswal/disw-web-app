@@ -1,4 +1,4 @@
-import { FooterContent, MainContent } from "+content"
+import { FooterContent, HeaderContent, MainContent } from "+content"
 import { LocaleProvider } from "+i18n"
 import { render, screen, within } from "@testing-library/preact"
 
@@ -29,27 +29,33 @@ test("The content displays a greeting.", () => {
     const content = renderContent()
     
     // THEN the content displays a greeting in Danish.
-    expect(content.getMainContent()).toHaveTextContent("Hej! Jeg hedder" + "Perseverance")
+    expect(content.getHeaderContent()).toHaveTextContent("Hej! Jeg hedder" + "Perseverance")
     
     // WHEN changing the locale to English.
     content.changeToEnglishLocale()
     
     // THEN the content displays a greeting in English.
-    expect(content.getMainContent()).toHaveTextContent("Hi! My name is" + "Perseverance")
+    expect(content.getHeaderContent()).toHaveTextContent("Hi! My name is" + "Perseverance")
 })
 
-test("The content displays a status.", () => {
+test("The content displays a biography.", () => {
     // GIVEN a test subject.
     const content = renderContent()
     
-    // THEN the content displays a status in Danish.
-    expect(content.getMainContent()).toHaveTextContent("… og jeg er astrobiolog på Mars.")
+    // THEN the content displays a biography in Danish.
+    expect(content.getMainContent()).toHaveTextContent(
+        "— og jeg er astrobiolog på Mars."
+        + "Jeg elsker at grave i sandet på Mars! Og jeg drømmer om at opdage liv på den røde planet.",
+    )
     
     // WHEN changing the locale to English.
     content.changeToEnglishLocale()
     
-    // THEN the content displays a status in English.
-    expect(content.getMainContent()).toHaveTextContent("… and I'm an astrobiologist on Mars.")
+    // THEN the content displays the biography in English.
+    expect(content.getMainContent()).toHaveTextContent(
+        "— and I'm an astrobiologist on Mars."
+        + "I enjoy digging through the Martian soil! And I dream about discovering life on the Red Planet.",
+    )
 })
 
 test("The content displays an age.", () => {
@@ -85,13 +91,13 @@ test("The content displays a discipline.", () => {
     const content = renderContent()
     
     // THEN the content displays a discipline in Danish.
-    expect(content.getMainContent()).toHaveTextContent("Baggrund" + "Astrobiologi")
+    expect(content.getMainContent()).toHaveTextContent("Faglig baggrund" + "Astrobiologi")
     
     // WHEN changing the locale to English.
     content.changeToEnglishLocale()
     
     // THEN the content displays the discipline in English.
-    expect(content.getMainContent()).toHaveTextContent("Discipline" + "Astrobiology")
+    expect(content.getMainContent()).toHaveTextContent("Academic Discipline" + "Astrobiology")
 })
 
 test("The content displays experience.", () => {
@@ -99,27 +105,13 @@ test("The content displays experience.", () => {
     const content = renderContent()
     
     // THEN the content displays experience in Danish.
-    expect(content.getMainContent()).toHaveTextContent("Erfaring" + "2 år")
+    expect(content.getMainContent()).toHaveTextContent("Joberfaring" + "2 år")
     
     // WHEN changing the locale to English.
     content.changeToEnglishLocale()
     
     // THEN the content displays the experience in English.
-    expect(content.getMainContent()).toHaveTextContent("Experience" + "2 years")
-})
-
-test("The content displays a biography.", () => {
-    // GIVEN a test subject.
-    const content = renderContent()
-    
-    // THEN the content displays a biography in Danish.
-    expect(content.getMainContent()).toHaveTextContent("Jeg elsker at grave i sandet på Mars! Og jeg drømmer om at opdage liv på den røde planet.")
-    
-    // WHEN changing the locale to English.
-    content.changeToEnglishLocale()
-    
-    // THEN the content displays the biography in English.
-    expect(content.getMainContent()).toHaveTextContent("I enjoy digging through the Martian soil! And I dream about discovering life on the Red Planet.")
+    expect(content.getMainContent()).toHaveTextContent("Work Experience" + "2 years")
 })
 
 test("The content displays a career of five occupations.", () => {
@@ -139,7 +131,7 @@ test("The content displays an 'Astrobiolog'/'Astrobiologist' occupation.", () =>
     expect(occupation).toBeInTheDocument()
     
     // AND it displays the period of the occupation in Danish.
-    expect(occupation).toHaveTextContent("december 2021\u2013nu")
+    expect(occupation).toHaveTextContent("december 2021\u2013")
     
     // AND it displays the organisation of the occupation in Danish.
     // AND it specifies a hyperlink to the organisation website.
@@ -163,7 +155,7 @@ test("The content displays an 'Astrobiolog'/'Astrobiologist' occupation.", () =>
     expect(occupation).toHaveAccessibleName("Astrobiologist")
     
     // AND it displays the period of the occupation in English.
-    expect(occupation).toHaveTextContent("December 2021\u2013present")
+    expect(occupation).toHaveTextContent("December 2021\u2013")
     
     // AND it displays the organisation of the occupation in English.
     // AND it specifies a hyperlink to the organisation website.
@@ -383,17 +375,26 @@ test("The content specifies a hyperlink to GitHub.", () => {
 function renderContent() {
     const { rerender } = render((
         <LocaleProvider value="da">
+            <HeaderContent/>
             <MainContent/>
             <FooterContent/>
         </LocaleProvider>
     ))
+    
+    function getHeaderContent() {
+        // Using getAllByRole() to work around a bug in Testing Library, which
+        // assumes that a <header> element has the 'banner' role when it is a
+        // descendant of an <article> or a <section> element, even though this
+        // is incorrect according to the WAI-ARIA specification.
+        return screen.getAllByRole("banner")[0]
+    }
     
     function getMainContent() {
         return screen.getByRole("main")
     }
     
     function getPortrait() {
-        return screen.getByRole("img")
+        return screen.getByRole("img", { name: /.+/u })
     }
     
     function getOccupation(title: string) {
@@ -412,6 +413,7 @@ function renderContent() {
     function changeToEnglishLocale() {
         rerender((
             <LocaleProvider value="en">
+                <HeaderContent/>
                 <MainContent/>
                 <FooterContent/>
             </LocaleProvider>
@@ -419,6 +421,7 @@ function renderContent() {
     }
     
     return {
+        getHeaderContent,
         getMainContent,
         getPortrait,
         getOccupation,

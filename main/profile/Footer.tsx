@@ -1,4 +1,5 @@
-import { GlyphIconGitHub } from "+elements"
+import { defaultTransitionClasses, GlyphIconGitHub } from "+elements"
+import clsx from "clsx"
 
 const copyrightYear = new Date().getFullYear()
 
@@ -12,15 +13,30 @@ export function Footer({
     copyrightOwner,
 }: FooterProps) {
     return (
-        <footer class="bg-neutral-200 p-8 dark:bg-neutral-900 md:py-16">
+        <footer class="mt-48 min-w-main-xs pb-16 md:mt-64">
             <div class="flex flex-col items-center gap-y-2 md:gap-y-4">
-                <div class="flex justify-center gap-x-2 text-neutral-500 dark:text-neutral-400">
-                    <a href={githubUrl} class="rounded-xl">
+                <div
+                    class={clsx(
+                        "flex justify-center gap-x-2 text-neutral-500 dark:text-neutral-400",
+                        defaultTransitionClasses,
+                    )}
+                >
+                    <a href={githubUrl} class="rounded-full">
                         <span class="sr-only">GitHub</span>
-                        <GlyphIconGitHub class="h-8 hover:text-neutral-700 dark:hover:text-neutral-200"/>
+                        <GlyphIconGitHub
+                            class={clsx(
+                                "h-8 w-8 hover:text-neutral-700 dark:hover:text-neutral-200",
+                                defaultTransitionClasses,
+                            )}
+                        />
                     </a>
                 </div>
-                <span class="font-light text-neutral-600 dark:text-neutral-300">
+                <span
+                    class={clsx(
+                        "font-light text-neutral-600 dark:text-neutral-300",
+                        defaultTransitionClasses,
+                    )}
+                >
                     &copy; {copyrightYear} {copyrightOwner}
                 </span>
             </div>

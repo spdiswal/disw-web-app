@@ -8,7 +8,7 @@ export function DescriptionList({
     children,
 }: DescriptionListProps) {
     return (
-        <dl class="grid grid-cols-1 gap-y-5 sm:grid-cols-description-list sm:gap-x-4 sm:gap-y-3 lg:gap-x-6">
+        <dl class="grid grid-cols-1 gap-y-5 sm:grid-cols-description-list sm:gap-x-4 sm:gap-y-6 lg:gap-x-6">
             {children}
         </dl>
     )

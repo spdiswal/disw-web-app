@@ -384,6 +384,7 @@ module.exports = {
                 "tailwindcss/no-custom-classname": ["error", {
                     callees: ["clsx"],
                     config: "./tailwind.config.cjs",
+                    whitelist: [],
                 }],
             },
         },

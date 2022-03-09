@@ -30,6 +30,7 @@ export function SortableTableColumnHeader({
                     "pointer-events-auto flex h-full w-full items-center py-3 px-6 text-left font-medium uppercase tracking-wider group-first:focus-visible:rounded-tl-xl group-last:focus-visible:rounded-tr-xl",
                     defaultFocusOutlineClasses,
                     focusOutlineInsideClasses,
+                    defaultTransitionClasses,
                 )}
                 onClick={onClick}
             >

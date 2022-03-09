@@ -26,10 +26,20 @@ export function Hero({
                         defaultTransitionClasses,
                     )}
                 >
-                    <p class="whitespace-nowrap text-xl font-semibold sm:text-2xl md:text-3xl">
+                    <p
+                        class={clsx(
+                            "whitespace-nowrap text-xl font-semibold sm:text-2xl md:text-3xl",
+                            defaultTransitionClasses,
+                        )}
+                    >
                         {{ da: "Hej! Jeg hedder", en: "Hi! My name is" }[locale]}
                     </p>
-                    <p class="whitespace-nowrap text-4xl font-black sm:text-5xl md:text-6xl lg:text-7xl">
+                    <p
+                        class={clsx(
+                            "whitespace-nowrap text-4xl font-black sm:text-5xl md:text-6xl lg:text-7xl",
+                            defaultTransitionClasses,
+                        )}
+                    >
                         {name}
                     </p>
                 </div>

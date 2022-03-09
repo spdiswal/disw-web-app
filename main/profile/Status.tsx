@@ -44,7 +44,14 @@ function StatusItem({
     return (
         <div class="whitespace-nowrap text-center">
             <dt>{title}</dt>
-            <dd class="font-bold md:text-xl lg:text-2xl">{value}</dd>
+            <dd
+                class={clsx(
+                    "font-bold md:text-xl lg:text-2xl",
+                    defaultTransitionClasses,
+                )}
+            >
+                {value}
+            </dd>
         </div>
     )
 }

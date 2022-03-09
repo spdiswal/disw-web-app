@@ -1,3 +1,5 @@
+import { defaultTransitionClasses } from "+elements"
+import clsx from "clsx"
 import type { ComponentChildren, JSX } from "preact"
 
 type CareerSectionProps = {
@@ -17,7 +19,13 @@ export function CareerSection({
         <section aria-labelledby={labelId}>
             <header class="my-main-2xs flex flex-col items-center sm:my-main-2sm md:my-main-md lg:my-main-lg">
                 {icon}
-                <h1 id={labelId} class="mt-2 text-2xl font-light md:mt-4 md:text-4xl">
+                <h1
+                    id={labelId}
+                    class={clsx(
+                        "mt-2 text-2xl font-light md:mt-4 md:text-4xl",
+                        defaultTransitionClasses,
+                    )}
+                >
                     {title}
                 </h1>
             </header>

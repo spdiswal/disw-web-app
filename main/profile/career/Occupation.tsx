@@ -1,8 +1,9 @@
-import { ExternalHyperlink } from "+elements"
+import { defaultTransitionClasses, ExternalHyperlink } from "+elements"
 import type { Localisable } from "+i18n"
 import { useLocale } from "+i18n"
 import { Article } from "+profile"
 import type { Month, ReadonlyNonEmptyArray, Year } from "+types"
+import clsx from "clsx"
 import type { ComponentChildren, JSX } from "preact"
 
 type OccupationProps = {
@@ -43,7 +44,13 @@ export function Occupation({
                     {periods.map((period) => (
                         <FormattedPeriod key={period.since} period={period}/>
                     ))}
-                    <h1 id={labelId} class="mt-4 mb-0.5 text-2xl font-bold md:mt-6 md:mb-1.5 md:text-3xl">
+                    <h1
+                        id={labelId}
+                        class={clsx(
+                            "mt-4 mb-0.5 text-2xl font-bold md:mt-6 md:mb-1.5 md:text-3xl",
+                            defaultTransitionClasses,
+                        )}
+                    >
                         {title}
                     </h1>
                     <ExternalHyperlink url={organisation.url} class="text-lg font-semibold md:text-xl">
@@ -66,7 +73,12 @@ function FormattedPeriod({
     period: { since, until },
 }: FormattedPeriodProps) {
     return (
-        <div class="mb-0.5 text-lg font-light md:mb-1.5 md:text-xl">
+        <div
+            class={clsx(
+                "mb-0.5 text-lg font-light md:mb-1.5 md:text-xl",
+                defaultTransitionClasses,
+            )}
+        >
             <FormattedYearMonth yearMonth={since}/>
             &ndash;
             {until !== null

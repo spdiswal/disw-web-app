@@ -1,7 +1,6 @@
 import clsx from "clsx"
 import type { ComponentChildren } from "preact"
-import { defaultFocusOutlineClasses } from "./constants"
-import { HeroIconExternalLink } from "./icons"
+import { defaultFocusOutlineClasses, slowTransitionClasses } from "./constants"
 
 type ExternalHyperlinkProps = {
     readonly class?: string
@@ -18,13 +17,13 @@ export function ExternalHyperlink({
         <a
             class={clsx(
                 _class,
-                "group block w-fit hover:underline focus-visible:rounded-full",
+                "group relative bg-gradient-to-r from-accent-500 to-accent-500 bg-link-underline-invisible bg-link-underline bg-no-repeat pb-0.5 text-accent-600 outline-none hover:bg-link-underline-visible focus-visible:rounded-full focus-visible:bg-link-underline-visible focus-visible:outline-offset-4 dark:from-primary-500 dark:to-primary-500 dark:text-primary-500",
                 defaultFocusOutlineClasses,
+                slowTransitionClasses,
             )}
             href={url}
         >
             {children}
-            <HeroIconExternalLink class="mb-0.5 ml-1 hidden h-4.5 w-4.5 sm:invisible sm:inline sm:group-hover:visible"/>
         </a>
     )
 }

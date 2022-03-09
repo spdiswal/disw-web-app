@@ -36,6 +36,13 @@ module.exports = {
             "lg": "80rem",
         },
         extend: {
+            backgroundPosition: {
+                "link-underline": "0% 100%",
+            },
+            backgroundSize: {
+                "link-underline-invisible": "0% 2px",
+                "link-underline-visible": "100% 2px",
+            },
             borderRadius: {
                 "1/3": "33.333333%",
             },
@@ -65,9 +72,6 @@ module.exports = {
             },
             outlineOffset: {
                 "-2": "-2px",
-            },
-            outlineWidth: {
-                3: "3px",
             },
             spacing: {
                 "main-xs": "2rem",

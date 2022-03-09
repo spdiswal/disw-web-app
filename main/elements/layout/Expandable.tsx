@@ -21,7 +21,7 @@ export function Expandable({
             <div class={clsx(!isExpanded && "-mx-4 sm:-mx-6", "w-full")}>
                 <div
                     class={clsx(
-                        !isExpanded && "-mx-4 h-40 overflow-y-clip border-b-2 border-neutral-300 px-4 dark:border-neutral-600 sm:-mx-6 sm:px-6",
+                        !isExpanded && "-mx-4 h-40 overflow-y-hidden border-b-2 border-neutral-300 px-4 dark:border-neutral-600 sm:-mx-6 sm:px-6",
                         defaultTransitionClasses,
                     )}
                 >

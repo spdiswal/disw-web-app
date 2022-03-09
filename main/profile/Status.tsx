@@ -20,7 +20,7 @@ export function Status({
     return (
         <dl
             class={clsx(
-                "flex flex-col gap-y-main-xs rounded-2xl bg-neutral-200 py-main-xs dark:bg-neutral-800 sm:flex-row sm:justify-evenly",
+                "flex flex-col space-y-main-xs rounded-2xl bg-neutral-200 py-main-xs dark:bg-neutral-800 sm:flex-row sm:justify-evenly sm:space-y-0",
                 defaultTransitionClasses,
             )}
         >

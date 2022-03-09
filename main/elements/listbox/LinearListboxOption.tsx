@@ -18,7 +18,7 @@ export function LinearListboxOption({
             class={clsx(
                 isHighlighted && "text-white dark:text-white",
                 isSelected ? "font-bold" : "font-normal",
-                "flex items-center gap-x-4",
+                "flex items-center",
                 defaultTransitionClasses,
             )}
         >

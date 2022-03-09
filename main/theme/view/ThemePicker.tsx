@@ -67,7 +67,7 @@ export function ThemePicker({
             renderOption={(themeSelection) => (
                 <LinearListboxOption>
                     {icon[themeSelection]}
-                    <span class="block grow truncate">
+                    <span class="mx-4 block grow truncate">
                         {caption[themeSelection][locale]}
                     </span>
                 </LinearListboxOption>

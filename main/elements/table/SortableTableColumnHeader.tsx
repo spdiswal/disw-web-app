@@ -27,7 +27,7 @@ export function SortableTableColumnHeader({
             <button
                 type="button"
                 class={clsx(
-                    "pointer-events-auto flex h-full w-full items-center gap-x-2 py-3 px-6 text-left font-medium uppercase tracking-wider group-first:focus-visible:rounded-tl-xl group-last:focus-visible:rounded-tr-xl",
+                    "pointer-events-auto flex h-full w-full items-center py-3 px-6 text-left font-medium uppercase tracking-wider group-first:focus-visible:rounded-tl-xl group-last:focus-visible:rounded-tr-xl",
                     defaultFocusOutlineClasses,
                     focusOutlineInsideClasses,
                 )}
@@ -48,14 +48,14 @@ function SortOrderIcon({
     order,
 }: SortOrderIconProps) {
     if (order === undefined) {
-        return <div class="invisible h-4 w-4"/>
+        return <div class="invisible ml-2 h-4 w-4"/>
     }
     
     switch (order) {
         case "ascending":
-            return <HeroIconChevronUp class="h-4 w-4"/>
+            return <HeroIconChevronUp class="ml-2 h-4 w-4"/>
         
         case "descending":
-            return <HeroIconChevronDown class="h-4 w-4"/>
+            return <HeroIconChevronDown class="ml-2 h-4 w-4"/>
     }
 }

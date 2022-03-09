@@ -14,23 +14,22 @@ export function Footer({
 }: FooterProps) {
     return (
         <footer class="mt-48 min-w-main-xs pb-16 md:mt-64">
-            <div class="flex flex-col items-center gap-y-2 md:gap-y-4">
-                <div
+            <div class="flex flex-col items-center space-y-2 md:space-y-4">
+                <a
+                    href={githubUrl}
                     class={clsx(
-                        "flex justify-center gap-x-2 text-neutral-500 dark:text-neutral-400",
+                        "rounded-full text-neutral-500 dark:text-neutral-400",
                         defaultTransitionClasses,
                     )}
                 >
-                    <a href={githubUrl} class="rounded-full">
-                        <span class="sr-only">GitHub</span>
-                        <GlyphIconGitHub
-                            class={clsx(
-                                "h-8 w-8 hover:text-neutral-700 dark:hover:text-neutral-200",
-                                defaultTransitionClasses,
-                            )}
-                        />
-                    </a>
-                </div>
+                    <span class="sr-only">GitHub</span>
+                    <GlyphIconGitHub
+                        class={clsx(
+                            "h-8 w-8 hover:text-neutral-700 dark:hover:text-neutral-200",
+                            defaultTransitionClasses,
+                        )}
+                    />
+                </a>
                 <span
                     class={clsx(
                         "font-light text-neutral-600 dark:text-neutral-300",

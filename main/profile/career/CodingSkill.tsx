@@ -12,7 +12,7 @@ export function CodingSkill({
     return (
         <Badge
             class={clsx(
-                "bg-neutral-600/10 text-sm text-neutral-600 dark:bg-neutral-300/20 dark:text-neutral-300",
+                "mr-2 mb-2 bg-neutral-600/10 text-sm text-neutral-600 dark:bg-neutral-300/20 dark:text-neutral-300",
                 defaultTransitionClasses,
             )}
         >

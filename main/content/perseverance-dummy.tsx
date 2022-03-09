@@ -50,7 +50,6 @@ export function MainContent() {
         <Main>
             <Article
                 id="biography"
-                class="md:flex-row-reverse"
                 renderHeader={(labelId) => (
                     <SimpleHeader
                         labelId={labelId}
@@ -60,6 +59,7 @@ export function MainContent() {
                         }[locale]}
                     />
                 )}
+                swapped
             >
                 <Prose>
                     <p>
@@ -130,13 +130,13 @@ export function MainContent() {
                 </Occupation>
                 <Occupation
                     id="21-first-officer"
-                    class="md:flex-row-reverse"
                     title={{ da: "Førsteofficer", en: "First Officer" }[locale]}
                     organisation={nasa}
                     periods={[
                         { since: "2021-03", until: "2021-10" },
                     ]}
                     image={<div/>}
+                    swapped
                 >
                     <Prose>
                         <p>
@@ -202,13 +202,13 @@ export function MainContent() {
             <Education>
                 <Occupation
                     id="17-msc-continuity"
-                    class="md:flex-row-reverse"
                     title={{ da: "Kandidat i kontinuitet", en: "MSc in Continuity" }[locale]}
                     organisation={nasa}
                     periods={[
                         { since: "2017-09", until: "2020-06" },
                     ]}
                     image={<div/>}
+                    swapped
                 >
                     <Prose>
                         <p>

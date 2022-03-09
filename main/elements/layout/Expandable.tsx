@@ -28,8 +28,8 @@ export function Expandable({
                     {children}
                 </div>
             </div>
-            <OpaqueButton class={clsx(isExpanded && "hidden", "mt-4 flex items-center gap-x-1 shadow-lg")} onClick={onExpansionButtonClicked}>
-                <HeroIconPlus class="h-4 w-4"/>
+            <OpaqueButton class={clsx(isExpanded && "hidden", "mt-4 flex items-center shadow-lg")} onClick={onExpansionButtonClicked}>
+                <HeroIconPlus class="mr-2 h-4 w-4"/>
                 <span>{expandButtonLabel}</span>
             </OpaqueButton>
         </div>

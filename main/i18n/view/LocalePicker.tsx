@@ -34,9 +34,9 @@ export function LocalePicker({
             selectedOption={selectedLocale}
             onOptionSelected={onLocaleSelected}
             renderButton={() => (
-                <HybridButton class="flex items-center gap-x-4 md:w-full md:text-sm">
+                <HybridButton class="flex items-center md:w-full md:text-sm">
                     {icon[selectedLocale]}
-                    <span class="hidden text-left md:block md:grow md:truncate">
+                    <span class="mx-4 hidden text-left md:block md:grow md:truncate">
                         {caption[selectedLocale]}
                     </span>
                     <HeroIconSelector class="hidden h-5 w-5 md:block"/>
@@ -45,7 +45,7 @@ export function LocalePicker({
             renderOption={(locale) => (
                 <LinearListboxOption>
                     {icon[locale]}
-                    <span class="block grow truncate">
+                    <span class="mx-4 block grow truncate">
                         {caption[locale]}
                     </span>
                 </LinearListboxOption>

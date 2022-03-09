@@ -7,11 +7,11 @@ import type { ComponentChildren, JSX } from "preact"
 
 type OccupationProps = {
     readonly id: string
-    readonly class?: string
     readonly title: string
     readonly organisation: Organisation
     readonly periods: ReadonlyNonEmptyArray<Period>
     readonly image: JSX.Element
+    readonly swapped?: true
     readonly children: ComponentChildren
 }
 
@@ -27,17 +27,16 @@ export type Period = {
 
 export function Occupation({
     id,
-    class: _class,
     title,
     organisation,
     periods,
     image,
+    swapped,
     children,
 }: OccupationProps) {
     return (
         <Article
             id={id}
-            class={_class}
             image={image}
             renderHeader={(labelId) => (
                 <header class="mb-4 md:mb-6 lg:mb-8">
@@ -52,6 +51,7 @@ export function Occupation({
                     </ExternalHyperlink>
                 </header>
             )}
+            swapped={swapped}
         >
             {children}
         </Article>

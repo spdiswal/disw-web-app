@@ -1,4 +1,4 @@
-import { defaultTransitionClasses, GlyphIconGitHub } from "+elements"
+import { defaultFocusOutlineClasses, defaultTransitionClasses, GlyphIconGitHub } from "+elements"
 import clsx from "clsx"
 
 const copyrightYear = new Date().getFullYear()
@@ -20,6 +20,7 @@ export function Footer({
                     class={clsx(
                         "rounded-full text-neutral-500 dark:text-neutral-400",
                         defaultTransitionClasses,
+                        defaultFocusOutlineClasses,
                     )}
                 >
                     <span class="sr-only">GitHub</span>

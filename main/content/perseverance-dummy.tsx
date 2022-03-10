@@ -50,8 +50,9 @@ export function MainContent() {
         <Main>
             <Article
                 id="biography"
-                renderHeader={(labelId) => (
+                renderHeader={(bookmark, labelId) => (
                     <SimpleHeader
+                        bookmark={bookmark}
                         labelId={labelId}
                         title={{
                             da: "— og jeg er astrobiolog på Mars.",

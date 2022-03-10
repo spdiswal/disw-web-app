@@ -6,6 +6,27 @@ type GlyphIconGitHubProps = {
  * GLYPHICONS: `github`.
  *
  * @see https://glyphicons.com/tools/social/
+ * @see https://glyphicons.com/license/
+ * @see https://github.com/logos
+ *
+ * @license
+ * © 2010 - 2021 GLYPHICONS® All rights reserved.
+ *
+ * All logos and trademarks in Social tool are the property of the respective trademark owners.
+ *
+ * GLYPHICONS® is a registered trademark of GLYPHICONS.com s.r.o.
+ *
+ * GITHUB®, the GITHUB® logo design, OCTOCAT® and the OCTOCAT® logo design are
+ * exclusive trademarks registered in the United States by GitHub, Inc.
+ *
+ * The OCTOCAT design is the exclusive property of GitHub, Inc and has been
+ * federally registered with the United States Copyright Office. All rights reserved.
+ *
+ * No adaptation or use of any kind of any of our registered trademarks or
+ * copyrights, or any other contents of this website, is allowed without the
+ * express written permission of GitHub, Inc.
+ *
+ * For more information regarding the authorized uses of these items please contact us.
  */
 export function GlyphIconGitHub(props: GlyphIconGitHubProps) {
     return (

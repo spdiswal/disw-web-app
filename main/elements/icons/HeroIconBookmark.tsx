@@ -1,9 +1,9 @@
-type HeroIconSelectorProps = {
+type HeroIconBookmarkProps = {
     readonly class?: string
 }
 
 /**
- * Heroicons: `selector`.
+ * Heroicons: `bookmark`.
  *
  * @see https://heroicons.com/
  *
@@ -28,7 +28,7 @@ type HeroIconSelectorProps = {
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export function HeroIconSelector(props: HeroIconSelectorProps) {
+export function HeroIconBookmark(props: HeroIconBookmarkProps) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +43,7 @@ export function HeroIconSelector(props: HeroIconSelectorProps) {
             <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                d="M8 9l4-4 4 4m0 6l-4 4-4-4"
+                d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
             />
         </svg>
     )

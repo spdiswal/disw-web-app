@@ -39,23 +39,35 @@ export function Occupation({
         <Article
             id={id}
             image={image}
-            renderHeader={(labelId) => (
-                <header class="mb-4 md:mb-6 lg:mb-8">
+            renderHeader={(bookmark, labelId) => (
+                <header class="mb-4 -ml-6 sm:-ml-7 md:mb-6 md:-ml-9 lg:mb-8 lg:-ml-10">
                     {periods.map((period) => (
                         <FormattedPeriod key={period.since} period={period}/>
                     ))}
-                    <h1
-                        id={labelId}
-                        class={clsx(
-                            "mt-4 mb-0.5 text-2xl font-bold md:mt-6 md:mb-1.5 md:text-3xl",
-                            defaultTransitionClasses,
-                        )}
-                    >
-                        {title}
-                    </h1>
-                    <ExternalHyperlink url={organisation.url} class="text-lg font-semibold md:text-xl">
-                        {organisation.name}
-                    </ExternalHyperlink>
+                    <div class="group mt-4 mb-0.5 flex flex-row items-center md:mt-6 md:mb-1.5">
+                        <span
+                            class={clsx(
+                                "absolute opacity-0 focus-within:opacity-100 group-hover:opacity-100",
+                                defaultTransitionClasses,
+                            )}
+                        >
+                            {bookmark}
+                        </span>
+                        <h1
+                            id={labelId}
+                            class={clsx(
+                                "ml-6 text-2xl font-bold sm:ml-7 md:ml-9 md:text-3xl lg:ml-10",
+                                defaultTransitionClasses,
+                            )}
+                        >
+                            {title}
+                        </h1>
+                    </div>
+                    <div class="ml-6 sm:ml-7 md:ml-9 lg:ml-10">
+                        <ExternalHyperlink url={organisation.url} class="text-lg font-semibold md:text-xl">
+                            {organisation.name}
+                        </ExternalHyperlink>
+                    </div>
                 </header>
             )}
             swapped={swapped}
@@ -75,7 +87,7 @@ function FormattedPeriod({
     return (
         <div
             class={clsx(
-                "mb-0.5 text-lg font-light md:mb-1.5 md:text-xl",
+                "mb-0.5 ml-6 text-lg font-light sm:ml-7 md:mb-1.5 md:ml-9 md:text-xl lg:ml-10",
                 defaultTransitionClasses,
             )}
         >

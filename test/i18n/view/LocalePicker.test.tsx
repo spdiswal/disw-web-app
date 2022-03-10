@@ -3,6 +3,23 @@ import { LocalePicker, LocaleProvider } from "+i18n"
 import { render, screen } from "@testing-library/preact"
 import userEvent from "@testing-library/user-event"
 
+test("The locale picker button has an accessibility label.", async () => {
+    // GIVEN a test subject.
+    // GIVEN that the selected locale is 'da'.
+    const localePicker = renderLocalePickerComponent({
+        selectedLocale: "da",
+    })
+    
+    // THEN the locale picker button has an accessibility label in Danish.
+    expect(localePicker.getButton()).toHaveAccessibleName("Skift sprog")
+    
+    // WHEN changing the locale to English.
+    await localePicker.selectOption("English")
+    
+    // THEN the locale picker button has an accessibility label in English.
+    expect(localePicker.getButton()).toHaveAccessibleName("Change language")
+})
+
 test("The locale picker button displays the selected 'da' locale.", () => {
     // GIVEN a test subject.
     // GIVEN that the selected locale is 'da'.
@@ -11,7 +28,7 @@ test("The locale picker button displays the selected 'da' locale.", () => {
     })
     
     // THEN the locale picker button displays the selected locale.
-    expect(localePicker.getButton()).toHaveAccessibleName("Dansk")
+    expect(localePicker.getButton()).toHaveTextContent("Dansk")
 })
 
 test("The locale picker button displays the selected 'en' locale.", () => {
@@ -22,7 +39,7 @@ test("The locale picker button displays the selected 'en' locale.", () => {
     })
     
     // THEN the locale picker button displays the selected locale.
-    expect(localePicker.getButton()).toHaveAccessibleName("English")
+    expect(localePicker.getButton()).toHaveTextContent("English")
 })
 
 test("The locale picker has two options.", () => {
@@ -82,11 +99,21 @@ function renderLocalePickerComponent(options?: {
     
     const user = userEvent.setup()
     
-    render((
+    const { rerender } = render((
         <LocaleProvider value={selectedLocale}>
-            <LocalePicker onLocaleSelected={onLocaleSelected}/>
+            <LocalePicker onLocaleSelected={changeLocale}/>
         </LocaleProvider>
     ))
+    
+    function changeLocale(newLocale: Locale) {
+        onLocaleSelected?.(newLocale)
+        
+        rerender((
+            <LocaleProvider value={newLocale}>
+                <LocalePicker onLocaleSelected={changeLocale}/>
+            </LocaleProvider>
+        ))
+    }
     
     function getButton() {
         return screen.getByRole("button")

@@ -8,7 +8,9 @@ import { ListboxButtonConfigurationProvider } from "./useListboxButtonConfigurat
 import { ListboxOptionStateProvider } from "./useListboxOptionState"
 
 type ListboxProps<Option extends string> = {
+    readonly id: string
     readonly class?: string
+    readonly accessibilityLabel: string
     readonly options: ReadonlyNonEmptyArray<Option>
     readonly selectedOption: Option
     readonly onOptionSelected?: (option: Option) => void
@@ -17,7 +19,9 @@ type ListboxProps<Option extends string> = {
 }
 
 export function Listbox<Option extends string>({
+    id,
     class: _class,
+    accessibilityLabel,
     options,
     selectedOption,
     onOptionSelected,
@@ -25,7 +29,10 @@ export function Listbox<Option extends string>({
     renderOption,
 }: ListboxProps<Option>) {
     const buttonRef = useRef<HTMLButtonElement>(null)
-    const popupRef = useRef<HTMLDivElement>(null)
+    const popupContainerRef = useRef<HTMLDivElement>(null)
+    
+    const accessibilityLabelId = `${id}-listbox-label`
+    const popupId = `${id}-listbox-popup`
     
     const [isPopupOpen, setPopupOpen] = useState(false)
     const [highlightedOption, setHighlightedOption] =
@@ -37,11 +44,19 @@ export function Listbox<Option extends string>({
     useWindowEvent("keydown", decideToChangeHighlightedOption)
     
     return (
-        <div class={clsx(_class, "relative")}>
+        <div id={id} class={clsx(_class, "relative")}>
+            <span id={accessibilityLabelId} class="hidden">
+                {accessibilityLabel}
+            </span>
             <ListboxButtonConfigurationProvider
                 value={{
+                    aria: {
+                        controls: popupId,
+                        expanded: isPopupOpen,
+                        hasPopup: true,
+                        labelledBy: accessibilityLabelId,
+                    },
                     ref: buttonRef,
-                    isExpanded: isPopupOpen,
                     handleMouseDown: togglePopup,
                     handleKeyDown: decideToOpenPopup,
                 }}
@@ -49,22 +64,32 @@ export function Listbox<Option extends string>({
                 {renderButton()}
             </ListboxButtonConfigurationProvider>
             <div
-                ref={popupRef}
+                ref={popupContainerRef}
                 class={clsx(
                     !isPopupOpen && "hidden",
                     "absolute right-0 z-50 mt-1 max-h-56 w-48 overflow-auto rounded-2xl bg-neutral-100/80 py-2 text-base shadow-lg ring-1 ring-neutral-900/20 backdrop-blur-md focus-visible:outline-none dark:bg-neutral-800/80 dark:ring-white/20 md:text-sm",
                     defaultTransitionClasses,
                 )}
-                role="listbox"
             >
-                <ul onMouseLeave={unhighlightAllOptions}>
+                <ul
+                    id={popupId}
+                    onMouseLeave={unhighlightAllOptions}
+                    role="listbox"
+                    tabIndex={-1}
+                    aria-activedescendant={(highlightedOption !== null
+                        ? `${id}-${highlightedOption}`
+                        : undefined)}
+                    aria-labelledby={accessibilityLabelId}
+                >
                     {options.map((option) => {
+                        const optionId = `${id}-${option}`
                         const isHighlighted = option === highlightedOption
                         const isSelected = option === selectedOption
                         
                         return (
                             <li
                                 key={option}
+                                id={optionId}
                                 class={clsx(
                                     isHighlighted && "bg-accent-600",
                                     defaultFocusOutlineClasses,
@@ -102,7 +127,7 @@ export function Listbox<Option extends string>({
     function hasOccurredInListbox(target: EventTarget | null) {
         return target instanceof Element
             && (buttonRef.current?.contains(target)
-                || popupRef.current?.contains(target))
+                || popupContainerRef.current?.contains(target))
     }
     
     function decideToOpenPopup(event: KeyboardEvent) {

@@ -50,15 +50,14 @@ export function ThemePicker({
     
     return (
         <Listbox
+            id="theme-picker"
             class={_class}
+            accessibilityLabel={accessibilityLabel[locale]}
             options={options}
             selectedOption={selectedTheme}
             onOptionSelected={onThemeSelected}
             renderButton={() => (
                 <TransparentButton>
-                    <span class="sr-only">
-                        {accessibilityLabel[locale]}
-                    </span>
                     {selectedTheme === "match-media"
                         ? icon[mediaTheme]
                         : highlightedIcon[selectedTheme]}

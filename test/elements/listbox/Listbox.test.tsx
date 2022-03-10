@@ -3,12 +3,12 @@ import { fireEvent, render, screen } from "@testing-library/preact"
 import userEvent from "@testing-library/user-event"
 
 const appleCultivars = [
-    "Ambrosia",
-    "Belle de Boskoop",
-    "Crimson Delight",
-    "Golden Delicious",
-    "Royal Gala",
-    "Spartan",
+    "ambrosia",
+    "belle-de-boskoop",
+    "crimson-delight",
+    "golden-delicious",
+    "royal-gala",
+    "spartan",
 ] as const
 
 type AppleCultivar = (typeof appleCultivars)[number]
@@ -18,15 +18,34 @@ const secondAppleCultivar = appleCultivars[1]
 const secondToLastAppleCultivar = appleCultivars[appleCultivars.length - 2]
 const lastAppleCultivar = appleCultivars[appleCultivars.length - 1]
 
+test("The listbox button has an accessibility label.", () => {
+    // GIVEN a test subject.
+    const listbox = renderListboxComponentOfAppleCultivars()
+    
+    // THEN the listbox button has an accessibility label.
+    expect(listbox.getButton()).toHaveAccessibleName("Choose an apple cultivar")
+})
+
 test("The listbox button displays the selected option.", () => {
     // GIVEN a test subject.
-    // GIVEN that the selected option is 'Ambrosia'.
+    // GIVEN that the selected option is 'ambrosia'.
     const listbox = renderListboxComponentOfAppleCultivars({
-        selectedOption: "Ambrosia",
+        selectedOption: "ambrosia",
     })
     
     // THEN the listbox button displays the selected option.
-    expect(listbox.getButton()).toHaveAccessibleName("Ambrosia")
+    expect(listbox.getButton()).toHaveTextContent("ambrosia")
+})
+
+test("The listbox button controls the listbox popup.", () => {
+    // GIVEN a test subject.
+    const listbox = renderListboxComponentOfAppleCultivars()
+    
+    // THEN the listbox button is associated with a popup.
+    expect(listbox.getButton()).toHaveAttribute("aria-haspopup", "true")
+    
+    // AND the listbox button controls the listbox popup.
+    expect(listbox.getButton()).toHaveAttribute("aria-controls", "apple-cultivar-picker-listbox-popup")
 })
 
 test("The listbox popup is hidden initially.", () => {
@@ -35,7 +54,7 @@ test("The listbox popup is hidden initially.", () => {
     
     // THEN the listbox popup is hidden.
     // AND the listbox button is marked as collapsed.
-    expect(listbox.getPopup()).toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).toHaveClass("hidden")
     expect(listbox.getButton()).toHaveAttribute("aria-expanded", "false")
 })
 
@@ -48,7 +67,7 @@ test("The listbox popup appears when you click on the listbox button.", async ()
     
     // THEN the listbox popup is shown.
     // AND the listbox button is marked as expanded.
-    expect(listbox.getPopup()).not.toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).not.toHaveClass("hidden")
     expect(listbox.getButton()).toHaveAttribute("aria-expanded", "true")
 })
 
@@ -64,7 +83,7 @@ test("The listbox popup disappears when you click on the listbox button again.",
     
     // THEN the listbox popup is hidden.
     // AND the listbox button is marked as collapsed.
-    expect(listbox.getPopup()).toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).toHaveClass("hidden")
     expect(listbox.getButton()).toHaveAttribute("aria-expanded", "false")
 })
 
@@ -84,31 +103,42 @@ test("The listbox popup displays all options.", async () => {
     }
 })
 
+test("The listbox popup has an accessibility label.", () => {
+    // GIVEN a test subject.
+    const listbox = renderListboxComponentOfAppleCultivars()
+    
+    // THEN the listbox popup has an accessibility label.
+    expect(listbox.getPopup()).toHaveAccessibleName("Choose an apple cultivar")
+})
+
 test("The selected option is highlighted as the listbox popup appears.", async () => {
     // GIVEN a test subject.
-    // GIVEN that the selected option is 'Crimson Delight'.
+    // GIVEN that the selected option is 'crimson-delight'.
     const listbox = renderListboxComponentOfAppleCultivars({
-        selectedOption: "Crimson Delight",
+        selectedOption: "crimson-delight",
     })
     
     // WHEN the listbox popup appears.
     await listbox.clickButton()
     
     // THEN the selected option is highlighted.
-    const highlightedOption = listbox.getOption("Crimson Delight")
+    const highlightedOption = listbox.getOption("crimson-delight")
     expect(highlightedOption).toHaveClass("bg-accent-600")
     
     // AND none of the other options are highlighted.
     for (const option of listbox.getOptionsExcept(highlightedOption)) {
         expect(option).not.toHaveClass("bg-accent-600")
     }
+    
+    // AND the active descendant of the listbox popup is the highlighted option.
+    expect(listbox.getActiveDescendant()).toBe("apple-cultivar-picker-crimson-delight")
 })
 
 test("The listbox popup appears and the selected option is highlighted when you press the Enter key while the listbox button has focus.", async () => {
     // GIVEN a test subject.
-    // GIVEN that the selected option is 'Belle de Boskoop'.
+    // GIVEN that the selected option is 'belle-de-boskoop'.
     const listbox = renderListboxComponentOfAppleCultivars({
-        selectedOption: "Belle de Boskoop",
+        selectedOption: "belle-de-boskoop",
     })
     
     // GIVEN that the listbox button has focus.
@@ -119,24 +149,27 @@ test("The listbox popup appears and the selected option is highlighted when you 
     
     // THEN the listbox popup is shown.
     // AND the listbox button is marked as expanded.
-    expect(listbox.getPopup()).not.toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).not.toHaveClass("hidden")
     expect(listbox.getButton()).toHaveAttribute("aria-expanded", "true")
     
     // AND the selected option is highlighted.
-    const highlightedOption = listbox.getOption("Belle de Boskoop")
+    const highlightedOption = listbox.getOption("belle-de-boskoop")
     expect(highlightedOption).toHaveClass("bg-accent-600")
     
     // AND none of the other options are highlighted.
     for (const option of listbox.getOptionsExcept(highlightedOption)) {
         expect(option).not.toHaveClass("bg-accent-600")
     }
+    
+    // AND the active descendant of the listbox popup is the highlighted option.
+    expect(listbox.getActiveDescendant()).toBe("apple-cultivar-picker-belle-de-boskoop")
 })
 
 test("The listbox popup appears and the selected option is highlighted when you press the Space key while the listbox button has focus.", async () => {
     // GIVEN a test subject.
-    // GIVEN that the selected option is 'Golden Delicious'.
+    // GIVEN that the selected option is 'golden-delicious'.
     const listbox = renderListboxComponentOfAppleCultivars({
-        selectedOption: "Golden Delicious",
+        selectedOption: "golden-delicious",
     })
     
     // GIVEN that the listbox button has focus.
@@ -147,17 +180,20 @@ test("The listbox popup appears and the selected option is highlighted when you 
     
     // THEN the listbox popup is shown.
     // AND the listbox button is marked as expanded.
-    expect(listbox.getPopup()).not.toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).not.toHaveClass("hidden")
     expect(listbox.getButton()).toHaveAttribute("aria-expanded", "true")
     
     // AND the selected option is highlighted.
-    const highlightedOption = listbox.getOption("Golden Delicious")
+    const highlightedOption = listbox.getOption("golden-delicious")
     expect(highlightedOption).toHaveClass("bg-accent-600")
     
     // AND none of the other options are highlighted.
     for (const option of listbox.getOptionsExcept(highlightedOption)) {
         expect(option).not.toHaveClass("bg-accent-600")
     }
+    
+    // AND the active descendant of the listbox popup is the highlighted option.
+    expect(listbox.getActiveDescendant()).toBe("apple-cultivar-picker-golden-delicious")
 })
 
 test("An option is highlighted when you move the cursor onto it.", async () => {
@@ -168,23 +204,26 @@ test("An option is highlighted when you move the cursor onto it.", async () => {
     await listbox.clickButton()
     
     // WHEN moving the cursor onto an option.
-    await listbox.moveCursorOntoOption("Golden Delicious")
+    await listbox.moveCursorOntoOption("golden-delicious")
     
     // THEN the hovered option is highlighted.
-    const highlightedOption = listbox.getOption("Golden Delicious")
+    const highlightedOption = listbox.getOption("golden-delicious")
     expect(highlightedOption).toHaveClass("bg-accent-600")
     
     // AND none of the other options are highlighted.
     for (const option of listbox.getOptionsExcept(highlightedOption)) {
         expect(option).not.toHaveClass("bg-accent-600")
     }
+    
+    // AND the active descendant of the listbox popup is the highlighted option.
+    expect(listbox.getActiveDescendant()).toBe("apple-cultivar-picker-golden-delicious")
 })
 
 test("None of the options are highlighted when you move the cursor outside the listbox popup.", async () => {
     // GIVEN a test subject.
-    // GIVEN that the selected option is 'Ambrosia'.
+    // GIVEN that the selected option is 'ambrosia'.
     const listbox = renderListboxComponentOfAppleCultivars({
-        selectedOption: "Ambrosia",
+        selectedOption: "ambrosia",
     })
     
     // GIVEN that the listbox popup is shown.
@@ -197,13 +236,16 @@ test("None of the options are highlighted when you move the cursor outside the l
     for (const option of listbox.getOptions()) {
         expect(option).not.toHaveClass("bg-accent-600")
     }
+    
+    // AND the listbox popup has no active descendant.
+    expect(listbox.getActiveDescendant()).toBeNull()
 })
 
 test("The listbox popup appears and the selected option is highlighted when you press the Arrow Down key while the listbox button has focus.", async () => {
     // GIVEN a test subject.
-    // GIVEN that the selected option is 'Belle de Boskoop'.
+    // GIVEN that the selected option is 'belle-de-boskoop'.
     const listbox = renderListboxComponentOfAppleCultivars({
-        selectedOption: "Belle de Boskoop",
+        selectedOption: "belle-de-boskoop",
     })
     
     // GIVEN that the listbox button has focus.
@@ -214,24 +256,27 @@ test("The listbox popup appears and the selected option is highlighted when you 
     
     // THEN the listbox popup is shown.
     // AND the listbox button is marked as expanded.
-    expect(listbox.getPopup()).not.toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).not.toHaveClass("hidden")
     expect(listbox.getButton()).toHaveAttribute("aria-expanded", "true")
     
     // AND the selected option is highlighted.
-    const highlightedOption = listbox.getOption("Belle de Boskoop")
+    const highlightedOption = listbox.getOption("belle-de-boskoop")
     expect(highlightedOption).toHaveClass("bg-accent-600")
     
     // AND none of the other options are highlighted.
     for (const option of listbox.getOptionsExcept(highlightedOption)) {
         expect(option).not.toHaveClass("bg-accent-600")
     }
+    
+    // AND the active descendant of the listbox popup is the highlighted option.
+    expect(listbox.getActiveDescendant()).toBe("apple-cultivar-picker-belle-de-boskoop")
 })
 
 test("The first option is highlighted when you press the Arrow Down while none of the options are highlighted.", async () => {
     // GIVEN a test subject.
-    // GIVEN that the selected option is 'Belle de Boskoop'.
+    // GIVEN that the selected option is 'belle-de-boskoop'.
     const listbox = renderListboxComponentOfAppleCultivars({
-        selectedOption: "Belle de Boskoop",
+        selectedOption: "belle-de-boskoop",
     })
     
     // GIVEN that the listbox popup is shown.
@@ -251,6 +296,9 @@ test("The first option is highlighted when you press the Arrow Down while none o
     for (const option of listbox.getOptionsExcept(highlightedOption)) {
         expect(option).not.toHaveClass("bg-accent-600")
     }
+    
+    // AND the active descendant of the listbox popup is the highlighted option.
+    expect(listbox.getActiveDescendant()).toBe(`apple-cultivar-picker-${firstAppleCultivar}`)
 })
 
 test("The next option is highlighted when you press the Arrow Down key.", async () => {
@@ -274,6 +322,9 @@ test("The next option is highlighted when you press the Arrow Down key.", async 
     for (const option of listbox.getOptionsExcept(highlightedOption)) {
         expect(option).not.toHaveClass("bg-accent-600")
     }
+    
+    // AND the active descendant of the listbox popup is the highlighted option.
+    expect(listbox.getActiveDescendant()).toBe(`apple-cultivar-picker-${secondAppleCultivar}`)
 })
 
 test("The first option is highlighted when you press the Arrow Down key while the last option is highlighted.", async () => {
@@ -297,13 +348,16 @@ test("The first option is highlighted when you press the Arrow Down key while th
     for (const option of listbox.getOptionsExcept(highlightedOption)) {
         expect(option).not.toHaveClass("bg-accent-600")
     }
+    
+    // AND the active descendant of the listbox popup is the highlighted option.
+    expect(listbox.getActiveDescendant()).toBe(`apple-cultivar-picker-${firstAppleCultivar}`)
 })
 
 test("The listbox popup appears and the selected option is highlighted when you press the Arrow Up key while the listbox button has focus.", async () => {
     // GIVEN a test subject.
-    // GIVEN that the selected option is 'Royal Gala'.
+    // GIVEN that the selected option is 'royal-gala'.
     const listbox = renderListboxComponentOfAppleCultivars({
-        selectedOption: "Royal Gala",
+        selectedOption: "royal-gala",
     })
     
     // GIVEN that the listbox button has focus.
@@ -314,24 +368,27 @@ test("The listbox popup appears and the selected option is highlighted when you 
     
     // THEN the listbox popup is shown.
     // AND the listbox button is marked as expanded.
-    expect(listbox.getPopup()).not.toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).not.toHaveClass("hidden")
     expect(listbox.getButton()).toHaveAttribute("aria-expanded", "true")
     
     // AND the selected option is highlighted.
-    const highlightedOption = listbox.getOption("Royal Gala")
+    const highlightedOption = listbox.getOption("royal-gala")
     expect(highlightedOption).toHaveClass("bg-accent-600")
     
     // AND none of the other options are highlighted.
     for (const option of listbox.getOptionsExcept(highlightedOption)) {
         expect(option).not.toHaveClass("bg-accent-600")
     }
+    
+    // AND the active descendant of the listbox popup is the highlighted option.
+    expect(listbox.getActiveDescendant()).toBe("apple-cultivar-picker-royal-gala")
 })
 
 test("The last option is highlighted when you press the Arrow Up while none of the options are highlighted.", async () => {
     // GIVEN a test subject.
-    // GIVEN that the selected option is 'Royal Gala'.
+    // GIVEN that the selected option is 'royal-gala'.
     const listbox = renderListboxComponentOfAppleCultivars({
-        selectedOption: "Royal Gala",
+        selectedOption: "royal-gala",
     })
     
     // GIVEN that the listbox popup is shown.
@@ -351,6 +408,9 @@ test("The last option is highlighted when you press the Arrow Up while none of t
     for (const option of listbox.getOptionsExcept(highlightedOption)) {
         expect(option).not.toHaveClass("bg-accent-600")
     }
+    
+    // AND the active descendant of the listbox popup is the highlighted option.
+    expect(listbox.getActiveDescendant()).toBe(`apple-cultivar-picker-${lastAppleCultivar}`)
 })
 
 test("The previous option is highlighted when you press the Arrow Up key.", async () => {
@@ -374,6 +434,9 @@ test("The previous option is highlighted when you press the Arrow Up key.", asyn
     for (const option of listbox.getOptionsExcept(highlightedOption)) {
         expect(option).not.toHaveClass("bg-accent-600")
     }
+    
+    // AND the active descendant of the listbox popup is the highlighted option.
+    expect(listbox.getActiveDescendant()).toBe(`apple-cultivar-picker-${secondToLastAppleCultivar}`)
 })
 
 test("The last option is highlighted when you press the Arrow Up key while the first option is highlighted.", async () => {
@@ -397,20 +460,23 @@ test("The last option is highlighted when you press the Arrow Up key while the f
     for (const option of listbox.getOptionsExcept(highlightedOption)) {
         expect(option).not.toHaveClass("bg-accent-600")
     }
+    
+    // AND the active descendant of the listbox popup is the highlighted option.
+    expect(listbox.getActiveDescendant()).toBe(`apple-cultivar-picker-${lastAppleCultivar}`)
 })
 
 test("Only the selected option is marked as selected.", async () => {
     // GIVEN a test subject.
-    // GIVEN that the selected option is 'Belle de Boskoop'.
+    // GIVEN that the selected option is 'belle-de-boskoop'.
     const listbox = renderListboxComponentOfAppleCultivars({
-        selectedOption: "Belle de Boskoop",
+        selectedOption: "belle-de-boskoop",
     })
     
     // WHEN the listbox popup appears.
     await listbox.clickButton()
     
     // THEN the selected option is marked as selected.
-    expect(listbox.getSelectedOption()).toHaveAccessibleName("Belle de Boskoop")
+    expect(listbox.getSelectedOption()).toHaveAccessibleName("belle-de-boskoop")
     
     // AND none of the other options are marked as selected.
     expect(listbox.getNonSelectedOptions())
@@ -422,22 +488,22 @@ test("The change handler is invoked when you click on an option.", async () => {
     const spyingChangeHandler = jest.fn()
     
     // GIVEN a test subject.
-    // GIVEN that the selected option is 'Golden Delicious'.
+    // GIVEN that the selected option is 'golden-delicious'.
     const listbox = renderListboxComponentOfAppleCultivars({
-        selectedOption: "Golden Delicious",
+        selectedOption: "golden-delicious",
         onOptionSelected: spyingChangeHandler,
     })
     
     // GIVEN that the listbox popup is shown.
     await listbox.clickButton()
     
-    // WHEN clicking on the 'Royal Gala' option.
-    await listbox.clickOption("Royal Gala")
+    // WHEN clicking on the 'royal-gala' option.
+    await listbox.clickOption("royal-gala")
     
     // THEN the change handler has been invoked once.
     // AND the clicked option is passed as the argument.
     expect(spyingChangeHandler).toHaveBeenCalledTimes(1)
-    expect(spyingChangeHandler).toHaveBeenCalledWith("Royal Gala")
+    expect(spyingChangeHandler).toHaveBeenCalledWith("royal-gala")
 })
 
 test("The change handler is invoked when you press the Enter key while an option is highlighted.", async () => {
@@ -445,17 +511,17 @@ test("The change handler is invoked when you press the Enter key while an option
     const spyingChangeHandler = jest.fn()
     
     // GIVEN a test subject.
-    // GIVEN that the selected option is 'Golden Delicious'.
+    // GIVEN that the selected option is 'golden-delicious'.
     const listbox = renderListboxComponentOfAppleCultivars({
-        selectedOption: "Royal Gala",
+        selectedOption: "royal-gala",
         onOptionSelected: spyingChangeHandler,
     })
     
     // GIVEN that the listbox popup is shown.
     await listbox.clickButton()
     
-    // GIVEN that the 'Belle de Boskoop' option is highlighted.
-    await listbox.moveCursorOntoOption("Belle de Boskoop")
+    // GIVEN that the 'belle-de-boskoop' option is highlighted.
+    await listbox.moveCursorOntoOption("belle-de-boskoop")
     
     // WHEN pressing the Enter key.
     await listbox.pressEnterKey()
@@ -463,7 +529,7 @@ test("The change handler is invoked when you press the Enter key while an option
     // THEN the change handler has been invoked once.
     // AND the highlighted option is passed as the argument.
     expect(spyingChangeHandler).toHaveBeenCalledTimes(1)
-    expect(spyingChangeHandler).toHaveBeenCalledWith("Belle de Boskoop")
+    expect(spyingChangeHandler).toHaveBeenCalledWith("belle-de-boskoop")
 })
 
 test("The change handler is invoked when you press the Space key while an option is highlighted.", async () => {
@@ -471,17 +537,17 @@ test("The change handler is invoked when you press the Space key while an option
     const spyingChangeHandler = jest.fn()
     
     // GIVEN a test subject.
-    // GIVEN that the selected option is 'Belle de Boskoop'.
+    // GIVEN that the selected option is 'belle-de-boskoop'.
     const listbox = renderListboxComponentOfAppleCultivars({
-        selectedOption: "Belle de Boskoop",
+        selectedOption: "belle-de-boskoop",
         onOptionSelected: spyingChangeHandler,
     })
     
     // GIVEN that the listbox popup is shown.
     await listbox.clickButton()
     
-    // GIVEN that the 'Crimson Delight' option is highlighted.
-    await listbox.moveCursorOntoOption("Crimson Delight")
+    // GIVEN that the 'crimson-delight' option is highlighted.
+    await listbox.moveCursorOntoOption("crimson-delight")
     
     // WHEN pressing the Space key.
     await listbox.pressSpaceKey()
@@ -489,7 +555,7 @@ test("The change handler is invoked when you press the Space key while an option
     // THEN the change handler has been invoked once.
     // AND the highlighted option is passed as the argument.
     expect(spyingChangeHandler).toHaveBeenCalledTimes(1)
-    expect(spyingChangeHandler).toHaveBeenCalledWith("Crimson Delight")
+    expect(spyingChangeHandler).toHaveBeenCalledWith("crimson-delight")
 })
 
 test("The listbox popup remains visible when you click on its border.", async () => {
@@ -503,24 +569,24 @@ test("The listbox popup remains visible when you click on its border.", async ()
     await listbox.clickPopupBorder()
     
     // THEN the listbox popup remains visible.
-    expect(listbox.getPopup()).not.toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).not.toHaveClass("hidden")
 })
 
 test("The listbox popup disappears when you click on an option.", async () => {
     // GIVEN a test subject.
-    // GIVEN that the selected option is 'Crimson Delight'.
+    // GIVEN that the selected option is 'crimson-delight'.
     const listbox = renderListboxComponentOfAppleCultivars({
-        selectedOption: "Crimson Delight",
+        selectedOption: "crimson-delight",
     })
     
     // GIVEN that the listbox popup is shown.
     await listbox.clickButton()
     
     // WHEN clicking on an option.
-    await listbox.clickOption("Spartan")
+    await listbox.clickOption("spartan")
     
     // THEN the listbox popup is hidden.
-    expect(listbox.getPopup()).toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).toHaveClass("hidden")
 })
 
 test("The listbox popup disappears when you click outside the listbox.", async () => {
@@ -534,7 +600,7 @@ test("The listbox popup disappears when you click outside the listbox.", async (
     await listbox.clickOutside()
     
     // THEN the listbox popup is hidden.
-    expect(listbox.getPopup()).toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).toHaveClass("hidden")
 })
 
 test("The listbox popup disappears when you press the Enter key while none of the options are highlighted.", async () => {
@@ -549,7 +615,7 @@ test("The listbox popup disappears when you press the Enter key while none of th
     
     // THEN the listbox popup is hidden.
     // AND the listbox button is marked as collapsed.
-    expect(listbox.getPopup()).toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).toHaveClass("hidden")
     expect(listbox.getButton()).toHaveAttribute("aria-expanded", "false")
 })
 
@@ -561,14 +627,14 @@ test("The listbox popup disappears when you press the Enter key while an option 
     await listbox.clickButton()
     
     // GIVEN that an option is highlighted.
-    await listbox.moveCursorOntoOption("Golden Delicious")
+    await listbox.moveCursorOntoOption("golden-delicious")
     
     // WHEN pressing the Enter key.
     await listbox.pressEnterKey()
     
     // THEN the listbox popup is hidden.
     // AND the listbox button is marked as collapsed.
-    expect(listbox.getPopup()).toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).toHaveClass("hidden")
     expect(listbox.getButton()).toHaveAttribute("aria-expanded", "false")
 })
 
@@ -584,7 +650,7 @@ test("The listbox popup disappears when you press the Space key while none of th
     
     // THEN the listbox popup is hidden.
     // AND the listbox button is marked as collapsed.
-    expect(listbox.getPopup()).toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).toHaveClass("hidden")
     expect(listbox.getButton()).toHaveAttribute("aria-expanded", "false")
 })
 
@@ -596,14 +662,14 @@ test("The listbox popup disappears when you press the Space key while an option 
     await listbox.clickButton()
     
     // GIVEN that an option is highlighted.
-    await listbox.moveCursorOntoOption("Golden Delicious")
+    await listbox.moveCursorOntoOption("golden-delicious")
     
     // WHEN pressing the Space key.
     await listbox.pressSpaceKey()
     
     // THEN the listbox popup is hidden.
     // AND the listbox button is marked as collapsed.
-    expect(listbox.getPopup()).toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).toHaveClass("hidden")
     expect(listbox.getButton()).toHaveAttribute("aria-expanded", "false")
 })
 
@@ -619,7 +685,7 @@ test("The listbox popup disappears when you press the Escape key.", async () => 
     
     // THEN the listbox popup is hidden.
     // AND the listbox button is marked as collapsed.
-    expect(listbox.getPopup()).toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).toHaveClass("hidden")
     expect(listbox.getButton()).toHaveAttribute("aria-expanded", "false")
 })
 
@@ -635,7 +701,7 @@ test("The listbox popup disappears when you press the Tab key.", async () => {
     
     // THEN the listbox popup is hidden.
     // AND the listbox button is marked as collapsed.
-    expect(listbox.getPopup()).toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).toHaveClass("hidden")
     expect(listbox.getButton()).toHaveAttribute("aria-expanded", "false")
 })
 
@@ -652,7 +718,7 @@ test("The listbox popup disappears when you hold the Shift key and press the Tab
     
     // THEN the listbox popup is hidden.
     // AND the listbox button is marked as collapsed.
-    expect(listbox.getPopup()).toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).toHaveClass("hidden")
     expect(listbox.getButton()).toHaveAttribute("aria-expanded", "false")
 })
 
@@ -667,20 +733,22 @@ test("The listbox popup disappears when the window loses focus.", async () => {
     listbox.blurWindow()
     
     // THEN the listbox popup is hidden.
-    expect(listbox.getPopup()).toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).toHaveClass("hidden")
 })
 
 function renderListboxComponentOfAppleCultivars(options?: {
     selectedOption?: AppleCultivar,
     onOptionSelected?: (selectedOption: AppleCultivar) => void,
 }) {
-    const selectedOption = options?.selectedOption ?? "Ambrosia"
+    const selectedOption = options?.selectedOption ?? "ambrosia"
     const onOptionSelected = options?.onOptionSelected
     
     const user = userEvent.setup()
     
     render((
         <Listbox
+            id="apple-cultivar-picker"
+            accessibilityLabel="Choose an apple cultivar"
             options={appleCultivars}
             selectedOption={selectedOption}
             onOptionSelected={onOptionSelected}
@@ -705,6 +773,10 @@ function renderListboxComponentOfAppleCultivars(options?: {
         return screen.getByRole("listbox")
     }
     
+    function getPopupContainer(): HTMLElement {
+        return getPopup().parentElement! // eslint-disable-line
+    }
+    
     function getOptions(): ReadonlyArray<HTMLElement> {
         return screen.getAllByRole("option")
     }
@@ -727,6 +799,10 @@ function renderListboxComponentOfAppleCultivars(options?: {
         return screen.getAllByRole("option", { selected: false })
     }
     
+    function getActiveDescendant(): string | null {
+        return getPopup().getAttribute("aria-activedescendant")
+    }
+    
     function giveFocusToButton() {
         getButton().focus()
     }
@@ -736,7 +812,7 @@ function renderListboxComponentOfAppleCultivars(options?: {
     }
     
     async function clickPopupBorder() {
-        await user.click(getPopup())
+        await user.click(getPopupContainer())
     }
     
     async function clickOutside() {
@@ -754,9 +830,7 @@ function renderListboxComponentOfAppleCultivars(options?: {
     function moveCursorAwayFromOptions() {
         // Calling `user.unhover(getPopup())` won't trigger the correct
         // mouse leave event on the list of options.
-        //
-        // eslint-disable-next-line
-        fireEvent.mouseLeave(getPopup().querySelector("ul")!)
+        fireEvent.mouseLeave(getPopup()) // eslint-disable-line
     }
     
     async function clickOption(name: AppleCultivar) {
@@ -793,12 +867,14 @@ function renderListboxComponentOfAppleCultivars(options?: {
     
     return {
         getButton,
+        getPopupContainer,
         getPopup,
         getOptions,
         getOption,
         getOptionsExcept,
         getSelectedOption,
         getNonSelectedOptions,
+        getActiveDescendant,
         giveFocusToButton,
         clickButton,
         clickPopupBorder,

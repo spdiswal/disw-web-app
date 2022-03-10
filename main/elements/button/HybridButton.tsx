@@ -19,18 +19,13 @@ export function HybridButton({
     onMouseDown,
     children,
 }: HybridButtonProps) {
-    const {
-        ref,
-        isExpanded,
-        handleKeyDown,
-        handleMouseDown,
-    } = useListboxButtonConfiguration()
+    const { aria, ref, handleKeyDown, handleMouseDown } =
+        useListboxButtonConfiguration()
     
     return (
         <button
-            type="button"
             ref={ref}
-            aria-expanded={isExpanded}
+            type="button"
             class={clsx(
                 _class,
                 commonButtonClasses,
@@ -43,6 +38,10 @@ export function HybridButton({
             onClick={onClick}
             onKeyDown={handleKeyDown ?? onKeyDown}
             onMouseDown={handleMouseDown ?? onMouseDown}
+            aria-controls={aria.controls}
+            aria-expanded={aria.expanded}
+            aria-haspopup={aria.hasPopup}
+            aria-labelledby={aria.labelledBy}
         >
             {children}
         </button>

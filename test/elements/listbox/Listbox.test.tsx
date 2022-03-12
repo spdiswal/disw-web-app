@@ -54,7 +54,7 @@ test("The listbox popup is hidden initially.", () => {
     
     // THEN the listbox popup is hidden.
     // AND the listbox button is marked as collapsed.
-    expect(listbox.getPopupContainer()).toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).toHaveClass("invisible")
     expect(listbox.getButton()).toHaveAttribute("aria-expanded", "false")
 })
 
@@ -67,7 +67,7 @@ test("The listbox popup appears when you click on the listbox button.", async ()
     
     // THEN the listbox popup is shown.
     // AND the listbox button is marked as expanded.
-    expect(listbox.getPopupContainer()).not.toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).not.toHaveClass("invisible")
     expect(listbox.getButton()).toHaveAttribute("aria-expanded", "true")
 })
 
@@ -83,7 +83,7 @@ test("The listbox popup disappears when you click on the listbox button again.",
     
     // THEN the listbox popup is hidden.
     // AND the listbox button is marked as collapsed.
-    expect(listbox.getPopupContainer()).toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).toHaveClass("invisible")
     expect(listbox.getButton()).toHaveAttribute("aria-expanded", "false")
 })
 
@@ -149,7 +149,7 @@ test("The listbox popup appears and the selected option is highlighted when you 
     
     // THEN the listbox popup is shown.
     // AND the listbox button is marked as expanded.
-    expect(listbox.getPopupContainer()).not.toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).not.toHaveClass("invisible")
     expect(listbox.getButton()).toHaveAttribute("aria-expanded", "true")
     
     // AND the selected option is highlighted.
@@ -180,7 +180,7 @@ test("The listbox popup appears and the selected option is highlighted when you 
     
     // THEN the listbox popup is shown.
     // AND the listbox button is marked as expanded.
-    expect(listbox.getPopupContainer()).not.toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).not.toHaveClass("invisible")
     expect(listbox.getButton()).toHaveAttribute("aria-expanded", "true")
     
     // AND the selected option is highlighted.
@@ -256,7 +256,7 @@ test("The listbox popup appears and the selected option is highlighted when you 
     
     // THEN the listbox popup is shown.
     // AND the listbox button is marked as expanded.
-    expect(listbox.getPopupContainer()).not.toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).not.toHaveClass("invisible")
     expect(listbox.getButton()).toHaveAttribute("aria-expanded", "true")
     
     // AND the selected option is highlighted.
@@ -368,7 +368,7 @@ test("The listbox popup appears and the selected option is highlighted when you 
     
     // THEN the listbox popup is shown.
     // AND the listbox button is marked as expanded.
-    expect(listbox.getPopupContainer()).not.toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).not.toHaveClass("invisible")
     expect(listbox.getButton()).toHaveAttribute("aria-expanded", "true")
     
     // AND the selected option is highlighted.
@@ -569,7 +569,7 @@ test("The listbox popup remains visible when you click on its border.", async ()
     await listbox.clickPopupBorder()
     
     // THEN the listbox popup remains visible.
-    expect(listbox.getPopupContainer()).not.toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).not.toHaveClass("invisible")
 })
 
 test("The listbox popup disappears when you click on an option.", async () => {
@@ -586,7 +586,7 @@ test("The listbox popup disappears when you click on an option.", async () => {
     await listbox.clickOption("spartan")
     
     // THEN the listbox popup is hidden.
-    expect(listbox.getPopupContainer()).toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).toHaveClass("invisible")
 })
 
 test("The listbox popup disappears when you click outside the listbox.", async () => {
@@ -600,7 +600,7 @@ test("The listbox popup disappears when you click outside the listbox.", async (
     await listbox.clickOutside()
     
     // THEN the listbox popup is hidden.
-    expect(listbox.getPopupContainer()).toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).toHaveClass("invisible")
 })
 
 test("The listbox popup disappears when you press the Enter key while none of the options are highlighted.", async () => {
@@ -615,7 +615,7 @@ test("The listbox popup disappears when you press the Enter key while none of th
     
     // THEN the listbox popup is hidden.
     // AND the listbox button is marked as collapsed.
-    expect(listbox.getPopupContainer()).toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).toHaveClass("invisible")
     expect(listbox.getButton()).toHaveAttribute("aria-expanded", "false")
 })
 
@@ -634,7 +634,7 @@ test("The listbox popup disappears when you press the Enter key while an option 
     
     // THEN the listbox popup is hidden.
     // AND the listbox button is marked as collapsed.
-    expect(listbox.getPopupContainer()).toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).toHaveClass("invisible")
     expect(listbox.getButton()).toHaveAttribute("aria-expanded", "false")
 })
 
@@ -650,7 +650,7 @@ test("The listbox popup disappears when you press the Space key while none of th
     
     // THEN the listbox popup is hidden.
     // AND the listbox button is marked as collapsed.
-    expect(listbox.getPopupContainer()).toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).toHaveClass("invisible")
     expect(listbox.getButton()).toHaveAttribute("aria-expanded", "false")
 })
 
@@ -669,7 +669,7 @@ test("The listbox popup disappears when you press the Space key while an option 
     
     // THEN the listbox popup is hidden.
     // AND the listbox button is marked as collapsed.
-    expect(listbox.getPopupContainer()).toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).toHaveClass("invisible")
     expect(listbox.getButton()).toHaveAttribute("aria-expanded", "false")
 })
 
@@ -685,7 +685,7 @@ test("The listbox popup disappears when you press the Escape key.", async () => 
     
     // THEN the listbox popup is hidden.
     // AND the listbox button is marked as collapsed.
-    expect(listbox.getPopupContainer()).toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).toHaveClass("invisible")
     expect(listbox.getButton()).toHaveAttribute("aria-expanded", "false")
 })
 
@@ -701,7 +701,7 @@ test("The listbox popup disappears when you press the Tab key.", async () => {
     
     // THEN the listbox popup is hidden.
     // AND the listbox button is marked as collapsed.
-    expect(listbox.getPopupContainer()).toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).toHaveClass("invisible")
     expect(listbox.getButton()).toHaveAttribute("aria-expanded", "false")
 })
 
@@ -718,7 +718,7 @@ test("The listbox popup disappears when you hold the Shift key and press the Tab
     
     // THEN the listbox popup is hidden.
     // AND the listbox button is marked as collapsed.
-    expect(listbox.getPopupContainer()).toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).toHaveClass("invisible")
     expect(listbox.getButton()).toHaveAttribute("aria-expanded", "false")
 })
 
@@ -733,7 +733,7 @@ test("The listbox popup disappears when the window loses focus.", async () => {
     listbox.blurWindow()
     
     // THEN the listbox popup is hidden.
-    expect(listbox.getPopupContainer()).toHaveClass("hidden")
+    expect(listbox.getPopupContainer()).toHaveClass("invisible")
 })
 
 function renderListboxComponentOfAppleCultivars(options?: {

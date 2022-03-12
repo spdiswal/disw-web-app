@@ -1,7 +1,6 @@
-import { slowTransitionClasses } from "+elements"
+import { slowestTransitionClasses } from "+elements"
 import { useTheme } from "+theme"
 import clsx from "clsx"
-import { useEffect, useRef } from "preact/hooks"
 
 type ThemeAwarePictureProps = {
     readonly class?: string
@@ -22,31 +21,6 @@ export function ThemeAwarePicture({
     caption,
 }: ThemeAwarePictureProps) {
     const theme = useTheme()
-    const darkImageRef = useRef<HTMLImageElement>(null)
-    
-    useEffect(() => {
-        darkImageRef.current?.classList.add("invisible")
-    }, [])
-    
-    useEffect(() => {
-        const darkImageElement = darkImageRef.current
-        
-        if (theme === "dark") {
-            darkImageElement?.classList.remove("invisible")
-        }
-        
-        function handleDarkImageTransitionEnd() {
-            if (theme === "light") {
-                darkImageElement?.classList.add("invisible")
-            }
-        }
-        
-        darkImageElement?.addEventListener("transitionend", handleDarkImageTransitionEnd)
-        
-        return function cleanUp() {
-            darkImageElement?.removeEventListener("transitionend", handleDarkImageTransitionEnd)
-        }
-    }, [theme])
     
     return (
         <div
@@ -58,7 +32,11 @@ export function ThemeAwarePicture({
             <picture>
                 <source type="image/webp" srcSet={lightSrcSet.webp}/>
                 <img
-                    class="pointer-events-none select-none"
+                    class={clsx(
+                        theme === "light" ? "visible opacity-100" : "invisible opacity-0",
+                        "pointer-events-none select-none",
+                        slowestTransitionClasses,
+                    )}
                     src={lightSrcSet.fallback}
                     alt={caption}
                 />
@@ -66,14 +44,13 @@ export function ThemeAwarePicture({
             <picture>
                 <source type="image/webp" srcSet={darkSrcSet.webp}/>
                 <img
-                    ref={darkImageRef}
                     class={clsx(
-                        theme === "dark" ? "opacity-100" : "opacity-0",
+                        theme === "dark" ? "visible opacity-100" : "invisible opacity-0",
                         "pointer-events-none absolute top-0 left-0 select-none",
-                        slowTransitionClasses,
+                        slowestTransitionClasses,
                     )}
                     src={darkSrcSet.fallback}
-                    alt=""
+                    alt={caption}
                 />
             </picture>
         </div>

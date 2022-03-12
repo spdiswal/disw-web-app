@@ -394,7 +394,7 @@ function renderContent() {
     }
     
     function getPortrait() {
-        return screen.getByRole("img", { name: /.+/u })
+        return screen.getByRole("img")
     }
     
     function getOccupation(title: string) {

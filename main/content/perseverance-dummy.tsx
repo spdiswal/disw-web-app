@@ -2,7 +2,6 @@ import { Prose } from "+elements"
 import { useLocale } from "+i18n"
 import type { Organisation } from "+profile"
 import { Article, Education, Employments, Footer, Hero, Main, Occupation, SimpleHeader, Status } from "+profile"
-import { ThemeAwarePicture } from "+theme"
 import heroWebp from "./perseverance-dummy.webp"
 
 export const name = "Perseverance"
@@ -18,17 +17,10 @@ export function HeaderContent() {
     return (
         <Hero
             background={
-                <ThemeAwarePicture
-                    class="relative"
-                    lightSrcSet={{
-                        webp: heroWebp,
-                        fallback: heroWebp,
-                    }}
-                    darkSrcSet={{
-                        webp: heroWebp,
-                        fallback: heroWebp,
-                    }}
-                    caption={{
+                <img
+                    class="pointer-events-none relative select-none"
+                    src={heroWebp}
+                    alt={{
                         da: "Mit selvportræt. Jeg har boret to huller i et klippestykke foran mig og lavet hjulspor i det røde sand. Horisonten er en smule diset. Courtesy NASA/JPL-Caltech.",
                         en: "My self-portrait. I have drilled two holes in a rock in front of me and made wheel tracks in the red soil. The horizon is slightly hazy. Courtesy NASA/JPL-Caltech.",
                     }[locale]}

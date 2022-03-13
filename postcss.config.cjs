@@ -3,7 +3,6 @@
 //
 // Don't forget to update the PostCSS section in the README.
 //
-//
 module.exports = {
     plugins: {
         tailwindcss: {},

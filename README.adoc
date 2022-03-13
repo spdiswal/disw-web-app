@@ -92,6 +92,8 @@ yarn run develop
 
 Equipped with hot module replacement (HMR), it reflects any changes you make immediately in the web browser.
 
+You can access the development server from other devices on the network using the LAN IP address of your local computer, which is printed in the console upon executing the script above (usually something like `192.168.X.Y`).
+
 [#_validating_the_software_quality]
 === Validating the Software Quality
 To validate the quality of the software:

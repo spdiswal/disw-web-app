@@ -54,10 +54,12 @@ export default defineConfig(({ mode }) => {
             !debugProductionBuild && deleteServerOrientedBuildArtifactPlugin(),
         ],
         server: {
+            host: "0.0.0.0",
             port: 8000,
             strictPort: true,
         },
         preview: {
+            host: "0.0.0.0",
             port: 80,
             strictPort: true,
         },

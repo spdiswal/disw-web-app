@@ -603,6 +603,20 @@ test("The listbox popup disappears when you click outside the listbox.", async (
     expect(listbox.getPopupContainer()).toHaveClass("invisible")
 })
 
+test("The listbox popup disappears when you tap outside the listbox.", async () => {
+    // GIVEN a test subject.
+    const listbox = renderListboxComponentOfAppleCultivars()
+    
+    // GIVEN that the listbox popup is shown.
+    await listbox.clickButton()
+    
+    // WHEN tapping outside the listbox.
+    await listbox.tapOutside()
+    
+    // THEN the listbox popup is hidden.
+    expect(listbox.getPopupContainer()).toHaveClass("invisible")
+})
+
 test("The listbox popup disappears when you press the Enter key while none of the options are highlighted.", async () => {
     // GIVEN a test subject.
     const listbox = renderListboxComponentOfAppleCultivars()
@@ -819,6 +833,10 @@ function renderListboxComponentOfAppleCultivars(options?: {
         await user.click(document.body)
     }
     
+    async function tapOutside() {
+        await user.pointer({ keys: "[TouchA]", target: document.body })
+    }
+    
     function blurWindow() {
         fireEvent.blur(window)
     }
@@ -879,6 +897,7 @@ function renderListboxComponentOfAppleCultivars(options?: {
         clickButton,
         clickPopupBorder,
         clickOutside,
+        tapOutside,
         blurWindow,
         moveCursorOntoOption,
         moveCursorAwayFromOptions,

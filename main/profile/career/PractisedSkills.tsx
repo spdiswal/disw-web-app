@@ -1,5 +1,6 @@
 import { useLocale } from "+i18n"
 import type { ComponentChildren } from "preact"
+import { Subsection } from "../Subsection"
 
 type PractisedSkillsProps = {
     readonly children: ComponentChildren
@@ -11,11 +12,10 @@ export function PractisedSkills({
     const locale = useLocale()
     
     return (
-        <div class="flex flex-col">
-            <h2 class="mb-3 text-xs uppercase tracking-wider">{{ da: "Praktiserede færdigheder", en: "Practised skills" }[locale]}</h2>
-            <span class="flex flex-wrap">
+        <Subsection heading={{ da: "Praktiserede færdigheder", en: "Practised skills" }[locale]}>
+            <span class="flex flex-wrap pt-1">
                 {children}
             </span>
-        </div>
+        </Subsection>
     )
 }

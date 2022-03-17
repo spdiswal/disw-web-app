@@ -16,10 +16,10 @@ export function Footer({
     children,
 }: FooterProps) {
     return (
-        <footer class="mt-48 min-w-screen-xs pb-16 md:mt-64">
+        <footer class="mt-48 min-w-screen-xs px-8 pb-16 md:mt-64">
             <div
                 class={clsx(
-                    "flex flex-col items-center space-y-2 font-light text-neutral-600 dark:text-neutral-300 md:space-y-4",
+                    "flex flex-col items-center space-y-4 font-light text-neutral-600 dark:text-neutral-300",
                     themeSwitchTransitionClasses,
                 )}
             >

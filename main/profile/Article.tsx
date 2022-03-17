@@ -36,7 +36,7 @@ export function Article({
             <div class="md:w-1/2-minus-screen-md-gap lg:w-1/2-minus-screen-lg-gap">{image}</div>
             <div class="md:w-1/2-minus-screen-md-gap lg:w-1/2-minus-screen-lg-gap">
                 {renderHeader(<Bookmark anchorId={id}/>, headerId)}
-                <div class="flex flex-col space-y-12">
+                <div class="flex flex-col space-y-10 pt-2">
                     {children}
                 </div>
             </div>

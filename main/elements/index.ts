@@ -1,6 +1,5 @@
 export * from "./badge"
 export * from "./button"
-export * from "./description-list"
 export * from "./icons"
 export * from "./image"
 export * from "./layout"

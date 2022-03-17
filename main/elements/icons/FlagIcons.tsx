@@ -1,5 +1,26 @@
-type FlagIconUnitedKingdomProps = {
-    readonly class?: string
+import type { IconProps } from "./IconProps"
+
+/**
+ * Pantone PMS 485 C: #da291c (red).
+ *
+ * @see https://flagcolor.com/denmark-flag-colors/
+ */
+export function FlagIconDenmark(props: IconProps) {
+    return (
+        <svg
+            class={props.class}
+            height="24"
+            viewBox="0 0 32 32"
+            aria-hidden="true"
+        >
+            <rect width="32" height="32" fill="#da291c"/>
+            <path
+                stroke="white"
+                stroke-width="5"
+                d="M 0,16 L 32,16 M 13,0 L 13,32"
+            />
+        </svg>
+    )
 }
 
 /**
@@ -8,10 +29,9 @@ type FlagIconUnitedKingdomProps = {
  *
  * @see https://flagcolor.com/british-flag-colors/
  */
-export function FlagIconUnitedKingdom(props: FlagIconUnitedKingdomProps) {
+export function FlagIconUnitedKingdom(props: IconProps) {
     return (
         <svg
-            xmlns="http://www.w3.org/2000/svg"
             class={props.class}
             height="24"
             viewBox="0 0 32 32"

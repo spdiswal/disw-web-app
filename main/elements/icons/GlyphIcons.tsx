@@ -1,10 +1,4 @@
-type GlyphIconGitHubProps = {
-    readonly class?: string
-}
-
 /**
- * GLYPHICONS: `github`.
- *
  * @see https://glyphicons.com/tools/social/
  * @see https://glyphicons.com/license/
  * @see https://github.com/logos
@@ -28,10 +22,12 @@ type GlyphIconGitHubProps = {
  *
  * For more information regarding the authorized uses of these items please contact us.
  */
-export function GlyphIconGitHub(props: GlyphIconGitHubProps) {
+
+import type { IconProps } from "./IconProps"
+
+export function GlyphIconGitHub(props: IconProps) {
     return (
         <svg
-            xmlns="http://www.w3.org/2000/svg"
             class={props.class}
             height="24"
             viewBox="0 0 32 32"

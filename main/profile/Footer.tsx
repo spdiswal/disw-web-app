@@ -1,4 +1,4 @@
-import { defaultFocusOutlineClasses, defaultTransitionClasses, GlyphIconGitHub } from "+elements"
+import { defaultFocusOutlineClasses, themeSwitchTransitionClasses, GlyphIconGitHub } from "+elements"
 import clsx from "clsx"
 import type { ComponentChildren } from "preact"
 
@@ -20,14 +20,14 @@ export function Footer({
             <div
                 class={clsx(
                     "flex flex-col items-center space-y-2 font-light text-neutral-600 dark:text-neutral-300 md:space-y-4",
-                    defaultTransitionClasses,
+                    themeSwitchTransitionClasses,
                 )}
             >
                 <a
                     href={githubUrl}
                     class={clsx(
                         "rounded-full text-neutral-500 dark:text-neutral-400",
-                        defaultTransitionClasses,
+                        themeSwitchTransitionClasses,
                         defaultFocusOutlineClasses,
                     )}
                 >
@@ -35,7 +35,7 @@ export function Footer({
                     <GlyphIconGitHub
                         class={clsx(
                             "h-8 w-8 hover:text-neutral-700 dark:hover:text-neutral-200",
-                            defaultTransitionClasses,
+                            themeSwitchTransitionClasses,
                         )}
                     />
                 </a>

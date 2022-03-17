@@ -2,7 +2,8 @@ import type { ReadonlyNonEmptyArray } from "+types"
 import clsx from "clsx"
 import type { JSX } from "preact"
 import { useRef, useState } from "preact/hooks"
-import { defaultFocusOutlineClasses, defaultTransitionClasses, focusOutlineInsideClasses } from "../constants"
+import { defaultFocusOutlineClasses, focusOutlineInsideClasses } from "../focus-classes"
+import { focusTransitionClasses, visibilityTransitionClasses } from "../transition-classes"
 import { useWindowEvent } from "../useWindowEvent"
 import { ListboxButtonConfigurationProvider } from "./useListboxButtonConfiguration"
 import { ListboxOptionStateProvider } from "./useListboxOptionState"
@@ -69,7 +70,7 @@ export function Listbox<Option extends string>({
                 class={clsx(
                     isPopupOpen ? "visible opacity-100" : "invisible opacity-0",
                     "absolute right-0 z-50 mt-1 max-h-56 w-48 overflow-auto rounded-2xl bg-neutral-100/80 py-2 text-base shadow-lg ring-1 ring-neutral-900/20 backdrop-blur-md focus-visible:outline-none dark:bg-neutral-800/80 dark:ring-white/20 md:text-sm",
-                    defaultTransitionClasses,
+                    visibilityTransitionClasses,
                 )}
             >
                 <ul
@@ -95,8 +96,8 @@ export function Listbox<Option extends string>({
                                     isHighlighted && "bg-accent-600",
                                     defaultFocusOutlineClasses,
                                     focusOutlineInsideClasses,
+                                    focusTransitionClasses,
                                     "cursor-pointer select-none py-2 px-3",
-                                    defaultTransitionClasses,
                                 )}
                                 role="option"
                                 aria-selected={isSelected}

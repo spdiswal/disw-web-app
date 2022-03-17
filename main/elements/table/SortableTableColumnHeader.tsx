@@ -1,7 +1,8 @@
 import clsx from "clsx"
 import type { ComponentChildren } from "preact"
-import { defaultFocusOutlineClasses, defaultTransitionClasses, focusOutlineInsideClasses } from "../constants"
+import { defaultFocusOutlineClasses, focusOutlineInsideClasses } from "../focus-classes"
 import { HeroIconChevronDown, HeroIconChevronUp } from "../icons"
+import { focusTransitionClasses, themeSwitchTransitionClasses } from "../transition-classes"
 import type { SortOrder } from "./useSortableTableRows"
 
 type SortableTableColumnHeaderProps = {
@@ -20,7 +21,7 @@ export function SortableTableColumnHeader({
             scope="col"
             class={clsx(
                 "group pointer-events-none p-0 text-neutral-600 hover:bg-neutral-200 hover:text-neutral-700 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:hover:text-neutral-50",
-                defaultTransitionClasses,
+                themeSwitchTransitionClasses,
             )}
             aria-sort={order}
         >
@@ -30,7 +31,7 @@ export function SortableTableColumnHeader({
                     "pointer-events-auto flex h-full w-full items-center py-3 px-6 text-left font-medium uppercase tracking-wider group-first:focus-visible:rounded-tl-xl group-last:focus-visible:rounded-tr-xl",
                     defaultFocusOutlineClasses,
                     focusOutlineInsideClasses,
-                    defaultTransitionClasses,
+                    focusTransitionClasses,
                 )}
                 onClick={onClick}
             >

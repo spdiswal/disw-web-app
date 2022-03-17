@@ -1,7 +1,7 @@
 import clsx from "clsx"
 import type { ComponentChildren } from "preact"
-import { defaultTransitionClasses } from "../constants"
 import { HeroIconCheck } from "../icons"
+import { focusTransitionClasses } from "../transition-classes"
 import { useListboxOptionState } from "./useListboxOptionState"
 
 type LinearListboxOptionProps = {
@@ -19,7 +19,7 @@ export function LinearListboxOption({
                 isHighlighted && "text-white dark:text-white",
                 isSelected ? "font-bold" : "font-normal",
                 "flex items-center",
-                defaultTransitionClasses,
+                focusTransitionClasses,
             )}
         >
             {children}
@@ -29,7 +29,7 @@ export function LinearListboxOption({
                         class={clsx(
                             isHighlighted ? "text-white" : "text-accent-600 dark:text-accent-500",
                             "h-5 w-5",
-                            defaultTransitionClasses,
+                            focusTransitionClasses,
                         )}
                     />
                 )

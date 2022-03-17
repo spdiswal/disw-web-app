@@ -1,4 +1,4 @@
-import { defaultTransitionClasses } from "+elements"
+import { responsiveTextSizeTransitionClasses, themeSwitchTransitionClasses } from "+elements"
 import { useLocale } from "+i18n"
 import clsx from "clsx"
 
@@ -21,7 +21,7 @@ export function Status({
         <dl
             class={clsx(
                 "flex flex-col space-y-screen-xs rounded-2xl bg-neutral-200 py-screen-xs dark:bg-neutral-800 sm:flex-row sm:justify-evenly sm:space-y-0",
-                defaultTransitionClasses,
+                themeSwitchTransitionClasses,
             )}
         >
             <StatusItem title={{ da: "Alder", en: "Age" }[locale]} value={age}/>
@@ -47,7 +47,7 @@ function StatusItem({
             <dd
                 class={clsx(
                     "font-bold md:text-xl lg:text-2xl",
-                    defaultTransitionClasses,
+                    responsiveTextSizeTransitionClasses,
                 )}
             >
                 {value}

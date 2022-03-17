@@ -1,7 +1,7 @@
 import clsx from "clsx"
 import type { ComponentChildren } from "preact"
 import { useState } from "preact/hooks"
-import { slowestTransitionClasses } from "../constants"
+import { imageTransitionClasses } from "../transition-classes"
 
 type ResponsiveImageProps = {
     readonly class?: string
@@ -27,7 +27,7 @@ export function ResponsiveImage({
                 class={clsx(
                     _class,
                     isLoaded && (isVisible ?? true) ? "visible opacity-100" : "invisible opacity-0",
-                    slowestTransitionClasses,
+                    imageTransitionClasses,
                 )}
                 ref={(imageElement) => {
                     if (imageElement?.complete) {

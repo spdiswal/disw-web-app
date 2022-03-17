@@ -1,4 +1,4 @@
-import { defaultTransitionClasses, ExternalHyperlink } from "+elements"
+import { ExternalHyperlink, responsiveTextSizeTransitionClasses, visibilityTransitionClasses } from "+elements"
 import type { Localisable } from "+i18n"
 import { useLocale } from "+i18n"
 import { Article } from "+profile"
@@ -48,7 +48,7 @@ export function Occupation({
                         <span
                             class={clsx(
                                 "absolute opacity-0 focus-within:opacity-100 group-hover:opacity-100",
-                                defaultTransitionClasses,
+                                visibilityTransitionClasses,
                             )}
                         >
                             {bookmark}
@@ -57,7 +57,7 @@ export function Occupation({
                             id={labelId}
                             class={clsx(
                                 "ml-6 text-2xl font-bold sm:ml-7 md:ml-9 md:text-3xl lg:ml-10",
-                                defaultTransitionClasses,
+                                responsiveTextSizeTransitionClasses,
                             )}
                         >
                             {title}
@@ -88,7 +88,7 @@ function FormattedPeriod({
         <div
             class={clsx(
                 "mb-0.5 ml-6 text-lg font-light sm:ml-7 md:mb-1.5 md:ml-9 md:text-xl lg:ml-10",
-                defaultTransitionClasses,
+                responsiveTextSizeTransitionClasses,
             )}
         >
             <FormattedYearMonth yearMonth={since}/>

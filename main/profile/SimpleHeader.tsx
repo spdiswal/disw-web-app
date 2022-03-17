@@ -1,4 +1,4 @@
-import { defaultTransitionClasses } from "+elements"
+import { responsiveTextSizeTransitionClasses } from "+elements"
 import clsx from "clsx"
 import type { JSX } from "preact"
 
@@ -18,7 +18,7 @@ export function SimpleHeader({
             <span
                 class={clsx(
                     "absolute opacity-0 focus-within:opacity-100 group-hover:opacity-100",
-                    defaultTransitionClasses,
+                    responsiveTextSizeTransitionClasses,
                 )}
             >
                 {bookmark}
@@ -27,7 +27,7 @@ export function SimpleHeader({
                 id={labelId}
                 class={clsx(
                     "ml-6 text-xl font-bold sm:ml-7 md:ml-9 md:text-2xl lg:ml-10 lg:text-3xl",
-                    defaultTransitionClasses,
+                    responsiveTextSizeTransitionClasses,
                 )}
             >
                 {title}

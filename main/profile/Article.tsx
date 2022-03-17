@@ -1,4 +1,4 @@
-import { defaultFocusOutlineClasses, defaultTransitionClasses, HeroIconBookmark } from "+elements"
+import { defaultFocusOutlineClasses, themeSwitchTransitionClasses, HeroIconBookmark } from "+elements"
 import { useLocale } from "+i18n"
 import clsx from "clsx"
 import type { ComponentChildren, JSX } from "preact"
@@ -58,7 +58,7 @@ function Bookmark({
             href={`#${anchorId}`}
             class={clsx(
                 "block rounded-full text-neutral-500 dark:text-neutral-400",
-                defaultTransitionClasses,
+                themeSwitchTransitionClasses,
                 defaultFocusOutlineClasses,
             )}
         >
@@ -66,7 +66,7 @@ function Bookmark({
             <HeroIconBookmark
                 class={clsx(
                     "h-5 w-5 hover:text-neutral-700 dark:hover:text-neutral-200 md:h-6 md:w-6 lg:h-7 lg:w-7",
-                    defaultTransitionClasses,
+                    themeSwitchTransitionClasses,
                 )}
             />
         </a>

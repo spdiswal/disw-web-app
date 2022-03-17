@@ -1,7 +1,7 @@
 import clsx from "clsx"
 import type { ComponentChildren } from "preact"
 import { Fragment } from "preact"
-import { defaultTransitionClasses } from "../constants"
+import { themeSwitchTransitionClasses } from "../transition-classes"
 
 type DescriptionListItemProps = {
     readonly class?: string
@@ -19,7 +19,7 @@ export function DescriptionListItem({
             <dt
                 class={clsx(
                     "font-semibold text-neutral-600 dark:text-neutral-300",
-                    defaultTransitionClasses,
+                    themeSwitchTransitionClasses,
                 )}
             >
                 {title}

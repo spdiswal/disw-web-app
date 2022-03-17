@@ -1,7 +1,7 @@
 import { HeroIconPlus, OpaqueButton } from "+elements"
 import clsx from "clsx"
 import type { ComponentChildren } from "preact"
-import { defaultTransitionClasses } from "../constants"
+import { themeSwitchTransitionClasses } from "../transition-classes"
 
 type ExpandableProps = {
     readonly expandButtonLabel: string
@@ -22,7 +22,7 @@ export function Expandable({
                 <div
                     class={clsx(
                         !isExpanded && "-mx-4 h-40 overflow-y-hidden border-b-2 border-neutral-300 px-4 dark:border-neutral-600 sm:-mx-6 sm:px-6",
-                        defaultTransitionClasses,
+                        themeSwitchTransitionClasses,
                     )}
                 >
                     {children}

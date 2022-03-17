@@ -1,8 +1,9 @@
 import clsx from "clsx"
 import type { ComponentChildren } from "preact"
-import { defaultFocusOutlineClasses, defaultTransitionClasses, focusOutlineInsideClasses } from "../constants"
+import { defaultFocusOutlineClasses, focusOutlineInsideClasses } from "../focus-classes"
 import { useListboxButtonConfiguration } from "../listbox"
-import { commonButtonClasses, transparentButtonClasses } from "./button-constants"
+import { themeSwitchTransitionClasses } from "../transition-classes"
+import { commonButtonClasses, transparentButtonClasses } from "./button-classes"
 
 type HybridButtonProps = {
     readonly class?: string
@@ -33,7 +34,7 @@ export function HybridButton({
                 "md:border md:border-neutral-400 md:bg-neutral-100 md:py-2 md:px-4 md:text-sm md:drop-shadow-sm md:hover:bg-white md:dark:bg-neutral-800 md:dark:hover:bg-neutral-700",
                 defaultFocusOutlineClasses,
                 focusOutlineInsideClasses,
-                defaultTransitionClasses,
+                themeSwitchTransitionClasses,
             )}
             onClick={onClick}
             onKeyDown={handleKeyDown ?? onKeyDown}

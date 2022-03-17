@@ -1,5 +1,5 @@
 import { FooterContent, HeaderContent, MainContent, name } from "+content"
-import { defaultTransitionClasses } from "+elements"
+import { themeSwitchTransitionClasses } from "+elements"
 import type { LocaleCachePort, PreferredLocalePort } from "+i18n"
 import { LocalePicker, LocaleProvider, useLocaleSelection } from "+i18n"
 import type { MediaThemePort, ThemeCachePort } from "+theme"
@@ -39,7 +39,7 @@ export function App({
                     <div
                         class={clsx(
                             "absolute top-4 right-4 z-40 flex items-center justify-end space-x-2 rounded-full bg-neutral-100/95 p-2 shadow-xl ring-1 ring-neutral-900/20 dark:bg-neutral-800/95 dark:ring-white/20 xs:fixed md:space-x-4 md:p-3",
-                            defaultTransitionClasses,
+                            themeSwitchTransitionClasses,
                         )}
                     >
                         <ThemePicker

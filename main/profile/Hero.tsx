@@ -1,4 +1,4 @@
-import { defaultTransitionClasses } from "+elements"
+import { responsiveTextSizeTransitionClasses, themeSwitchTransitionClasses } from "+elements"
 import { useLocale } from "+i18n"
 import clsx from "clsx"
 import type { JSX } from "preact"
@@ -21,13 +21,13 @@ export function Hero({
                 <div
                     class={clsx(
                         "flex flex-col rounded-2xl bg-gradient-to-br from-neutral-500/75 to-neutral-700/75 px-3 py-2 text-center text-white shadow-xl backdrop-blur-sm dark:from-neutral-600/75 dark:to-neutral-800/75 sm:space-y-1 sm:px-4 sm:py-3 md:space-y-1.5 md:px-6 md:py-5 lg:space-y-2 lg:px-8 lg:py-6",
-                        defaultTransitionClasses,
+                        themeSwitchTransitionClasses,
                     )}
                 >
                     <p
                         class={clsx(
                             "whitespace-nowrap text-xl font-semibold sm:text-2xl md:text-3xl",
-                            defaultTransitionClasses,
+                            responsiveTextSizeTransitionClasses,
                         )}
                     >
                         {{ da: "Hej! Jeg hedder", en: "Hi! My name is" }[locale]}
@@ -35,7 +35,7 @@ export function Hero({
                     <p
                         class={clsx(
                             "whitespace-nowrap text-4xl font-black sm:text-5xl md:text-6xl lg:text-7xl",
-                            defaultTransitionClasses,
+                            responsiveTextSizeTransitionClasses,
                         )}
                     >
                         {name}

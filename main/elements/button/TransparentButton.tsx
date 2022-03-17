@@ -1,8 +1,9 @@
 import clsx from "clsx"
 import type { ComponentChildren } from "preact"
-import { defaultFocusOutlineClasses, defaultTransitionClasses, focusOutlineInsideClasses } from "../constants"
+import { defaultFocusOutlineClasses, focusOutlineInsideClasses } from "../focus-classes"
 import { useListboxButtonConfiguration } from "../listbox"
-import { commonButtonClasses, transparentButtonClasses } from "./button-constants"
+import { themeSwitchTransitionClasses } from "../transition-classes"
+import { commonButtonClasses, transparentButtonClasses } from "./button-classes"
 
 type TransparentButtonProps = {
     readonly class?: string
@@ -32,7 +33,7 @@ export function TransparentButton({
                 transparentButtonClasses,
                 defaultFocusOutlineClasses,
                 focusOutlineInsideClasses,
-                defaultTransitionClasses,
+                themeSwitchTransitionClasses,
             )}
             onClick={onClick}
             onKeyDown={handleKeyDown ?? onKeyDown}

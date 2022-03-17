@@ -1,4 +1,4 @@
-import { defaultTransitionClasses } from "+elements"
+import { responsiveTextSizeTransitionClasses } from "+elements"
 import clsx from "clsx"
 import type { ComponentChildren, JSX } from "preact"
 
@@ -23,7 +23,7 @@ export function CareerSection({
                     id={labelId}
                     class={clsx(
                         "mt-2 text-2xl font-light md:mt-4 md:text-4xl",
-                        defaultTransitionClasses,
+                        responsiveTextSizeTransitionClasses,
                     )}
                 >
                     {title}

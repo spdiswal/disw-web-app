@@ -8,7 +8,7 @@ export function Main({
     children,
 }: MainProps) {
     return (
-        <main class="mx-main-xs flex min-w-main-xs-minus-margin max-w-main-xs flex-col space-y-main-2xs sm:mx-auto sm:max-w-main-sm sm:space-y-main-2sm md:mx-main-md md:max-w-main-md md:space-y-main-md lg:mx-auto lg:max-w-main-lg lg:space-y-main-lg">
+        <main class="mx-screen-xs flex min-w-screen-xs-minus-margin max-w-screen-xs flex-col space-y-2x-screen-xs sm:mx-auto sm:max-w-screen-sm sm:space-y-2x-screen-sm md:max-w-screen-md md:space-y-screen-md lg:max-w-screen-lg lg:space-y-screen-lg">
             {children}
         </main>
     )

@@ -17,7 +17,7 @@ export function CareerSection({
 }: CareerSectionProps) {
     return (
         <section aria-labelledby={labelId}>
-            <header class="my-main-2xs flex flex-col items-center sm:my-main-2sm md:my-main-md lg:my-main-lg">
+            <header class="my-2x-screen-xs flex flex-col items-center sm:my-2x-screen-sm md:my-screen-md lg:my-screen-lg">
                 {icon}
                 <h1
                     id={labelId}

@@ -35,7 +35,7 @@ export function App({
     return (
         <ThemeProvider value={appliedTheme}>
             <LocaleProvider value={locale}>
-                <div class="relative min-w-main-xs">
+                <div class="relative min-w-screen-xs">
                     <div
                         class={clsx(
                             "absolute top-4 right-4 z-40 flex items-center justify-end space-x-2 rounded-full bg-neutral-100/95 p-2 shadow-xl ring-1 ring-neutral-900/20 dark:bg-neutral-800/95 dark:ring-white/20 xs:fixed md:space-x-4 md:p-3",

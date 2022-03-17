@@ -2,26 +2,26 @@ import { FooterContent, HeaderContent, MainContent } from "+content"
 import { LocaleProvider } from "+i18n"
 import { render, screen, within } from "@testing-library/preact"
 
-test("The content specifies the source of the portrait.", () => {
+test("The content specifies the fallback source of the hero image.", () => {
     // GIVEN a test subject.
     const content = renderContent()
     
-    // THEN the content specifies the source of the portrait.
-    expect(content.getPortrait()).toHaveAttribute("src", "perseverance-dummy.webp")
+    // THEN the content specifies the fallback source of the hero image.
+    expect(content.getHeroImage()).toHaveAttribute("src", "perseverance-fallback.jpeg")
 })
 
-test("The content specifies the alternative text of the portrait.", () => {
+test("The content specifies the alternative text of the hero image.", () => {
     // GIVEN a test subject.
     const content = renderContent()
     
-    // THEN the content specifies an alternative text of the portrait in Danish.
-    expect(content.getPortrait()).toHaveAttribute("alt", "Mit selvportræt. Jeg har boret to huller i et klippestykke foran mig og lavet hjulspor i det røde sand. Horisonten er en smule diset. Courtesy NASA/JPL-Caltech.")
+    // THEN the content specifies an alternative text of the hero image in Danish.
+    expect(content.getHeroImage()).toHaveAttribute("alt", "Mit selvportræt på Mars. Jeg har boret to huller i et klippestykke foran mig og lavet hjulspor i det røde sand. Horisonten er en smule diset. Courtesy NASA/JPL-Caltech.")
     
     // WHEN changing the locale to English.
     content.changeToEnglishLocale()
     
-    // THEN the content specifies the alternative text of the portrait in English.
-    expect(content.getPortrait()).toHaveAttribute("alt", "My self-portrait. I have drilled two holes in a rock in front of me and made wheel tracks in the red soil. The horizon is slightly hazy. Courtesy NASA/JPL-Caltech.")
+    // THEN the content specifies the alternative text of the hero image in English.
+    expect(content.getHeroImage()).toHaveAttribute("alt", "My self-portrait on Mars. I have drilled two holes in a rock in front of me and made wheel tracks in the red soil. The horizon is slightly hazy. Courtesy NASA/JPL-Caltech.")
 })
 
 test("The content displays a greeting.", () => {
@@ -368,8 +368,17 @@ test("The content specifies a hyperlink to GitHub.", () => {
     const content = renderContent()
     
     // THEN the content specifies a hyperlink to GitHub.
-    expect(within(content.getFooterContent()).getByRole("link"))
+    expect(within(content.getFooterContent()).getByRole("link", { name: "GitHub" }))
         .toHaveAttribute("href", "https://github.com/spdiswal/")
+})
+
+test("The content specifies a hyperlink to the NASA/JPL-Caltech image use policy.", () => {
+    // GIVEN a test subject.
+    const content = renderContent()
+    
+    // THEN the content specifies a hyperlink to the NASA/JPL-Caltech image use policy.
+    expect(within(content.getFooterContent()).getByRole("link", { name: /Fotos:/u }))
+        .toHaveAttribute("href", "https://www.jpl.nasa.gov/jpl-image-use-policy")
 })
 
 function renderContent() {
@@ -389,12 +398,12 @@ function renderContent() {
         return screen.getAllByRole("banner")[0]
     }
     
-    function getMainContent() {
-        return screen.getByRole("main")
+    function getHeroImage() {
+        return within(getHeaderContent()).getByRole("img", { name: /.+/u })
     }
     
-    function getPortrait() {
-        return screen.getByRole("img")
+    function getMainContent() {
+        return screen.getByRole("main")
     }
     
     function getOccupation(title: string) {
@@ -422,8 +431,8 @@ function renderContent() {
     
     return {
         getHeaderContent,
+        getHeroImage,
         getMainContent,
-        getPortrait,
         getOccupation,
         getOccupations,
         getFooterContent,

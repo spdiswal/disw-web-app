@@ -29,12 +29,12 @@ export function Article({
             class={clsx(
                 image && "space-y-8 sm:space-y-12 md:space-y-0",
                 swapped ? "md:flex-row-reverse md:space-x-reverse lg:space-x-reverse" : "md:flex-row",
-                "flex w-full flex-col pt-main-xs sm:pt-main-sm md:space-x-main-md md:pt-main-md lg:space-x-main-lg lg:pt-main-lg",
+                "flex w-full flex-col pt-screen-xs sm:pt-screen-sm md:space-x-screen-md md:pt-screen-md lg:space-x-screen-lg lg:pt-screen-lg",
             )}
             aria-labelledby={headerId}
         >
-            <div class="md:w-1/2-minus-gap-main-md lg:w-1/2-minus-gap-main-lg">{image}</div>
-            <div class="md:w-1/2-minus-gap-main-md lg:w-1/2-minus-gap-main-lg">
+            <div class="md:w-1/2-minus-screen-md-gap lg:w-1/2-minus-screen-lg-gap">{image}</div>
+            <div class="md:w-1/2-minus-screen-md-gap lg:w-1/2-minus-screen-lg-gap">
                 {renderHeader(<Bookmark anchorId={id}/>, headerId)}
                 <div class="flex flex-col space-y-12">
                     {children}

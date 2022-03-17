@@ -41,41 +41,66 @@ yarn install
 
 === Defining a Profile
 A profile describes the content to display in the web app.
+It defines three components: `HeaderContent`, `MainContent`, and `FooterContent`.
+A reference implementation is available in `perserverance-dummy.tsx`.
 
 The `VITE_PROFILE_NAME` environment variable specifies the profile to use.
 It is defined in `.env.development`.
 
-You can create a new profile (e.g. named `my-profile`):
+You can create a new profile:
 
-. In the `main/content` folder, save the portrait as a https://developers.google.com/speed/webp/docs/using[WebP] image file named `my-profile.webp`.
-. In the same folder, create a TypeScript file named `my-profile.tsx` and import the portrait:
+. In the `main/content` folder, create a TypeScript file named e.g. `my-profile.local.tsx` which must export the profile name (to be displayed in the title bar) and three function components:
 +
 ----
-import portraitAssetUrl from "./my-profile.webp"
+import { Hero, Main, Footer } from "+profile"
+
+export const name = "My Profile Name"
+
+export function HeaderContent() {
+    return (
+        <Hero> ... </Hero>
+    )
+}
+
+export function MainContent() {
+    return (
+        <Main> ... </Main>
+    )
+}
+
+export function FooterContent() {
+    return (
+        <Footer> ... </Footer>
+    )
+}
 ----
-. Export a `string` constant named `name` with the name to display in the title bar.
-. Export three function components named `HeaderContent`, `MainContent`, and `FooterContent`, respectively.
-You can use the corresponding `<Hero/>`, `<Main/>`, and `<Footer/>` components from the `+profile` module to define their content.
+. In the `main/content` folder, create a new folder named `assets.local` to contain image assets for the hero and the occupation timeline of the profile page.
+Use the `HeroImage` and `ThemedArticleImage` components to encapsulate the image assets in their own components.
+Provide images in multiple sizes to accommodate responsive design.
+Encode the images as https://developers.google.com/speed/webp/docs/using[WebP] files and provide a https://jpeg.org/jpeg/[JPEG] file as a fallback.
 . In the project root folder, create a new file named `.env.development.local` (or `.env.production.local` when building for production).
-Git will ignore this file.
-Let it override the `VITE_PROFILE_NAME` environment variable to use the new profile:
+Override the `VITE_PROFILE_NAME` environment variable to use the new profile by specifying the name of the TypeScript file without the `.tsx` extension:
 +
 ----
-VITE_PROFILE_NAME=my-profile
+VITE_PROFILE_NAME=my-profile.local
 ----
 
 [IMPORTANT]
 ====
-Git will ignore filenames that contain the substring `.local`.
+The Git repository in this project ignores files and folders whose names contain the substring `.local`.
 Use this to prevent personal information from leaking into the repository.
+For example: `my-profile.local.tsx` and `assets.local`.
+====
 
-For example: `my-profile.local.tsx` and `my-profile.local.webp`.
-
-You must override the `VITE_PROFILE_NAME` environment variable accordingly:
+[TIP]
+====
+When switching between profiles in `.env.development.local`, you may hit this error in the web browser console:
 
 ----
-VITE_PROFILE_NAME=my-profile.local
+Uncaught Error: Hook can only be invoked from render methods.
 ----
+
+You can resolve this error by restarting the development server.
 ====
 
 == Common Work Tasks

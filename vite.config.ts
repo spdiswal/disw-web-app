@@ -64,6 +64,8 @@ export default defineConfig(({ mode }) => {
             strictPort: true,
         },
         build: {
+            assetsInlineLimit: 2048 /* bytes */,
+            chunkSizeWarningLimit: 256 /* kilobytes */,
             emptyOutDir: false, // Overridden by `--emptyOutDir` when making a server-oriented build.
             outDir: path(relativeOutputFolder),
             minify: !debugProductionBuild,

@@ -1,8 +1,8 @@
-import { Prose } from "+elements"
+import { ExternalHyperlink, Prose } from "+elements"
 import { useLocale } from "+i18n"
 import type { Organisation } from "+profile"
 import { Article, Education, Employments, Footer, Hero, Main, Occupation, SimpleHeader, Status } from "+profile"
-import heroWebp from "./perseverance-dummy.webp"
+import { JezeroArticleImage, PerseveranceHeroImage } from "./assets"
 
 export const name = "Perseverance"
 
@@ -12,20 +12,9 @@ const nasa: Organisation = {
 }
 
 export function HeaderContent() {
-    const locale = useLocale()
-    
     return (
         <Hero
-            background={
-                <img
-                    class="pointer-events-none relative select-none"
-                    src={heroWebp}
-                    alt={{
-                        da: "Mit selvportræt. Jeg har boret to huller i et klippestykke foran mig og lavet hjulspor i det røde sand. Horisonten er en smule diset. Courtesy NASA/JPL-Caltech.",
-                        en: "My self-portrait. I have drilled two holes in a rock in front of me and made wheel tracks in the red soil. The horizon is slightly hazy. Courtesy NASA/JPL-Caltech.",
-                    }[locale]}
-                />
-            }
+            background={<PerseveranceHeroImage/>}
             name={name}
         />
     )
@@ -80,7 +69,7 @@ export function MainContent() {
                     periods={[
                         { since: "2021-12", until: null },
                     ]}
-                    image={<div/>}
+                    image={<JezeroArticleImage/>}
                 >
                     <Prose>
                         <p>
@@ -128,7 +117,7 @@ export function MainContent() {
                     periods={[
                         { since: "2021-03", until: "2021-10" },
                     ]}
-                    image={<div/>}
+                    image={<JezeroArticleImage/>}
                     swapped
                 >
                     <Prose>
@@ -162,7 +151,7 @@ export function MainContent() {
                     periods={[
                         { since: "2020-08", until: "2021-02" },
                     ]}
-                    image={<div/>}
+                    image={<JezeroArticleImage/>}
                 >
                     <Prose>
                         <p>
@@ -200,7 +189,7 @@ export function MainContent() {
                     periods={[
                         { since: "2017-09", until: "2020-06" },
                     ]}
-                    image={<div/>}
+                    image={<JezeroArticleImage/>}
                     swapped
                 >
                     <Prose>
@@ -231,7 +220,7 @@ export function MainContent() {
                     periods={[
                         { since: "2013-07", until: "2017-05" },
                     ]}
-                    image={<div/>}
+                    image={<JezeroArticleImage/>}
                 >
                     <Prose>
                         <p>
@@ -260,10 +249,19 @@ export function MainContent() {
 }
 
 export function FooterContent() {
+    const locale = useLocale()
+    
     return (
         <Footer
             copyrightOwner="The Perseverance Dummy Profile"
             githubUrl="https://github.com/spdiswal/"
-        />
+        >
+            <ExternalHyperlink url="https://www.jpl.nasa.gov/jpl-image-use-policy">
+                {{
+                    da: "Fotos: Courtesy NASA/JPL-Caltech/ASU/MSSS.",
+                    en: "Photos: Courtesy NASA/JPL-Caltech/ASU/MSSS.",
+                }[locale]}
+            </ExternalHyperlink>
+        </Footer>
     )
 }

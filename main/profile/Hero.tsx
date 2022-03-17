@@ -15,10 +15,8 @@ export function Hero({
     const locale = useLocale()
     
     return (
-        <header class="relative flex min-w-main-xs flex-col items-center md:justify-center lg:mx-auto lg:max-w-main-xl">
-            <div class="max-h-120 overflow-hidden sm:max-h-160 md:max-h-120 lg:max-h-160">
-                {background}
-            </div>
+        <header class="relative flex min-w-screen-xs flex-col items-center md:justify-center lg:mx-auto lg:max-w-screen-2xl">
+            {background}
             <div class="absolute bottom-8 z-10 flex flex-col items-center sm:bottom-16 md:bottom-auto md:right-16 lg:right-32">
                 <div
                     class={clsx(

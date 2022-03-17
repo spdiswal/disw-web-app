@@ -1,2 +1,2 @@
-export * from "./ThemeAwarePicture"
+export * from "./ProgressiveThemedImage"
 export * from "./ThemePicker"

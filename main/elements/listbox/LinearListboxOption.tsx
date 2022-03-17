@@ -27,7 +27,7 @@ export function LinearListboxOption({
                 ? (
                     <HeroIconCheck
                         class={clsx(
-                            isHighlighted ? "text-white" : "text-accent-600 dark:text-accent-500",
+                            isHighlighted ? "text-white" : "text-primary-600 dark:text-primary-500",
                             "h-5 w-5",
                             focusTransitionClasses,
                         )}

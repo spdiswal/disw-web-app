@@ -18,8 +18,8 @@ const caption: Readonly<Record<ThemeSelection, Localisable<string>>> = {
 }
 
 const highlightedIcon: Readonly<Record<Theme, JSX.Element>> = {
-    dark: <HeroIconMoon class="h-5 w-5 shrink-0 rounded-full text-primary-500"/>,
-    light: <HeroIconSun class="h-5 w-5 shrink-0 rounded-full text-primary-500"/>,
+    dark: <HeroIconMoon class="h-5 w-5 shrink-0 rounded-full text-accent-theme-500"/>,
+    light: <HeroIconSun class="h-5 w-5 shrink-0 rounded-full text-accent-theme-500"/>,
 }
 
 const icon: Readonly<Record<ThemeSelection, JSX.Element>> = {

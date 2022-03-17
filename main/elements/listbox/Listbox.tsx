@@ -93,7 +93,7 @@ export function Listbox<Option extends string>({
                                 key={option}
                                 id={optionId}
                                 class={clsx(
-                                    isHighlighted && "bg-accent-600",
+                                    isHighlighted && "bg-primary-600",
                                     defaultFocusOutlineClasses,
                                     focusOutlineInsideClasses,
                                     focusTransitionClasses,

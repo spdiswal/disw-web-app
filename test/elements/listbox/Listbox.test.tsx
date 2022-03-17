@@ -18,6 +18,8 @@ const secondAppleCultivar = appleCultivars[1]
 const secondToLastAppleCultivar = appleCultivars[appleCultivars.length - 2]
 const lastAppleCultivar = appleCultivars[appleCultivars.length - 1]
 
+const highlightingClass = "bg-primary-600"
+
 test("The listbox button has an accessibility label.", () => {
     // GIVEN a test subject.
     const listbox = renderListboxComponentOfAppleCultivars()
@@ -123,11 +125,11 @@ test("The selected option is highlighted as the listbox popup appears.", async (
     
     // THEN the selected option is highlighted.
     const highlightedOption = listbox.getOption("crimson-delight")
-    expect(highlightedOption).toHaveClass("bg-accent-600")
+    expect(highlightedOption).toHaveClass(highlightingClass)
     
     // AND none of the other options are highlighted.
     for (const option of listbox.getOptionsExcept(highlightedOption)) {
-        expect(option).not.toHaveClass("bg-accent-600")
+        expect(option).not.toHaveClass(highlightingClass)
     }
     
     // AND the active descendant of the listbox popup is the highlighted option.
@@ -154,11 +156,11 @@ test("The listbox popup appears and the selected option is highlighted when you 
     
     // AND the selected option is highlighted.
     const highlightedOption = listbox.getOption("belle-de-boskoop")
-    expect(highlightedOption).toHaveClass("bg-accent-600")
+    expect(highlightedOption).toHaveClass(highlightingClass)
     
     // AND none of the other options are highlighted.
     for (const option of listbox.getOptionsExcept(highlightedOption)) {
-        expect(option).not.toHaveClass("bg-accent-600")
+        expect(option).not.toHaveClass(highlightingClass)
     }
     
     // AND the active descendant of the listbox popup is the highlighted option.
@@ -185,11 +187,11 @@ test("The listbox popup appears and the selected option is highlighted when you 
     
     // AND the selected option is highlighted.
     const highlightedOption = listbox.getOption("golden-delicious")
-    expect(highlightedOption).toHaveClass("bg-accent-600")
+    expect(highlightedOption).toHaveClass(highlightingClass)
     
     // AND none of the other options are highlighted.
     for (const option of listbox.getOptionsExcept(highlightedOption)) {
-        expect(option).not.toHaveClass("bg-accent-600")
+        expect(option).not.toHaveClass(highlightingClass)
     }
     
     // AND the active descendant of the listbox popup is the highlighted option.
@@ -208,11 +210,11 @@ test("An option is highlighted when you move the cursor onto it.", async () => {
     
     // THEN the hovered option is highlighted.
     const highlightedOption = listbox.getOption("golden-delicious")
-    expect(highlightedOption).toHaveClass("bg-accent-600")
+    expect(highlightedOption).toHaveClass(highlightingClass)
     
     // AND none of the other options are highlighted.
     for (const option of listbox.getOptionsExcept(highlightedOption)) {
-        expect(option).not.toHaveClass("bg-accent-600")
+        expect(option).not.toHaveClass(highlightingClass)
     }
     
     // AND the active descendant of the listbox popup is the highlighted option.
@@ -234,7 +236,7 @@ test("None of the options are highlighted when you move the cursor outside the l
     
     // THEN none of the options are highlighted.
     for (const option of listbox.getOptions()) {
-        expect(option).not.toHaveClass("bg-accent-600")
+        expect(option).not.toHaveClass(highlightingClass)
     }
     
     // AND the listbox popup has no active descendant.
@@ -261,11 +263,11 @@ test("The listbox popup appears and the selected option is highlighted when you 
     
     // AND the selected option is highlighted.
     const highlightedOption = listbox.getOption("belle-de-boskoop")
-    expect(highlightedOption).toHaveClass("bg-accent-600")
+    expect(highlightedOption).toHaveClass(highlightingClass)
     
     // AND none of the other options are highlighted.
     for (const option of listbox.getOptionsExcept(highlightedOption)) {
-        expect(option).not.toHaveClass("bg-accent-600")
+        expect(option).not.toHaveClass(highlightingClass)
     }
     
     // AND the active descendant of the listbox popup is the highlighted option.
@@ -290,11 +292,11 @@ test("The first option is highlighted when you press the Arrow Down while none o
     
     // THEN the first option is highlighted.
     const highlightedOption = listbox.getOption(firstAppleCultivar)
-    expect(highlightedOption).toHaveClass("bg-accent-600")
+    expect(highlightedOption).toHaveClass(highlightingClass)
     
     // AND none of the other options are highlighted.
     for (const option of listbox.getOptionsExcept(highlightedOption)) {
-        expect(option).not.toHaveClass("bg-accent-600")
+        expect(option).not.toHaveClass(highlightingClass)
     }
     
     // AND the active descendant of the listbox popup is the highlighted option.
@@ -316,11 +318,11 @@ test("The next option is highlighted when you press the Arrow Down key.", async 
     
     // THEN the second option is highlighted.
     const highlightedOption = listbox.getOption(secondAppleCultivar)
-    expect(highlightedOption).toHaveClass("bg-accent-600")
+    expect(highlightedOption).toHaveClass(highlightingClass)
     
     // AND none of the other options are highlighted.
     for (const option of listbox.getOptionsExcept(highlightedOption)) {
-        expect(option).not.toHaveClass("bg-accent-600")
+        expect(option).not.toHaveClass(highlightingClass)
     }
     
     // AND the active descendant of the listbox popup is the highlighted option.
@@ -342,11 +344,11 @@ test("The first option is highlighted when you press the Arrow Down key while th
     
     // THEN the first option is highlighted.
     const highlightedOption = listbox.getOption(firstAppleCultivar)
-    expect(highlightedOption).toHaveClass("bg-accent-600")
+    expect(highlightedOption).toHaveClass(highlightingClass)
     
     // AND none of the other options are highlighted.
     for (const option of listbox.getOptionsExcept(highlightedOption)) {
-        expect(option).not.toHaveClass("bg-accent-600")
+        expect(option).not.toHaveClass(highlightingClass)
     }
     
     // AND the active descendant of the listbox popup is the highlighted option.
@@ -373,11 +375,11 @@ test("The listbox popup appears and the selected option is highlighted when you 
     
     // AND the selected option is highlighted.
     const highlightedOption = listbox.getOption("royal-gala")
-    expect(highlightedOption).toHaveClass("bg-accent-600")
+    expect(highlightedOption).toHaveClass(highlightingClass)
     
     // AND none of the other options are highlighted.
     for (const option of listbox.getOptionsExcept(highlightedOption)) {
-        expect(option).not.toHaveClass("bg-accent-600")
+        expect(option).not.toHaveClass(highlightingClass)
     }
     
     // AND the active descendant of the listbox popup is the highlighted option.
@@ -402,11 +404,11 @@ test("The last option is highlighted when you press the Arrow Up while none of t
     
     // THEN the last option is highlighted.
     const highlightedOption = listbox.getOption(lastAppleCultivar)
-    expect(highlightedOption).toHaveClass("bg-accent-600")
+    expect(highlightedOption).toHaveClass(highlightingClass)
     
     // AND none of the other options are highlighted.
     for (const option of listbox.getOptionsExcept(highlightedOption)) {
-        expect(option).not.toHaveClass("bg-accent-600")
+        expect(option).not.toHaveClass(highlightingClass)
     }
     
     // AND the active descendant of the listbox popup is the highlighted option.
@@ -428,11 +430,11 @@ test("The previous option is highlighted when you press the Arrow Up key.", asyn
     
     // THEN the second to last option is highlighted.
     const highlightedOption = listbox.getOption(secondToLastAppleCultivar)
-    expect(highlightedOption).toHaveClass("bg-accent-600")
+    expect(highlightedOption).toHaveClass(highlightingClass)
     
     // AND none of the other options are highlighted.
     for (const option of listbox.getOptionsExcept(highlightedOption)) {
-        expect(option).not.toHaveClass("bg-accent-600")
+        expect(option).not.toHaveClass(highlightingClass)
     }
     
     // AND the active descendant of the listbox popup is the highlighted option.
@@ -454,11 +456,11 @@ test("The last option is highlighted when you press the Arrow Up key while the f
     
     // THEN the last option is highlighted.
     const highlightedOption = listbox.getOption(lastAppleCultivar)
-    expect(highlightedOption).toHaveClass("bg-accent-600")
+    expect(highlightedOption).toHaveClass(highlightingClass)
     
     // AND none of the other options are highlighted.
     for (const option of listbox.getOptionsExcept(highlightedOption)) {
-        expect(option).not.toHaveClass("bg-accent-600")
+        expect(option).not.toHaveClass(highlightingClass)
     }
     
     // AND the active descendant of the listbox popup is the highlighted option.

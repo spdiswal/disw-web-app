@@ -17,11 +17,11 @@ module.exports = {
     darkMode: "class",
     theme: {
         colors: {
-            "accent": colors.blue,
-            "neutral": colors.slate,
-            "primary": colors.orange,
-            "warning": colors.amber,
             "white": colors.white,
+            "neutral": colors.slate,
+            "primary": colors.blue,
+            "accent-theme": colors.orange,
+            "warning": colors.amber,
         },
         screens: {
             // Breakpoints are defined by 'rem' units instead of 'px' units to

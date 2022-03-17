@@ -5,6 +5,7 @@ import { Article, Education, Employments, Footer, Hero, Main, Occupation, Simple
 import { JezeroArticleImage, PerseveranceHeroImage } from "./assets"
 
 export const name = "Perseverance"
+export const description = "An astrobiologist on Mars, deployed at the Jezero Crater to collect rock and soil samples and to search for signs of past life."
 
 const nasa: Organisation = {
     name: "NASA",

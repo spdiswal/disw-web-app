@@ -1,5 +1,5 @@
 import { dummyLocaleCachePort, dummyPreferredLocalePort } from "+i18n"
-import { name } from "+content"
+import { name, description } from "+content"
 import { dummyMediaThemePort, dummyThemeCachePort } from "+theme"
 import { renderToString } from "preact-render-to-string"
 import type { TailwindColorGroup, TailwindConfig } from "tailwindcss/tailwind-config"
@@ -35,6 +35,10 @@ export function substituteHtmlFragments(
         tailwindConfig.theme.colors.neutral
     
     const fragmentsToSubstitute = [
+        {
+            placeholderToReplace: "<!-- [main-server.tsx fragment: meta-description] -->",
+            fragmentToInsert: `<meta name="description" content="${description}"/>`,
+        },
         {
             placeholderToReplace: "<!-- [main-server.tsx fragment: prevent-flash-of-unstyled-content] -->",
             fragmentToInsert: `

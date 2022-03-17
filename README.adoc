@@ -49,12 +49,13 @@ It is defined in `.env.development`.
 
 You can create a new profile:
 
-. In the `main/content` folder, create a TypeScript file named e.g. `my-profile.local.tsx` which must export the profile name (to be displayed in the title bar) and three function components:
+. In the `main/content` folder, create a TypeScript file named e.g. `my-profile.local.tsx` which must export the name to be displayed in the title bar, a description for search engines and web browsers, and three function components:
 +
 ----
 import { Hero, Main, Footer } from "+profile"
 
 export const name = "My Profile Name"
+export const description = "An accurate summary of the page content."
 
 export function HeaderContent() {
     return (

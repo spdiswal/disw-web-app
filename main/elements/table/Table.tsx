@@ -49,7 +49,7 @@ export function Table<Column extends string, Row extends string>({
                         <tr
                             key={row}
                             class={clsx(
-                                "odd:bg-white even:bg-neutral-50 dark:odd:bg-neutral-700 dark:even:bg-neutral-800",
+                                "odd:bg-white even:bg-neutral-100 dark:odd:bg-neutral-700 dark:even:bg-neutral-800",
                                 themeSwitchTransitionClasses,
                             )}
                         >

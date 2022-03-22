@@ -40,7 +40,7 @@ export function Occupation({
             id={id}
             image={image}
             renderHeader={(bookmark, labelId) => (
-                <header class="mb-4 -ml-6 sm:-ml-7 md:mb-6 md:-ml-9 lg:mb-8 lg:-ml-10">
+                <header class="mb-4 -ml-6 sm:-ml-7 md:-ml-9 lg:-ml-10">
                     {periods.map((period) => (
                         <FormattedPeriod key={period.since} period={period}/>
                     ))}

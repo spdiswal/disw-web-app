@@ -1,5 +1,6 @@
-import { atLeastExtraLargeScreen, atLeastMediumScreen, atLeastSmallScreen, convertToSourceSet, portraitHeroImageSizeHint, standardHeroImageSizeHint, ultraWideHeroImageSizeHint, WebpImageSource, wideHeroImageSizeHint } from "+elements"
+import { atLeastExtraLargeScreen, atLeastMediumScreen, atLeastSmallScreen, atMostExtraSmallScreen, atMostLargeScreen, atMostSmallScreen, convertToSourceSet, portraitHeroImageSizeHint, standardHeroImageSizeHint, ultraWideHeroImageSizeHint, WebpImageSource, wideHeroImageSizeHint } from "+elements"
 import { useLocale } from "+i18n"
+import type { ImageAssetToPreload } from "+profile"
 import { HeroImage } from "+profile"
 import { Fragment } from "preact"
 import fallbackJpeg from "./perseverance-fallback.jpeg"
@@ -56,6 +57,37 @@ const ultraWideSourceSet = convertToSourceSet({
     1760: ultraWideWebp1760w,
     1920: ultraWideWebp1920w,
 })
+
+export const preloadedPerseveranceHeroImageSources: ReadonlyArray<ImageAssetToPreload> = [
+    {
+        contentType: "image",
+        condition: atMostExtraSmallScreen,
+        fallbackUrl: fallbackJpeg,
+        sourceSet: portraitSourceSet,
+        sizeHint: portraitHeroImageSizeHint,
+    },
+    {
+        contentType: "image",
+        condition: `${atLeastSmallScreen} and ${atMostSmallScreen}`,
+        fallbackUrl: fallbackJpeg,
+        sourceSet: standardSourceSet,
+        sizeHint: standardHeroImageSizeHint,
+    },
+    {
+        contentType: "image",
+        condition: `${atLeastMediumScreen} and ${atMostLargeScreen}`,
+        fallbackUrl: fallbackJpeg,
+        sourceSet: wideSourceSet,
+        sizeHint: wideHeroImageSizeHint,
+    },
+    {
+        contentType: "image",
+        condition: atLeastExtraLargeScreen,
+        fallbackUrl: fallbackJpeg,
+        sourceSet: ultraWideSourceSet,
+        sizeHint: ultraWideHeroImageSizeHint,
+    },
+]
 
 export function PerseveranceHeroImage() {
     const locale = useLocale()

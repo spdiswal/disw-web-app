@@ -1,11 +1,15 @@
 import { ExternalHyperlink, Prose } from "+elements"
 import { useLocale } from "+i18n"
-import type { Organisation } from "+profile"
+import type { AssetToPreload, Organisation } from "+profile"
 import { Article, Education, Employments, Footer, Hero, Main, Occupation, SimpleHeader, Status } from "+profile"
-import { JezeroArticleImage, PerseveranceHeroImage } from "./assets"
+import { JezeroArticleImage, PerseveranceHeroImage, preloadedPerseveranceHeroImageSources } from "./assets"
 
 export const name = "Perseverance"
 export const description = "An astrobiologist on Mars, deployed at the Jezero Crater to collect rock and soil samples and to search for signs of past life."
+
+export const assetsToPreload: ReadonlyArray<AssetToPreload> = [
+    ...preloadedPerseveranceHeroImageSources,
+]
 
 const nasa: Organisation = {
     name: "NASA",

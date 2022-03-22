@@ -1,12 +1,14 @@
 import type { Flavour } from "+types"
 
 type WebpImageSourceProps = {
-    readonly sourceSet: SourceSet
-    readonly sizeHint: SizeHint
-    readonly condition?: Condition
+    readonly sourceSet: ImageSourceSourceSet
+    readonly sizeHint: ImageSourceSizeHint
+    readonly condition?: ImageSourceCondition
 }
 
-export function convertToSourceSet(assets: PredefinedImageAssets): SourceSet {
+export function convertToSourceSet(
+    assets: PredefinedImageAssets,
+): ImageSourceSourceSet {
     return Object.entries(assets)
         .map(([width, asset]) => `${asset} ${width}w`)
         .join(",")
@@ -64,25 +66,28 @@ type PredefinedArticleImageWidth =
     | /* High pixel density counterparts: */ 800 | 1040 | 1280 | 1520
 
 // See `maxWidth` in `tailwind.config.cjs`.
-export const portraitHeroImageSizeHint: SizeHint = "100vw"
-export const standardHeroImageSizeHint: SizeHint = "100vw"
-export const wideHeroImageSizeHint: SizeHint = "100vw"
-export const ultraWideHeroImageSizeHint: SizeHint = "max(120rem, 100vw)"
+export const portraitHeroImageSizeHint: ImageSourceSizeHint = "100vw"
+export const standardHeroImageSizeHint: ImageSourceSizeHint = "100vw"
+export const wideHeroImageSizeHint: ImageSourceSizeHint = "100vw"
+export const ultraWideHeroImageSizeHint: ImageSourceSizeHint = "max(120rem, 100vw)"
 
 // See `maxWidth` and `width` in `tailwind.config.cjs`.
-export const articleImageSizeHint: SizeHint =
+export const articleImageSizeHint: ImageSourceSizeHint =
     /*    lg: */ "(min-width: 80rem) calc(50% - 1/2*(5rem)),"
     + /*  md: */ "(min-width: 60rem) calc(50% - 1/2*(4rem)),"
     + /*  sm: */ "(min-width: 40rem) min(calc(1/2*(100rem - 5rem)), calc(100vw - 2*3rem)),"
     + /*  xs: */ "calc(100vw - 2*2rem)"
 
-export const atLeastExtraLargeScreen: Condition = "(min-width: 100rem)"
-export const atLeastMediumScreen: Condition = "(min-width: 60rem)"
-export const atLeastSmallScreen: Condition = "(min-width: 40rem)"
+export const atLeastExtraLargeScreen: ImageSourceCondition = "(min-width: 100rem)"
+export const atMostLargeScreen: ImageSourceCondition = "(max-width: 99.99rem)"
+export const atLeastMediumScreen: ImageSourceCondition = "(min-width: 60rem)"
+export const atMostSmallScreen: ImageSourceCondition = "(max-width: 59.99rem)"
+export const atLeastSmallScreen: ImageSourceCondition = "(min-width: 40rem)"
+export const atMostExtraSmallScreen: ImageSourceCondition = "(max-width: 39.99rem)"
 
-type SourceSet = string & Flavour<"SourceSet">
-type SizeHint = string & Flavour<"SizeHint">
-type Condition = string & Flavour<"Condition">
+export type ImageSourceSourceSet = string & Flavour<"SourceSet">
+export type ImageSourceSizeHint = string & Flavour<"SizeHint">
+export type ImageSourceCondition = string & Flavour<"Condition">
 
 export function WebpImageSource({
     sourceSet,

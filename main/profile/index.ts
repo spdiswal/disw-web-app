@@ -1,5 +1,6 @@
 export * from "./career"
 export * from "./Article"
+export * from "./AssetToPreload"
 export * from "./Footer"
 export * from "./Hero"
 export * from "./HeroImage"

@@ -1,5 +1,6 @@
+import { assetsToPreload, description, name } from "+content"
 import { dummyLocaleCachePort, dummyPreferredLocalePort } from "+i18n"
-import { name, description } from "+content"
+import { convertToLinkElement } from "+profile"
 import { dummyMediaThemePort, dummyThemeCachePort } from "+theme"
 import { renderToString } from "preact-render-to-string"
 import type { TailwindColorGroup, TailwindConfig } from "tailwindcss/tailwind-config"
@@ -38,6 +39,10 @@ export function substituteHtmlFragments(
         {
             placeholderToReplace: "<!-- [main-server.tsx fragment: meta-description] -->",
             fragmentToInsert: `<meta name="description" content="${description}"/>`,
+        },
+        {
+            placeholderToReplace: "<!-- [main-server.tsx fragment: preload-assets] -->",
+            fragmentToInsert: assetsToPreload.map(convertToLinkElement).join("\n"),
         },
         {
             placeholderToReplace: "<!-- [main-server.tsx fragment: prevent-flash-of-unstyled-content] -->",

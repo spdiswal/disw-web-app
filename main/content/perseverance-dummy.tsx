@@ -1,8 +1,8 @@
 import { ExternalHyperlink, Prose } from "+elements"
 import { useLocale } from "+i18n"
-import type { AssetToPreload, Organisation } from "+profile"
+import type { AssetToPreload, Favicon, Organisation } from "+profile"
 import { Article, Education, Employments, Footer, Hero, Main, Occupation, SimpleHeader, Status } from "+profile"
-import { JezeroArticleImage, PerseveranceHeroImage, preloadedPerseveranceHeroImageSources } from "./assets"
+import { favicon16w, favicon32w, JezeroArticleImage, PerseveranceHeroImage, preloadedPerseveranceHeroImageSources } from "./assets"
 
 export const name = "Perseverance"
 export const description = "An astrobiologist on Mars, deployed at the Jezero Crater to collect rock and soil samples and to search for signs of past life."
@@ -10,6 +10,11 @@ export const description = "An astrobiologist on Mars, deployed at the Jezero Cr
 export const assetsToPreload: ReadonlyArray<AssetToPreload> = [
     ...preloadedPerseveranceHeroImageSources,
 ]
+
+export const favicon: Favicon = {
+    16: favicon16w,
+    32: favicon32w,
+}
 
 const nasa: Organisation = {
     name: "NASA",

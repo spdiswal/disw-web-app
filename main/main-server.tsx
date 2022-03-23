@@ -1,4 +1,4 @@
-import { assetsToPreload, description, name } from "+content"
+import { assetsToPreload, description, favicon, name } from "+content"
 import { dummyLocaleCachePort, dummyPreferredLocalePort } from "+i18n"
 import { convertToLinkElement } from "+profile"
 import { dummyMediaThemePort, dummyThemeCachePort } from "+theme"
@@ -29,11 +29,16 @@ export function substituteHtmlFragments(
 ): string {
     // The TypeScript and ESLint warnings must be suppressed because the static
     // type of the Tailwind CSS configuration does not expose custom colour
-    // groups such as `neutral`.
+    // groups such as `neutral` and `primary`.
     const tailwindNeutralColourGroup: TailwindColorGroup = // eslint-disable-line @typescript-eslint/no-unsafe-assignment
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         tailwindConfig.theme.colors.neutral
+    
+    const tailwindPrimaryColourGroup: TailwindColorGroup = // eslint-disable-line @typescript-eslint/no-unsafe-assignment
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        tailwindConfig.theme.colors.primary
     
     const fragmentsToSubstitute = [
         {
@@ -41,8 +46,19 @@ export function substituteHtmlFragments(
             fragmentToInsert: `<meta name="description" content="${description}"/>`,
         },
         {
+            placeholderToReplace: "<!-- [main-server.tsx fragment: meta-theme-color] -->",
+            fragmentToInsert: `<meta name="theme-color" content="${tailwindPrimaryColourGroup["600"]}">`,
+        },
+        {
             placeholderToReplace: "<!-- [main-server.tsx fragment: preload-assets] -->",
             fragmentToInsert: assetsToPreload.map(convertToLinkElement).join("\n"),
+        },
+        {
+            placeholderToReplace: "<!-- [main-server.tsx fragment: favicon] -->",
+            fragmentToInsert: `
+                <link rel="icon" type="image/png" sizes="16x16" href="${favicon["16"]}"/>
+                <link rel="icon" type="image/png" sizes="32x32" href="${favicon["32"]}"/>
+            `,
         },
         {
             placeholderToReplace: "<!-- [main-server.tsx fragment: prevent-flash-of-unstyled-content] -->",

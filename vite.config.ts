@@ -1,9 +1,11 @@
 import preactPlugin from "@preact/preset-vite"
-import { unlinkSync } from "fs"
+import { createReadStream, createWriteStream } from "fs"
+import { readdir, stat, unlink } from "fs/promises"
 import { minify as minifyHtml } from "html-minifier-terser"
-import { basename, extname, resolve as resolvePath } from "path"
+import { join as joinPath, resolve as resolvePath } from "path"
 import type { ConfigEnv, Plugin, UserConfig } from "vite"
 import { defineConfig, loadEnv } from "vite"
+import { createBrotliCompress } from "zlib"
 import type * as MainServerTsx from "./main/main-server"
 import tailwindConfig from "./tailwind.config.cjs"
 
@@ -52,6 +54,7 @@ export default defineConfig(({ mode }) => {
             }),
             !debugProductionBuild && minifyIndexHtmlPlugin(),
             !debugProductionBuild && deleteServerOrientedBuildArtifactPlugin(),
+            !debugProductionBuild && compressBuildArtifactsPlugin(),
         ],
         server: {
             host: "0.0.0.0",
@@ -66,17 +69,10 @@ export default defineConfig(({ mode }) => {
         build: {
             assetsInlineLimit: 2048 /* bytes */,
             chunkSizeWarningLimit: 256 /* kilobytes */,
+            reportCompressedSize: false,
             emptyOutDir: false, // Overridden by `--emptyOutDir` when making a server-oriented build.
             outDir: path(relativeOutputFolder),
             minify: !debugProductionBuild,
-            rollupOptions: {
-                output: {
-                    // Read more:
-                    // https://rollupjs.org/guide/en/#outputassetfilenames
-                    //
-                    assetFileNames: stripEmittedAssetFilenamesOfLocalSubstring,
-                },
-            },
         },
         ssr: {
             noExternal: true,
@@ -147,10 +143,52 @@ function deleteServerOrientedBuildArtifactPlugin(): Plugin {
     return {
         name: "delete-server-oriented-build-artifact",
         apply: isClientOrientedProductionBuild,
-        closeBundle: () => {
-            unlinkSync(path(relativeServerOrientedBuild))
+        closeBundle: async () => {
+            await unlink(path(relativeServerOrientedBuild))
         },
     }
+}
+
+/**
+ * Generates a Brotli-compressed file (with the `.br` extension) of every
+ * `.css`, `.html`, and `.js` file in the production distribution.
+ */
+function compressBuildArtifactsPlugin(): Plugin {
+    let outputFolder: string
+    
+    return {
+        name: "compress-build-artifacts",
+        apply: isClientOrientedProductionBuild,
+        configResolved: (config) => {
+            outputFolder = config.build.outDir
+        },
+        closeBundle: async () => {
+            const outputFiles = await listAllFilesRecursively(outputFolder)
+            
+            for (const outputFile of outputFiles) {
+                if (isCompressible(outputFile)) {
+                    await compressFile(outputFile)
+                }
+            }
+        },
+    }
+}
+
+function isCompressible(fileName: string): boolean {
+    return fileName.endsWith(".css")
+        || fileName.endsWith(".html")
+        || fileName.endsWith(".js")
+}
+
+async function compressFile(fileToCompress: string): Promise<void> {
+    return new Promise<void>((resolve) => {
+        const readStream = createReadStream(fileToCompress)
+        const writeStream = createWriteStream(`${fileToCompress}.br`)
+        
+        const brotli = createBrotliCompress()
+        const compressStream = readStream.pipe(brotli).pipe(writeStream)
+        compressStream.on("finish", resolve)
+    })
 }
 
 function isClientOrientedProductionBuild(
@@ -165,22 +203,18 @@ function path(relativeToProjectRoot: string): string {
     return resolvePath(__dirname, relativeToProjectRoot)
 }
 
-/**
- * Removes the `.local` substring from the emitted asset filenames.
- */
-function stripEmittedAssetFilenamesOfLocalSubstring(
-    assetInfo: { name?: string },
-): string {
-    const assetsFolder = "assets"
-    const localSubstringToRemove = ".local"
-    
-    if (assetInfo.name) {
-        const assetName = basename(assetInfo.name, extname(assetInfo.name))
-        
-        if (assetName.endsWith(localSubstringToRemove)) {
-            return `${assetsFolder}/${assetName.slice(0, -localSubstringToRemove.length)}.[hash][extname]`
-        }
+async function listAllFilesRecursively(
+    pathToList: string,
+): Promise<ReadonlyArray<string>> {
+    const isFile = (await stat(pathToList)).isFile()
+
+    if (isFile) {
+        return [pathToList]
     }
     
-    return `${assetsFolder}/[name].[hash][extname]`
+    const entries = (await readdir(pathToList))
+        .map((entry) => joinPath(pathToList, entry))
+        .map(listAllFilesRecursively)
+    
+    return (await Promise.all(entries)).flat()
 }

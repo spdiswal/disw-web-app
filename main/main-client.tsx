@@ -2,6 +2,7 @@ import { adaptLocaleCachePortToSessionStorage, adaptPreferredLocalePortToNavigat
 import { adaptMediaThemePortToMediaQuery, adaptThemeCachePortToSessionStorage } from "+theme"
 import { render } from "preact"
 import { App } from "./App"
+import "./assets/font/inter.css"
 import "./initialise-tailwind.css"
 import "./make-visible.css"
 

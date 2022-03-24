@@ -13,13 +13,11 @@
     "dependencies": {
         "clsx": "1.1.1",
         "preact": "10.6.6",
-        "tailwindcss": "3.0.23",
         "tslib": "2.3.1"
     },
     "dependenciesComments": {
         "clsx": "A runtime library for constructing conditional class attribute strings from JavaScript objects and arrays.",
         "preact": "Preact; a virtual DOM-based UI library with JSX support inspired by React. It is a runtime dependency, as it provides the API for mounting the web app onto the DOM.",
-        "tailwindcss": "Tailwind CSS; a utility-first CSS framework. It is a runtime dependency, as it provides a CSS reset and helper rules in the CSS distribution.",
         "tslib": "A runtime library that optimises TypeScript applications."
     },
     "devDependencies": {
@@ -55,6 +53,7 @@
         "jest": "27.5.1",
         "postcss": "8.4.7",
         "preact-render-to-string": "5.1.20",
+        "tailwindcss": "3.0.23",
         "ts-jest": "27.1.3",
         "typescript": "4.5.5",
         "vite": "2.8.4"
@@ -92,6 +91,7 @@
         "jest": "Jest; a unit testing framework.",
         "postcss": "PostCSS; a processing tool for CSS. It is a peer dependency of 'tailwindcss'.",
         "preact-render-to-string": "A tool that renders Preact components to HTML-compatible strings.",
+        "tailwindcss": "Tailwind CSS; a utility-first CSS framework that uses a JIT compiler to generate CSS rulesets dynamically.",
         "ts-jest": "A Jest transformer that supports Preact-compatible JSX and TypeScript, including source maps and debugging in IntelliJ IDEA.",
         "typescript": "TypeScript; a statically typed programming language that extends the JavaScript syntax.",
         "vite": "Vite; a frontend build tool with native support for JSX, TypeScript, and PostCSS."

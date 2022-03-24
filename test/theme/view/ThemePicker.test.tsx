@@ -108,8 +108,8 @@ test("The change handler is invoked upon selecting the 'dark' option.", async ()
 })
 
 function renderThemePickerComponent(options?: {
-    locale?: Locale,
-    onThemeSelected?: (selectedTheme: ThemeSelection) => void,
+    readonly locale?: Locale,
+    readonly onThemeSelected?: (selectedTheme: ThemeSelection) => void,
 }) {
     const locale = options?.locale ?? "en"
     const mediaTheme: Theme = "light"

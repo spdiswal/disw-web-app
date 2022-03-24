@@ -91,8 +91,8 @@ test("The change handler is invoked upon selecting the 'en' option.", async () =
 })
 
 function renderLocalePickerComponent(options?: {
-    selectedLocale?: Locale,
-    onLocaleSelected?: (selectedLocale: Locale) => void,
+    readonly selectedLocale?: Locale,
+    readonly onLocaleSelected?: (selectedLocale: Locale) => void,
 }) {
     const selectedLocale = options?.selectedLocale ?? "da"
     const onLocaleSelected = options?.onLocaleSelected

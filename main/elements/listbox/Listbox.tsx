@@ -47,9 +47,9 @@ export function Listbox<Option extends string>({
     
     return (
         <div id={id} class={clsx(_class, "relative")}>
-            <span id={accessibilityLabelId} class="hidden">
+            <label id={accessibilityLabelId} class="sr-only">
                 {accessibilityLabel}
-            </span>
+            </label>
             <ListboxButtonConfigurationProvider
                 value={{
                     aria: {
@@ -69,7 +69,7 @@ export function Listbox<Option extends string>({
                 ref={popupContainerRef}
                 class={clsx(
                     isPopupOpen ? "visible opacity-100" : "invisible opacity-0",
-                    "absolute right-0 z-50 mt-1 max-h-56 w-48 overflow-auto rounded-2xl bg-neutral-100/80 py-2 text-base shadow-lg ring-1 ring-neutral-900/20 backdrop-blur-md focus-visible:outline-none dark:bg-neutral-800/80 dark:ring-white/20 md:text-sm",
+                    "absolute right-0 z-50 mt-1 max-h-56 w-52 overflow-auto rounded-2xl bg-neutral-100/80 py-2 text-base shadow-lg ring-1 ring-neutral-900/20 backdrop-blur-md focus-visible:outline-none dark:bg-neutral-800/80 dark:ring-white/20 md:w-44 md:text-sm",
                     visibilityTransitionClasses,
                 )}
             >

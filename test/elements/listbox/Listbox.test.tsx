@@ -753,8 +753,8 @@ test("The listbox popup disappears when the window loses focus.", async () => {
 })
 
 function renderListboxComponentOfAppleCultivars(options?: {
-    selectedOption?: AppleCultivar,
-    onOptionSelected?: (selectedOption: AppleCultivar) => void,
+    readonly selectedOption?: AppleCultivar,
+    readonly onOptionSelected?: (selectedOption: AppleCultivar) => void,
 }) {
     const selectedOption = options?.selectedOption ?? "ambrosia"
     const onOptionSelected = options?.onOptionSelected

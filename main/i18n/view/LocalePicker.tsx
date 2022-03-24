@@ -1,5 +1,5 @@
 import { FlagIconDenmark, FlagIconUnitedKingdom, HeroIconSelector, HybridButton, LinearListboxOption, Listbox } from "+elements"
-import type { Locale, Localisable } from "+i18n"
+import type { Locale } from "+i18n"
 import { useLocale } from "+i18n"
 import type { ReadonlyNonEmptyArray } from "+types"
 import type { JSX } from "preact"
@@ -14,11 +14,6 @@ const caption: Readonly<Record<Locale, string>> = {
 const icon: Readonly<Record<Locale, JSX.Element>> = {
     da: <FlagIconDenmark class="h-5 w-5 shrink-0 rounded-full"/>,
     en: <FlagIconUnitedKingdom class="h-5 w-5 shrink-0 rounded-full"/>,
-}
-
-const accessibilityLabel: Localisable<string> = {
-    da: "Skift sprog",
-    en: "Change language",
 }
 
 type LocalePickerProps = {
@@ -36,7 +31,10 @@ export function LocalePicker({
         <Listbox
             id="locale-picker"
             class={_class}
-            accessibilityLabel={accessibilityLabel[selectedLocale]}
+            accessibilityLabel={{
+                da: "Skift sprog",
+                en: "Change language",
+            }[selectedLocale]}
             options={options}
             selectedOption={selectedLocale}
             onOptionSelected={onLocaleSelected}

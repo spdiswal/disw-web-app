@@ -28,11 +28,6 @@ const icon: Readonly<Record<ThemeSelection, JSX.Element>> = {
     "match-media": <HeroIconDesktopComputer class="h-5 w-5 shrink-0 rounded-full"/>,
 }
 
-const accessibilityLabel: Localisable<string> = {
-    da: "Skift visuelt tema",
-    en: "Change visual theme",
-}
-
 type ThemePickerProps = {
     readonly class?: string
     readonly mediaTheme: Theme
@@ -52,7 +47,10 @@ export function ThemePicker({
         <Listbox
             id="theme-picker"
             class={_class}
-            accessibilityLabel={accessibilityLabel[locale]}
+            accessibilityLabel={{
+                da: "Skift visuelt tema",
+                en: "Change visual theme",
+            }[locale]}
             options={options}
             selectedOption={selectedTheme}
             onOptionSelected={onThemeSelected}

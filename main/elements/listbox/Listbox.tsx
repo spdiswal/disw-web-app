@@ -40,6 +40,7 @@ export function Listbox<Option extends string>({
         useState<Option | null>(null)
     
     useWindowEvent("blur", closePopup)
+    useWindowEvent("scroll", closePopup)
     useWindowEvent("mousedown", closePopupIfOutsideListbox)
     useWindowEvent("touchstart", closePopupIfOutsideListbox)
     useWindowEvent("keydown", decideToSelectHighlightedOptionOrClosePopup)

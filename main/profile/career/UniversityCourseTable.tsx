@@ -93,10 +93,20 @@ export function UniversityCourseTable({
                     
                     return (
                         <Fragment>
-                            <TableCell class="font-semibold">{name}</TableCell>
-                            <TableCell class="whitespace-nowrap">{termLabel[term][locale]}{" "}{year}</TableCell>
-                            <TableCell class="whitespace-nowrap">{weight}{" "}ECTS</TableCell>
-                            <TableCell class="whitespace-nowrap">{gradeLabel[grade][locale]}</TableCell>
+                            <TableCell class="font-semibold">
+                                <div class="w-44 sm:w-auto md:w-44 lg:w-auto">
+                                    {name}
+                                </div>
+                            </TableCell>
+                            <TableCell class="whitespace-nowrap">
+                                {termLabel[term][locale]}{" "}{year}
+                            </TableCell>
+                            <TableCell class="whitespace-nowrap">
+                                {weight}{" "}ECTS
+                            </TableCell>
+                            <TableCell class="whitespace-nowrap">
+                                {gradeLabel[grade][locale]}
+                            </TableCell>
                         </Fragment>
                     )
                 }}

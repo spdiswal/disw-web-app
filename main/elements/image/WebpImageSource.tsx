@@ -15,14 +15,14 @@ export function convertToSourceSet(
 }
 
 type PredefinedImageAssets =
-    | PredefinedPortraitHeroImageAssets
+    | PredefinedSquareHeroImageAssets
     | PredefinedStandardHeroImageAssets
     | PredefinedWideHeroImageAssets
     | PredefinedUltraWideHeroImageAssets
     | PredefinedArticleImageAssets
 
-type PredefinedPortraitHeroImageAssets = {
-    readonly [W in PredefinedPortraitHeroImageWidth]: string
+type PredefinedSquareHeroImageAssets = {
+    readonly [W in PredefinedSquareHeroImageWidth]: string
 }
 
 type PredefinedStandardHeroImageAssets = {
@@ -41,8 +41,8 @@ type PredefinedArticleImageAssets = {
     readonly [W in PredefinedArticleImageWidth]: string
 }
 
-// The aspect ratio is 4:5 for the `xs` viewport (h = 1.2w).
-type PredefinedPortraitHeroImageWidth =
+// The aspect ratio is 1:1 (square) for the `xs` viewport (h = 1.0w).
+type PredefinedSquareHeroImageWidth =
     | 320 | 480 | 640
     | /* High pixel density counterparts: */ 960 | 1280 | 1440
 
@@ -66,7 +66,7 @@ type PredefinedArticleImageWidth =
     | /* High pixel density counterparts: */ 800 | 1040 | 1280 | 1520
 
 // See `maxWidth` in `tailwind.config.cjs`.
-export const portraitHeroImageSizeHint: ImageSourceSizeHint = "100vw"
+export const squareHeroImageSizeHint: ImageSourceSizeHint = "100vw"
 export const standardHeroImageSizeHint: ImageSourceSizeHint = "100vw"
 export const wideHeroImageSizeHint: ImageSourceSizeHint = "100vw"
 export const ultraWideHeroImageSizeHint: ImageSourceSizeHint = "max(120rem, 100vw)"

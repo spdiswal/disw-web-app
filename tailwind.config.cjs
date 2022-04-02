@@ -71,7 +71,7 @@ module.exports = {
                 "-2": "-2px",
             },
             spacing: {
-                "aspect-ratio-4-5": "calc(5/4 * 100%)",
+                "aspect-ratio-square": "calc(1/1 * 100%)",
                 "aspect-ratio-4-3": "calc(3/4 * 100%)",
                 "aspect-ratio-5-3": "calc(3/5 * 100%)",
                 "aspect-ratio-5-2": "calc(2/5 * 100%)",

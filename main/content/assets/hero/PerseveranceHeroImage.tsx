@@ -1,16 +1,16 @@
-import { atLeastExtraLargeScreen, atLeastMediumScreen, atLeastSmallScreen, atMostExtraSmallScreen, atMostLargeScreen, atMostSmallScreen, convertToSourceSet, portraitHeroImageSizeHint, standardHeroImageSizeHint, ultraWideHeroImageSizeHint, WebpImageSource, wideHeroImageSizeHint } from "+elements"
+import { atLeastExtraLargeScreen, atLeastMediumScreen, atLeastSmallScreen, atMostExtraSmallScreen, atMostLargeScreen, atMostSmallScreen, convertToSourceSet, squareHeroImageSizeHint, standardHeroImageSizeHint, ultraWideHeroImageSizeHint, WebpImageSource, wideHeroImageSizeHint } from "+elements"
 import { useLocale } from "+i18n"
 import type { ImageAssetToPreload } from "+profile"
 import { HeroImage } from "+profile"
 import { Fragment } from "preact"
 import fallbackJpeg from "./perseverance-fallback.jpeg"
 import placeholderJpeg from "./perseverance-placeholder.jpeg"
-import portraitWebp1280w from "./perseverance-portrait-1280w.webp"
-import portraitWebp1440w from "./perseverance-portrait-1440w.webp"
-import portraitWebp320w from "./perseverance-portrait-320w.webp"
-import portraitWebp480w from "./perseverance-portrait-480w.webp"
-import portraitWebp640w from "./perseverance-portrait-640w.webp"
-import portraitWebp960w from "./perseverance-portrait-960w.webp"
+import squareWebp1280w from "./perseverance-square-1280w.webp"
+import squareWebp1440w from "./perseverance-square-1440w.webp"
+import squareWebp320w from "./perseverance-square-320w.webp"
+import squareWebp480w from "./perseverance-square-480w.webp"
+import squareWebp640w from "./perseverance-square-640w.webp"
+import squareWebp960w from "./perseverance-square-960w.webp"
 import standardWebp1440w from "./perseverance-standard-1440w.webp"
 import standardWebp1680w from "./perseverance-standard-1680w.webp"
 import standardWebp1920w from "./perseverance-standard-1920w.webp"
@@ -26,13 +26,13 @@ import wideWebp1600w from "./perseverance-wide-1600w.webp"
 import wideWebp2240w from "./perseverance-wide-2240w.webp"
 import wideWebp2560w from "./perseverance-wide-2560w.webp"
 
-const portraitSourceSet = convertToSourceSet({
-    320: portraitWebp320w,
-    480: portraitWebp480w,
-    640: portraitWebp640w,
-    960: portraitWebp960w,
-    1280: portraitWebp1280w,
-    1440: portraitWebp1440w,
+const squareSourceSet = convertToSourceSet({
+    320: squareWebp320w,
+    480: squareWebp480w,
+    640: squareWebp640w,
+    960: squareWebp960w,
+    1280: squareWebp1280w,
+    1440: squareWebp1440w,
 })
 
 const standardSourceSet = convertToSourceSet({
@@ -63,8 +63,8 @@ export const preloadedPerseveranceHeroImageSources: ReadonlyArray<ImageAssetToPr
         contentType: "image",
         condition: atMostExtraSmallScreen,
         fallbackUrl: fallbackJpeg,
-        sourceSet: portraitSourceSet,
-        sizeHint: portraitHeroImageSizeHint,
+        sourceSet: squareSourceSet,
+        sizeHint: squareHeroImageSizeHint,
     },
     {
         contentType: "image",
@@ -112,8 +112,8 @@ export function PerseveranceHeroImage() {
                         sizeHint={standardHeroImageSizeHint}
                     />
                     <WebpImageSource
-                        sourceSet={portraitSourceSet}
-                        sizeHint={portraitHeroImageSizeHint}
+                        sourceSet={squareSourceSet}
+                        sizeHint={squareHeroImageSizeHint}
                     />
                 </Fragment>
             }

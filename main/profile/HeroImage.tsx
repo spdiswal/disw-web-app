@@ -16,7 +16,7 @@ export function HeroImage({
 }: HeroImageProps) {
     return (
         <ProgressiveImage
-            class="w-full overflow-hidden pb-aspect-ratio-4-5 sm:pb-aspect-ratio-4-3 md:pb-aspect-ratio-5-2 xl:pb-aspect-ratio-10-3 2xl:rounded-b-2xl"
+            class="w-full overflow-hidden pb-aspect-ratio-square sm:pb-aspect-ratio-4-3 md:pb-aspect-ratio-5-2 xl:pb-aspect-ratio-10-3 2xl:rounded-b-2xl"
             originalImage={
                 <ResponsiveImage
                     class="absolute z-10 h-full w-full object-contain object-center"

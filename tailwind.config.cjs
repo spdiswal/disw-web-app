@@ -41,11 +41,11 @@ module.exports = {
         },
         extend: {
             backgroundPosition: {
-                "link-underline": "0% 100%",
+                "position-bl": "0% 100%",
             },
             backgroundSize: {
-                "link-underline-invisible": "0% 2px",
-                "link-underline-visible": "100% 2px",
+                "size-border-l": "0% 2px",
+                "size-border-r": "100% 2px",
             },
             fontFamily: {
                 "sans": [`"Inter var"`, ...defaultTheme.fontFamily.sans],

@@ -18,7 +18,7 @@ export function ExternalHyperlink({
         <a
             class={clsx(
                 _class,
-                "group relative bg-gradient-to-r from-primary-500 to-primary-500 bg-link-underline-invisible bg-link-underline bg-no-repeat pb-0.5 text-primary-600 outline-none hover:bg-link-underline-visible focus-visible:rounded-full focus-visible:bg-link-underline-visible focus-visible:outline-offset-4 dark:from-accent-theme-500 dark:to-accent-theme-500 dark:text-accent-theme-500",
+                "group relative bg-gradient-to-r from-primary-500 to-primary-500 bg-size-border-l bg-position-bl bg-no-repeat pb-0.5 text-primary-600 outline-none hover:bg-size-border-r focus-visible:rounded-full focus-visible:bg-size-border-r focus-visible:outline-offset-4 dark:from-accent-theme-500 dark:to-accent-theme-500 dark:text-accent-theme-500",
                 defaultFocusOutlineClasses,
                 linkTransitionClasses,
             )}

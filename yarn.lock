@@ -1129,10 +1129,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/tailwindcss@npm:3.0.9":
-  version: 3.0.9
-  resolution: "@types/tailwindcss@npm:3.0.9"
-  checksum: c991b2156d484276316d28d4e621d55ac2b43d2291939a6809d5c1ee71ed632331f08f0ac4ded8ea87f4038e38e28945ea63746d739ceb662e42face4e65e3a8
+"@types/tailwindcss@npm:3.0.10":
+  version: 3.0.10
+  resolution: "@types/tailwindcss@npm:3.0.10"
+  checksum: 4394244b71e1ce64f5e0cc2c5f91c34bea07a77441886cb6f6ea70a91756cf05a0a908241c1d0b377a44ecc52f83364a6253179f9e4b955015047e26a650479c
   languageName: node
   linkType: hard
 
@@ -1578,13 +1578,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"autoprefixer@npm:10.4.2":
-  version: 10.4.2
-  resolution: "autoprefixer@npm:10.4.2"
+"autoprefixer@npm:10.4.4":
+  version: 10.4.4
+  resolution: "autoprefixer@npm:10.4.4"
   dependencies:
-    browserslist: ^4.19.1
-    caniuse-lite: ^1.0.30001297
-    fraction.js: ^4.1.2
+    browserslist: ^4.20.2
+    caniuse-lite: ^1.0.30001317
+    fraction.js: ^4.2.0
     normalize-range: ^0.1.2
     picocolors: ^1.0.0
     postcss-value-parser: ^4.2.0
@@ -1592,7 +1592,7 @@ __metadata:
     postcss: ^8.1.0
   bin:
     autoprefixer: bin/autoprefixer
-  checksum: dbd13e641eaa7d7e3121769c22cc439222f1a9d0371a583d12300849de7287ece1e793767ff9902842dbfd56c4b7c19ed9fe1947c9f343ba2f4f3519dbddfdef
+  checksum: bd42e23d71af0228b6b0b27d0d0b33c95e67562e55eb4ca0e221cf795a06482c90d565d6544a5f4090d8e303b09b200845fa2bcaaa707d1e8777974250dffe1f
   languageName: node
   linkType: hard
 
@@ -1751,18 +1751,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"browserslist@npm:^4.19.1":
-  version: 4.19.1
-  resolution: "browserslist@npm:4.19.1"
+"browserslist@npm:^4.20.2":
+  version: 4.20.2
+  resolution: "browserslist@npm:4.20.2"
   dependencies:
-    caniuse-lite: ^1.0.30001286
-    electron-to-chromium: ^1.4.17
+    caniuse-lite: ^1.0.30001317
+    electron-to-chromium: ^1.4.84
     escalade: ^3.1.1
-    node-releases: ^2.0.1
+    node-releases: ^2.0.2
     picocolors: ^1.0.0
   bin:
     browserslist: cli.js
-  checksum: c0777fd483691638fd6801e16c9d809e1d65f6d2b06db2e806654be51045cbab1452a89841a2c5caea2cbe19d621b4f1d391cffbb24512aa33280039ab345875
+  checksum: 18e09beeae32e69fea45fc3642240fb63027b1460d90e24da86377177dca3d82c80f8fa44469d95109e3962f08eb2a23e03037bd5e1f1ec38e4866e2a8572435
   languageName: node
   linkType: hard
 
@@ -1872,17 +1872,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"caniuse-lite@npm:^1.0.30001297":
-  version: 1.0.30001300
-  resolution: "caniuse-lite@npm:1.0.30001300"
-  checksum: f8c981c0658e2ea67b5e106538a9f3b15d528a6679f2b6e7cb3f508a99e4f9f3f69c73d1b243c77e5ccb3bcef964a801a26a2ba6a13416b42baf314577e3172a
-  languageName: node
-  linkType: hard
-
 "caniuse-lite@npm:^1.0.30001304":
   version: 1.0.30001312
   resolution: "caniuse-lite@npm:1.0.30001312"
   checksum: 753fb9ea1e02e999430b323a71b5acab5120f3b5fc0161b01669f54a3ef5c5296240b6ae9b79b12a3742e3aed216aa9ee3d5398a23c16d08625ccd376b79545d
+  languageName: node
+  linkType: hard
+
+"caniuse-lite@npm:^1.0.30001317":
+  version: 1.0.30001324
+  resolution: "caniuse-lite@npm:1.0.30001324"
+  checksum: c48bc69d6a0f07f5907465481f313f35c55a6ebf066df233a91c8929a52cfaac380ffad63241ee1cd79a0c001e2af7644a759c10c1470a9c46d194913c81c5c3
   languageName: node
   linkType: hard
 
@@ -2390,6 +2390,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"electron-to-chromium@npm:^1.4.84":
+  version: 1.4.103
+  resolution: "electron-to-chromium@npm:1.4.103"
+  checksum: ae5783cafb1f49e92946416fafc5af45d85e5a6847ce00f4cf4b4d2e54bca1d27b26699ea2cedf5b700c1a0190329e7ec20dc06198daa9f0c343044bc074ae75
+  languageName: node
+  linkType: hard
+
 "emittery@npm:^0.8.1":
   version: 0.8.1
   resolution: "emittery@npm:0.8.1"
@@ -2787,7 +2794,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-jsx-a11y@npm:^6.5.1":
+"eslint-plugin-jsx-a11y@npm:6.5.1":
   version: 6.5.1
   resolution: "eslint-plugin-jsx-a11y@npm:6.5.1"
   dependencies:
@@ -3195,10 +3202,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fraction.js@npm:^4.1.2":
-  version: 4.1.2
-  resolution: "fraction.js@npm:4.1.2"
-  checksum: a67eff2b599cb6546b77ce9c913bd0cccd646e1a525c793ba4e0bf5a399fc403f379227fca83423a6ea79d01e35c2f2b0f141ffa1d09e41377041268a53fb150
+"fraction.js@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "fraction.js@npm:4.2.0"
+  checksum: 8c76a6e21dedea87109d6171a0ac77afa14205794a565d71cb10d2925f629a3922da61bf45ea52dbc30bce4d8636dc0a27213a88cbd600eab047d82f9a3a94c5
   languageName: node
   linkType: hard
 
@@ -4980,6 +4987,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"node-releases@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "node-releases@npm:2.0.2"
+  checksum: da858bf86b4d512842379749f5a5e4196ddab05ba18ffcf29f05bf460beceaca927f070f4430bb5046efec18941ddbc85e4c5fdbb83afc28a38dd6069a2f255e
+  languageName: node
+  linkType: hard
+
 "nopt@npm:^5.0.0":
   version: 5.0.0
   resolution: "nopt@npm:5.0.0"
@@ -5392,14 +5406,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:8.4.7, postcss@npm:^8.4.4, postcss@npm:^8.4.6":
-  version: 8.4.7
-  resolution: "postcss@npm:8.4.7"
+"postcss@npm:8.4.12, postcss@npm:^8.4.4, postcss@npm:^8.4.6":
+  version: 8.4.12
+  resolution: "postcss@npm:8.4.12"
   dependencies:
     nanoid: ^3.3.1
     picocolors: ^1.0.0
     source-map-js: ^1.0.2
-  checksum: a515ed36622edbee1d3ba153298d3b62ae9826dfa6de19204c2a6f975c8d3ad36808423b5119a9d82b78efd486de3ce35a1faf882a36ac8aa09492be4fbb7fe1
+  checksum: 248e3d0f9bbb8efaafcfda7f91627a29bdc9a19f456896886330beb28c5abea0e14c7901b35191928602e2eccbed496b1e94097d27a0b2a980854cd00c7a835f
   languageName: node
   linkType: hard
 
@@ -5783,11 +5797,11 @@ __metadata:
     "@types/html-minifier-terser": 6.1.0
     "@types/jest": 27.4.1
     "@types/node": 16.11.14
-    "@types/tailwindcss": 3.0.9
+    "@types/tailwindcss": 3.0.10
     "@types/testing-library__jest-dom": 5.14.2
     "@typescript-eslint/eslint-plugin": 5.12.1
     "@typescript-eslint/parser": 5.12.1
-    autoprefixer: 10.4.2
+    autoprefixer: 10.4.4
     babel-plugin-transform-hook-names: 1.0.2
     clsx: 1.1.1
     eslint: 8.10.0
@@ -5795,14 +5809,14 @@ __metadata:
     eslint-plugin-jest: 26.1.1
     eslint-plugin-jest-dom: 4.0.1
     eslint-plugin-jest-formatting: 3.1.0
-    eslint-plugin-jsx-a11y: ^6.5.1
+    eslint-plugin-jsx-a11y: 6.5.1
     eslint-plugin-react: 7.29.2
     eslint-plugin-react-hooks: 4.3.0
     eslint-plugin-tailwindcss: 3.5.0
     eslint-plugin-testing-library: 5.0.5
     html-minifier-terser: 6.1.0
     jest: 27.5.1
-    postcss: 8.4.7
+    postcss: 8.4.12
     preact: 10.6.6
     preact-render-to-string: 5.1.20
     tailwindcss: 3.0.23

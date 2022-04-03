@@ -12,7 +12,7 @@ export function PractisedSkills({
     const locale = useLocale()
     
     return (
-        <Subsection heading={{ da: "Praktiserede færdigheder", en: "Practised skills" }[locale]}>
+        <Subsection heading={{ da: "Praktiserede færdigheder", en: "Practised Skills" }[locale]}>
             <span class="flex flex-wrap pt-1">
                 {children}
             </span>

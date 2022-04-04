@@ -1,13 +1,14 @@
 import { FooterContent, HeaderContent, MainContent } from "+content"
 import { LocaleProvider } from "+i18n"
 import { render, screen, within } from "@testing-library/preact"
+import heroFallbackImage from "../../main/content/assets/hero/perseverance-fallback.jpeg"
 
 test("The content specifies the fallback source of the hero image.", () => {
     // GIVEN a test subject.
     const content = renderContent()
     
     // THEN the content specifies the fallback source of the hero image.
-    expect(content.getHeroImage()).toHaveAttribute("src", "perseverance-fallback.jpeg")
+    expect(content.getHeroImage()).toHaveAttribute("src", heroFallbackImage)
 })
 
 test("The content specifies the alternative text of the hero image.", () => {

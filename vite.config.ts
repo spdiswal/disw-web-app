@@ -77,6 +77,11 @@ export default defineConfig(({ mode }) => {
         ssr: {
             noExternal: true,
         },
+        test: {
+            environment: "jsdom",
+            globals: true, // Required by Preact Testing Library to enable automatic component cleanup.
+            setupFiles: "./test/test-setup.ts",
+        },
     }
 })
 
@@ -207,7 +212,7 @@ async function listAllFilesRecursively(
     pathToList: string,
 ): Promise<ReadonlyArray<string>> {
     const isFile = (await stat(pathToList)).isFile()
-
+    
     if (isFile) {
         return [pathToList]
     }

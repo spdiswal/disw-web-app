@@ -4,6 +4,7 @@ import type { Theme, ThemeSelection } from "+theme"
 import { ThemePicker } from "+theme"
 import { render, screen } from "@testing-library/preact"
 import userEvent from "@testing-library/user-event"
+import { vi } from "vitest"
 
 test("The theme picker button has an accessibility label.", () => {
     // GIVEN a test subject.
@@ -49,7 +50,7 @@ test("The theme picker has three options.", () => {
 
 test("The change handler is invoked upon selecting the 'match-media' option.", async () => {
     // GIVEN a spying change handler.
-    const spyingChangeHandler = jest.fn()
+    const spyingChangeHandler = vi.fn()
     
     // GIVEN a test subject.
     // GIVEN that the locale is English.
@@ -69,7 +70,7 @@ test("The change handler is invoked upon selecting the 'match-media' option.", a
 
 test("The change handler is invoked upon selecting the 'light' option.", async () => {
     // GIVEN a spying change handler.
-    const spyingChangeHandler = jest.fn()
+    const spyingChangeHandler = vi.fn()
     
     // GIVEN a test subject.
     // GIVEN that the locale is English.
@@ -89,7 +90,7 @@ test("The change handler is invoked upon selecting the 'light' option.", async (
 
 test("The change handler is invoked upon selecting the 'dark' option.", async () => {
     // GIVEN a spying change handler.
-    const spyingChangeHandler = jest.fn()
+    const spyingChangeHandler = vi.fn()
     
     // GIVEN a test subject.
     // GIVEN that the locale is English.

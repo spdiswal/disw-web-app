@@ -14,7 +14,7 @@ test("The document applies the 'dark' theme when the restored theme selection is
     }))
     
     // THEN the document applies the 'dark' theme.
-    expect(document.documentElement.classList).toContain("dark")
+    expect(document.documentElement).toHaveClass("dark")
 })
 
 test("The document applies the 'light' theme when the restored theme selection is 'match-media' and the media theme is 'light'.", () => {
@@ -27,7 +27,7 @@ test("The document applies the 'light' theme when the restored theme selection i
     }))
     
     // THEN the document applies the 'light' theme.
-    expect(document.documentElement.classList).not.toContain("dark")
+    expect(document.documentElement).not.toHaveClass("dark")
 })
 
 test("The document applies the 'light' media theme when the restored theme selection is 'match-media' and media theme changes from 'dark' to 'light'.", async () => {
@@ -47,7 +47,7 @@ test("The document applies the 'light' media theme when the restored theme selec
     })
     
     // THEN the document applies the 'light' theme.
-    expect(document.documentElement.classList).not.toContain("dark")
+    expect(document.documentElement).not.toHaveClass("dark")
 })
 
 test("The document applies the 'dark' theme when the restored theme selection is 'match-media' and media theme changes from 'light' to 'dark'.", async () => {
@@ -67,7 +67,7 @@ test("The document applies the 'dark' theme when the restored theme selection is
     })
     
     // THEN the document applies the 'dark' theme.
-    expect(document.documentElement.classList).toContain("dark")
+    expect(document.documentElement).toHaveClass("dark")
 })
 
 test("The document applies the 'dark' theme when the restored theme selection is 'dark'.", () => {
@@ -80,7 +80,7 @@ test("The document applies the 'dark' theme when the restored theme selection is
     }))
     
     // THEN the document applies the 'dark' theme.
-    expect(document.documentElement.classList).toContain("dark")
+    expect(document.documentElement).toHaveClass("dark")
 })
 
 test("The document applies the 'light' theme when the restored theme selection is 'light'.", () => {
@@ -93,7 +93,7 @@ test("The document applies the 'light' theme when the restored theme selection i
     }))
     
     // THEN the document applies the 'light' theme.
-    expect(document.documentElement.classList).not.toContain("dark")
+    expect(document.documentElement).not.toHaveClass("dark")
 })
 
 test("The document applies the 'dark' theme when it is selected.", async () => {
@@ -111,7 +111,7 @@ test("The document applies the 'dark' theme when it is selected.", async () => {
     })
     
     // THEN the document applies the 'dark' theme.
-    expect(document.documentElement.classList).toContain("dark")
+    expect(document.documentElement).toHaveClass("dark")
 })
 
 test("The document applies the 'light' theme when it is selected.", async () => {
@@ -129,7 +129,7 @@ test("The document applies the 'light' theme when it is selected.", async () => 
     })
     
     // THEN the document applies the 'light' theme.
-    expect(document.documentElement.classList).not.toContain("dark")
+    expect(document.documentElement).not.toHaveClass("dark")
 })
 
 test("The theme cache saves the 'dark' theme when it is selected.", async () => {

@@ -2,6 +2,7 @@ import type { Locale } from "+i18n"
 import { LocalePicker, LocaleProvider } from "+i18n"
 import { render, screen } from "@testing-library/preact"
 import userEvent from "@testing-library/user-event"
+import { vi } from "vitest"
 
 test("The locale picker button has an accessibility label.", async () => {
     // GIVEN a test subject.
@@ -56,7 +57,7 @@ test("The locale picker has two options.", () => {
 
 test("The change handler is invoked upon selecting the 'da' option.", async () => {
     // GIVEN a spying change handler.
-    const spyingChangeHandler = jest.fn()
+    const spyingChangeHandler = vi.fn()
     
     // GIVEN a test subject.
     const localePicker = renderLocalePickerComponent({
@@ -74,7 +75,7 @@ test("The change handler is invoked upon selecting the 'da' option.", async () =
 
 test("The change handler is invoked upon selecting the 'en' option.", async () => {
     // GIVEN a spying change handler.
-    const spyingChangeHandler = jest.fn()
+    const spyingChangeHandler = vi.fn()
     
     // GIVEN a test subject.
     const localePicker = renderLocalePickerComponent({

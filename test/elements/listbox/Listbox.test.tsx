@@ -1,6 +1,7 @@
 import { LinearListboxOption, Listbox, OpaqueButton } from "+elements"
 import { fireEvent, render, screen } from "@testing-library/preact"
 import userEvent from "@testing-library/user-event"
+import { vi } from "vitest"
 
 const appleCultivars = [
     "ambrosia",
@@ -487,7 +488,7 @@ test("Only the selected option is marked as selected.", async () => {
 
 test("The change handler is invoked when you click on an option.", async () => {
     // GIVEN a spying change handler.
-    const spyingChangeHandler = jest.fn()
+    const spyingChangeHandler = vi.fn()
     
     // GIVEN a test subject.
     // GIVEN that the selected option is 'golden-delicious'.
@@ -510,7 +511,7 @@ test("The change handler is invoked when you click on an option.", async () => {
 
 test("The change handler is invoked when you press the Enter key while an option is highlighted.", async () => {
     // GIVEN a spying change handler.
-    const spyingChangeHandler = jest.fn()
+    const spyingChangeHandler = vi.fn()
     
     // GIVEN a test subject.
     // GIVEN that the selected option is 'golden-delicious'.
@@ -536,7 +537,7 @@ test("The change handler is invoked when you press the Enter key while an option
 
 test("The change handler is invoked when you press the Space key while an option is highlighted.", async () => {
     // GIVEN a spying change handler.
-    const spyingChangeHandler = jest.fn()
+    const spyingChangeHandler = vi.fn()
     
     // GIVEN a test subject.
     // GIVEN that the selected option is 'belle-de-boskoop'.

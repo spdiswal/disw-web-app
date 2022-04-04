@@ -132,12 +132,18 @@ It runs the following means of validation:
 
 * Type checking via TypeScript.
 * Static program analysis (linting) via ESLint.
-* Automated unit testing via Jest.
+* Automated unit testing via Vitest.
 
 You can apply an automated fix of certain issues reported by ESLint:
 
 ----
 yarn run validate:lint:fix
+----
+
+You can run the test suite continuously (i.e. in 'watch' mode):
+
+----
+yarn run validate:unit-test:watch
 ----
 
 === Building for Production
@@ -266,12 +272,12 @@ Both techniques allow search engines to discover the contents of the web app wit
 If you need to debug the _production-grade distribution_, you can set the `VITE_DEBUG_PRODUCTION_BUILD` environment variable to be `true` in `.env.production.local`.
 This enables Preact debugging tools on runtime and skips minification of the build artifacts.
 
-=== Jest
-https://jestjs.io/[Jest] is a unit testing framework for JavaScript.
-It is independent of Vite and does not inherit any of its capabilities.
+=== Vitest
+https://vitest.dev/[Vitest] is a unit testing framework for JavaScript.
+It relies on Vite to support TypeScript, JSX, and PostCSS.
+Its API is largely compatible with that of https://jestjs.io/[Jest].
 
-`jest.config.cjs` defines the https://jestjs.io/docs/configuration[configuration] of Jest.
-It relies on the `ts-jest` transformer to support TypeScript and Preact-compatible JSX transformations via `tsconfig.json`.
+The `test` section in `vite.config.ts` defines the https://vitest.dev/config/[configuration] of Vitest.
 
 === ESLint
 https://eslint.org/[ESLint] is a static program analysis tool that flags issues in the source code.

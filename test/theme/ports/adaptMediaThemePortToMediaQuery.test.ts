@@ -1,5 +1,6 @@
 import { mockMediaQuery, raiseFakeMediaQueryChangeEvent } from "+test/fakes"
 import { adaptMediaThemePortToMediaQuery } from "+theme"
+import { vi } from "vitest"
 
 const prefersDarkColourSchemeQuery = "(prefers-color-scheme: dark)"
 
@@ -33,7 +34,7 @@ test("The media theme adapter invokes the subscribers when the media starts pref
     const { subscribeToMediaTheme } = adaptMediaThemePortToMediaQuery()
     
     // GIVEN a spying subscriber to the media theme.
-    const spyingSubscriber = jest.fn()
+    const spyingSubscriber = vi.fn()
     subscribeToMediaTheme(spyingSubscriber)
     
     // WHEN the media starts preferring a dark colour scheme.
@@ -53,7 +54,7 @@ test("The media theme adapter invokes the subscribers when the media stops prefe
     const { subscribeToMediaTheme } = adaptMediaThemePortToMediaQuery()
     
     // GIVEN a spying subscriber to the media theme.
-    const spyingSubscriber = jest.fn()
+    const spyingSubscriber = vi.fn()
     subscribeToMediaTheme(spyingSubscriber)
     
     // WHEN the media stops preferring a dark colour scheme.

@@ -29,7 +29,7 @@ export function CareerSection({
                     {title}
                 </h1>
             </header>
-            <div class="flex flex-col space-y-24 sm:space-y-32 md:space-y-48 lg:space-y-64">
+            <div class="flex flex-col space-y-24 sm:space-y-32 md:space-y-40 lg:space-y-48">
                 {children}
             </div>
         </section>

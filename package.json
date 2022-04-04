@@ -13,7 +13,7 @@
     },
     "dependencies": {
         "clsx": "1.1.1",
-        "preact": "10.6.6",
+        "preact": "10.7.0",
         "tslib": "2.3.1"
     },
     "dependenciesComments": {
@@ -22,9 +22,10 @@
         "tslib": "A runtime library that optimises TypeScript applications."
     },
     "devDependencies": {
-        "@babel/core": "7.17.5",
+        "@babel/core": "7.17.8",
         "@babel/plugin-transform-react-jsx": "7.17.3",
-        "@preact/preset-vite": "2.1.7",
+        "@babel/plugin-transform-react-jsx-development": "7.16.7",
+        "@preact/preset-vite": "2.2.0",
         "@testing-library/dom": "8.11.3",
         "@testing-library/jest-dom": "5.16.2",
         "@testing-library/preact": "2.0.1",
@@ -59,7 +60,8 @@
     },
     "devDependenciesComments": {
         "@babel/core": "Babel; a JavaScript compiler. It is a peer dependency of '@preact/preset-vite'.",
-        "@babel/plugin-transform-react-jsx": "A Babel plugin that supports Preact-compatible JSX transformations. It is a peer dependency of '@preact/preset-vite'.",
+        "@babel/plugin-transform-react-jsx": "A Babel plugin that supports Preact-compatible JSX transformations. It is applied when building for production. It is a peer dependency of '@preact/preset-vite'.",
+        "@babel/plugin-transform-react-jsx-development": "A Babel plugin that supports Preact-compatible JSX transformations. It is applied when running the development server. It is a peer dependency of '@preact/preset-vite'.",
         "@preact/preset-vite": "A Vite plugin for Preact applications that supports hot module replacement (HMR) and Preact Devtools.",
         "@testing-library/dom": "DOM Testing Library; a library that unit tests web applications through their user accessibility via the DOM. It is a peer dependency of '@testing-library/user-event'.",
         "@testing-library/jest-dom": "A Testing Library add-on that provides DOM assertion matchers in Jest (and Vitest, which provides a Jest-compatible API).",

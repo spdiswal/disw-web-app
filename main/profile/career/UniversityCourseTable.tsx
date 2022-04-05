@@ -1,4 +1,4 @@
-import { Expandable, SortableTableColumnHeader, Table, TableCell, useSortableTableRows } from "+elements"
+import { Expandable, SortableTableColumnHeader, Table, TableCell, useExpansionRequestSubscriber, useSortableTableRows } from "+elements"
 import type { Localisable } from "+i18n"
 import { useLocale } from "+i18n"
 import type { Comparator, Year } from "+types"
@@ -48,8 +48,7 @@ export function UniversityCourseTable({
     courses,
 }: UniversityCourseTableProps) {
     const locale = useLocale()
-    
-    const [isExpanded, setExpanded] = useState(false)
+    const { subscribe, expand } = useExpansionRequestSubscriber()
     
     const [activeColumn, setActiveColumn] =
         useState<UniversityCourseColumn>("term")
@@ -73,9 +72,11 @@ export function UniversityCourseTable({
     
     return (
         <Expandable
-            expandButtonLabel={{ da: "Vis alle kurser", en: "Show all courses" }[locale]}
-            isExpanded={isExpanded}
-            onExpansionButtonClicked={expand}
+            buttonLabels={{
+                collapsed: { da: "Vis alle kurser", en: "Show all courses" }[locale],
+                expanded: { da: "Skjul kurserne", en: "Hide the courses" }[locale],
+            }}
+            subscribeToExpansionRequests={subscribe}
         >
             <Table
                 columns={columns}
@@ -123,10 +124,6 @@ export function UniversityCourseTable({
         } else {
             setOrder(order === "ascending" ? "descending" : "ascending")
         }
-    }
-    
-    function expand() {
-        setExpanded(true)
     }
 }
 

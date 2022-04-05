@@ -47,6 +47,9 @@ module.exports = {
                 "size-border-l": "0% 2px",
                 "size-border-r": "100% 2px",
             },
+            boxShadow: {
+                "border-t": "0 1px 8px 2px rgba(0, 0, 0, 0.2)",
+            },
             fontFamily: {
                 "sans": [`"Inter var"`, ...defaultTheme.fontFamily.sans],
             },

@@ -167,6 +167,26 @@ export function HeroIconDesktopComputer(props: IconProps) {
     )
 }
 
+export function HeroIconMinus(props: IconProps) {
+    return (
+        <svg
+            class={props.class}
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+        >
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M20 12H4"
+            />
+        </svg>
+    )
+}
+
 export function HeroIconMoon(props: IconProps) {
     return (
         <svg

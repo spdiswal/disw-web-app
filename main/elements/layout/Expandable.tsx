@@ -1,37 +1,100 @@
-import { HeroIconPlus, OpaqueButton } from "+elements"
+import { expandableTransitionClasses, HeroIconMinus, HeroIconPlus, OpaqueButton } from "+elements"
 import clsx from "clsx"
 import type { ComponentChildren } from "preact"
-import { themeSwitchTransitionClasses } from "../transition-classes"
+import { useEffect, useRef, useState } from "preact/hooks"
 
 type ExpandableProps = {
-    readonly expandButtonLabel: string
-    readonly isExpanded: boolean
-    readonly onExpansionButtonClicked?: () => void
+    readonly buttonLabels: ExpansionButtonLabels
+    readonly subscribeToExpansionRequests?:
+        (subscriber: ExpansionRequestSubscriber) => ExpansionRequestSubscription
     readonly children: ComponentChildren
 }
 
+type ExpansionButtonLabels = {
+    readonly expanded: string
+    readonly collapsed: string
+}
+
+export type ExpansionState = "collapsed" | "expanded"
+
+export type ExpansionRequestSubscriber =
+    (requestedState: ExpansionState) => void
+
+export type ExpansionRequestSubscription = {
+    readonly unsubscribe: () => void
+}
+
 export function Expandable({
-    expandButtonLabel,
-    isExpanded,
-    onExpansionButtonClicked,
+    buttonLabels: {
+        collapsed: collapsedButtonLabel,
+        expanded: expandedButtonLabel,
+    },
+    subscribeToExpansionRequests,
     children,
 }: ExpandableProps) {
+    const containerRef = useRef<HTMLDivElement>(null)
+    const contentRef = useRef<HTMLDivElement>(null)
+    
+    const [state, setState] = useState<ExpansionState>("collapsed")
+    
+    useEffect(() => {
+        if (subscribeToExpansionRequests !== undefined) {
+            const { unsubscribe } = subscribeToExpansionRequests(setState)
+            
+            return function cleanUp() {
+                unsubscribe()
+            }
+        }
+    }, [subscribeToExpansionRequests])
+    
+    useEffect(() => {
+        if (containerRef.current !== null) {
+            if (state === "expanded") {
+                const contentHeight = contentRef.current?.scrollHeight ?? 0
+                containerRef.current.style.height = `calc(${contentHeight}px + 3rem)`
+            } else {
+                containerRef.current.style.height = "8rem"
+            }
+        }
+    }, [state])
+    
     return (
-        <div class="flex flex-col items-center">
-            <div class={clsx(!isExpanded && "-mx-4 sm:-mx-6", "w-full")}>
-                <div
-                    class={clsx(
-                        !isExpanded && "-mx-4 h-40 overflow-y-hidden border-b-2 border-neutral-300 px-4 dark:border-neutral-600 sm:-mx-6 sm:px-6",
-                        themeSwitchTransitionClasses,
-                    )}
-                >
+        <div class="-mx-3 flex flex-col items-center">
+            <div
+                ref={containerRef}
+                class={clsx(
+                    "relative w-full overflow-y-hidden px-3",
+                    expandableTransitionClasses,
+                )}
+            >
+                <div ref={contentRef}>
                     {children}
                 </div>
+                <div
+                    class={clsx(
+                        state === "collapsed" ? "visible opacity-100" : "invisible opacity-0",
+                        "absolute inset-x-0 bottom-0 h-0 border-t border-neutral-200 shadow-border-t dark:border-neutral-600",
+                        expandableTransitionClasses,
+                    )}
+                />
             </div>
-            <OpaqueButton class={clsx(isExpanded && "hidden", "mt-4 flex items-center shadow-lg")} onClick={onExpansionButtonClicked}>
-                <HeroIconPlus class="mr-2 h-4 w-4"/>
-                <span>{expandButtonLabel}</span>
+            <OpaqueButton
+                class="relative bottom-5 flex h-10 items-center shadow-lg"
+                onClick={toggleExpansion}
+            >
+                {state === "collapsed"
+                    ? <HeroIconPlus class="mr-2 h-4 w-4"/>
+                    : <HeroIconMinus class="mr-2 h-4 w-4"/>}
+                {state === "collapsed"
+                    ? <span>{collapsedButtonLabel}</span>
+                    : <span>{expandedButtonLabel}</span>}
             </OpaqueButton>
         </div>
     )
+    
+    function toggleExpansion() {
+        setState((currentState) => (
+            currentState === "collapsed" ? "expanded" : "collapsed"
+        ))
+    }
 }

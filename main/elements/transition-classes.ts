@@ -8,5 +8,6 @@ export const focusTransitionClasses = fastTransition
 export const visibilityTransitionClasses = fastTransition
 export const responsiveTextSizeTransitionClasses = defaultTransition
 export const themeSwitchTransitionClasses = defaultTransition
+export const expandableTransitionClasses = slowTransition
 export const linkTransitionClasses = slowTransition
 export const imageTransitionClasses = slowestTransition

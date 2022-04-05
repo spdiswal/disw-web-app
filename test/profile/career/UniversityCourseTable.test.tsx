@@ -306,13 +306,13 @@ test("The table is expanded by clicking on the expansion button.", async () => {
     const courseTable = renderUniversityCourseTable()
     
     // GIVEN that the table is not expanded yet.
-    expect(courseTable.getExpandButton()).not.toHaveClass("hidden")
+    expect(courseTable.getExpandButton()).toHaveAccessibleName("Show all courses")
     
     // WHEN clicking on the expansion button.
     await courseTable.clickExpandButton()
     
     // THEN the table is expanded.
-    expect(courseTable.getExpandButton()).toHaveClass("hidden")
+    expect(courseTable.getExpandButton()).toHaveAccessibleName("Hide the courses")
 })
 
 test("The table is expanded by clicking on the 'name' column header.", async () => {
@@ -320,13 +320,13 @@ test("The table is expanded by clicking on the 'name' column header.", async () 
     const courseTable = renderUniversityCourseTable()
     
     // GIVEN that the table is not expanded yet.
-    expect(courseTable.getExpandButton()).not.toHaveClass("hidden")
+    expect(courseTable.getExpandButton()).toHaveAccessibleName("Show all courses")
     
     // WHEN clicking on the 'name' column header.
     await courseTable.clickColumnHeader("name")
     
     // THEN the table is expanded.
-    expect(courseTable.getExpandButton()).toHaveClass("hidden")
+    expect(courseTable.getExpandButton()).toHaveAccessibleName("Hide the courses")
 })
 
 test("The table is expanded by clicking on the 'term' column header.", async () => {
@@ -334,13 +334,13 @@ test("The table is expanded by clicking on the 'term' column header.", async () 
     const courseTable = renderUniversityCourseTable()
     
     // GIVEN that the table is not expanded yet.
-    expect(courseTable.getExpandButton()).not.toHaveClass("hidden")
+    expect(courseTable.getExpandButton()).toHaveAccessibleName("Show all courses")
     
     // WHEN clicking on the 'term' column header.
     await courseTable.clickColumnHeader("term")
     
     // THEN the table is expanded.
-    expect(courseTable.getExpandButton()).toHaveClass("hidden")
+    expect(courseTable.getExpandButton()).toHaveAccessibleName("Hide the courses")
 })
 
 test("The table is expanded by clicking on the 'weight' column header.", async () => {
@@ -348,13 +348,13 @@ test("The table is expanded by clicking on the 'weight' column header.", async (
     const courseTable = renderUniversityCourseTable()
     
     // GIVEN that the table is not expanded yet.
-    expect(courseTable.getExpandButton()).not.toHaveClass("hidden")
+    expect(courseTable.getExpandButton()).toHaveAccessibleName("Show all courses")
     
     // WHEN clicking on the 'weight' column header.
     await courseTable.clickColumnHeader("weight")
     
     // THEN the table is expanded.
-    expect(courseTable.getExpandButton()).toHaveClass("hidden")
+    expect(courseTable.getExpandButton()).toHaveAccessibleName("Hide the courses")
 })
 
 test("The table is expanded by clicking on the 'grade' column header.", async () => {
@@ -362,13 +362,13 @@ test("The table is expanded by clicking on the 'grade' column header.", async ()
     const courseTable = renderUniversityCourseTable()
     
     // GIVEN that the table is not expanded yet.
-    expect(courseTable.getExpandButton()).not.toHaveClass("hidden")
+    expect(courseTable.getExpandButton()).toHaveAccessibleName("Show all courses")
     
     // WHEN clicking on the 'grade' column header.
     await courseTable.clickColumnHeader("grade")
     
     // THEN the table is expanded.
-    expect(courseTable.getExpandButton()).toHaveClass("hidden")
+    expect(courseTable.getExpandButton()).toHaveAccessibleName("Hide the courses")
 })
 
 const columnHeaderLabels: Readonly<Record<UniversityCourseColumn, string>> = {
@@ -392,7 +392,7 @@ function renderUniversityCourseTable() {
     }
     
     function getExpandButton() {
-        return screen.getByRole("button", { name: "Show all courses" })
+        return screen.getByRole("button", { name: /(Show all courses)|(Hide the courses)/u })
     }
     
     async function clickExpandButton() {

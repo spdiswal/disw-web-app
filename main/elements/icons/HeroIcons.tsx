@@ -47,26 +47,6 @@ export function HeroIconAcademicCap(props: IconProps) {
     )
 }
 
-export function HeroIconBookmark(props: IconProps) {
-    return (
-        <svg
-            class={props.class}
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            aria-hidden="true"
-        >
-            <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
-            />
-        </svg>
-    )
-}
-
 export function HeroIconBriefcase(props: IconProps) {
     return (
         <svg
@@ -162,6 +142,26 @@ export function HeroIconDesktopComputer(props: IconProps) {
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+            />
+        </svg>
+    )
+}
+
+export function HeroIconLink(props: IconProps) {
+    return (
+        <svg
+            class={props.class}
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+        >
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
             />
         </svg>
     )

@@ -1,4 +1,4 @@
-import { defaultFocusOutlineClasses, themeSwitchTransitionClasses, HeroIconBookmark } from "+elements"
+import { defaultFocusOutlineClasses, HeroIconLink, themeSwitchTransitionClasses } from "+elements"
 import { useLocale } from "+i18n"
 import clsx from "clsx"
 import type { ComponentChildren, JSX } from "preact"
@@ -63,7 +63,7 @@ function Bookmark({
             )}
         >
             <span class="sr-only">{{ da: "Bogmærke til dette sted", en: "Bookmark to this location" }[locale]}</span>
-            <HeroIconBookmark
+            <HeroIconLink
                 class={clsx(
                     "h-5 w-5 hover:text-neutral-700 dark:hover:text-neutral-200 md:h-6 md:w-6 lg:h-7 lg:w-7",
                     themeSwitchTransitionClasses,

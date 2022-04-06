@@ -20,7 +20,7 @@ export function Hero({
             <div class="absolute bottom-4 z-10 flex flex-col items-center sm:bottom-8 md:bottom-auto md:right-16 lg:right-32">
                 <div
                     class={clsx(
-                        "flex flex-col rounded-2xl bg-gradient-to-br from-neutral-500/75 to-neutral-700/75 px-3 py-2 text-center text-white shadow-xl backdrop-blur-sm dark:from-neutral-600/75 dark:to-neutral-800/75 sm:space-y-1 sm:px-4 sm:py-3 md:space-y-1.5 md:px-6 md:py-5 lg:space-y-2 lg:px-8 lg:py-6",
+                        "flex flex-col rounded-2xl bg-gradient-to-br from-neutral-500/75 to-neutral-700/75 px-3 py-2 text-center text-white shadow-xl ring-1 ring-neutral-400/50 backdrop-blur-sm dark:from-neutral-600/75 dark:to-neutral-800/75 dark:ring-neutral-500/50 sm:space-y-1 sm:px-4 sm:py-3 md:space-y-1.5 md:px-6 md:py-5 lg:space-y-2 lg:px-8 lg:py-6",
                         themeSwitchTransitionClasses,
                     )}
                 >

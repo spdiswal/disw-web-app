@@ -1,4 +1,4 @@
-import { expandableTransitionClasses, HeroIconMinus, HeroIconPlus, OpaqueButton } from "+elements"
+import { expandableTransitionClasses, HeroIconMinus, HeroIconPlus, OpaqueButton, useWindowEvent } from "+elements"
 import clsx from "clsx"
 import type { ComponentChildren } from "preact"
 import { useEffect, useRef, useState } from "preact/hooks"
@@ -36,6 +36,7 @@ export function Expandable({
     const contentRef = useRef<HTMLDivElement>(null)
     
     const [state, setState] = useState<ExpansionState>("collapsed")
+    const [contentHeight, setContentHeight] = useState(0)
     
     useEffect(() => {
         if (subscribeToExpansionRequests !== undefined) {
@@ -48,15 +49,22 @@ export function Expandable({
     }, [subscribeToExpansionRequests])
     
     useEffect(() => {
+        setContentHeight(contentRef.current?.scrollHeight ?? 0)
+    }, [])
+    
+    useWindowEvent("resize", () => {
+        setContentHeight(contentRef.current?.scrollHeight ?? 0)
+    })
+    
+    useEffect(() => {
         if (containerRef.current !== null) {
             if (state === "expanded") {
-                const contentHeight = contentRef.current?.scrollHeight ?? 0
                 containerRef.current.style.height = `calc(${contentHeight}px + 3rem)`
             } else {
                 containerRef.current.style.height = "8rem"
             }
         }
-    }, [state])
+    }, [state, contentHeight])
     
     return (
         <div class="-mx-3 flex flex-col items-center">

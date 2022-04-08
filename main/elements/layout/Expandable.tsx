@@ -50,7 +50,7 @@ export function Expandable({
     
     useEffect(() => {
         setContentHeight(contentRef.current?.scrollHeight ?? 0)
-    }, [])
+    }, [children])
     
     useWindowEvent("resize", () => {
         setContentHeight(contentRef.current?.scrollHeight ?? 0)

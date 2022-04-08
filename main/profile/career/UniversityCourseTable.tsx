@@ -6,9 +6,9 @@ import { Fragment } from "preact"
 import { useCallback, useMemo, useState } from "preact/hooks"
 
 const columns = ["name", "term", "weight", "grade"] as const
-export type UniversityCourseColumn = typeof columns[number]
+export type CourseColumn = typeof columns[number]
 
-const columnHeaderLabel: Readonly<Record<UniversityCourseColumn, Localisable<string>>> = {
+const columnHeaderLabel: Readonly<Record<CourseColumn, Localisable<string>>> = {
     name: { da: "Kursus", en: "Course" },
     term: { da: "Semester", en: "Term" },
     weight: { da: "Belastning", en: "Weight" },
@@ -48,12 +48,6 @@ export function UniversityCourseTable({
     courses,
 }: UniversityCourseTableProps) {
     const locale = useLocale()
-    const { subscribe, expand } = useExpansionRequestSubscriber()
-    
-    const [activeColumn, setActiveColumn] =
-        useState<UniversityCourseColumn>("term")
-    
-    const rows = useMemo(() => Object.keys(courses), [courses])
     
     const compareAsCourses =
         useCallback((comparator: Comparator<UniversityCourse>) => {
@@ -62,13 +56,71 @@ export function UniversityCourseTable({
             ) as Comparator<string>
         }, [courses])
     
+    const [activeColumn, setActiveColumn] = useState<CourseColumn>("term")
     const comparator =
         useMemo(() => {
             return compareAsCourses(getColumnComparator(activeColumn))
         }, [compareAsCourses, activeColumn])
     
+    const rows = useMemo(() => Object.keys(courses), [courses])
     const { sortedRows, order, setOrder } =
         useSortableTableRows({ rows, comparator })
+    
+    const { subscribe, expand } = useExpansionRequestSubscriber()
+    const expandAndSortByColumn = useCallback((column: CourseColumn) => {
+        expand()
+        
+        if (column !== activeColumn) {
+            setActiveColumn(column)
+            setOrder("ascending")
+        } else {
+            setOrder(order === "ascending" ? "descending" : "ascending")
+        }
+    }, [activeColumn, expand, order, setOrder])
+    
+    const table = useMemo(() => (
+        <Table
+            columns={columns}
+            rows={sortedRows}
+            renderColumnHeader={(column) => (
+                <SortableTableColumnHeader
+                    order={column === activeColumn ? order : undefined}
+                    onClick={() => expandAndSortByColumn(column)}
+                >
+                    {columnHeaderLabel[column][locale]}
+                </SortableTableColumnHeader>
+            )}
+            renderRow={(row) => {
+                const { name, year, term, weight, grade } = courses[row]
+                
+                return (
+                    <Fragment>
+                        <TableCell class="font-semibold">
+                            <div class="w-44 sm:w-auto md:w-44 lg:w-auto">
+                                {name}
+                            </div>
+                        </TableCell>
+                        <TableCell class="whitespace-nowrap">
+                            {termLabel[term][locale]}{" "}{year}
+                        </TableCell>
+                        <TableCell class="whitespace-nowrap">
+                            {weight}{" "}ECTS
+                        </TableCell>
+                        <TableCell class="whitespace-nowrap">
+                            {gradeLabel[grade][locale]}
+                        </TableCell>
+                    </Fragment>
+                )
+            }}
+        />
+    ), [
+        locale,
+        courses,
+        activeColumn,
+        order,
+        sortedRows,
+        expandAndSortByColumn,
+    ])
     
     return (
         <Expandable
@@ -78,53 +130,9 @@ export function UniversityCourseTable({
             }}
             subscribeToExpansionRequests={subscribe}
         >
-            <Table
-                columns={columns}
-                rows={sortedRows}
-                renderColumnHeader={(column) => (
-                    <SortableTableColumnHeader
-                        order={column === activeColumn ? order : undefined}
-                        onClick={() => expandAndSortByColumn(column)}
-                    >
-                        {columnHeaderLabel[column][locale]}
-                    </SortableTableColumnHeader>
-                )}
-                renderRow={(row) => {
-                    const { name, year, term, weight, grade } = courses[row]
-                    
-                    return (
-                        <Fragment>
-                            <TableCell class="font-semibold">
-                                <div class="w-44 sm:w-auto md:w-44 lg:w-auto">
-                                    {name}
-                                </div>
-                            </TableCell>
-                            <TableCell class="whitespace-nowrap">
-                                {termLabel[term][locale]}{" "}{year}
-                            </TableCell>
-                            <TableCell class="whitespace-nowrap">
-                                {weight}{" "}ECTS
-                            </TableCell>
-                            <TableCell class="whitespace-nowrap">
-                                {gradeLabel[grade][locale]}
-                            </TableCell>
-                        </Fragment>
-                    )
-                }}
-            />
+            {table}
         </Expandable>
     )
-    
-    function expandAndSortByColumn(column: UniversityCourseColumn) {
-        expand()
-        
-        if (column !== activeColumn) {
-            setActiveColumn(column)
-            setOrder("ascending")
-        } else {
-            setOrder(order === "ascending" ? "descending" : "ascending")
-        }
-    }
 }
 
 const byName: Comparator<UniversityCourse> =
@@ -173,7 +181,7 @@ const byGrade: Comparator<UniversityCourse> =
     }
 
 function getColumnComparator(
-    column: UniversityCourseColumn,
+    column: CourseColumn,
 ): Comparator<UniversityCourse> {
     switch (column) {
         case "name":

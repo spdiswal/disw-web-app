@@ -1,5 +1,5 @@
 import { LocaleProvider } from "+i18n"
-import type { Grade, Term, UniversityCourse, UniversityCourseColumn } from "+profile"
+import type { Grade, Term, UniversityCourse, CourseColumn } from "+profile"
 import { UniversityCourseTable } from "+profile"
 import type { ReadonlyNonEmptyArray } from "+types"
 import { render, screen } from "@testing-library/preact"
@@ -371,7 +371,7 @@ test("The table is expanded by clicking on the 'grade' column header.", async ()
     expect(courseTable.getExpandButton()).toHaveAccessibleName("Hide the courses")
 })
 
-const columnHeaderLabels: Readonly<Record<UniversityCourseColumn, string>> = {
+const columnHeaderLabels: Readonly<Record<CourseColumn, string>> = {
     name: "Course",
     term: "Term",
     weight: "Weight",
@@ -399,7 +399,7 @@ function renderUniversityCourseTable() {
         await user.click(getExpandButton())
     }
     
-    async function clickColumnHeader(column: UniversityCourseColumn) {
+    async function clickColumnHeader(column: CourseColumn) {
         const columnHeader = screen.getByRole("button", {
             name: columnHeaderLabels[column],
         })

@@ -1,14 +1,13 @@
 import type { ExpansionState, ExpansionRequestSubscriber, ExpansionRequestSubscription } from "+elements"
-import { useRef } from "preact/hooks"
+import { useCallback, useRef } from "preact/hooks"
 
 export function useExpansionRequestSubscriber() {
     const subscriberRef = useRef<ExpansionRequestSubscriber | null>(null)
     
-    return {
-        subscribe,
-        expand: () => notifySubscriber("expanded"),
-        collapse: () => notifySubscriber("collapsed"),
-    }
+    const expand = useCallback(() => notifySubscriber("expanded"), [])
+    const collapse = useCallback(() => notifySubscriber("collapsed"), [])
+    
+    return { subscribe, expand, collapse }
     
     function subscribe(
         subscriber: ExpansionRequestSubscriber,

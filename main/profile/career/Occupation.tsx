@@ -41,8 +41,12 @@ export function Occupation({
             image={image}
             renderHeader={(bookmark, labelId) => (
                 <header class="mb-4 -ml-6 sm:-ml-7 md:-ml-9 lg:-ml-10">
-                    {periods.map((period) => (
-                        <FormattedPeriod key={period.since} period={period}/>
+                    {periods.map((period, index) => (
+                        <FormattedPeriod
+                            key={period.since}
+                            period={period}
+                            includeDelimiter={index !== periods.length - 1}
+                        />
                     ))}
                     <div class="group mt-4 mb-0.5 flex flex-row items-center md:mt-6 md:mb-1.5">
                         <span
@@ -79,15 +83,17 @@ export function Occupation({
 
 type FormattedPeriodProps = {
     readonly period: Period
+    readonly includeDelimiter: boolean
 }
 
 function FormattedPeriod({
     period: { since, until },
+    includeDelimiter,
 }: FormattedPeriodProps) {
     return (
         <div
             class={clsx(
-                "mb-0.5 ml-6 text-lg font-light sm:ml-7 md:mb-1.5 md:ml-9 md:text-xl lg:ml-10",
+                "mb-0.5 ml-6 text-lg font-light sm:ml-7 md:mb-1 md:ml-9 md:text-xl lg:ml-10",
                 responsiveTextSizeTransitionClasses,
             )}
         >
@@ -96,6 +102,7 @@ function FormattedPeriod({
             {until !== null
                 ? <FormattedYearMonth yearMonth={until}/>
                 : null}
+            {includeDelimiter ? "," : null}
         </div>
     )
 }

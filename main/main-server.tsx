@@ -29,25 +29,16 @@ export function substituteHtmlFragments(
 ): string {
     // The TypeScript and ESLint warnings must be suppressed because the static
     // type of the Tailwind CSS configuration does not expose custom colour
-    // groups such as `neutral` and `primary`.
+    // groups such as `neutral`.
     const tailwindNeutralColourGroup: TailwindColorGroup = // eslint-disable-line @typescript-eslint/no-unsafe-assignment
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         tailwindConfig.theme.colors.neutral
     
-    const tailwindPrimaryColourGroup: TailwindColorGroup = // eslint-disable-line @typescript-eslint/no-unsafe-assignment
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        tailwindConfig.theme.colors.primary
-    
     const fragmentsToSubstitute = [
         {
             placeholderToReplace: "<!-- [main-server.tsx fragment: meta-description] -->",
             fragmentToInsert: `<meta name="description" content="${description}"/>`,
-        },
-        {
-            placeholderToReplace: "<!-- [main-server.tsx fragment: meta-theme-color] -->",
-            fragmentToInsert: `<meta name="theme-color" content="${tailwindPrimaryColourGroup["600"]}">`,
         },
         {
             placeholderToReplace: "<!-- [main-server.tsx fragment: preload-assets] -->",

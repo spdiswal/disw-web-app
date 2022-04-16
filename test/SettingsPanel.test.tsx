@@ -12,51 +12,26 @@ test("The settings panel is visible initially.", () => {
     expect(settingsPanel.getPanel()).toHaveClass(insideViewport)
 })
 
-test("The settings panel remains visible when you scroll down insignificantly.", () => {
+test("The settings panel disappears when you scroll down.", () => {
     // GIVEN a test subject.
     const settingsPanel = renderSettingsPanel()
     
-    // WHEN scrolling down insignificantly.
-    settingsPanel.scrollDownInsignificantly()
-    
-    // THEN the settings panel is visible.
-    expect(settingsPanel.getPanel()).toHaveClass(insideViewport)
-})
-
-test("The settings panel disappears when you scroll down considerably.", () => {
-    // GIVEN a test subject.
-    const settingsPanel = renderSettingsPanel()
-    
-    // WHEN scrolling down considerably.
-    settingsPanel.scrollDownConsiderably()
+    // WHEN scrolling down.
+    settingsPanel.scrollDown()
     
     // THEN the settings panel is hidden.
     expect(settingsPanel.getPanel()).toHaveClass(outsideViewport)
 })
 
-test("The settings panel remains hidden when you scroll up insignificantly.", () => {
+test("The settings panel reappears when you scroll up.", () => {
     // GIVEN a test subject.
     const settingsPanel = renderSettingsPanel()
     
     // GIVEN that the settings panel is hidden.
-    settingsPanel.scrollDownConsiderably()
+    settingsPanel.scrollDown()
     
-    // WHEN scrolling up insignificantly.
-    settingsPanel.scrollUpInsignificantly()
-    
-    // THEN the settings panel is hidden.
-    expect(settingsPanel.getPanel()).toHaveClass(outsideViewport)
-})
-
-test("The settings panel reappears when you scroll up considerably.", () => {
-    // GIVEN a test subject.
-    const settingsPanel = renderSettingsPanel()
-    
-    // GIVEN that the settings panel is hidden.
-    settingsPanel.scrollDownConsiderably()
-    
-    // WHEN scrolling up considerably.
-    settingsPanel.scrollUpConsiderably()
+    // WHEN scrolling up.
+    settingsPanel.scrollUp()
     
     // THEN the settings panel is visible.
     expect(settingsPanel.getPanel()).toHaveClass(insideViewport)
@@ -76,7 +51,7 @@ function renderSettingsPanel() {
         return screen.getByLabelText("Indstillinger")
     }
     
-    function scrollDownConsiderably() {
+    function scrollDown() {
         // Soft scrolling fires multiple events.
         fireEvent.scroll(window, { target: { scrollY: window.scrollY + 1 } })
         fireEvent.scroll(window, { target: { scrollY: window.scrollY + 5 } })
@@ -85,7 +60,7 @@ function renderSettingsPanel() {
         fireEvent.scroll(window, { target: { scrollY: window.scrollY + 1 } })
     }
     
-    function scrollUpConsiderably() {
+    function scrollUp() {
         // Soft scrolling fires multiple events.
         fireEvent.scroll(window, { target: { scrollY: window.scrollY - 1 } })
         fireEvent.scroll(window, { target: { scrollY: window.scrollY - 5 } })
@@ -94,29 +69,9 @@ function renderSettingsPanel() {
         fireEvent.scroll(window, { target: { scrollY: window.scrollY - 1 } })
     }
     
-    function scrollDownInsignificantly() {
-        // Soft scrolling fires multiple events.
-        fireEvent.scroll(window, { target: { scrollY: window.scrollY + 1 } })
-        fireEvent.scroll(window, { target: { scrollY: window.scrollY + 2 } })
-        fireEvent.scroll(window, { target: { scrollY: window.scrollY + 4 } })
-        fireEvent.scroll(window, { target: { scrollY: window.scrollY + 2 } })
-        fireEvent.scroll(window, { target: { scrollY: window.scrollY + 1 } })
-    }
-    
-    function scrollUpInsignificantly() {
-        // Soft scrolling fires multiple events.
-        fireEvent.scroll(window, { target: { scrollY: window.scrollY - 1 } })
-        fireEvent.scroll(window, { target: { scrollY: window.scrollY - 2 } })
-        fireEvent.scroll(window, { target: { scrollY: window.scrollY - 4 } })
-        fireEvent.scroll(window, { target: { scrollY: window.scrollY - 2 } })
-        fireEvent.scroll(window, { target: { scrollY: window.scrollY - 1 } })
-    }
-    
     return {
         getPanel,
-        scrollDownConsiderably,
-        scrollUpConsiderably,
-        scrollDownInsignificantly,
-        scrollUpInsignificantly,
+        scrollDown,
+        scrollUp,
     }
 }

@@ -13,8 +13,6 @@ type SettingsPanelProps = {
     readonly onLocaleSelected: (selectedLocale: Locale) => void
 }
 
-const decisiveScrollDistance = 16
-
 export function SettingsPanel({
     mediaTheme,
     themeSelection,
@@ -37,14 +35,8 @@ export function SettingsPanel({
             return
         }
         
-        const hasScrolledUpConsiderably = scrollDelta < -decisiveScrollDistance
-        const hasScrolledDownConsiderably = scrollDelta > decisiveScrollDistance
-        
-        if (hasScrolledUpConsiderably) {
-            setVisible(true)
-        } else if (hasScrolledDownConsiderably) {
-            setVisible(false)
-        }
+        const hasScrolledUp = scrollDelta < 0
+        setVisible(hasScrolledUp)
     })
     
     return (
@@ -54,7 +46,7 @@ export function SettingsPanel({
             </label>
             <div
                 class={clsx(
-                    "absolute right-4 z-40 flex items-center justify-end space-x-2 rounded-full bg-neutral-100/95 p-2 shadow-xl ring-1 ring-neutral-900/20 dark:bg-neutral-800/95 dark:ring-white/20 xs:fixed md:space-x-4 md:p-3",
+                    "absolute right-4 z-40 flex items-center justify-end space-x-2 rounded-full bg-neutral-100/95 p-2 shadow-xl ring-1 ring-neutral-900/20 delay-150 dark:bg-neutral-800/95 dark:ring-white/20 xs:fixed md:space-x-4 md:p-3",
                     visible ? "visible top-4" : "invisible -top-24",
                     themeSwitchTransitionClasses,
                 )}

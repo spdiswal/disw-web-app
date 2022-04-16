@@ -767,6 +767,20 @@ test("The listbox popup disappears when you scroll the window.", async () => {
     expect(listbox.getPopupContainer()).toHaveClass("invisible")
 })
 
+test("The listbox button loses focus when you scroll the window.", () => {
+    // GIVEN a test subject.
+    const listbox = renderListboxComponentOfAppleCultivars()
+    
+    // GIVEN that the listbox button has focus.
+    listbox.giveFocusToButton()
+    
+    // WHEN the scrolling the window.
+    listbox.scrollWindow()
+    
+    // THEN the listbox button no longer has focus.
+    expect(listbox.getButton()).not.toHaveFocus()
+})
+
 function renderListboxComponentOfAppleCultivars(options?: {
     readonly selectedOption?: AppleCultivar,
     readonly onOptionSelected?: (selectedOption: AppleCultivar) => void,

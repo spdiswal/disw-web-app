@@ -41,6 +41,7 @@ export function Listbox<Option extends string>({
     
     useWindowEvent("blur", closePopup)
     useWindowEvent("scroll", closePopup)
+    useWindowEvent("scroll", blurButton)
     useWindowEvent("mousedown", closePopupIfOutsideListbox)
     useWindowEvent("touchstart", closePopupIfOutsideListbox)
     useWindowEvent("keydown", decideToSelectHighlightedOptionOrClosePopup)
@@ -120,6 +121,10 @@ export function Listbox<Option extends string>({
             </div>
         </div>
     )
+    
+    function blurButton() {
+        buttonRef.current?.blur()
+    }
     
     function closePopupIfOutsideListbox({ target }: MouseEvent | TouchEvent) {
         if (!hasOccurredInListbox(target)) {

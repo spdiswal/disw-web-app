@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/preact"
 import { SettingsPanel } from "../main/SettingsPanel"
 
-const insideViewport = "top-4"
-const outsideViewport = "-top-24"
+const insideViewport = "visible top-4"
+const outsideViewport = "invisible -top-24"
 
 test("The settings panel is visible initially.", () => {
     // GIVEN a test subject.

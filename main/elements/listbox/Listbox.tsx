@@ -1,8 +1,9 @@
 import type { ReadonlyNonEmptyArray } from "+types"
 import clsx from "clsx"
 import type { JSX } from "preact"
-import { useRef, useState } from "preact/hooks"
+import { useEffect, useRef, useState } from "preact/hooks"
 import { defaultFocusOutlineClasses, focusOutlineInsideClasses } from "../focus-classes"
+import { useSettingsPanelVisibility } from "../settings-panel"
 import { focusTransitionClasses, visibilityTransitionClasses } from "../transition-classes"
 import { useWindowEvent } from "../useWindowEvent"
 import { ListboxButtonConfigurationProvider } from "./useListboxButtonConfiguration"
@@ -39,9 +40,16 @@ export function Listbox<Option extends string>({
     const [highlightedOption, setHighlightedOption] =
         useState<Option | null>(null)
     
+    const isSettingsPanelVisible = useSettingsPanelVisibility()
+    
+    useEffect(() => {
+        if (!isSettingsPanelVisible) {
+            blurButton()
+            closePopup()
+        }
+    }, [isSettingsPanelVisible])
+    
     useWindowEvent("blur", closePopup)
-    useWindowEvent("scroll", closePopup)
-    useWindowEvent("scroll", blurButton)
     useWindowEvent("mousedown", closePopupIfOutsideListbox)
     useWindowEvent("touchstart", closePopupIfOutsideListbox)
     useWindowEvent("keydown", decideToSelectHighlightedOptionOrClosePopup)

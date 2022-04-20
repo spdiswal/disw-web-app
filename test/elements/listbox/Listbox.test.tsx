@@ -1,4 +1,4 @@
-import { LinearListboxOption, Listbox, OpaqueButton } from "+elements"
+import { LinearListboxOption, Listbox, OpaqueButton, SettingsPanelVisibilityProvider } from "+elements"
 import { fireEvent, render, screen } from "@testing-library/preact"
 import userEvent from "@testing-library/user-event"
 import { vi } from "vitest"
@@ -753,29 +753,29 @@ test("The listbox popup disappears when the window loses focus.", async () => {
     expect(listbox.getPopupContainer()).toHaveClass("invisible")
 })
 
-test("The listbox popup disappears when you scroll the window.", async () => {
+test("The listbox popup disappears when the settings panel disappears.", async () => {
     // GIVEN a test subject.
     const listbox = renderListboxComponentOfAppleCultivars()
     
     // GIVEN that the listbox popup is shown.
     await listbox.clickButton()
     
-    // WHEN the scrolling the window.
-    listbox.scrollWindow()
+    // WHEN the settings panel disappears.
+    listbox.hideSettingsPanel()
     
     // THEN the listbox popup is hidden.
     expect(listbox.getPopupContainer()).toHaveClass("invisible")
 })
 
-test("The listbox button loses focus when you scroll the window.", () => {
+test("The listbox button loses focus when the settings panel disappears.", () => {
     // GIVEN a test subject.
     const listbox = renderListboxComponentOfAppleCultivars()
     
     // GIVEN that the listbox button has focus.
     listbox.giveFocusToButton()
     
-    // WHEN the scrolling the window.
-    listbox.scrollWindow()
+    // WHEN the settings panel disappears.
+    listbox.hideSettingsPanel()
     
     // THEN the listbox button no longer has focus.
     expect(listbox.getButton()).not.toHaveFocus()
@@ -790,24 +790,26 @@ function renderListboxComponentOfAppleCultivars(options?: {
     
     const user = userEvent.setup()
     
-    render((
-        <Listbox
-            id="apple-cultivar-picker"
-            accessibilityLabel="Choose an apple cultivar"
-            options={appleCultivars}
-            selectedOption={selectedOption}
-            onOptionSelected={onOptionSelected}
-            renderButton={() => (
-                <OpaqueButton>
-                    {selectedOption}
-                </OpaqueButton>
-            )}
-            renderOption={(option) => (
-                <LinearListboxOption>
-                    {option}
-                </LinearListboxOption>
-            )}
-        />
+    const { rerender } = render((
+        <SettingsPanelVisibilityProvider value>
+            <Listbox
+                id="apple-cultivar-picker"
+                accessibilityLabel="Choose an apple cultivar"
+                options={appleCultivars}
+                selectedOption={selectedOption}
+                onOptionSelected={onOptionSelected}
+                renderButton={() => (
+                    <OpaqueButton>
+                        {selectedOption}
+                    </OpaqueButton>
+                )}
+                renderOption={(option) => (
+                    <LinearListboxOption>
+                        {option}
+                    </LinearListboxOption>
+                )}
+            />
+        </SettingsPanelVisibilityProvider>
     ))
     
     function getButton(): HTMLElement {
@@ -872,10 +874,6 @@ function renderListboxComponentOfAppleCultivars(options?: {
         fireEvent.blur(window)
     }
     
-    function scrollWindow() {
-        fireEvent.scroll(window)
-    }
-    
     async function moveCursorOntoOption(name: AppleCultivar) {
         await user.hover(getOption(name))
     }
@@ -918,6 +916,30 @@ function renderListboxComponentOfAppleCultivars(options?: {
         await user.keyboard("{Tab}")
     }
     
+    function hideSettingsPanel() {
+        rerender((
+            <SettingsPanelVisibilityProvider value={false}>
+                <Listbox
+                    id="apple-cultivar-picker"
+                    accessibilityLabel="Choose an apple cultivar"
+                    options={appleCultivars}
+                    selectedOption={selectedOption}
+                    onOptionSelected={onOptionSelected}
+                    renderButton={() => (
+                        <OpaqueButton>
+                            {selectedOption}
+                        </OpaqueButton>
+                    )}
+                    renderOption={(option) => (
+                        <LinearListboxOption>
+                            {option}
+                        </LinearListboxOption>
+                    )}
+                />
+            </SettingsPanelVisibilityProvider>
+        ))
+    }
+    
     return {
         getButton,
         getPopupContainer,
@@ -934,7 +956,6 @@ function renderListboxComponentOfAppleCultivars(options?: {
         clickOutside,
         tapOutside,
         blurWindow,
-        scrollWindow,
         moveCursorOntoOption,
         moveCursorAwayFromOptions,
         clickOption,
@@ -945,5 +966,6 @@ function renderListboxComponentOfAppleCultivars(options?: {
         pressEscapeKey,
         pressSpaceKey,
         pressTabKey,
+        hideSettingsPanel,
     }
 }

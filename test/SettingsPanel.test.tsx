@@ -1,5 +1,5 @@
+import { SettingsPanel } from "+elements"
 import { fireEvent, render, screen } from "@testing-library/preact"
-import { SettingsPanel } from "../main/SettingsPanel"
 
 const insideViewport = "visible top-4"
 const outsideViewport = "invisible -top-24"

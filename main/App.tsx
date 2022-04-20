@@ -1,10 +1,10 @@
 import { FooterContent, HeaderContent, MainContent, name } from "+content"
+import { SettingsPanel } from "+elements"
 import type { LocaleCachePort, PreferredLocalePort } from "+i18n"
 import { LocaleProvider, useLocaleSelection } from "+i18n"
 import type { MediaThemePort, ThemeCachePort } from "+theme"
 import { ThemeProvider, useThemeSelection } from "+theme"
 import { useEffect } from "preact/hooks"
-import { SettingsPanel } from "./SettingsPanel"
 
 type AppProps = {
     readonly localeCachePort: LocaleCachePort

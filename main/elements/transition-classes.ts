@@ -6,6 +6,7 @@ const fastTransition = `${transitionClasses} duration-75`
 
 export const focusTransitionClasses = fastTransition
 export const visibilityTransitionClasses = fastTransition
+export const positionTransitionClasses = defaultTransition
 export const responsiveTextSizeTransitionClasses = defaultTransition
 export const themeSwitchTransitionClasses = defaultTransition
 export const expandableTransitionClasses = `${transitionClasses} duration-700 sm:duration-500 md:duration-700 lg:duration-500`

@@ -55,11 +55,12 @@ module.exports = {
             code: 80,
             tabWidth: 4,
             ignoreComments: true,
-            // language=RegExp
             ignorePattern:
-                "(^import\\s.+\\sfrom\\s.+$)"
-                + "|(^\\s*(export\\s)?function\\s\\w+(<.+>)?\\((\\)(:\\s.+)?\\s\\{)?$)"
-                + "|(^\\s*(export\\s)?(const|let)\\s\\w+:\\s.+\\s=(\\s([({\\[]))?$)",
+            // language=RegExp
+                "(^import\\s.+\\sfrom\\s.+$)" // Import statements.
+                + "|(^\\s*(export\\s)?function\\s\\w+(<.+>)?\\((\\)(:\\s.+)?\\s\\{)?$)" // Function signatures with no parameters, perhaps with type parameters and a return type declaration.
+                + "|(^\\s*(export\\s)?(const|let)\\s\\w+:\\s.+\\s=(\\s([({\\[]))?$)" // Variable declarations, perhaps with the opening bracket of an object or array initialiser.
+                + "|(^\\s*\\w+=\\{\\w+\\}$)", // JSX attributes with function references.
             ignoreRegExpLiterals: true,
             ignoreStrings: true,
             ignoreTemplateLiterals: true,

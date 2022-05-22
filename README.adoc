@@ -109,6 +109,8 @@ This section describes the scripts to execute for carrying out certain daily wor
 You should execute these scripts from the project root folder.
 They have been defined in the `scripts` field in `package.json`.
 
+TIP: IntelliJ IDEA users may want to suppress warnings from Node.js by specifying `NODE_NO_WARNINGS=1` in the `Environment` setting of run configurations that execute scripts.
+
 === Starting a Development Server
 To start a development server that hosts the web app under construction at http://localhost:8000:
 

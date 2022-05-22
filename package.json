@@ -8,8 +8,8 @@
         "validate:lint": "eslint **/*.{ts,tsx}",
         "validate:lint:fix": "eslint --fix **/*.{ts,tsx}",
         "validate:type-check": "tsc",
-        "validate:unit-test": "NODE_NO_WARNINGS=1 && vitest run",
-        "validate:unit-test:watch": "NODE_NO_WARNINGS=1 && vitest watch"
+        "validate:unit-test": "vitest run",
+        "validate:unit-test:watch": "vitest watch"
     },
     "dependencies": {
         "clsx": "1.1.1",

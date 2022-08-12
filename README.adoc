@@ -1,43 +1,60 @@
 = DISW Web App
 
-This repository contains the app for web browsers.
+This repository contains the Node.js project for the website.
+It is deployed as static content to a web server.
 
-== Getting Started
-
-=== Prerequisites
-* https://nodejs.org/en/[Node.js], version 16 or newer.
-* https://yarnpkg.com/getting-started/install[Yarn], which you can install with npm:
+== Prerequisites
+* https://nodejs.org/en[Node.js], version 16 or newer.
+* https://yarnpkg.com/getting-started/install[Yarn], which is bundled with Node.js as an opt-in:
++
+.(requires admin privileges)
+----
+corepack enable
+----
++
+or which you can install with npm:
 +
 ----
 npm install -g yarn
 ----
 
-Recommended plugins for IntelliJ IDEA users:
-
-* https://plugins.jetbrains.com/plugin/7391-asciidoc[AsciiDoc]
-* https://plugins.jetbrains.com/plugin/15321-tailwind-css[Tailwind CSS]
-
-Recommended browser extensions:
+=== Recommendations
+Browser extensions:
 
 * https://preactjs.github.io/preact-devtools/[Preact Devtools]
 
-=== Cloning the Repository
-For IntelliJ IDEA users:
+IntelliJ IDEA plugins:
 
-. Clone the Git repository onto your local computer: menu:Welcome[Get from VCS] or menu:Git[Clone].
-. Open the project folder into which you cloned the repository:
-menu:File[Open].
+* https://plugins.jetbrains.com/plugin/7391-asciidoc[AsciiDoc]
+
+== Getting Started
+=== Specifying Your Git Identity
+
+[subs="+quotes,+replacements"]
+----
+.../disw-web-app> *git config user.name "_<first name>_ _<last name>_"*
+.../disw-web-app> *git config user.email "_<id+username>_@users.noreply.github.com"*
+----
 
 === Installing Third-Party Dependencies
 This project uses the https://yarnpkg.com/features/zero-installs[zero-install feature] of the Yarn package manager.
-Upon cloning the Git repository, the `.yarn/cache` folder contains a cache of most third-party dependencies already, effectively replacing the usual `node_modules` folder.
+Upon cloning the Git repository, the `.yarn/cache` directory already contains a cache of the third-party dependencies, effectively replacing the usual `node_modules` directory.
 
-However, a few dependencies (usually executable binaries) remain _unplugged_.
-They must be installed explicitly by executing this command from the project root folder:
+=== Using IntelliJ IDEA
+Open the project directory into which you cloned the repository: menu:File[Open].
 
-----
-yarn install
-----
+CAUTION: You should not _import_ the project or create a _new project from existing sources_.
+
+Adjust the inspection settings to disable false positive warnings:
+
+. Open the inspection settings: menu:File[Settings > Editor > Inspections].
+. Disable warnings from this inspection:
+* menu:JavaScript and TypeScript[Imports and dependencies > _Missing 'React' namespace import in JSX code_].
+
+Specify a pattern of files to exclude from indexing:
+
+. Open the project module settings: menu:File[Project Structure > Modules].
+. For the `disw-web-app` module, set _Exclude files_ to `.asciidoctor*;.editorconfig;.eslint*;.git*;.pnp*;*yarn*`.
 
 === Defining a Profile
 A profile describes the content to display in the web app.
@@ -49,7 +66,7 @@ It is defined in `.env.development`.
 
 You can create a new profile:
 
-. In the `main/content` folder, create a TypeScript file named e.g. `my-profile.local.tsx` which must export the name to be displayed in the title bar, a description for search engines and web browsers, and three function components:
+. In the `main/content` directory, create a TypeScript file named e.g. `my-profile.local.tsx` which must export the name to be displayed in the title bar, a description for search engines and web browsers, and three function components:
 +
 ----
 import { Hero, Main, Footer } from "+profile"
@@ -75,11 +92,11 @@ export function FooterContent() {
     )
 }
 ----
-. In the `main/content` folder, create a new folder named `assets.local` to contain image assets for the hero and the occupation timeline of the profile page.
+. In the `main/content` directory, create a new directory named `assets.local` to contain image assets for the hero and the occupation timeline of the profile page.
 Use the `HeroImage` and `ThemedArticleImage` components to encapsulate the image assets in their own components.
 Provide images in multiple sizes to accommodate responsive design.
 Encode the images as https://developers.google.com/speed/webp/docs/using[WebP] files and provide a https://jpeg.org/jpeg/[JPEG] file as a fallback.
-. In the project root folder, create a new file named `.env.development.local` (or `.env.production.local` when building for production).
+. In the project root directory, create a new file named `.env.development.local` (or `.env.production.local` when building for production).
 Override the `VITE_PROFILE_NAME` environment variable to use the new profile by specifying the name of the TypeScript file without the `.tsx` extension:
 +
 ----
@@ -88,9 +105,9 @@ VITE_PROFILE_NAME=my-profile.local
 
 [IMPORTANT]
 ====
-The Git repository in this project ignores files and folders whose names contain the substring `.local`.
+The Git repository in this project ignores files and directories whose names contain the substring `.local`.
 Use this to prevent personal information from leaking into the repository.
-For example: `my-profile.local.tsx` and `assets.local`.
+Examples: `my-profile.local.tsx` and `assets.local`.
 ====
 
 [TIP]
@@ -104,69 +121,61 @@ Uncaught Error: Hook can only be invoked from render methods.
 You can resolve this error by restarting the development server.
 ====
 
-== Common Work Tasks
-This section describes the scripts to execute for carrying out certain daily work tasks.
-You should execute these scripts from the project root folder.
-They have been defined in the `scripts` field in `package.json`.
-
-TIP: IntelliJ IDEA users may want to suppress warnings from Node.js by specifying `NODE_NO_WARNINGS=1` in the `Environment` setting of run configurations that execute scripts.
+== Common Tasks
+The `scripts` field in `package.json` defines a set of daily work tasks.
+Corresponding IntelliJ IDEA configurations are located in `.idea/runConfigurations`.
 
 === Starting a Development Server
-To start a development server that hosts the web app under construction at http://localhost:8000:
+Run the `develop` configuration in IntelliJ IDEA to serve the web app in development, or execute:
 
+[subs="+quotes,+replacements"]
 ----
-yarn run develop
+.../disw-web-app> *yarn run develop*
 ----
 
-Equipped with hot module replacement (HMR), it reflects any changes you make immediately in the web browser.
+Visit one of the addresses printed in the console in a web browser.
+Use http://localhost:8000 when you want to access the web app from your local computer, or use the LAN IP address (usually something like `192.168.X.Y`) when you want to access it from another device.
 
-You can access the development server from other devices on the network using the LAN IP address of your local computer, which is printed in the console upon executing the script above (usually something like `192.168.X.Y`).
+Equipped with hot module replacement (HMR), it reflects any changes you make in the source code immediately in the web browser.
 
-[#_validating_the_software_quality]
 === Validating the Software Quality
-To validate the quality of the software:
+Run the `validate` configuration in IntelliJ IDEA to validate the quality of the software, or execute:
 
+[subs="+quotes,+replacements"]
 ----
-yarn run validate
+.../disw-web-app> *yarn run validate*
 ----
 
 It runs the following means of validation:
 
-* Type checking via TypeScript.
-* Static program analysis (linting) via ESLint.
-* Automated unit testing via Vitest.
+* Type checking via TypeScript (`validate:type-check`).
+* Static program analysis (linting) via ESLint (`validate:lint`).
+* Automated unit testing via Vitest (`validate:unit-test`).
 
-You can apply an automated fix of certain issues reported by ESLint:
+The `validate:lint:fix` configuration applies an automated fix of certain issues reported by ESLint.
 
-----
-yarn run validate:lint:fix
-----
-
-You can run the test suite continuously (i.e. in 'watch' mode):
-
-----
-yarn run validate:unit-test:watch
-----
+The `validate:unit-test:watch` configuration makes the unit test suite run continuously (i.e. in 'watch' mode).
 
 === Building for Production
-To make a production-grade distribution of the web app:
+Run the `build` configuration in IntelliJ IDEA to make a production-grade distribution of the web app, or execute:
 
+[subs="+quotes,+replacements"]
 ----
-yarn run build
+.../disw-web-app> *yarn run build*
 ----
 
-It saves the output in the `build/www` folder.
+It saves the output in the `build/www` directory.
 
-<<_validating_the_software_quality>> must pass before it attempts to build the distribution.
+[CAUTION]
+====
+The software validation criteria must pass before it attempts to build the distribution.
 
-After building the distribution, you can start a web server that hosts a preview at http://localhost:80:
+The `build:generate` configuration generates the distribution without validating the software quality.
+====
 
-----
-yarn run build:preview
-----
+The `build:preview` configuration serves a preview of the generated distribution at http://localhost:80.
 
 == Tools
-
 === Third-Party Dependencies
 Following the Node.js convention, this project distinguishes between _runtime_ dependencies and _development_ dependencies.
 The `dependencies` and `devDependencies` fields in `package.json` declare these two sets of dependencies, respectively.
@@ -175,14 +184,12 @@ The `dependencies` and `devDependencies` fields in `package.json` declare these 
 ====
 A dependency is a runtime dependency when it is imported by the production source code.
 
-For example, `preact` and `clsx` are runtime dependencies as they are imported by `main-client.tsx` and `Hero.tsx` (among many other component files), respectively.
-
+For example, `preact` is a runtime dependency, as it is imported by `main-client.tsx`.
 On the other hand, `tailwindcss` is a development dependency, as it uses a JIT compiler in the build pipeline to generate CSS rulesets dynamically.
-
-Preferably, runtime dependencies should not have any transitive dependencies.
 ====
 
 Use the custom `dependenciesComments` and `devDependenciesComments` fields to associate each dependency to a maintenance comment or a description that justifies its use in this project.
+Preferably, runtime dependencies should not have any transitive dependencies.
 
 [IMPORTANT]
 ====
@@ -191,15 +198,16 @@ For security reasons, *always specify the exact version* of a dependency in `pac
 Avoid using the `^` and `~` modifiers, which would otherwise allow the package manager to install a newer minor or patch version of the dependency than the one specified.
 ====
 
-To update a third-party dependency to its latest version, execute these two commands from the project root folder:
+To update a third-party dependency to its latest version, execute these two commands:
 
+[subs="+quotes,+replacements"]
 ----
-yarn up --exact <dependency>
-yarn up --recursive <dependency>
+.../disw-web-app> *yarn up --exact _<dependency>_*
+.../disw-web-app> *yarn up --recursive _<dependency>_*
 ----
 
 === Preact
-https://preactjs.com/[Preact] is a reactive web UI framework with an API similar to that of React.
+https://preactjs.com[Preact] is a reactive web UI framework with an API similar to that of React.
 It lets you define components as JavaScript functions using https://reactjs.org/docs/introducing-jsx.html[JSX].
 
 [CAUTION]
@@ -211,36 +219,31 @@ For historical reasons, most tools support JSX transformations for React, compil
 However, in Preact, the factory function is `h` (also known as https://github.com/hyperhype/hyperscript[hyperscript]).
 ====
 
-For IntelliJ IDEA users:
-
-. Open the inspection settings: *File* &rsaquo; *Settings* &rsaquo; *Editor* &rsaquo; *Inspections*.
-. Disable the warning from this inspection: *JavaScript and TypeScript* &rsaquo; *Imports and dependencies* &rsaquo; _Missing 'React' namespace import in JSX code_.
-
 === Tailwind CSS
-https://tailwindcss.com/[Tailwind CSS] is a utility-first CSS framework.
+https://tailwindcss.com[Tailwind CSS] is a utility-first CSS framework.
 It encourages the developer to reuse styles by extracting components (e.g. via Preact) rather than defining CSS rules and abstractions as practised in traditional CSS development.
 
 `tailwind.config.cjs` defines the https://tailwindcss.com/docs/configuration[configuration] of the Tailwind CSS environment.
 
-NOTE: The `.cjs` file extension indicates that the JavaScript file follows the CommonJS module standard of Node.js instead of the modern ECMAScript module standard (ESM).
+TIP: The `.cjs` file extension indicates that the JavaScript file follows the CommonJS module standard of Node.js instead of the modern ECMAScript module standard (ESM).
 The latter is usually indicated by the `.mjs` file extension.
 
 === PostCSS
-https://postcss.org/[PostCSS] is a processing tool for CSS.
+https://postcss.org[PostCSS] is a processing tool for CSS.
 Among other things, it permits the use of CSS syntax extensions such as the `@tailwind` and `@apply` directives from Tailwind CSS.
 
 `postcss.config.cjs` defines the configuration of PostCSS as https://tailwindcss.com/docs/configuration#generating-a-post-css-configuration-file[recommended] by the Tailwind CSS documentation.
 
 === TypeScript
-https://www.typescriptlang.org/[TypeScript] is a programming language that extends JavaScript with syntax for static typing.
+https://www.typescriptlang.org[TypeScript] is a programming language that extends JavaScript with syntax for static typing.
 
 `tsconfig.json` defines the https://www.typescriptlang.org/tsconfig[configuration] of the TypeScript environment, except for the set of globally visible types which `global.d.ts` defines.
 
 === Vite
-https://vitejs.dev/[Vite] is a frontend build tool.
+https://vitejs.dev[Vite] is a frontend build tool.
 It hosts the development server and generates the distribution of the web app for production.
 
-`vite.config.ts` defines the https://vitejs.dev/config/[configuration] of Vite.
+`vite.config.ts` defines the https://vitejs.dev/config[configuration] of Vite.
 It picks up the PostCSS configuration in `postcss.config.cjs` automatically.
 
 [CAUTION]
@@ -271,37 +274,40 @@ _Server-Side Rendering_ (SSR) is a slightly different technique in which the HTM
 Both techniques allow search engines to discover the contents of the web app without having to execute any browser scripts.
 ====
 
-If you need to debug the _production-grade distribution_, you can set the `VITE_DEBUG_PRODUCTION_BUILD` environment variable to be `true` in `.env.production.local`.
+If you need to debug the _production-grade distribution_, you can set `VITE_DEBUG_PRODUCTION_BUILD=true` in `.env.production.local`.
 This enables Preact debugging tools on runtime and skips minification of the build artifacts.
 
 === Vitest
-https://vitest.dev/[Vitest] is a unit testing framework for JavaScript.
+https://vitest.dev[Vitest] is a unit testing framework for JavaScript.
 It relies on Vite to support TypeScript, JSX, and PostCSS.
-Its API is largely compatible with that of https://jestjs.io/[Jest].
+Its API is largely compatible with that of https://jestjs.io[Jest].
 
-The `test` section in `vite.config.ts` defines the https://vitest.dev/config/[configuration] of Vitest.
+The `test` field in `vite.config.ts` defines the https://vitest.dev/config[configuration] of Vitest.
 
 === ESLint
-https://eslint.org/[ESLint] is a static program analysis tool that flags issues in the source code.
+https://eslint.org[ESLint] is a static program analysis tool that flags issues in the source code.
 
-`.eslintrc.cjs` defines the https://eslint.org/docs/user-guide/configuring/[configuration] of ESLint, including the set of rules to be enforced.
-Every rule must be set to either `error` or `off`.
-We do not use the `warning` level, which would only pollute the linting report while allowing rules to be violated without interrupting the build step.
+`.eslintrc.cjs` defines the https://eslint.org/docs/user-guide/configuring[configuration] of ESLint, including the set of rules to be enforced.
 
-It uses https://typescript-eslint.io/[TypeScript ESLint] to parse TypeScript sources and perform type-aware analysis according to `tsconfig.json`.
+It uses https://typescript-eslint.io[TypeScript ESLint] to parse TypeScript sources and perform type-aware analysis according to `tsconfig.json`.
+
+CAUTION: Every rule must be set to either `error` or `off`.
+We do not use the `warning` level, as it would only pollute the linting report while allowing rules to be violated without interrupting the build step.
 
 === AsciiDoc
-https://docs.asciidoctor.org/asciidoc/latest/[AsciiDoc] is a markup language for writing documentation.
-https://docs.asciidoctor.org/asciidoctor/latest/[AsciiDoctor] is a processing tool that converts AsciiDoc files to various output formats such as HTML and PDF.
+https://docs.asciidoctor.org/asciidoc/latest[AsciiDoc] is a markup language for writing documentation.
+https://docs.asciidoctor.org/asciidoctor/latest[AsciiDoctor] is a processing tool that converts AsciiDoc files to various output formats such as HTML and PDF.
 
 No configuration is needed for accessing the AsciiDoc documentation files in plain text.
 
+[TIP]
+====
 IntelliJ IDEA users with the AsciiDoc plugin may https://intellij-asciidoc-plugin.ahus1.de/docs/users-guide/features/advanced/stylesheets.html[customise the HTML preview] by providing a stylesheet:
 
-. In the project root folder, create a new folder named `.asciidoctor`.
-Git will ignore this folder.
-. Copy your stylesheet (e.g. `my-preview-stylesheet.css`) into the `.asciidoctor` folder.
-. In the project root folder, create a new file named `.asciidoctorconfig`.
+. In the project root directory, create a new directory named `.asciidoctor`.
+Git will ignore this directory.
+. Copy your stylesheet (e.g. `my-preview-stylesheet.css`) into the `.asciidoctor` directory.
+. In the project root directory, create a new file named `.asciidoctorconfig`.
 Git will ignore this file.
 Insert this content into the file to apply the stylesheet:
 +
@@ -311,9 +317,6 @@ Insert this content into the file to apply the stylesheet:
 :stylesheet: my-preview-stylesheet.css
 ----
 
-[CAUTION]
-====
 The configuration file and the stylesheet *should not* be checked into the Git repository.
-
 By refraining from doing so, developers may provide their own stylesheet to suit their preference, for example to match a light or a dark theme in IntelliJ IDEA.
 ====

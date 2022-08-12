@@ -3,14 +3,12 @@ import { useLocale } from "+i18n"
 import clsx from "clsx"
 
 type StatusProps = {
-    readonly age: string
     readonly residence: string
     readonly discipline: string
     readonly experience: string
 }
 
 export function Status({
-    age,
     residence,
     discipline,
     experience,
@@ -24,7 +22,6 @@ export function Status({
                 themeSwitchTransitionClasses,
             )}
         >
-            <StatusItem title={{ da: "Alder", en: "Age" }[locale]} value={age}/>
             <StatusItem title={{ da: "Bopæl", en: "Residence" }[locale]} value={residence}/>
             <StatusItem title={{ da: "Faglig baggrund", en: "Academic Discipline" }[locale]} value={discipline}/>
             <StatusItem title={{ da: "Joberfaring", en: "Work Experience" }[locale]} value={experience}/>

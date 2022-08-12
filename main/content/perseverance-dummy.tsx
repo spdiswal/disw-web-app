@@ -63,7 +63,6 @@ export function MainContent() {
                 </Prose>
             </Article>
             <Status
-                age={{ da: "10 år", en: "10 years" }[locale]}
                 residence="Jezero"
                 discipline={{ da: "Astrobiologi", en: "Astrobiology" }[locale]}
                 experience={{ da: "2 år", en: "2 years" }[locale]}

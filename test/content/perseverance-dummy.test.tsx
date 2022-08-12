@@ -59,20 +59,6 @@ test("The content displays a biography.", () => {
     )
 })
 
-test("The content displays an age.", () => {
-    // GIVEN a test subject.
-    const content = renderContent()
-    
-    // THEN the content displays an age in Danish.
-    expect(content.getMainContent()).toHaveTextContent("Alder" + "10 år")
-    
-    // WHEN changing the locale to English.
-    content.changeToEnglishLocale()
-    
-    // THEN the content displays the age in English.
-    expect(content.getMainContent()).toHaveTextContent("Age" + "10 years")
-})
-
 test("The content displays a residence.", () => {
     // GIVEN a test subject.
     const content = renderContent()

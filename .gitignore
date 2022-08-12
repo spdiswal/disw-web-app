@@ -5,7 +5,8 @@
 # https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
 # Editors and IDEs.
-.idea/
+.idea/*
+!.idea/runConfigurations/
 .vscode/
 
 # AsciiDoctor in IntelliJ IDEA.

@@ -99,5 +99,5 @@
         "since 2021 and > 0.2% in alt-EU"
     ],
     "private": true,
-    "packageManager": "yarn@3.2.0"
+    "packageManager": "yarn@3.2.2"
 }

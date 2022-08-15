@@ -31,14 +31,13 @@ node_modules/
 !.yarn/sdks/
 !.yarn/versions/
 
-# TypeScript.
-*.tsbuildinfo
-
 # Build artifacts.
 build/
 out/
 dist/
 *.log
+.eslintcache
+*.tsbuildinfo
 
 # Operating system artifacts.
 *~

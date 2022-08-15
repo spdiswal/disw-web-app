@@ -5,7 +5,7 @@
         "build:preview": "vite preview",
         "develop": "vite serve",
         "validate": "yarn run validate:type-check && yarn run validate:lint && yarn run validate:unit-test",
-        "validate:lint": "eslint **/*.{ts,tsx}",
+        "validate:lint": "eslint --cache **/*.{ts,tsx}",
         "validate:lint:fix": "eslint --fix **/*.{ts,tsx}",
         "validate:type-check": "tsc",
         "validate:unit-test": "vitest run",

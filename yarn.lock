@@ -737,17 +737,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*":
-  version: 17.0.23
-  resolution: "@types/node@npm:17.0.23"
-  checksum: a3517554737cbb042e76c30d0e5482192ac4d9bea0eeb086e2622d9cabf460a0eb52a696b99fcd18e7fcc93c96db6cc7ae507f6608f256ef0b5c1d8c87a5a470
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:16.11.26":
-  version: 16.11.26
-  resolution: "@types/node@npm:16.11.26"
-  checksum: 57757caaba3f0d95de82198cb276a1002c49b710108c932a1d02d7c91ff2fa57cfe2dd19fde60853b6dd90b0964b3cf35557981d2628e20aed6a909057aedfe6
+"@types/node@npm:*, @types/node@npm:18.7.6":
+  version: 18.7.6
+  resolution: "@types/node@npm:18.7.6"
+  checksum: 5122988c325eda8d1f5cbe4494916036aae1758f9d5bb2d8139a800b8bad1540fbb167cd3c759da9a5cb4600cd3507609ac7969747113c1549a3e4320a17b1a9
   languageName: node
   linkType: hard
 
@@ -4736,7 +4729,7 @@ __metadata:
     "@testing-library/preact-hooks": 1.1.0
     "@testing-library/user-event": 14.0.4
     "@types/html-minifier-terser": 6.1.0
-    "@types/node": 16.11.26
+    "@types/node": 18.7.6
     "@types/tailwindcss": 3.0.10
     "@types/testing-library__jest-dom": 5.14.3
     "@typescript-eslint/eslint-plugin": 5.33.1

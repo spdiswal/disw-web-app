@@ -32,7 +32,7 @@
         "@testing-library/preact-hooks": "1.1.0",
         "@testing-library/user-event": "14.0.4",
         "@types/html-minifier-terser": "6.1.0",
-        "@types/node": "16.11.26",
+        "@types/node": "18.7.6",
         "@types/tailwindcss": "3.0.10",
         "@types/testing-library__jest-dom": "5.14.3",
         "@typescript-eslint/eslint-plugin": "5.33.1",

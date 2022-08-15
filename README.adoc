@@ -4,7 +4,7 @@ This repository contains the Node.js project for the website.
 It is deployed as static content to a web server.
 
 == Prerequisites
-* https://nodejs.org/en[Node.js], version 16 or newer.
+* https://nodejs.org/en[Node.js], version 18 or newer.
 * https://yarnpkg.com/getting-started/install[Yarn], which is bundled with Node.js as an opt-in:
 +
 .(requires admin privileges)

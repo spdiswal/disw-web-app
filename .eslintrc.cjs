@@ -75,6 +75,7 @@ module.exports = {
         "no-bitwise": "error",
         "no-caller": "error",
         "no-confusing-arrow": "error",
+        "no-constant-binary-expression": "error",
         "no-constructor-return": "error",
         "no-dupe-class-members": "off",
         "@typescript-eslint/no-dupe-class-members": "error",
@@ -310,6 +311,7 @@ module.exports = {
                     allowFunctions: true,
                     allowArrowFunctions: true,
                 }],
+                "react/jsx-no-leaked-render": "error",
                 "react/jsx-no-script-url": "error",
                 "react/jsx-no-useless-fragment": ["error", {
                     allowExpressions: true,
@@ -366,7 +368,6 @@ module.exports = {
                 "tailwindcss/classnames-order": ["error", {
                     callees: ["clsx"],
                     config: "./tailwind.config.cjs",
-                    officialSorting: true,
                 }],
                 "tailwindcss/enforces-negative-arbitrary-values": ["error", {
                     callees: ["clsx"],
@@ -407,7 +408,7 @@ module.exports = {
                 "jest/no-deprecated-functions": "off",
                 "jest/no-disabled-tests": "error",
                 "jest/no-duplicate-hooks": "error",
-                "jest/no-if": "error",
+                "jest/no-conditional-in-test": "error",
                 "jest/no-test-return-statement": "error",
                 "jest/prefer-expect-resolves": "error",
                 "jest/prefer-hooks-on-top": "error",

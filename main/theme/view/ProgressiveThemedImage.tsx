@@ -33,7 +33,9 @@ export function ProgressiveThemedImage({
     return (
         <div class={clsx(_class, "relative")}>
             {renderLightThemedImage(theme === "light")}
-            {isDarkImageNeeded && renderDarkThemedImage(theme === "dark")}
+            {isDarkImageNeeded
+                ? renderDarkThemedImage(theme === "dark")
+                : null}
             {placeholderImage}
         </div>
     )

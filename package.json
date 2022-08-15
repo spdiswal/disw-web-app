@@ -96,7 +96,7 @@
         "vitest": "Vitest; a unit testing framework that uses the Vite build configuration natively."
     },
     "browserslist": [
-        "last 2 versions and > 0.5% in alt-EU"
+        "since 2021 and > 0.2% in alt-EU"
     ],
     "private": true,
     "packageManager": "yarn@3.2.0"

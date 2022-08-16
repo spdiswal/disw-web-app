@@ -3,8 +3,11 @@ import { dummyLocaleCachePort, dummyPreferredLocalePort } from "+i18n"
 import { convertToLinkElement } from "+profile"
 import { dummyMediaThemePort, dummyThemeCachePort } from "+theme"
 import { renderToString } from "preact-render-to-string"
-import type { TailwindColorGroup, TailwindConfig } from "tailwindcss/tailwind-config"
+import type { Config as TailwindConfig } from "tailwindcss"
+import type tailwindDefaultColors from "tailwindcss/colors"
 import { App } from "./App"
+
+type ColorShade = keyof typeof tailwindDefaultColors.slate
 
 const app = (
     <App
@@ -30,10 +33,10 @@ export function substituteHtmlFragments(
     // The TypeScript and ESLint warnings must be suppressed because the static
     // type of the Tailwind CSS configuration does not expose custom colour
     // groups such as `neutral`.
-    const tailwindNeutralColourGroup: TailwindColorGroup = // eslint-disable-line @typescript-eslint/no-unsafe-assignment
+    const tailwindNeutralColor =
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        tailwindConfig.theme.colors.neutral
+        tailwindConfig.theme.colors.neutral as Record<ColorShade, string>
     
     const fragmentsToSubstitute = [
         {
@@ -56,13 +59,13 @@ export function substituteHtmlFragments(
             fragmentToInsert: `
                 <style>
                     html {
-                        background-color: ${tailwindNeutralColourGroup["50"]};
+                        background-color: ${tailwindNeutralColor["50"]};
                         visibility: hidden;
                     }
                     
                     @media (prefers-color-scheme: dark) {
                         html {
-                            background-color: ${tailwindNeutralColourGroup["900"]};
+                            background-color: ${tailwindNeutralColor["900"]};
                         }
                     }
                 </style>`,

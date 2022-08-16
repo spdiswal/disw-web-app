@@ -1,5 +1,5 @@
 const defaultTheme = require("tailwindcss/defaultTheme")
-const colors = require("tailwindcss/colors")
+const defaultColors = require("tailwindcss/colors")
 
 // Read more:
 // https://tailwindcss.com/docs/configuration
@@ -7,7 +7,7 @@ const colors = require("tailwindcss/colors")
 // Don't forget to update the Tailwind CSS section in the README.
 //
 /**
- * @type {import("tailwindcss/tailwind-config").TailwindConfig}
+ * @type {import("tailwindcss").Config}
  */
 module.exports = {
     content: [
@@ -17,11 +17,11 @@ module.exports = {
     darkMode: "class",
     theme: {
         colors: {
-            "white": colors.white,
-            "neutral": colors.slate,
-            "primary": colors.blue,
-            "accent-theme": colors.orange,
-            "warning": colors.amber,
+            "white": defaultColors.white,
+            "neutral": defaultColors.slate,
+            "primary": defaultColors.blue,
+            "accent-theme": defaultColors.orange,
+            "warning": defaultColors.amber,
         },
         screens: {
             // Breakpoints are defined by 'rem' units instead of 'px' units to
